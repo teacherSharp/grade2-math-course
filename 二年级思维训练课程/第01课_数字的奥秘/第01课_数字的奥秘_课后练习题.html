@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第01课《数字的奥秘》- 课后练习题（拔高版）</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        /* 头部 */
+        .header {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header .subtitle {
+            font-size: 20px;
+            opacity: 0.95;
+        }
+        
+        .header .badge {
+            display: inline-block;
+            background: #FFD700;
+            color: #333;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+        
+        /* 内容区域 */
+        .content {
+            padding: 40px;
+        }
+        
+        .student-info {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .info-item {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .info-item label {
+            display: block;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .info-item input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        
+        /* 题目卡片 */
+        .question-card {
+            background: white;
+            border: 3px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .question-card:hover {
+            border-color: #660099;
+            box-shadow: 0 8px 25px rgba(102, 0, 153, 0.15);
+        }
+        
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .question-number {
+            font-size: 22px;
+            font-weight: bold;
+            color: #660099;
+        }
+        
+        .difficulty {
+            font-size: 18px;
+        }
+        
+        .question-content {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .question-content strong {
+            color: #94070A;
+        }
+        
+        /* 数独样式 */
+        .sudoku-grid {
+            display: inline-grid;
+            grid-template-columns: repeat(3, 50px);
+            gap: 3px;
+            background: #333;
+            padding: 3px;
+            margin: 15px 0;
+            border: 3px solid #333;
+        }
+        
+        .sudoku-cell {
+            width: 50px;
+            height: 50px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .sudoku-cell.filled {
+            background: #E3F2FD;
+            color: #1976D2;
+        }
+        
+        .sudoku-cell.empty {
+            background: white;
+        }
+        
+        /* 数列样式 */
+        .number-sequence {
+            font-size: 28px;
+            letter-spacing: 10px;
+            margin: 15px 0;
+            padding: 15px;
+            background: #FFF8E1;
+            border-radius: 10px;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+        }
+        
+        /* 图形规律 */
+        .pattern-box {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        
+        .pattern-item {
+            width: 60px;
+            height: 60px;
+            border: 3px solid #660099;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            background: white;
+        }
+        
+        .pattern-item.missing {
+            border-style: dashed;
+            background: #FFF3E0;
+        }
+        
+        /* 答题区域 */
+        .answer-section {
+            background: #f5f5f5;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .answer-title {
+            font-weight: bold;
+            color: #660099;
+            margin-bottom: 10px;
+        }
+        
+        .answer-input {
+            width: 100%;
+            min-height: 80px;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            resize: vertical;
+        }
+        
+        /* 页脚 */
+        .footer {
+            background: #f5f5f5;
+            padding: 30px;
+            text-align: center;
+            color: #666;
+        }
+        
+        .tips {
+            background: #E8F5E9;
+            border-left: 5px solid #4CAF50;
+            padding: 15px;
+            margin: 30px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .tips-title {
+            color: #2E7D32;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <div class="header">
+            <h1>🔢 第01课《数字的奥秘》</h1>
+            <div class="subtitle">课后练习题（拔高版）</div>
+            <div class="badge">🏆 奥数难度 · 挑战自我</div>
+        </div>
+        
+        <!-- 内容区域 -->
+        <div class="content">
+            <!-- 学生信息 -->
+            <div class="student-info">
+                <div class="info-item">
+                    <label>姓名</label>
+                    <input type="text" placeholder="请输入姓名">
+                </div>
+                <div class="info-item">
+                    <label>班级</label>
+                    <input type="text" placeholder="请输入班级">
+                </div>
+                <div class="info-item">
+                    <label>日期</label>
+                    <input type="text" placeholder="YYYY-MM-DD">
+                </div>
+            </div>
+            
+            <!-- 提示 -->
+            <div class="tips">
+                <div class="tips-title">💡 做题小贴士</div>
+                <div>1. 仔细读题，找出规律再作答</div>
+                <div>2. 可以画图或列表帮助思考</div>
+                <div>3. 做完后检查答案是否合理</div>
+                <div>4. 挑战题可以和家长一起讨论</div>
+            </div>
+            
+            <!-- 第1题：基础题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">第1题 ★☆☆☆☆</div>
+                    <div class="difficulty">基础巩固</div>
+                </div>
+                <div class="question-content">
+                    <p><strong>🐸 小青蛙跳荷叶</strong></p>
+                    <p>小青蛙从第1片荷叶开始跳，每次跳2片荷叶。</p>
+                    <p>它踩到的荷叶编号是：<strong>1, 3, 5, 7, ___, ___</strong></p>
+                    <p>请问：接下来会踩到哪两片荷叶？</p>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-title">✏️ 我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="请写出接下来的两个数字，并说明规律...">
+                </div>
+            </div>
+            
+            <!-- 第2题：提高题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">第2题 ★★☆☆☆</div>
+                    <div class="difficulty">思维拓展</div>
+                </div>
+                <div class="question-content">
+                    <p><strong>🔐 神秘代码</strong></p>
+                    <p>下面图形代表不同的数字，请找出规律并填空：</p>
+                    <div class="pattern-box">
+                        <div class="pattern-item">🔴</div>
+                        <div class="pattern-item">+</div>
+                        <div class="pattern-item">🔴</div>
+                        <div class="pattern-item">=</div>
+                        <div class="pattern-item">8</div>
+                    </div>
+                    <div class="pattern-box">
+                        <div class="pattern-item">🔴</div>
+                        <div class="pattern-item">+</div>
+                        <div class="pattern-item">🔵</div>
+                        <div class="pattern-item">=</div>
+                        <div class="pattern-item">10</div>
+                    </div>
+                    <div class="pattern-box">
+                        <div class="pattern-item">🔵</div>
+                        <div class="pattern-item">+</div>
+                        <div class="pattern-item">🔵</div>
+                        <div class="pattern-item">=</div>
+                        <div class="pattern-item">?</div>
+                    </div>
+                    <p>请问：🔵 + 🔵 = ?</p>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-title">✏️ 我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="请写出答案，并说明推理过程...">
+                </div>
+            </div>
+            
+            <!-- 第3题：挑战题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">第3题 ★★★☆☆</div>
+                    <div class="difficulty">挑战提升</div>
+                </div>
+                <div class="question-content">
+                    <p><strong>🧩 图形数独</strong></p>
+                    <p>将 🌸、🍀、⭐ 填入空格，使每行、每列都有这三种图案，且不重复。</p>
+                    <div class="sudoku-grid">
+                        <div class="sudoku-cell filled">🌸</div>
+                        <div class="sudoku-cell filled">🍀</div>
+                        <div class="sudoku-cell empty">?</div>
+                        <div class="sudoku-cell filled">⭐</div>
+                        <div class="sudoku-cell filled">🌸</div>
+                        <div class="sudoku-cell empty">?</div>
+                        <div class="sudoku-cell empty">?</div>
+                        <div class="sudoku-cell empty">?</div>
+                        <div class="sudoku-cell empty">?</div>
+                    </div>
+                    <p>请填出所有空格：</p>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-title">✏️ 我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="请按位置写出答案，例如：第一行第三个是⭐...">
+                </div>
+            </div>
+            
+            <!-- 第4题：烧脑题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">第4题 ★★★★☆</div>
+                    <div class="difficulty">烧脑挑战</div>
+                </div>
+                <div class="question-content">
+                    <p><strong>🐰 兔子数列</strong></p>
+                    <p>小兔子家族人数增长有规律：</p>
+                    <div class="number-sequence">1, 1, 2, 3, 5, 8, 13, ___, ___</div>
+                    <p>这是著名的斐波那契数列：从第3个数开始，每个数都是前两个数之和。</p>
+                    <p>请问：第8个和第9个数分别是多少？</p>
+                    <p style="margin-top: 15px; color: #666; font-size: 16px;">
+                        💡 提示：13 = 5 + 8，那么下一个数 = 8 + 13
+                    </p>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-title">✏️ 我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="请写出第8个和第9个数，并验证是否符合规律...">
+                </div>
+            </div>
+            
+            <!-- 第5题：终极挑战 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">第5题 ★★★★★</div>
+                    <div class="difficulty">终极挑战</div>
+                </div>
+                <div class="question-content">
+                    <p><strong>🎡 旋转的彩球</strong></p>
+                    <p>观察下面彩球的排列规律，找出第10个彩球的颜色：</p>
+                    <div class="pattern-box">
+                        <div class="pattern-item" style="background: #FF6B6B;">🔴</div>
+                        <div class="pattern-item" style="background: #4ECDC4;">🔵</div>
+                        <div class="pattern-item" style="background: #FFE66D;">🟡</div>
+                        <div class="pattern-item" style="background: #FF6B6B;">🔴</div>
+                        <div class="pattern-item" style="background: #4ECDC4;">🔵</div>
+                        <div class="pattern-item" style="background: #FFE66D;">🟡</div>
+                        <div class="pattern-item" style="background: #FF6B6B;">🔴</div>
+                        <div class="pattern-item missing">?</div>
+                    </div>
+                    <p>规律：🔴红 → 🔵蓝 → 🟡黄 → 🔴红 → 🔵蓝 → 🟡黄 → ...（循环）</p>
+                    <p>请问：第10个彩球是什么颜色？</p>
+                    <p style="margin-top: 10px;">附加问题：第20个呢？第27个呢？</p>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-title">✏️ 我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="请写出第10、20、27个彩球的颜色，并说明规律...">
+                </div>
+            </div>
+        </div>
+        
+        <!-- 页脚 -->
+        <div class="footer">
+            <p style="font-size: 18px; font-weight: bold; color: #660099; margin-bottom: 10px;">
+                🌟 完成挑战，你是最棒的！
+            </p>
+            <p>二年级思维训练课程 · 夏老师原创</p>
+            <p style="margin-top: 10px;">完成时间：____月____日 ____:____</p>
+        </div>
+    </div>
+</body>
+</html>
