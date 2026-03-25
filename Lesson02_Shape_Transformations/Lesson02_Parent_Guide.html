@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第02课《图形变变变》家长协同方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header .subtitle {
+            font-size: 18px;
+            opacity: 0.95;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #660099;
+        }
+        
+        .section h2 {
+            color: #660099;
+            font-size: 22px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section p, .section li {
+            color: #333;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        
+        .section ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .section li {
+            margin-bottom: 8px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe0e0 100%);
+            border: 2px solid #94070A;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        .highlight-box h3 {
+            color: #94070A;
+            margin-bottom: 10px;
+        }
+        
+        .activity-card {
+            background: white;
+            border: 2px solid #660099;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            transition: transform 0.3s ease;
+        }
+        
+        .activity-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(102, 0, 153, 0.1);
+        }
+        
+        .activity-card h4 {
+            color: #660099;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .tip-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4CAF50;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .qr-section {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #f5f0ff 0%, #e8d5ff 100%);
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .qr-section h3 {
+            color: #660099;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        .contact-info {
+            background: white;
+            border: 3px solid #660099;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px auto;
+            max-width: 300px;
+        }
+        
+        .next-lesson {
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            border: 2px solid #FF9800;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+        
+        .next-lesson h3 {
+            color: #FF9800;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .footer {
+            background: #660099;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 24px;
+            }
+            .content {
+                padding: 20px;
+            }
+            .section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📐 第02课《图形变变变》</h1>
+            <div class="subtitle">家长协同指导方案</div>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2>🎯 本课学习目标</h2>
+                <p>通过本课学习，孩子将能够：</p>
+                <ul>
+                    <li>🔷 认识基本平面图形（正方形、长方形、三角形、圆形）</li>
+                    <li>🔶 掌握图形的拼组方法，用基本图形拼成复杂图案</li>
+                    <li>📐 学会图形的分割技巧，理解整体与部分的关系</li>
+                    <li>🔢 准确数出复杂图形中包含的基本图形数量</li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2>📋 课前准备材料</h2>
+                <p>请家长协助孩子准备以下材料：</p>
+                <ul>
+                    <li>✂️ 安全剪刀（儿童专用）</li>
+                    <li>📄 彩色卡纸或硬纸板（多种颜色）</li>
+                    <li>📏 直尺和三角板</li>
+                    <li>🖍️ 彩色笔或蜡笔</li>
+                    <li>🧩 七巧板（如有）</li>
+                </ul>
+                <div class="tip-box">
+                    💡 <strong>准备建议：</strong>可以提前将卡纸剪成不同大小的正方形、长方形、三角形，方便课堂使用。
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>📚 课堂重点回顾</h2>
+                <div class="highlight-box">
+                    <h3>🔷 知识点一：图形认知</h3>
+                    <p><strong>正方形：</strong>四条边相等，四个角都是直角 🔲</p>
+                    <p><strong>长方形：</strong>对边相等，四个角都是直角 ▭</p>
+                    <p><strong>三角形：</strong>三条边，三个角 🔺</p>
+                    <p><strong>圆形：</strong>没有角，边缘是曲线 🔵</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>🔶 知识点二：图形拼组</h3>
+                    <p>两个相同的直角三角形可以拼成一个长方形或正方形</p>
+                    <p>两个相同的小正方形可以拼成一个长方形</p>
+                    <p>四个相同的小正方形可以拼成一个大正方形</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>📐 知识点三：图形分割</h3>
+                    <p>一个正方形可以分成两个长方形或两个三角形</p>
+                    <p>一个长方形可以分成两个正方形（特殊情况）或两个长方形</p>
+                    <p>分割时要注意：分割线必须是直线</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>🏠 家庭巩固练习</h2>
+                
+                <div class="activity-card">
+                    <h4>🎨 活动一：图形拼拼乐</h4>
+                    <p><strong>目标：</strong>巩固图形拼组知识</p>
+                    <p><strong>步骤：</strong></p>
+                    <ol style="margin-left: 20px; line-height: 1.8;">
+                        <li>准备几种不同颜色的卡纸，剪成大小相同的小正方形</li>
+                        <li>让孩子用2个小正方形拼成长方形</li>
+                        <li>用4个小正方形拼成大正方形</li>
+                        <li>尝试用三角形拼成其他图形</li>
+                    </ol>
+                    <p><strong>时间：</strong>15-20分钟</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h4>✂️ 活动二：图形分割挑战</h4>
+                    <p><strong>目标：</strong>培养图形分割思维</p>
+                    <p><strong>步骤：</strong></p>
+                    <ol style="margin-left: 20px; line-height: 1.8;">
+                        <li>画一个大正方形</li>
+                        <li>让孩子画出不同的分割方法（横着分、竖着分、斜着分）</li>
+                        <li>数一数每种分法得到几个图形</li>
+                        <li>比较不同分法的异同</li>
+                    </ol>
+                    <p><strong>时间：</strong>15分钟</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h4>🔍 活动三：生活中的图形</h4>
+                    <p><strong>目标：</strong>发现生活中的图形</p>
+                    <p><strong>步骤：</strong></p>
+                    <ol style="margin-left: 20px; line-height: 1.8;">
+                        <li>在家中寻找不同形状的物品</li>
+                        <li>说出物品的形状名称</li>
+                        <li>讨论：为什么门是长方形的？为什么盘子是圆形的？</li>
+                    </ol>
+                    <p><strong>时间：</strong>10分钟</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>💡 亲子互动建议</h2>
+                <ul>
+                    <li>🎮 一起玩七巧板游戏，比赛谁拼出的图案更多</li>
+                    <li>🎨 用图形拼出小动物或房子，发挥创意</li>
+                    <li>📖 阅读与图形相关的绘本，如《形状王国》</li>
+                    <li>🧩 购买图形拼图玩具，寓教于乐</li>
+                </ul>
+                <div class="tip-box">
+                    💡 <strong>教育提示：</strong>图形学习要注重动手操作，让孩子在实践中理解图形的特征和关系。
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>❓ 常见问题解答</h2>
+                <p><strong>Q1：孩子总是分不清正方形和长方形怎么办？</strong></p>
+                <p>A：强调正方形的四条边都相等，而长方形只有对边相等。可以用折纸的方法让孩子直观感受。</p>
+                <br>
+                <p><strong>Q2：图形分割时孩子无从下手？</strong></p>
+                <p>A：先用折纸的方式演示，让孩子看到折痕就是分割线，然后再尝试画图分割。</p>
+                <br>
+                <p><strong>Q3：数图形时总是漏数或重复？</strong></p>
+                <p>A：教给孩子有序思考的方法，按大小分类数（先数小的，再数大的），或者按位置顺序数。</p>
+            </div>
+            
+            <!-- 联系方式区域 -->
+            <div class="qr-section">
+                <h3>📱 联系夏老师</h3>
+                <div class="contact-info">
+                    <div style="font-size: 24px; color: #660099; font-weight: bold; margin-bottom: 10px;">
+                        📞 19117803360
+                    </div>
+                    <div style="font-size: 14px; color: #666; margin-bottom: 15px;">
+                        欢迎随时咨询
+                    </div>
+                    <div style="width: 150px; height: 150px; margin: 0 auto; background: white; border: 2px solid #660099; border-radius: 10px; padding: 10px;">
+                        <img src="../code.jpg" alt="夏老师微信二维码" style="width: 100%; height: 100%; object-fit: contain; border-radius: 5px; display: block;">
+                    </div>
+                </div>
+                <div style="font-size: 14px; color: #666; margin-top: 10px;">
+                    如有任何问题，欢迎随时联系<br>
+                    夏老师将为您提供专业指导
+                </div>
+            </div>
+            
+            <!-- 下节课预告 -->
+            <div class="next-lesson">
+                <h3>🚀 下节课预告</h3>
+                <div style="font-size: 16px; line-height: 1.8;">
+                    <p><strong>第03课《数字迷宫》</strong></p>
+                    <p style="margin-top: 10px;">下节课我们将进入<strong>迷宫的世界</strong>，学习：</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>路径规划与方向判断</li>
+                        <li>数字推理与逻辑分析</li>
+                        <li>迷宫游戏的解题策略</li>
+                        <li>动手操作：设计自己的数字迷宫</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>准备材料：</strong>方格纸、铅笔、橡皮</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 页脚 -->
+        <div class="footer">
+            <p>二年级思维训练课程 · 夏老师原创</p>
+            <p style="margin-top: 5px;">让数学成为孩子最喜欢的科目</p>
+        </div>
+    </div>
+</body>
+</html>

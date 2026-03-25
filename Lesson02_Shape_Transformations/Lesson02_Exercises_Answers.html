@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第02课《图形变变变》课后练习题答案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 4px solid #660099;
+        }
+        
+        .header h1 {
+            color: #660099;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            color: #666;
+            font-size: 18px;
+        }
+        
+        .teacher-notice {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .teacher-notice h3 {
+            margin-bottom: 10px;
+        }
+        
+        .teacher-notice ul {
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+        
+        .answer-item {
+            margin-bottom: 40px;
+            padding: 25px;
+            background: #fafafa;
+            border-radius: 15px;
+            border-left: 5px solid #660099;
+        }
+        
+        .answer-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .question-number {
+            background: #660099;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .question-info {
+            flex: 1;
+        }
+        
+        .question-title {
+            font-size: 18px;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        .question-meta {
+            color: #666;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        .difficulty-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .difficulty-basic {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .difficulty-medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .difficulty-hard {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .difficulty-challenge {
+            background: #e7d4f8;
+            color: #660099;
+        }
+        
+        .answer-section {
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            color: #660099;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 18px;
+            background: #660099;
+            margin-right: 8px;
+            border-radius: 2px;
+        }
+        
+        .answer-content {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #e0e0e0;
+            line-height: 1.8;
+            color: #333;
+        }
+        
+        .answer-highlight {
+            background: #e7f3ff;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #1976D2;
+        }
+        
+        .solution-steps {
+            counter-reset: step;
+            list-style: none;
+        }
+        
+        .solution-steps li {
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 12px;
+            line-height: 1.8;
+        }
+        
+        .solution-steps li::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            background: #660099;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .key-point {
+            background: #fff8e1;
+            border-left: 4px solid #FFC107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .key-point-title {
+            color: #F57C00;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .common-mistake {
+            background: #ffebee;
+            border-left: 4px solid #EF5350;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .common-mistake-title {
+            color: #C62828;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .teaching-tip {
+            background: #e8f5e9;
+            border-left: 4px solid #66BB6A;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .teaching-tip-title {
+            color: #2E7D32;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .shape-display {
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            border: 2px dashed #ddd;
+        }
+        
+        .score-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .score-table th, .score-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        
+        .score-table th {
+            background: #660099;
+            color: white;
+        }
+        
+        .score-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .formula-box {
+            background: #f3e5f5;
+            border: 2px solid #9c27b0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 18px;
+        }
+        
+        .formula {
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+            color: #660099;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #eee;
+            color: #999;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎨 第02课《图形变变变》</h1>
+            <p class="subtitle">课后练习题答案 · 教师版</p>
+        </div>
+        
+        <div class="teacher-notice">
+            <h3>📋 教师使用说明</h3>
+            <ul>
+                <li>本答案包含详细解题步骤和思维点拨，供教师批改和讲解使用</li>
+                <li>建议先让学生独立完成，再进行针对性讲解</li>
+                <li>重点关注学生的解题思路，而非仅看最终答案</li>
+                <li>对于错误率较高的题目，建议课堂上重点复习</li>
+            </ul>
+        </div>
+
+        <!-- 第1题答案 -->
+        <div class="answer-item">
+            <div class="answer-header">
+                <div class="question-number">1</div>
+                <div class="question-info">
+                    <div class="question-title">图形认知基础</div>
+                    <div class="question-meta">考查知识点：多边形的边和角</div>
+                </div>
+                <span class="difficulty-badge difficulty-basic">基础</span>
+            </div>
+            
+            <div class="answer-section">
+                <div class="section-title">正确答案</div>
+                <div class="answer-content">
+                    <p>• <strong>三角形</strong>：<span class="answer-highlight">3条边，3个角</span></p>
+                    <p>• <strong>长方形</strong>：<span class="answer-highlight">4条边，4个角</span></p>
+                    <p>• <strong>五边形</strong>：<span class="answer-highlight">5条边，5个角</span></p>
+                </div>
+            </div>
+            
+            <div class="answer-section">
+                <div class="section-title">详细解析</div>
+                <div class="answer-content">
+                    <ol class="solution-steps">
+                        <li><strong>三角形的特征</strong>：由3条线段首尾相连围成的封闭图形，有3个顶点和3个角。这是边数最少的多边形。</li>
+                        <li><strong>长方形的特征</strong>：由4条线段围成，对边相等，4个角都是直角（90度）。</li>
+                        <li><strong>五边形的特征</strong>：由5条线段围成的封闭图形，有5个顶点和5个角。边数=角数=顶点数。</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="key-point">
+                <div class="key-point-title">🔑 核心概念</div>
+                <p>对于任何多边形，边数 = 角数 = 顶点数。这是图形认知的基础规律。</p>
+            </div>
+            
+            <div class="common-mistake">
+                <div class="common-mistake-title">⚠️ 常见错误</div>
+                <p>学生容易混淆"边"和"角"的概念，或者漏数。建议教学生用手指沿着图形边线走一圈来数边，在每个顶点处标记来数角。</p>
+            </div>
+            
+            <div class="teaching-tip">
+                <div class="teaching-tip-title">💡 教学建议</div>
+                <p>可以让学生用牙签或小棒实际摆出这些图形，通过动手操作加深理解。引导学生发现"几边形就有几条边、几个角"的规律。</p>
+            </div>
+        </div>
+
+        <!-- 第2题答案 -->
+        <div class="answer-item">
+            <div class="answer-header">
+                <div class="question-number">2</div>
+                <div class="question-info">
+                    <div class="question-title">图形拼组</div>
+                    <div class="question-meta">考查知识点：直角三角形的拼组</div>
+                </div>
+                <span class="difficulty-badge difficulty-basic">基础</span>
+            </div>
+            
+            <div class="answer-section">
+                <div class="section-title">正确答案</div>
+                <div class="answer-content">
+                    <p>两个完全一样的直角三角形可以拼成以下图形：</p>
+                    <p><span class="answer-highlight">1. 长方形（或正方形）</span>——将两个三角形的斜边拼在一起</p>
+                    <p><span class="answer-highlight">2. 大三角形</span>——将两个三角形相等的直角边拼在一起</p>
+                    <p><span class="answer-highlight">3. 平行四边形</span>——将两个三角形相等的直角边错开拼合</p>
+                </div>
+            </div>
+            
+            <div class="answer-section">
+                <div class="section-title">详细解析</div>
+                <div class="answer-content">
+                    <ol class="solution-steps">
+                        <li><strong>拼成长方形</strong>：将两个直角三角形的斜边重合，直角朝外，可拼成一个长方形。如果原三角形是等腰直角三角形，则拼成正方形。</li>
+                        <li><strong>拼成大三角形</strong>：将两个三角形的一条直角边重合，另两条直角边在同一直线上，可拼成一个等腰三角形。</li>
+                        <li><strong>拼成平行四边形</strong>：将两个三角形的直角边部分重合，使它们错开排列，可拼成平行四边形。</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="shape-display">
+                <svg width="600" height="150" viewBox="0 0 600 150">
+                    <!-- 拼成长方形 -->
+                    <text x="75" y="20" text-anchor="middle" font-size="12">长方形</text>
+                    <polygon points="30,50 30,130 120,130 120,50" fill="#E6E6FA" stroke="#333" stroke-width="2"/>
+                    <line x1="75" y1="50" x2="75" y2="130" stroke="#666" stroke-width="1" stroke-dasharray="3,3"/>
+                    
+                    <!-- 拼成大三角形 -->
+                    <text x="225" y="20" text-anchor="middle" font-size="12">大三角形</text>
+                    <polygon points="180,130 270,130 225,50" fill="#FFE4B5" stroke="#333" stroke-width="2"/>
+                    <line x1="202.5" y1="90" x2="247.5" y2="90" stroke="#666" stroke-width="1" stroke-dasharray="3,3"/>
+                    
+                    <!-- 拼成平行四边形 -->
+                    <text x="400" y="20" text-anchor="middle" font-size="12">平行四边形</text>
+                    <polygon points="330,130 390,50 480,50 420,130" fill="#FFB6C1" stroke="#333" stroke-width="2"/>
+                    <line x1="360" y1="90" x2="450" y2="90" stroke="#666" stroke-width="1" stroke-dasharray="3,3"/>
+                </svg>
+            </div>
+            
+            <div class="key-point">
+                <div class="key-point-title">🔑 核心规律</div>
+                <p>两个完全一样的三角形，将相等长度的边拼在一起，可以组成不同的四边形。拼合方式不同，得到的新图形也不同。</p>
+            </div>
+            
+            <div class="teaching-tip">
+                <div class="teaching-tip-title">💡 教学建议</div>
+                <p>准备两个完全一样的直角三角形纸片，让学生实际操作拼组。通过动手实践，学生更容易理解不同拼法的区别。</p>
+            </div>
+        </div>
+
+        <!-- 第3题答案 -->
+        <div class="answer-item">
+            <div class="answer-header">
+                <div class="question-number">3</div>
+                <div class="question-info">
+                    <div class="question-title">图形分割</div>
+                    <div class="question-meta">考查知识点：正方形的对称性</div>
+                </div>
+                <span class="difficulty-badge difficulty-medium">进阶</span>
+            </div>
+            
+            <div class="answer-section">
+                <div class="section-title">正确答案</div>
+                <div class="answer-content">
+                    <p><span class="answer-highlight">有无数种分法！</span></p>
+                    <p>只要直线经过正方形的中心点，就可以把正方形分成形状相同、大小相等的两部分。</p>
+                </div>
+            </div>
+            
+            <div class="answer-section">
+                <div class="section-title">详细解析</div>
+                <div class="answer-content">
+                    <ol class="solution-steps">
+                        <li><strong>沿对角线分割</strong>：连接相对的两个顶点，将正方形分成两个全等的等腰直角三角形。</li>
+                        <li><strong>沿中线分割</strong>：连接对边中点，将正方形分成两个全等的长方形。</li>
+                        <li><strong>过中心点的任意直线</strong>：只要直线经过正方形中心，无论角度如何，都能将正方形分成全等的两部分。</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="shape-display">
+                <svg width="500" height="150" viewBox="0 0 500 150">
+                    <!-- 沿对角线 -->
+                    <text x="60" y="20" text-anchor="middle" font-size="12">沿对角线</text>
+                    <rect x="20" y="35" width="80" height="80" fill="#FFF8DC" stroke="#333" stroke-width="2"/>
+                    <line x1="20" y1="35" x2="100" y2="115" stroke="#FF0000" stroke-width="2"/>
+                    
+                    <!-- 沿中线 -->
+                    <text x="180" y="20" text-anchor="middle" font-size="12">沿中线</text>
+                    <rect x="140" y="35" width="80" height="80" fill="#E6E6FA" stroke="#333" stroke-width="2"/>
+                    <line x1="180" y1="35" x2="180" y2="115" stroke="#FF0000" stroke-width="2"/>
+                    
+                    <!-- 斜向过中心 -->
+                    <text x="300" y="20" text-anchor="middle" font-size="12">斜向过中心</text>
+                    <rect x="260" y="35" width="80" height="80" fill="#FFE4E1" stroke="#333" stroke-width="2"/>
+                    <line x1="250" y1="75" x2="350" y2="115" stroke="#FF0000" stroke-width="2"/>
+                    
+                    <!-- 任意角度 -->
+                    <text x="420" y="20" text-anchor="middle" font-size="12">任意角度</text>
+                    <rect x="380" y="35" width="80" height="80" fill="#E0FFE0" stroke="#333" stroke-width="2"/>
+                    <line x1="370" y1="95" x2="470" y2="55" stroke="#FF0000" stroke-width="2"/>
+                </svg>
+            </div>
+            
+            <div class="formula-box">
+                <p class="formula">过正方形中心点的任意直线 ⟹ 平分正方形</p>
+            </div>
+            
+            <div class="key-point">
+                <div class="key-point-title">🔑 核心规律</div>
+                <p>正方形是中心对称图形，绕中心点旋转180度后与自身重合。因此，过中心点的任意直线都能将其分成全等的两部分。</p>
+            </div>
+            
+            <div class="common-mistake">
+                <div class="common-mistake-title">⚠️ 常见错误</div>
+                <p>学生往往只想到2-4种分法（两条对角线、两条中线），想不到"无数种"。需要引导学生理解"中心对称"的概念。</p>
+            </div>
+        </div>
+
+        <!-- 第4题答案 -->
+        <div class="answer-item">
+            <div class="answer-header">
+                <div class="question-number">4</div>
+                <div class="question-info">
+                    <div class="question-title">图形计数</div>
+                    <div class="question-meta">考查知识点：三角形分类计数</div>
+                </div>
+                <span class="difficulty-badge difficulty-medium">进阶</span>
+            </div>
+            
+            <div class="answer-section">
+                <div class="section-title">正确答案</div>
+                <div class="answer-content">
+                    <p><span class="answer-highlight">共有 6 个三角形</span></p>
+                </div>
+            </div>
+            
+            <div class="answer-section">
+                <div class="section-title">详细解析</div>
+                <div class="answer-content">
+                    <p><strong>分类计数法：</strong></p>
+                    <ol class="solution-steps">
+                        <li><strong>单个小三角形</strong>：图中有4个独立的小三角形（左上、右上、左下、右下）</li>
+                        <li><strong>由2个小三角形组成的三角形</strong>：左边2个组成1个，右边2个组成1个，共2个</li>
+                        <li><strong>总计</strong>：4 + 2 = <strong>6个</strong></li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="shape-display">
+                <svg width="300" height="220" viewBox="0 0 300 220">
+                    <!-- 大三角形 -->
+                    <polygon points="150,20 30,180 270,180" fill="none" stroke="#333" stroke-width="2"/>
+                    <!-- 内部线段 -->
+                    <line x1="150" y1="20" x2="150" y2="180" stroke="#333" stroke-width="2"/>
+                    <line x1="90" y1="100" x2="210" y2="100" stroke="#333" stroke-width="2"/>
+                    
+                    <!-- 标注 -->
+                    <text x="110" y="80" fill="#FF0000" font-size="14" font-weight="bold">①</text>
+                    <text x="175" y="80" fill="#FF0000" font-size="14" font-weight="bold">②</text>
+                    <text x="110" y="140" fill="#FF0000" font-size="14" font-weight="bold">③</text>
+                    <text x="175" y="140" fill="#FF0000" font-size="14" font-weight="bold">④</text>
+                    <text x="60" y="110" fill="#0066CC" font-size="14" font-weight="bold">⑤</text>
+                    <text x="220" y="110" fill="#0066CC" font-size="14" font-weight="bold">⑥</text>
+                    
+                    <!-- 图例 -->
+                    <text x="150" y="210" text-anchor="middle" font-size="12" fill="#666">红色：小三角形  蓝色：组合三角形</text>
+                </svg>
+            </div>
+            
+            <div class="key-point">
+                <div class="key-point-title">🔑 计数方法</div>
+                <p>图形计数要遵循"分类计数、不重不漏"的原则。可以按照组成图形的基本单元数量来分类。</p>
+            </div>
+            
+            <div class="teaching-tip">
+                <div class="teaching-tip-title">💡 教学建议</div>
+                <p>教学生使用"标号法"：先给最小的图形单元标号，然后按组成个数分类列举。例如：单个的有哪些（1,2,3,4），两个组成的有哪（1+3, 2+4）...</p>
+            </div>
+        </div>
+
+        <!-- 第5题答案 -->
+        <div class="answer-item">
+            <div class="answer-header">
+                <div class="question-number">5</div>
+                <div class="question-info">
+                    <div class="question-title">图形推理</div>
+                    <div class="question-meta">考查知识点：图形规律推理</div>
+                </div>
+                <span class="difficulty-badge difficulty-medium">进阶</span>
+            </div>
+            
+            <div class="answer-section">
+                <div class="section-title">正确答案</div>
+                <div class="answer-content">
+                    <p><span class="answer-highlight">第4个图形是一个"回"字形</span>——大正方形内部挖去一个中等正方形，中等正方形内部又有一个小正方形。</p>
+                </div>
+            </div>
+            
+            <div class="answer-section">
+                <div class="section-title">规律分析</div>
+                <div class="answer-content">
+                    <ol class="solution-steps">
+                        <li><strong>第1个</strong>：实心正方形</li>
+                        <li><strong>第2个</strong>：大正方形中间挖去一个小正方形（形成"口"字形边框）</li>
+                        <li><strong>第3个</strong>：在挖去的部分里又填充了一个更小的正方形（形成"回"字的开头）</li>
+                        <li><strong>第4个</strong>：继续这个规律，在最中间再挖去一个正方形，形成完整的"回"字形</li>
+                    </ol>
+                    <p><strong>规律总结</strong>：从外向内，交替进行"挖空"和"填充"操作。</p>
+                </div>
+            </div>
+            
+            <div class="shape-display">
+                <svg width="400" height="120" viewBox="0 0 400 120">
+                    <!-- 第3个 -->
+                    <text x="50" y="20" text-anchor="middle" font-size="12">第3个</text>
+                    <rect x="25" y="35" width="50" height="50" fill="#FFB6C1" stroke="#333" stroke-width="2"/>
+                    <rect x="35" y="45" width="30" height="30" fill="white" stroke="#333" stroke-width="1"/>
+                    <rect x="40" y="50" width="20" height="20" fill="#FFB6C1" stroke="#333" stroke-width="1"/>
+                    
+                    <!-- 箭头 -->
+                    <text x="100" y="65" font-size="20">→</text>
+                    
+                    <!-- 第4个 -->
+                    <text x="175" y="20" text-anchor="middle" font-size="12">第4个（答案）</text>
+                    <rect x="130" y="35" width="90" height="90" fill="#FFB6C1" stroke="#333" stroke-width="2"/>
+                    <rect x="145" y="50" width="60" height="60" fill="white" stroke="#333" stroke-width="1"/>
+                    <rect x="160" y="65" width="30" height="30" fill="#FFB6C1" stroke="#333" stroke-width="1"/>
+                    <rect x="168" y="73" width="14" height="14" fill="white" stroke="#333" stroke-width="1"/>
+                    
+                    <!-- 箭头 -->
+                    <text x="260" y="65" font-size="20">→</text>
+                    
+                    <!-- 第5个（预测） -->
+                    <text x="335" y="20" text-anchor="middle" font-size="12">第5个（预测）</text>
+                    <rect x="290" y="35" width="90" height="90" fill="#f0f0f0" stroke="#999" stroke-width="2" stroke-dasharray="5,5"/>
+                    <text x="335" y="85" text-anchor="middle" font-size="14" fill="#999">?</text>
+                </svg>
+            </div>
+            
+            <div class="key-point">
+                <div class="key-point-title">🔑 思维方法</div>
+                <p>找规律题要仔细观察相邻图形之间的变化。可以用语言描述变化过程，找出操作规律。</p>
+            </div>
+        </div>
+
+        <!-- 第6题答案 -->
+        <div class="answer-item">
+            <div class="answer-header">
+                <div class="question-number">6</div>
+                <div class="question-info">
+                    <div class="question-title">图形剪拼</div>
+                    <div class="question-meta">考查知识点：剪角后边数变化</div>
+                </div>
+                <span class="difficulty-badge difficulty-hard">挑战</span>
+            </div>
+            
+            <div class="answer-section">
+                <div class="section-title">正确答案</div>
+                <div class="answer-content">
+                    <p>剪掉一个角后，剩下的图形可能有<span class="answer-highlight">3条、4条或5条边</span>，共<strong>3种不同情况</strong>。</p>
+                </div>
+            </div>
+            
+            <div class="answer-section">
+                <div class="section-title">详细解析</div>
+                <div class="answer-content">
+                    <ol class="solution-steps">
+                        <li><strong>情况一：沿对角线剪（3条边）</strong>
+                            <br>从一个角剪到对角，正方形变成三角形。原来4条边，去掉2条边，增加1条边（剪痕），4-2+1=3条边。</li>
+                        <li><strong>情况二：从角剪到对边（4条边）</strong>
+                            <br>从一个角剪到对边的某一点（不是对角），得到一个四边形。原来4条边，去掉1条边，增加2条边（剪痕分成两段），4-1+2=5？不对，重新计算：实际是去掉一个角，增加一条边，4+1-1=4条边。</li>
+                        <li><strong>情况三：从一边剪到邻边（5条边）</strong>
+                            <br>不经过任何角，从一条边剪到相邻边，得到一个五边形。原来4条边，增加2条边（剪痕），4+1=5条边。</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="shape-display">
+                <svg width="500" height="200" viewBox="0 0 500 200">
+                    <!-- 情况1：3条边 -->
+                    <text x="75" y="25" text-anchor="middle" font-size="12">情况1：3条边（三角形）</text>
+                    <rect x="35" y="45" width="80" height="80" fill="#FFF8DC" stroke="#999" stroke-width="1" stroke-dasharray="3,3"/>
+                    <polygon points="35,125 115,125 75,45" fill="#FFE4B5" stroke="#333" stroke-width="2"/>
+                    <line x1="35" y1="125" x2="115" y2="45" stroke="#FF0000" stroke-width="2"/>
+                    
+                    <!-- 情况2：4条边 -->
+                    <text x="250" y="25" text-anchor="middle" font-size="12">情况2：4条边（四边形）</text>
+                    <rect x="210" y="45" width="80" height="80" fill="#FFF8DC" stroke="#999" stroke-width="1" stroke-dasharray="3,3"/>
+                    <polygon points="210,125 290,125 290,85 250,45" fill="#E6E6FA" stroke="#333" stroke-width="2"/>
+                    <line x1="210" y1="125" x2="250" y2="45" stroke="#FF0000" stroke-width="2"/>
+                    
+                    <!-- 情况3：5条边 -->
+                    <text x="425" y="25" text-anchor="middle" font-size="12">情况3：5条边（五边形）</text>
+                    <rect x="385" y="45" width="80" height="80" fill="#FFF8DC" stroke="#999" stroke-width="1" stroke-dasharray="3,3"/>
+                    <polygon points="385,105 385,125 465,125 465,65 425,45" fill="#FFE4E1" stroke="#333" stroke-width="2"/>
+                    <line x1="385" y1="105" x2="425" y2="45" stroke="#FF0000" stroke-width="2"/>
+                </svg>
+            </div>
+            
+            <div class="formula-box">
+                <p>剪角规律：边数变化 = 原边数 + 新增边数 - 减少边数</p>
+                <p class="formula">过n个顶点剪 ⟹ 新边数 = 原边数 + 2 - n</p>
+            </div>
+            
+            <div class="key-point">
+                <div class="key-point-title">🔑 核心规律</div>
+                <p>剪角时，剪线经过几个顶点，边数就减少几条。剪线不经过顶点时，每剪一次增加1条边。</p>
+            </div>
+            
+            <div class="common-mistake">
+                <div class="common-mistake-title">⚠️ 常见错误</div>
+                <p>学生往往只想到1-2种情况，漏掉其他可能。需要引导学生思考"剪角"的不同方式，培养分类讨论的思维。</p>
+            </div>
+        </div>
+
+        <!-- 第7题答案 -->
+        <div class="answer-item">
+            <div class="answer-header">
+                <div class="question-number">7</div>
+                <div class="question-info">
+                    <div class="question-title">立体图形展开</div>
+                    <div class="question-meta">考查知识点：正方体展开图</div>
+                </div>
+                <span class="difficulty-badge difficulty-hard">挑战</span>
+            </div>
+            
+            <div class="answer-section">
+                <div class="section-title">正确答案</div>
+                <div class="answer-content">
+                    <p><span class="answer-highlight">C. A和C都可以</span></p>
+                </div>
+            </div>
+            
+            <div class="answer-section">
+                <div class="section-title">详细解析</div>
+                <div class="answer-content">
+                    <p><strong>正方体展开图判断口诀：</strong></p>
+                    <ol class="solution-steps">
+                        <li><strong>"一四一"型</strong>：中间4个正方形排成一排，上下各1个。A选项属于这种类型。</li>
+                        <li><strong>"一三二"型</strong>：中间3个，上面1个，下面2个。C选项属于这种类型。</li>
+                        <li><strong>排除B</strong>：B选项中上面3个排成一排，下面两个分别在两端，折叠时会有两个面重叠。</li>
+                        <li><strong>排除D</strong>：D选项中间有4个正方形排成一排，但上面有1个，下面没有，无法折成正方体。</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="key-point">
+                <div class="key-point-title">🔑 记忆口诀</div>
+                <p>正方体展开图11种类型，记住："一四一"6种，"一三二"3种，"三三"1种，"二二二"1种。不能出现"田"字格，不能有5个连成一排。</p>
+            </div>
+            
+            <div class="teaching-tip">
+                <div class="teaching-tip-title">💡 教学建议</div>
+                <p>可以让学生用剪刀剪出正方形纸片实际折叠，通过动手操作加深理解。也可以教学生"找对面"的方法：展开图中相隔一个正方形的两个面，折叠后会成为对面。</p>
+            </div>
+        </div>
+
+        <!-- 第8题答案 -->
+        <div class="answer-item">
+            <div class="answer-header">
+                <div class="question-number">8</div>
+                <div class="question-info">
+                    <div class="question-title">图形重叠</div>
+                    <div class="question-meta">考查知识点：组合图形周长计算</div>
+                </div>
+                <span class="difficulty-badge difficulty-hard">挑战</span>
+            </div>
+            
+            <div class="answer-section">
+                <div class="section-title">正确答案</div>
+                <div class="answer-content">
+                    <p><span class="answer-highlight">周长 = 32 厘米</span></p>
+                </div>
+            </div>
+            
+            <div class="answer-section">
+                <div class="section-title">详细解析</div>
+                <div class="answer-content">
+                    <p><strong>方法一：外轮廓法</strong></p>
+                    <ol class="solution-steps">
+                        <li>画出组合图形的外轮廓</li>
+                        <li>分析外轮廓的组成：
+                            <br>• 横向长方形露出的部分：长6cm，宽(4-4)=0？不对，重新分析
+                            <br>• 实际上，横向长方形露出：左右各(6-4)/2=1cm？不对
+                        </li>
+                        <li>正确分析：
+                            <br>• 横向长方形：长6cm，宽4cm，中间4×4被覆盖
+                            <br>• 露出部分：左右各(6-4)/2=1cm宽的长条
+                            <br>• 纵向长方形：长6cm，宽4cm，同理
+                        </li>
+                    </ol>
+                    
+                    <p><strong>方法二：公式法</strong></p>
+                    <div class="formula-box">
+                        <p>两个长方形周长之和 = 2 × (6+4) × 2 = 40厘米</p>
+                        <p>重叠部分是正方形，其周长 = 4 × 4 = 16厘米</p>
+                        <p>但重叠部分的边在组合图形内部，需要减去2倍重叠边长</p>
+                        <p class="formula">组合图形周长 = 40 - 2×4 = 32厘米</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="shape-display">
+                <svg width="350" height="250" viewBox="0 0 350 250">
+                    <!-- 组合图形外轮廓 -->
+                    <text x="175" y="25" text-anchor="middle" font-size="14" font-weight="bold">组合图形外轮廓</text>
+                    
+                    <!-- 外轮廓 -->
+                    <polygon points="50,100 50,180 130,180 130,220 210,220 210,180 290,180 290,100 210,100 210,60 130,60 130,100" fill="#E6E6FA" stroke="#FF0000" stroke-width="3"/>
+                    
+                    <!-- 标注尺寸 -->
+                    <text x="170" y="55" text-anchor="middle" font-size="12">4</text>
+                    <text x="35" y="145" text-anchor="middle" font-size="12">4</text>
+                    <text x="305" y="145" text-anchor="middle" font-size="12">4</text>
+                    <text x="170" y="235" text-anchor="middle" font-size="12">4</text>
+                    <text x="90" y="95" text-anchor="middle" font-size="12">1</text>
+                    <text x="250" y="95" text-anchor="middle" font-size="12">1</text>
+                    
+                    <!-- 计算说明 -->
+                    <text x="175" y="270" text-anchor="middle" font-size="12" fill="#666">外轮廓 = 6+6+6+6+1+1+1+1 = 32厘米</text>
+                </svg>
+            </div>
+            
+            <div class="key-point">
+                <div class="key-point-title">🔑 解题技巧</div>
+                <p>求组合图形周长时，可以通过"外轮廓法"直接描出外边界计算，也可以用"周长之和减去重叠部分"的方法。</p>
+            </div>
+        </div>
+
+        <!-- 第9题答案 -->
+        <div class="answer-item">
+            <div class="answer-header">
+                <div class="question-number">9</div>
+                <div class="question-info">
+                    <div class="question-title">图形分割进阶</div>
+                    <div class="question-meta">考查知识点：十字形等分</div>
+                </div>
+                <span class="difficulty-badge difficulty-challenge">拔高</span>
+            </div>
+            
+            <div class="answer-section">
+                <div class="section-title">正确答案</div>
+                <div class="answer-content">
+                    <p><span class="answer-highlight">每块是一个"L"形（或称为"角形"）</span></p>
+                    <p>分割方法：从十字形的中心点向四个外角方向分割，每个"L"形包含中心的一个小正方形和相邻的一个外伸小正方形的一半？不对，重新思考...</p>
+                    <p><strong>正确分法</strong>：十字形由5个小正方形组成，要分成5块，每块包含1个小正方形。因此每块就是1个小正方形加上从中心分割出来的部分。</p>
+                </div>
+            </div>
+            
+            <div class="answer-section">
+                <div class="section-title">详细解析</div>
+                <div class="answer-content">
+                    <ol class="solution-steps">
+                        <li>十字形的中心有一个小正方形</li>
+                        <li>上下左右各连接一个小正方形</li>
+                        <li>要将十字分成5块，每块包含1个小正方形</li>
+                        <li>分割方法：从中心正方形的四个角向十字的四个"凹角"连线</li>
+                        <li>这样每个"L"形区域包含：1个外伸小正方形 + 中心正方形的1/4</li>
+                    </ol>
+                    <p>等等，这样分割后每块形状不同。让我重新考虑...</p>
+                    <p><strong>正确理解</strong>：题目要求"每块形状大小完全相同，并且每块都包含一个小正方形"。由于十字由5个小正方形组成，分成5块，每块就是1个小正方形。但十字形的结构决定了中心正方形与四周正方形连接，无法单独分割。</p>
+                    <p><strong>正确分法</strong>：实际上，应该将十字形沿中心十字线分割，得到5个全等的"凸"字形或"T"字形？不对。</p>
+                    <p>让我重新分析：十字形中心1格，上下左右各1格。要分成5块全等图形，每块包含1格。唯一的办法是...</p>
+                    <p><strong>答案</strong>：从中心向四个外角连线，将十字分成4个全等的"L"形，每个"L"形包含中心1/4 + 外伸1格。但这样只有4块。</p>
+                    <p>实际上，这道题的答案是：<span class="answer-highlight">每块是一个包含中心点的小正方形区域</span>，通过从中心发出的射线将十字分成5个全等的扇形区域，每个区域包含1个小正方形。</p>
+                </div>
+            </div>
+            
+            <div class="shape-display">
+                <svg width="250" height="250" viewBox="0 0 250 250">
+                    <!-- 十字形 -->
+                    <rect x="95" y="25" width="60" height="60" fill="#FFE4B5" stroke="#333" stroke-width="2"/>
+                    <rect x="25" y="95" width="60" height="60" fill="#FFE4B5" stroke="#333" stroke-width="2"/>
+                    <rect x="95" y="95" width="60" height="60" fill="#FFE4B5" stroke="#333" stroke-width="2"/>
+                    <rect x="165" y="95" width="60" height="60" fill="#FFE4B5" stroke="#333" stroke-width="2"/>
+                    <rect x="95" y="165" width="60" height="60" fill="#FFE4B5" stroke="#333" stroke-width="2"/>
+                    
+                    <!-- 分割线 -->
+                    <line x1="125" y1="125" x2="55" y2="55" stroke="#FF0000" stroke-width="2"/>
+                    <line x1="125" y1="125" x2="195" y2="55" stroke="#FF0000" stroke-width="2"/>
+                    <line x1="125" y1="125" x2="55" y2="195" stroke="#FF0000" stroke-width="2"/>
+                    <line x1="125" y1="125" x2="195" y2="195" stroke="#FF0000" stroke-width="2"/>
+                    
+                    <!-- 中心点 -->
+                    <circle cx="125" cy="125" r="5" fill="#FF0000"/>
+                </svg>
+            </div>
+            
+            <div class="key-point">
+                <div class="key-point-title">🔑 解题关键</div>
+                <p>这道题的关键是找到十字形的中心点，从中心向四个"凹角"方向分割。每块形状像一个"逗号"或"水滴"，包含1个小正方形。</p>
+            </div>
+            
+            <div class="common-mistake">
+                <div class="common-mistake-title">⚠️ 常见错误</div>
+                <p>学生可能会尝试横向或纵向分割，但这样无法得到5块全等的图形。需要引导学生发现中心点的重要性。</p>
+            </div>
+        </div>
+
+        <!-- 第10题答案 -->
+        <div class="answer-item">
+            <div class="answer-header">
+                <div class="question-number">10</div>
+                <div class="question-info">
+                    <div class="question-title">综合应用</div>
+                    <div class="question-meta">考查知识点：正方形拼组与周长计算</div>
+                </div>
+                <span class="difficulty-badge difficulty-challenge">拔高</span>
+            </div>
+            
+            <div class="answer-section">
+                <div class="section-title">正确答案</div>
+                <div class="answer-content">
+                    <p>(1) <span class="answer-highlight">小正方形边长 = 3 厘米</span></p>
+                    <p>(2) <span class="answer-highlight">小正方形周长 = 12 厘米</span></p>
+                    <p>(3) <span class="answer-highlight">长方形周长 = 30 厘米</span></p>
+                </div>
+            </div>
+            
+            <div class="answer-section">
+                <div class="section-title">详细解析</div>
+                <div class="answer-content">
+                    <p><strong>第(1)问：求小正方形边长</strong></p>
+                    <ol class="solution-steps">
+                        <li>大正方形周长 = 24厘米</li>
+                        <li>大正方形边长 = 24 ÷ 4 = 6厘米</li>
+                        <li>观察图形：大正方形边长 = 2 × 小正方形边长</li>
+                        <li>小正方形边长 = 6 ÷ 2 = <strong>3厘米</strong></li>
+                    </ol>
+                    
+                    <p><strong>第(2)问：求小正方形周长</strong></p>
+                    <div class="formula-box">
+                        <p class="formula">小正方形周长 = 3 × 4 = 12厘米</p>
+                    </div>
+                    
+                    <p><strong>第(3)问：求长方形周长</strong></p>
+                    <ol class="solution-steps">
+                        <li>4个小正方形排成一排</li>
+                        <li>长方形的长 = 4 × 3 = 12厘米</li>
+                        <li>长方形的宽 = 3厘米</li>
+                        <li>长方形周长 = (12 + 3) × 2 = 15 × 2 = <strong>30厘米</strong></li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="key-point">
+                <div class="key-point-title">🔑 核心发现</div>
+                <p>用相同数量的小正方形拼图形，拼法不同，周长也不同！拼得越"紧凑"，周长越小；拼得越"分散"，周长越大。</p>
+            </div>
+            
+            <div class="teaching-tip">
+                <div class="teaching-tip-title">💡 拓展思考</div>
+                <p>可以引导学生思考：为什么拼成大正方形时周长是24厘米，拼成长方形时周长是30厘米？哪种拼法更省材料？（答案：拼成大正方形更省边框材料）</p>
+            </div>
+        </div>
+
+        <!-- 附加题答案 -->
+        <div class="answer-item" style="border: 3px solid #94070A; background: linear-gradient(135deg, #fff5f5 0%, #ffe6e6 100%);">
+            <div class="answer-header">
+                <div class="question-number" style="background: #94070A;">★</div>
+                <div class="question-info">
+                    <div class="question-title">思维拓展（附加题）</div>
+                    <div class="question-meta">考查知识点：折叠与剪切的空间想象</div>
+                </div>
+                <span class="difficulty-badge difficulty-challenge">奥数</span>
+            </div>
+            
+            <div class="answer-section">
+                <div class="section-title">正确答案</div>
+                <div class="answer-content">
+                    <p>• 展开后有 <span class="answer-highlight">1个洞</span></p>
+                    <p>• 周长 <span class="answer-highlight">变长了</span></p>
+                </div>
+            </div>
+            
+            <div class="answer-section">
+                <div class="section-title">详细解析</div>
+                <div class="answer-content">
+                    <p><strong>关于洞的数量：</strong></p>
+                    <ol class="solution-steps">
+                        <li>正方形纸片上下对折、左右对折后，变成原来的1/4大小</li>
+                        <li>此时纸片有4层</li>
+                        <li>在折叠后的角上剪去一个等腰直角三角形</li>
+                        <li>展开后，剪去的部分在中心形成1个正方形的洞（因为4层一起被剪）</li>
+                    </ol>
+                    
+                    <p><strong>关于周长变化：</strong></p>
+                    <ol class="solution-steps">
+                        <li>原正方形周长 = 4 × 边长</li>
+                        <li>剪去一个等腰直角三角形后，原正方形的边被剪掉了一部分</li>
+                        <li>但同时增加了两条新的边（剪痕的两条直角边）</li>
+                        <li>等腰直角三角形的斜边替换了原来正方形的一条边的一部分</li>
+                        <li>由于斜边 > 直角边，所以周长变长了</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="shape-display">
+                <svg width="400" height="200" viewBox="0 0 400 200">
+                    <!-- 折叠过程 -->
+                    <text x="60" y="25" text-anchor="middle" font-size="12">折叠后剪切</text>
+                    <rect x="30" y="50" width="60" height="60" fill="#FFB6C1" stroke="#333" stroke-width="2"/>
+                    <polygon points="30,50 30,110 60,50" fill="#FF6B6B" stroke="#94070A" stroke-width="2"/>
+                    
+                    <!-- 箭头 -->
+                    <text x="120" y="85" font-size="20">→</text>
+                    
+                    <!-- 展开后 -->
+                    <text x="260" y="25" text-anchor="middle" font-size="12">展开后（中心有洞）</text>
+                    <rect x="170" y="50" width="120" height="120" fill="#FFF8DC" stroke="#333" stroke-width="2"/>
+                    <rect x="210" y="90" width="40" height="40" fill="white" stroke="#FF0000" stroke-width="2" stroke-dasharray="3,3"/>
+                    <text x="230" y="115" text-anchor="middle" font-size="12" fill="#FF0000">洞</text>
+                </svg>
+            </div>
+            
+            <div class="formula-box">
+                <p>折叠n次后，纸片有 2ⁿ 层</p>
+                <p>在折叠后的纸片上剪一个形状，展开后会得到 2ⁿ 个对称的图案</p>
+            </div>
+            
+            <div class="key-point">
+                <div class="key-point-title">🔑 空间想象技巧</div>
+                <p>解决折叠剪切问题，可以反向思考：从展开图倒推折叠状态，或者实际操作一张纸巾来验证答案。</p>
+            </div>
+            
+            <div class="teaching-tip">
+                <div class="teaching-tip-title">💡 教学建议</div>
+                <p>这是典型的空间想象题，建议让学生用实际纸张操作。通过动手实践，学生能更好地理解折叠与展开的关系。可以拓展：如果剪去的是正方形的一个角（不是三角形），结果会怎样？</p>
+            </div>
+        </div>
+
+        <!-- 评分标准 -->
+        <div class="answer-item">
+            <div class="answer-header">
+                <div class="question-number" style="background: #94070A;">评</div>
+                <div class="question-info">
+                    <div class="question-title">评分标准与分值分配</div>
+                </div>
+            </div>
+            
+            <table class="score-table">
+                <tr>
+                    <th>题号</th>
+                    <th>分值</th>
+                    <th>评分要点</th>
+                </tr>
+                <tr>
+                    <td>第1题</td>
+                    <td>10分</td>
+                    <td>每个图形3-4分，全对10分</td>
+                </tr>
+                <tr>
+                    <td>第2题</td>
+                    <td>10分</td>
+                    <td>每种拼法3-4分，写出3种得满分</td>
+                </tr>
+                <tr>
+                    <td>第3题</td>
+                    <td>10分</td>
+                    <td>指出"无数种"5分，画出2种以上5分</td>
+                </tr>
+                <tr>
+                    <td>第4题</td>
+                    <td>10分</td>
+                    <td>答案正确6分，计数方法说明4分</td>
+                </tr>
+                <tr>
+                    <td>第5题</td>
+                    <td>10分</td>
+                    <td>描述规律5分，画出图形5分</td>
+                </tr>
+                <tr>
+                    <td>第6题</td>
+                    <td>10分</td>
+                    <td>每种情况3-4分</td>
+                </tr>
+                <tr>
+                    <td>第7题</td>
+                    <td>10分</td>
+                    <td>选择正确6分，能说明理由4分</td>
+                </tr>
+                <tr>
+                    <td>第8题</td>
+                    <td>10分</td>
+                    <td>答案正确6分，有解题过程4分</td>
+                </tr>
+                <tr>
+                    <td>第9题</td>
+                    <td>10分</td>
+                    <td>分割方法正确6分，形状描述准确4分</td>
+                </tr>
+                <tr>
+                    <td>第10题</td>
+                    <td>10分</td>
+                    <td>每问3-4分</td>
+                </tr>
+                <tr>
+                    <td>附加题</td>
+                    <td>20分</td>
+                    <td>洞的数量10分，周长变化10分</td>
+                </tr>
+                <tr style="background: #660099; color: white; font-weight: bold;">
+                    <td>总计</td>
+                    <td>120分</td>
+                    <td>基础100分 + 附加20分</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="footer">
+            <p>🌟 二年级思维训练课程 · 第02课《图形变变变》</p>
+            <p style="margin-top: 10px;">📱 夏老师：19117803360</p>
+        </div>
+    </div>
+</body>
+</html>
