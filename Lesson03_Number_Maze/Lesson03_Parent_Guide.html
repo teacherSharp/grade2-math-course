@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第03课《数字迷宫》家长协同方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 4px solid #660099;
+        }
+        
+        .header h1 {
+            color: #660099;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            color: #666;
+            font-size: 18px;
+        }
+        
+        .section {
+            margin-bottom: 35px;
+            padding: 25px;
+            background: #fafafa;
+            border-radius: 15px;
+            border-left: 5px solid #660099;
+        }
+        
+        .section h2 {
+            color: #660099;
+            font-size: 24px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section h2::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 24px;
+            background: #94070A;
+            margin-right: 10px;
+            border-radius: 4px;
+        }
+        
+        .section p, .section li {
+            color: #444;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        
+        .section ul {
+            margin-left: 25px;
+            margin-top: 10px;
+        }
+        
+        .section li {
+            margin-bottom: 8px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #e7d4f8 0%, #f0e6ff 100%);
+            border: 2px solid #660099;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .highlight-box h3 {
+            color: #660099;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .activity-card {
+            background: white;
+            border: 2px dashed #660099;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        .activity-card h4 {
+            color: #94070A;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .tip-box {
+            background: #fff8e1;
+            border-left: 4px solid #FFC107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .tip-box strong {
+            color: #F57C00;
+        }
+        
+        .qr-section {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            border-radius: 15px;
+            color: white;
+        }
+        
+        .qr-section h3 {
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+        
+        .contact-info {
+            background: white;
+            border: 3px solid #660099;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px auto;
+            max-width: 300px;
+        }
+        
+        .contact-info .phone {
+            font-size: 24px;
+            color: #660099;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .contact-info .qr-code {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+            background: white;
+            border: 2px solid #660099;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        
+        .contact-info .qr-code img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 5px;
+            display: block;
+        }
+        
+        .next-lesson {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border: 2px solid #4CAF50;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .next-lesson h3 {
+            color: #2E7D32;
+            margin-bottom: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #eee;
+            color: #999;
+        }
+        
+        .maze-example {
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+        }
+        
+        .maze-grid {
+            display: inline-grid;
+            grid-template-columns: repeat(5, 40px);
+            gap: 2px;
+            background: #333;
+            padding: 2px;
+            border-radius: 5px;
+        }
+        
+        .maze-cell {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .maze-cell.wall {
+            background: #333;
+        }
+        
+        .maze-cell.path {
+            background: #E3F2FD;
+        }
+        
+        .maze-cell.start {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .maze-cell.end {
+            background: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎮 第03课《数字迷宫》</h1>
+            <p class="subtitle">家长协同方案 · 二年级思维训练课程</p>
+        </div>
+
+        <div class="section">
+            <h2>课程主题与目标</h2>
+            <p>本节课以"数字迷宫"为主题，通过趣味迷宫游戏培养孩子的<strong>路径规划能力</strong>和<strong>数字推理思维</strong>。</p>
+            <div class="highlight-box">
+                <h3>🎯 学习目标</h3>
+                <ul>
+                    <li>理解迷宫的基本结构和行走规则</li>
+                    <li>学会使用"右手定则"等迷宫解法策略</li>
+                    <li>培养空间方位感和路径记忆能力</li>
+                    <li>在数字迷宫中练习加减法运算</li>
+                    <li>提升逻辑推理和问题解决能力</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>课前准备</h2>
+            <p>为了让孩子更好地参与课堂活动，请家长协助准备以下材料：</p>
+            <ul>
+                <li>✏️ 铅笔和橡皮（用于标记路径）</li>
+                <li>📐 直尺（辅助画线）</li>
+                <li>🎨 彩色笔（用不同颜色标记不同路径）</li>
+                <li>📒 练习本（记录解题思路）</li>
+            </ul>
+            <div class="tip-box">
+                <strong>💡 温馨提示：</strong>如果孩子有迷宫游戏书或益智类APP，可以提前让孩子熟悉迷宫的基本玩法。
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>课堂重点回顾</h2>
+            <p>本节课主要学习了以下内容：</p>
+            
+            <h3 style="color: #660099; margin: 20px 0 10px;">1️⃣ 迷宫的基本概念</h3>
+            <ul>
+                <li><strong>入口（Start）</strong>：迷宫的起点，通常用绿色或"S"标记</li>
+                <li><strong>出口（End）</strong>：迷宫的终点，通常用红色或"E"标记</li>
+                <li><strong>通道</strong>：可以行走的路径</li>
+                <li><strong>墙壁</strong>：阻挡前进的障碍物</li>
+            </ul>
+
+            <div class="maze-example">
+                <p style="margin-bottom: 15px; color: #666;">简单迷宫示例（S=起点，E=终点）</p>
+                <div class="maze-grid">
+                    <div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div>
+                    <div class="maze-cell start">S</div>
+                    <div class="maze-cell path"></div>
+                    <div class="maze-cell path"></div>
+                    <div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div>
+                    <div class="maze-cell path"></div>
+                    <div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div>
+                    <div class="maze-cell path"></div>
+                    <div class="maze-cell path"></div>
+                    <div class="maze-cell path"></div>
+                    <div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div>
+                    <div class="maze-cell end">E</div>
+                    <div class="maze-cell wall"></div>
+                </div>
+            </div>
+
+            <h3 style="color: #660099; margin: 20px 0 10px;">2️⃣ 迷宫解法策略</h3>
+            <ul>
+                <li><strong>右手定则</strong>：始终沿着右侧墙壁行走，最终能找到出口</li>
+                <li><strong>标记法</strong>：用不同颜色标记已走过的路径，避免重复</li>
+                <li><strong>倒推法</strong>：从终点倒推回起点，有时更容易找到路径</li>
+                <li><strong>分层法</strong>：将复杂迷宫分层简化，逐步突破</li>
+            </ul>
+
+            <h3 style="color: #660099; margin: 20px 0 10px;">3️⃣ 数字迷宫的特殊规则</h3>
+            <ul>
+                <li>每个格子有一个数字</li>
+                <li>只能按照数字指示的步数移动（如格子写"2"，必须走2步）</li>
+                <li>不能走出迷宫边界</li>
+                <li>不能走到墙壁或障碍物上</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>家庭巩固练习</h2>
+            <p>请家长陪同孩子完成以下活动，巩固课堂所学：</p>
+
+            <div class="activity-card">
+                <h4>🎮 活动一：家庭迷宫挑战</h4>
+                <p>家长和孩子一起设计一个简单的5×5迷宫，互相挑战：</p>
+                <ol>
+                    <li>在纸上画出5×5的方格</li>
+                    <li>用黑色笔涂出一些墙壁</li>
+                    <li>标出起点（S）和终点（E）</li>
+                    <li>交换迷宫，看谁能最快找到出路</li>
+                </ol>
+                <div class="tip-box">
+                    <strong>💡 进阶玩法：</strong>在格子里写上数字，规定必须按照数字步数移动，制作"数字迷宫"。
+                </div>
+            </div>
+
+            <div class="activity-card">
+                <h4>🧩 活动二：迷宫游戏APP体验</h4>
+                <p>推荐几款适合孩子的迷宫类益智游戏：</p>
+                <ul>
+                    <li>"迷宫逃脱"类小游戏（注意控制游戏时间）</li>
+                    <li>"纪念碑谷"（培养空间思维）</li>
+                    <li>纸质迷宫书（保护视力，更推荐）</li>
+                </ul>
+            </div>
+
+            <div class="activity-card">
+                <h4>✏️ 活动三：数字迷宫练习题</h4>
+                <p>完成课后练习题（链接见下方），重点练习：</p>
+                <ul>
+                    <li>基础迷宫：找到从入口到出口的路径</li>
+                    <li>数字迷宫：按数字规则移动</li>
+                    <li>逻辑迷宫：根据条件推理正确路径</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>亲子互动建议</h2>
+            <div class="highlight-box">
+                <h3>👨‍👩‍👧‍👦 推荐互动方式</h3>
+                <ul>
+                    <li><strong>角色扮演</strong>：家长扮演"迷宫向导"，用语言指导孩子走出迷宫（如"向左转""向前走3步"）</li>
+                    <li><strong>计时挑战</strong>：给孩子设定时间限制，增加游戏的紧张感和趣味性</li>
+                    <li><strong>故事化</strong>：把迷宫变成探险故事（"我们要帮小兔子找到胡萝卜"）</li>
+                    <li><strong>实物迷宫</strong>：用积木或绳子在地上摆出迷宫，让孩子实际行走体验</li>
+                </ul>
+            </div>
+            <div class="tip-box">
+                <strong>⚠️ 注意事项：</strong>
+                <ul style="margin-top: 10px;">
+                    <li>如果孩子卡住了，不要直接给答案，用提问引导（"你觉得走哪边更近？"）</li>
+                    <li>鼓励孩子尝试不同路径，培养试错精神</li>
+                    <li>及时表扬孩子的进步，建立自信心</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>常见问题解答</h2>
+            <p><strong>Q1：孩子总是走死胡同，怎么办？</strong></p>
+            <p>A：这是正常现象。教孩子使用"标记法"，走过的路径做记号，遇到死胡同就退回上一个岔路口尝试其他方向。</p>
+            
+            <p style="margin-top: 15px;"><strong>Q2：孩子觉得迷宫太难，没兴趣怎么办？</strong></p>
+            <p>A：从简单的3×3迷宫开始，逐步增加难度。可以用孩子喜欢的主题（如恐龙、公主）设计迷宫，增加趣味性。</p>
+            
+            <p style="margin-top: 15px;"><strong>Q3：数字迷宫和普通迷宫有什么区别？</strong></p>
+            <p>A：数字迷宫增加了数学运算要求，需要孩子计算步数，对数字敏感度和计算能力都是很好的锻炼。</p>
+        </div>
+
+        <div class="next-lesson">
+            <h3>📚 下节课预告</h3>
+            <p><strong>第04课《有趣的排队》</strong></p>
+            <p>我们将学习序数、位置关系和间隔问题，通过排队游戏理解"第几"和"几个"的区别，培养空间位置感。</p>
+            <p style="margin-top: 10px;"><strong>预习建议：</strong>带孩子观察生活中的排队场景（如超市、车站），让孩子说说"从前往后数，你是第几个"。</p>
+        </div>
+
+        <div class="qr-section">
+            <h3>📱 联系夏老师</h3>
+            <div class="contact-info">
+                <div class="phone">📞 19117803360</div>
+                <div style="font-size: 14px; color: #666; margin-bottom: 15px;">欢迎随时咨询</div>
+                <div class="qr-code">
+                    <img src="../code.jpg" alt="夏老师微信二维码" style="width: 100%; height: 100%; object-fit: contain; border-radius: 5px; display: block;">
+                </div>
+            </div>
+            <p style="margin-top: 15px;">如有任何问题，欢迎随时联系<br>夏老师将为您提供专业指导</p>
+        </div>
+
+        <div class="footer">
+            <p>🌟 二年级思维训练课程 · 第03课《数字迷宫》</p>
+            <p style="margin-top: 10px;">让数学成为孩子最喜欢的科目</p>
+        </div>
+    </div>
+</body>
+</html>
