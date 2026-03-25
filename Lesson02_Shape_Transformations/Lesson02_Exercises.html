@@ -702,7 +702,7 @@
                 <span class="difficulty-badge difficulty-challenge">拔高</span>
             </div>
             <div class="question-content">
-                下图是一个由5个小正方形组成的"十"字形。请把它剪成5块，每块形状大小完全相同，并且每块都包含一个小正方形。
+                下图是一个由5个小正方形组成的"十"字形。请把它剪成<strong>4块</strong>，每块形状大小完全相同（面积相等）。
             </div>
             <div class="shape-display">
                 <svg width="200" height="200" viewBox="0 0 200 200">
@@ -712,12 +712,14 @@
                     <rect x="70" y="70" width="60" height="60" fill="#FFE4B5" stroke="#333" stroke-width="2"/>
                     <rect x="130" y="70" width="60" height="60" fill="#FFE4B5" stroke="#333" stroke-width="2"/>
                     <rect x="70" y="130" width="60" height="60" fill="#FFE4B5" stroke="#333" stroke-width="2"/>
+                    <!-- 中心点标记 -->
+                    <circle cx="100" cy="100" r="4" fill="#FF0000"/>
                 </svg>
             </div>
             <div class="answer-area">
                 <label class="answer-label">✏️ 描述你的分割方法：</label>
                 <textarea class="answer-input" rows="5" placeholder="分割方法：
-1. 
+1. 先找到十字形的中心点
 2. 
 3. 
 ...
@@ -725,14 +727,20 @@
 每块的形状是："></textarea>
             </div>
             <div class="drawing-area">
-                <p>在下方画出分割线：</p>
+                <p>在下方画出分割线（提示：从中心点出发）：</p>
                 <svg width="150" height="150" style="border: 2px solid #ddd; margin-top: 10px;">
                     <rect x="55" y="5" width="40" height="40" fill="#f9f9f9" stroke="#ddd"/>
                     <rect x="5" y="55" width="40" height="40" fill="#f9f9f9" stroke="#ddd"/>
                     <rect x="55" y="55" width="40" height="40" fill="#f9f9f9" stroke="#ddd"/>
                     <rect x="105" y="55" width="40" height="40" fill="#f9f9f9" stroke="#ddd"/>
                     <rect x="55" y="105" width="40" height="40" fill="#f9f9f9" stroke="#ddd"/>
+                    <!-- 中心点 -->
+                    <circle cx="75" cy="75" r="3" fill="#FF0000"/>
                 </svg>
+            </div>
+            <div class="hint-box">
+                <div class="hint-title">💡 解题提示</div>
+                <div class="hint-content">十字形有5个小正方形，要分成4块面积相等的图形，每块面积应该是5÷4=1.25个小正方形。考虑从中心点向哪些方向分割？</div>
             </div>
         </div>
 

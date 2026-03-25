@@ -5,25 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>第02课《图形变变变》交互式课件</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             overflow-x: hidden;
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         .slide {
             display: none;
             background: white;
@@ -34,17 +23,11 @@
             min-height: 600px;
             animation: slideIn 0.5s ease;
         }
-        
-        .slide.active {
-            display: block;
-        }
-        
+        .slide.active { display: block; }
         @keyframes slideIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
-        /* 封面页样式 */
         .cover-slide {
             text-align: center;
             background: linear-gradient(135deg, #660099 0%, #94070A 100%);
@@ -54,401 +37,60 @@
             justify-content: center;
             align-items: center;
         }
-        
-        .cover-slide h1 {
-            font-size: 56px;
-            margin-bottom: 20px;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
-            animation: bounce 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .cover-slide .subtitle {
-            font-size: 28px;
-            margin-bottom: 40px;
-            opacity: 0.95;
-        }
-        
+        .cover-slide h1 { font-size: 56px; margin-bottom: 20px; text-shadow: 3px 3px 6px rgba(0,0,0,0.3); animation: bounce 2s infinite; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .cover-slide .subtitle { font-size: 28px; margin-bottom: 40px; opacity: 0.95; }
         .cover-slide .start-btn {
-            background: white;
-            color: #660099;
-            border: none;
-            padding: 20px 60px;
-            font-size: 24px;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            background: white; color: #660099; border: none; padding: 20px 60px;
+            font-size: 24px; border-radius: 50px; cursor: pointer;
+            transition: all 0.3s ease; box-shadow: 0 5px 20px rgba(0,0,0,0.3);
         }
-        
-        .cover-slide .start-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-        }
-        
-        /* 页面标题 */
-        .slide-title {
-            color: #660099;
-            font-size: 36px;
-            margin-bottom: 30px;
-            text-align: center;
-            border-bottom: 4px solid #94070A;
-            padding-bottom: 15px;
-        }
-        
-        /* 内容卡片 */
-        .content-card {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 25px;
-            margin: 20px 0;
-            border-left: 5px solid #660099;
-        }
-        
-        .content-card h3 {
-            color: #660099;
-            font-size: 24px;
-            margin-bottom: 15px;
-        }
-        
-        .content-card p, .content-card li {
-            font-size: 18px;
-            line-height: 1.8;
-            color: #333;
-        }
-        
-        .content-card ul {
-            margin-left: 25px;
-        }
-        
-        .content-card li {
-            margin-bottom: 10px;
-        }
-        
-        /* 图形展示区 */
-        .shape-display {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin: 30px 0;
-            flex-wrap: wrap;
-        }
-        
-        .shape-item {
-            text-align: center;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        
-        .shape-item:hover {
-            transform: scale(1.1);
-        }
-        
-        .shape-item .shape {
-            width: 120px;
-            height: 120px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 80px;
-        }
-        
-        .shape-item .shape-name {
-            font-size: 20px;
-            color: #660099;
-            font-weight: bold;
-        }
-        
-        /* 交互式拼图区 */
-        .puzzle-area {
-            background: #fff5f5;
-            border: 3px dashed #94070A;
-            border-radius: 15px;
-            padding: 30px;
-            margin: 20px 0;
-            text-align: center;
-        }
-        
-        .puzzle-pieces {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 20px 0;
-            flex-wrap: wrap;
-        }
-        
-        .puzzle-piece {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 50px;
-            cursor: move;
-            transition: transform 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        
-        .puzzle-piece:hover {
-            transform: rotate(10deg) scale(1.1);
-        }
-        
-        /* 答题区 */
-        .answer-section {
-            background: #e8f5e9;
-            border-radius: 15px;
-            padding: 25px;
-            margin: 20px 0;
-        }
-        
-        .answer-input {
-            width: 100px;
-            height: 60px;
-            font-size: 28px;
-            text-align: center;
-            border: 3px solid #660099;
-            border-radius: 10px;
-            margin: 0 10px;
-        }
-        
-        .answer-input.correct {
-            border-color: #4CAF50;
-            background: #C8E6C9;
-        }
-        
-        .answer-input.wrong {
-            border-color: #f44336;
-            background: #FFEBEE;
-            animation: shake 0.5s;
-        }
-        
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
-        }
-        
+        .cover-slide .start-btn:hover { transform: scale(1.1); box-shadow: 0 8px 30px rgba(0,0,0,0.4); }
+        .slide-title { color: #660099; font-size: 36px; margin-bottom: 30px; text-align: center; border-bottom: 4px solid #94070A; padding-bottom: 15px; }
+        .content-card { background: #f8f9fa; border-radius: 15px; padding: 25px; margin: 20px 0; border-left: 5px solid #660099; }
+        .content-card h3 { color: #660099; font-size: 24px; margin-bottom: 15px; }
+        .content-card p, .content-card li { font-size: 18px; line-height: 1.8; color: #333; }
+        .content-card ul { margin-left: 25px; }
+        .content-card li { margin-bottom: 10px; }
+        .shape-display { display: flex; justify-content: center; gap: 40px; margin: 30px 0; flex-wrap: wrap; }
+        .shape-item { text-align: center; cursor: pointer; transition: transform 0.3s ease; }
+        .shape-item:hover { transform: scale(1.1); }
+        .shape-item .shape { width: 120px; height: 120px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; font-size: 80px; }
+        .shape-item .shape-name { font-size: 20px; color: #660099; font-weight: bold; }
+        .answer-input { width: 100px; height: 60px; font-size: 28px; text-align: center; border: 3px solid #660099; border-radius: 10px; margin: 0 10px; }
+        .answer-input.correct { border-color: #4CAF50; background: #C8E6C9; }
+        .answer-input.wrong { border-color: #f44336; background: #FFEBEE; animation: shake 0.5s; }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
         .check-btn {
-            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            font-size: 20px;
-            border-radius: 30px;
-            cursor: pointer;
-            margin: 15px 10px;
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%); color: white; border: none;
+            padding: 15px 40px; font-size: 20px; border-radius: 30px; cursor: pointer; margin: 15px 10px;
             transition: all 0.3s ease;
         }
-        
-        .check-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(102, 0, 153, 0.4);
-        }
-        
-        .feedback {
-            font-size: 20px;
-            margin-top: 15px;
-            padding: 15px;
-            border-radius: 10px;
-            display: none;
-        }
-        
-        .feedback.success {
-            background: #C8E6C9;
-            color: #2E7D32;
-            display: block;
-        }
-        
-        .feedback.error {
-            background: #FFEBEE;
-            color: #C62828;
-            display: block;
-        }
-        
-        /* 进度条 */
-        .progress-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 8px;
-            background: rgba(255,255,255,0.3);
-            z-index: 1000;
-        }
-        
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #660099 0%, #94070A 100%);
-            transition: width 0.3s ease;
-        }
-        
-        /* 导航按钮 */
-        .nav-container {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 20px;
-            z-index: 1000;
-        }
-        
-        .nav-btn {
-            background: white;
-            color: #660099;
-            border: 3px solid #660099;
-            padding: 15px 30px;
-            font-size: 18px;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        
-        .nav-btn:hover {
-            background: #660099;
-            color: white;
-            transform: scale(1.05);
-        }
-        
-        /* 页码指示器 */
-        .page-indicator {
-            position: fixed;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255,255,255,0.9);
-            padding: 10px 25px;
-            border-radius: 20px;
-            font-size: 16px;
-            color: #660099;
-            font-weight: bold;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-        }
-        
-        /* 图形计数游戏 */
-        .counting-game {
-            background: #fff8e1;
-            border: 3px solid #FF9800;
-            border-radius: 15px;
-            padding: 25px;
-            margin: 20px 0;
-        }
-        
-        .shape-complex {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin: 20px 0;
-            flex-wrap: wrap;
-        }
-        
-        .shape-to-count {
-            position: relative;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        
-        .shape-to-count:hover {
-            transform: scale(1.1);
-        }
-        
-        .shape-to-count.selected {
-            filter: drop-shadow(0 0 10px #660099);
-        }
-        
-        /* 拖拽区域 */
-        .drop-zone {
-            min-height: 150px;
-            background: #f5f5f5;
-            border: 3px dashed #660099;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 20px 0;
-            font-size: 18px;
-            color: #666;
-        }
-        
-        .drop-zone.drag-over {
-            background: #e8d5ff;
-            border-color: #94070A;
-        }
-        
-        /* 游戏化元素 */
-        .score-board {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: white;
-            padding: 15px 25px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            font-size: 18px;
-            color: #660099;
-            font-weight: bold;
-        }
-        
-        .timer {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 15px;
-            font-size: 24px;
-            font-weight: bold;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-        }
-        
-        /* 响应式设计 */
+        .check-btn:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(102, 0, 153, 0.4); }
+        .feedback { font-size: 20px; margin-top: 15px; padding: 15px; border-radius: 10px; display: none; }
+        .feedback.success { background: #C8E6C9; color: #2E7D32; display: block; }
+        .feedback.error { background: #FFEBEE; color: #C62828; display: block; }
+        .progress-container { position: fixed; top: 0; left: 0; width: 100%; height: 8px; background: rgba(255,255,255,0.3); z-index: 1000; }
+        .progress-bar { height: 100%; background: linear-gradient(90deg, #660099 0%, #94070A 100%); transition: width 0.3s ease; }
+        .nav-container { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 20px; z-index: 1000; }
+        .nav-btn { background: white; color: #660099; border: 3px solid #660099; padding: 15px 30px; font-size: 18px; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .nav-btn:hover { background: #660099; color: white; transform: scale(1.05); }
+        .page-indicator { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background: rgba(255,255,255,0.9); padding: 10px 25px; border-radius: 20px; font-size: 16px; color: #660099; font-weight: bold; box-shadow: 0 3px 10px rgba(0,0,0,0.2); }
+        .timer { position: fixed; top: 20px; left: 20px; background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); color: white; padding: 15px 25px; border-radius: 15px; font-size: 24px; font-weight: bold; box-shadow: 0 5px 20px rgba(0,0,0,0.2); display: none; }
+        .score-board { position: fixed; top: 20px; right: 20px; background: white; padding: 15px 25px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.2); font-size: 18px; color: #660099; font-weight: bold; display: none; }
         @media (max-width: 768px) {
-            .slide {
-                padding: 20px;
-                min-height: auto;
-            }
-            
-            .cover-slide h1 {
-                font-size: 36px;
-            }
-            
-            .slide-title {
-                font-size: 24px;
-            }
-            
-            .shape-display {
-                gap: 20px;
-            }
-            
-            .shape-item .shape {
-                width: 80px;
-                height: 80px;
-                font-size: 50px;
-            }
+            .slide { padding: 20px; min-height: auto; }
+            .cover-slide h1 { font-size: 36px; }
+            .slide-title { font-size: 24px; }
+            .shape-display { gap: 20px; }
+            .shape-item .shape { width: 80px; height: 80px; font-size: 50px; }
         }
     </style>
 </head>
 <body>
-    <div class="progress-container">
-        <div class="progress-bar" id="progressBar" style="width: 5%;"></div>
-    </div>
-    
-    <div class="timer" id="timer" style="display: none;">
-        ⏱️ <span id="timeValue">30</span>秒
-    </div>
-    
-    <div class="score-board" id="scoreBoard" style="display: none;">
-        ⭐ 得分: <span id="scoreValue">0</span>
-    </div>
+    <div class="progress-container"><div class="progress-bar" id="progressBar" style="width: 3.8%;"></div></div>
+    <div class="timer" id="timer">⏱️ <span id="timeValue">30</span>秒</div>
+    <div class="score-board" id="scoreBoard">⭐ 得分: <span id="scoreValue">0</span></div>
 
     <div class="container">
         <!-- 第1页：封面 -->
@@ -469,11 +111,12 @@
                     <li>🔶 掌握图形的拼组方法，用小图形拼出大图案</li>
                     <li>📐 学会图形的分割技巧，理解整体与部分的关系</li>
                     <li>🔢 准确数出复杂图形中包含的基本图形数量</li>
+                    <li>🎲 了解正方体展开图的11种类型</li>
                 </ul>
             </div>
             <div class="content-card" style="background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%); border-color: #FF9800;">
                 <h3 style="color: #FF9800;">🎮 课堂游戏预告</h3>
-                <p style="font-size: 18px;">图形拼图挑战 · 图形分割大师 · 图形计数竞赛</p>
+                <p style="font-size: 18px;">图形拼图挑战 · 图形分割大师 · 图形计数竞赛 · 正方体展开图探索</p>
             </div>
         </div>
 
@@ -483,22 +126,10 @@
             <div class="content-card">
                 <h3>你能认出这些图形吗？点击看看！</h3>
                 <div class="shape-display">
-                    <div class="shape-item" onclick="showShapeInfo('square')">
-                        <div class="shape">⬜</div>
-                        <div class="shape-name">?</div>
-                    </div>
-                    <div class="shape-item" onclick="showShapeInfo('rectangle')">
-                        <div class="shape">▭</div>
-                        <div class="shape-name">?</div>
-                    </div>
-                    <div class="shape-item" onclick="showShapeInfo('triangle')">
-                        <div class="shape">🔺</div>
-                        <div class="shape-name">?</div>
-                    </div>
-                    <div class="shape-item" onclick="showShapeInfo('circle')">
-                        <div class="shape">🔵</div>
-                        <div class="shape-name">?</div>
-                    </div>
+                    <div class="shape-item" onclick="showShapeInfo('square')"><div class="shape">⬜</div><div class="shape-name">?</div></div>
+                    <div class="shape-item" onclick="showShapeInfo('rectangle')"><div class="shape">▭</div><div class="shape-name">?</div></div>
+                    <div class="shape-item" onclick="showShapeInfo('triangle')"><div class="shape">🔺</div><div class="shape-name">?</div></div>
+                    <div class="shape-item" onclick="showShapeInfo('circle')"><div class="shape">🔵</div><div class="shape-name">?</div></div>
                 </div>
                 <div id="shapeInfo" style="margin-top: 20px; padding: 20px; background: #e8d5ff; border-radius: 10px; display: none; font-size: 18px;"></div>
             </div>
@@ -518,12 +149,10 @@
                     今天，他们要举行一场<strong>图形变形大赛</strong>，看谁能变出最多有趣的图案！
                 </p>
             </div>
-            <div style="text-align: center; font-size: 80px; margin-top: 20px;">
-                ✨🎪✨
-            </div>
+            <div style="text-align: center; font-size: 80px; margin-top: 20px;">✨🎪✨</div>
         </div>
 
-        <!-- 第5页：概念页1 - 正方形 -->
+        <!-- 第5页：认识正方形 -->
         <div class="slide" data-slide="5">
             <h2 class="slide-title">📚 认识正方形</h2>
             <div class="content-card">
@@ -542,13 +171,11 @@
             </div>
             <div class="content-card" style="background: #e8f5e9; border-color: #4CAF50;">
                 <h3 style="color: #2E7D32;">💡 记忆口诀</h3>
-                <p style="font-size: 22px; text-align: center; color: #2E7D32;">
-                    "正方形，四边同，四个直角站得正！"
-                </p>
+                <p style="font-size: 22px; text-align: center; color: #2E7D32;">"正方形，四边同，四个直角站得正！"</p>
             </div>
         </div>
 
-        <!-- 第6页：概念页2 - 长方形 -->
+        <!-- 第6页：认识长方形 -->
         <div class="slide" data-slide="6">
             <h2 class="slide-title">📚 认识长方形</h2>
             <div class="content-card">
@@ -575,7 +202,7 @@
             </div>
         </div>
 
-        <!-- 第7页：概念页3 - 三角形 -->
+        <!-- 第7页：认识三角形 -->
         <div class="slide" data-slide="7">
             <h2 class="slide-title">📚 认识三角形</h2>
             <div class="content-card">
@@ -595,23 +222,14 @@
             <div class="content-card" style="background: #e3f2fd; border-color: #2196F3;">
                 <h3 style="color: #1565C0;">🔺 三角形的种类</h3>
                 <div style="display: flex; justify-content: space-around; margin-top: 15px; flex-wrap: wrap; gap: 20px;">
-                    <div style="text-align: center;">
-                        <div style="font-size: 60px;">🔺</div>
-                        <div>等边三角形</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 60px;">📐</div>
-                        <div>等腰三角形</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 60px;">📏</div>
-                        <div>直角三角形</div>
-                    </div>
+                    <div style="text-align: center;"><div style="font-size: 60px;">🔺</div><div>等边三角形</div></div>
+                    <div style="text-align: center;"><div style="font-size: 60px;">📐</div><div>等腰三角形</div></div>
+                    <div style="text-align: center;"><div style="font-size: 60px;">🔻</div><div>直角三角形</div></div>
                 </div>
             </div>
         </div>
 
-        <!-- 第8页：概念页4 - 圆形 -->
+        <!-- 第8页：认识圆形 -->
         <div class="slide" data-slide="8">
             <h2 class="slide-title">📚 认识圆形</h2>
             <div class="content-card">
@@ -620,329 +238,584 @@
                     <div style="font-size: 150px;">🔵</div>
                     <div style="flex: 1; min-width: 300px;">
                         <ul style="font-size: 20px; line-height: 2;">
-                            <li>✅ <strong>没有边</strong>（边缘是曲线）</li>
+                            <li>✅ <strong>没有边</strong>（是一条曲线）</li>
                             <li>✅ <strong>没有角</strong></li>
-                            <li>✅ 从圆心到边缘的距离 <strong>处处相等</strong></li>
-                            <li>✅ 可以 <strong>滚动</strong></li>
+                            <li>✅ 从圆心到圆周的<strong>距离都相等</strong></li>
+                            <li>✅ 可以<strong>滚动</strong></li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="content-card" style="background: #fce4ec; border-color: #E91E63;">
+            <div class="content-card" style="background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%); border-color: #E91E63;">
                 <h3 style="color: #C2185B;">🎯 生活中的圆形</h3>
-                <div style="font-size: 50px; text-align: center; margin-top: 15px;">
-                    🍕 🕐 🎱 🏀 🌍 🌕
-                </div>
-                <p style="text-align: center; margin-top: 10px; font-size: 16px;">
-                    披萨 · 时钟 · 台球 · 篮球 · 地球 · 月亮
+                <p style="font-size: 18px; text-align: center;">
+                    硬币 🪙 · 盘子 🍽️ · 车轮 🚗 · 钟表 ⏰ · 太阳 ☀️ · 月亮 🌕
                 </p>
             </div>
         </div>
 
         <!-- 第9页：图形拼组 -->
         <div class="slide" data-slide="9">
-            <h2 class="slide-title">🔧 图形拼组大挑战</h2>
+            <h2 class="slide-title">🧩 图形拼组：小变大</h2>
             <div class="content-card">
-                <h3>用两个相同的直角三角形可以拼成什么？</h3>
-                <div class="puzzle-area">
-                    <div class="puzzle-pieces">
-                        <div class="puzzle-piece">📐</div>
-                        <div class="puzzle-piece">📐</div>
+                <h3>用2个相同的三角形可以拼成什么？</h3>
+                <div style="display: flex; justify-content: center; gap: 50px; margin: 30px 0; flex-wrap: wrap;">
+                    <div style="text-align: center;">
+                        <svg width="120" height="120" viewBox="0 0 120 120">
+                            <polygon points="60,10 110,110 10,110" fill="#FF9800" stroke="#333" stroke-width="2"/>
+                        </svg>
+                        <div>+</div>
+                        <svg width="120" height="120" viewBox="0 0 120 120">
+                            <polygon points="60,10 110,110 10,110" fill="#FF9800" stroke="#333" stroke-width="2"/>
+                        </svg>
                     </div>
-                    <p style="font-size: 18px; color: #666;">拖拽或点击拼一拼</p>
+                    <div style="font-size: 60px; display: flex; align-items: center;">=</div>
+                    <div style="text-align: center;">
+                        <svg width="200" height="120" viewBox="0 0 200 120">
+                            <polygon points="100,10 190,110 10,110" fill="none" stroke="#94070A" stroke-width="2" stroke-dasharray="5,5"/>
+                            <line x1="100" y1="10" x2="100" y2="110" stroke="#94070A" stroke-width="2"/>
+                            <polygon points="100,10 190,110 100,110" fill="#FFB74D" stroke="#333" stroke-width="2"/>
+                            <polygon points="100,10 100,110 10,110" fill="#FFB74D" stroke="#333" stroke-width="2"/>
+                        </svg>
+                        <div>长方形或平行四边形</div>
+                    </div>
                 </div>
-                <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
-                    <button class="check-btn" onclick="showPuzzleAnswer('rectangle')">拼成长方形</button>
-                    <button class="check-btn" onclick="showPuzzleAnswer('triangle')">拼成大三角形</button>
-                    <button class="check-btn" onclick="showPuzzleAnswer('square')">拼成正方形</button>
-                </div>
-                <div id="puzzleFeedback" class="feedback"></div>
             </div>
-            <div class="content-card" style="background: #e8f5e9;">
-                <h3>💡 拼组秘诀</h3>
-                <p>相等的边拼在一起，可以组成新的图形！</p>
+            <div class="content-card" style="background: #e8f5e9; border-color: #4CAF50;">
+                <h3 style="color: #2E7D32;">💡 拼组技巧</h3>
+                <p style="font-size: 18px;">
+                    • 把<strong>相等的边</strong>拼在一起<br>
+                    • 可以拼成不同的新图形<br>
+                    • 2个三角形 → 长方形/平行四边形/大三角形
+                </p>
             </div>
         </div>
 
         <!-- 第10页：图形分割 -->
         <div class="slide" data-slide="10">
-            <h2 class="slide-title">✂️ 图形分割大师</h2>
+            <h2 class="slide-title">✂️ 图形分割：大变小</h2>
             <div class="content-card">
-                <h3>一个正方形可以怎么分割？</h3>
+                <h3>把一个长方形分成2个相同的图形</h3>
                 <div style="display: flex; justify-content: center; gap: 40px; margin: 30px 0; flex-wrap: wrap;">
                     <div style="text-align: center;">
-                        <div style="font-size: 100px; margin-bottom: 10px;">⬜</div>
-                        <div style="font-size: 30px;">⬇️</div>
-                        <div style="font-size: 50px;">▭▭</div>
-                        <p>分成两个长方形</p>
+                        <svg width="200" height="120" viewBox="0 0 200 120">
+                            <rect x="10" y="10" width="180" height="100" fill="#2196F3" stroke="#333" stroke-width="2"/>
+                            <line x1="100" y1="10" x2="100" y2="110" stroke="#f44336" stroke-width="3" stroke-dasharray="8,4"/>
+                        </svg>
+                        <div>分成2个长方形</div>
                     </div>
                     <div style="text-align: center;">
-                        <div style="font-size: 100px; margin-bottom: 10px;">⬜</div>
-                        <div style="font-size: 30px;">⬇️</div>
-                        <div style="font-size: 50px;">📐📐</div>
-                        <p>分成两个三角形</p>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 100px; margin-bottom: 10px;">⬜</div>
-                        <div style="font-size: 30px;">⬇️</div>
-                        <div style="font-size: 40px;">⬜⬜<br>⬜⬜</div>
-                        <p>分成四个小正方形</p>
+                        <svg width="200" height="120" viewBox="0 0 200 120">
+                            <rect x="10" y="10" width="180" height="100" fill="#2196F3" stroke="#333" stroke-width="2"/>
+                            <line x1="10" y1="10" x2="190" y2="110" stroke="#f44336" stroke-width="3" stroke-dasharray="8,4"/>
+                        </svg>
+                        <div>分成2个三角形</div>
                     </div>
                 </div>
             </div>
-            <div class="answer-section">
-                <h3>🎯 练习：一个长方形可以分成两个正方形吗？</h3>
-                <p style="font-size: 18px; margin-bottom: 15px;">（提示：想想长方形的长和宽有什么关系）</p>
-                <div style="text-align: center;">
-                    <button class="check-btn" onclick="checkDivisionAnswer('yes')">可以</button>
-                    <button class="check-btn" onclick="checkDivisionAnswer('no')">不可以</button>
-                    <button class="check-btn" onclick="checkDivisionAnswer('sometimes')">有时候可以</button>
-                </div>
-                <div id="divisionFeedback" class="feedback"></div>
-            </div>
-        </div>
-
-        <!-- 第11页：图形计数入门 -->
-        <div class="slide" data-slide="11">
-            <h2 class="slide-title">🔢 图形计数入门</h2>
-            <div class="content-card">
-                <h3>数一数，下面有多少个长方形？</h3>
-                <div style="text-align: center; margin: 30px 0;">
-                    <svg width="300" height="150" viewBox="0 0 300 150">
-                        <!-- 左边长方形 -->
-                        <rect x="50" y="25" width="100" height="100" fill="#E6E6FA" stroke="#333" stroke-width="3"/>
-                        <!-- 右边长方形（共边） -->
-                        <rect x="150" y="25" width="100" height="100" fill="#FFE4E1" stroke="#333" stroke-width="3"/>
-                        <!-- 共边标注 -->
-                        <line x1="150" y1="25" x2="150" y2="125" stroke="#FF0000" stroke-width="2" stroke-dasharray="5,3"/>
-                        <!-- 标注文字 -->
-                        <text x="100" y="145" text-anchor="middle" font-size="14" fill="#666">长方形①</text>
-                        <text x="200" y="145" text-anchor="middle" font-size="14" fill="#666">长方形②</text>
-                        <text x="150" y="15" text-anchor="middle" font-size="12" fill="#FF0000">共边</text>
-                    </svg>
-                </div>
-                <div class="answer-section">
-                    <div style="text-align: center;">
-                        <input type="number" class="answer-input" id="count1" placeholder="?">
-                        <button class="check-btn" onclick="checkCount1()">检查答案</button>
-                    </div>
-                    <div id="countFeedback1" class="feedback"></div>
-                </div>
-            </div>
-            <div class="content-card" style="background: #fff8e1;">
-                <h3>💡 计数小技巧</h3>
+            <div class="content-card" style="background: #fff3e0; border-color: #FF9800;">
+                <h3 style="color: #E65100;">🎯 分割方法</h3>
                 <p style="font-size: 18px;">
-                    1️⃣ 先数单个的图形（2个）<br>
-                    2️⃣ 再数由多个小图形组成的大图形（1个大的）<br>
-                    3️⃣ 最后加起来：2 + 1 = 3，不要漏数！
+                    • <strong>横着分</strong>：分成2个长方形<br>
+                    • <strong>竖着分</strong>：分成2个长方形<br>
+                    • <strong>对角线分</strong>：分成2个三角形
                 </p>
             </div>
         </div>
 
-        <!-- 第12页：图形计数进阶 -->
+        <!-- 第11页：模块一总结 -->
+        <div class="slide" data-slide="11">
+            <h2 class="slide-title">📋 模块总结：认识与变换图形</h2>
+            <div class="content-card" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);">
+                <h3>🎯 核心知识点</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px;">
+                    <div style="background: white; padding: 15px; border-radius: 10px;">
+                        <h4 style="color: #2196F3;">🔲 正方形</h4>
+                        <ul style="margin-left: 20px; line-height: 1.8;"><li>四边相等</li><li>四个直角</li><li>四条对称轴</li></ul>
+                    </div>
+                    <div style="background: white; padding: 15px; border-radius: 10px;">
+                        <h4 style="color: #FF9800;">▭ 长方形</h4>
+                        <ul style="margin-left: 20px; line-height: 1.8;"><li>对边相等</li><li>四个直角</li><li>两条对称轴</li></ul>
+                    </div>
+                    <div style="background: white; padding: 15px; border-radius: 10px;">
+                        <h4 style="color: #4CAF50;">🔺 三角形</h4>
+                        <ul style="margin-left: 20px; line-height: 1.8;"><li>三边三角</li><li>具有稳定性</li><li>内角和180°</li></ul>
+                    </div>
+                    <div style="background: white; padding: 15px; border-radius: 10px;">
+                        <h4 style="color: #9C27B0;">🔵 圆形</h4>
+                        <ul style="margin-left: 20px; line-height: 1.8;"><li>没有边角</li><li>可以滚动</li><li>无数条对称轴</li></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="content-card" style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);">
+                <h3>✅ 学生应掌握</h3>
+                <div style="font-size: 18px; line-height: 2;">
+                    <p>1. 能识别正方形、长方形、三角形、圆形</p>
+                    <p>2. 知道各种图形的基本特征</p>
+                    <p>3. 能用小图形拼组大图形</p>
+                    <p>4. 能将大图形分割成小图形</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第12页：图形计数1 -->
         <div class="slide" data-slide="12">
-            <h2 class="slide-title">🔢 图形计数进阶</h2>
+            <h2 class="slide-title">🔢 图形计数（一）</h2>
             <div class="content-card">
-                <h3>数一数，下面有多少个三角形？</h3>
-                <div style="text-align: center; margin: 30px 0; font-size: 0;">
-                    <div style="display: inline-block; font-size: 80px; line-height: 1;">🔺</div>
-                    <div style="display: inline-block; font-size: 80px; line-height: 1;">🔺</div>
-                    <div style="display: inline-block; font-size: 80px; line-height: 1;">🔺</div>
+                <h3>数一数，下图中有几个长方形？</h3>
+                <div style="text-align: center; margin: 30px 0;">
+                    <svg width="300" height="200" viewBox="0 0 300 200">
+                        <rect x="50" y="30" width="200" height="120" fill="#E3F2FD" stroke="#333" stroke-width="2"/>
+                        <line x1="150" y1="30" x2="150" y2="150" stroke="#333" stroke-width="2"/>
+                        <line x1="50" y1="90" x2="250" y2="90" stroke="#333" stroke-width="2"/>
+                    </svg>
                 </div>
-                <div class="answer-section">
-                    <div style="text-align: center;">
-                        <input type="number" class="answer-input" id="count2" placeholder="?">
-                        <button class="check-btn" onclick="checkCount2()">检查答案</button>
-                    </div>
-                    <div id="countFeedback2" class="feedback"></div>
+                <div style="text-align: center; margin: 20px 0;">
+                    <input type="text" class="answer-input" id="count1" placeholder="?">
+                    <button class="check-btn" onclick="checkCount1()">检查答案</button>
                 </div>
+                <div class="feedback" id="feedback_count1"></div>
             </div>
-            <div class="content-card">
-                <h3>🔍 提示</h3>
-                <p>记得数单个的，还要数合起来的大三角形哦！</p>
+            <div class="content-card" style="background: #fff8e1; border-color: #FFC107;">
+                <h3 style="color: #FF8F00;">💡 计数技巧</h3>
+                <p style="font-size: 18px;">先数单个的，再数组合的！小长方形有4个，2个组合的有4个，4个组合的有1个。</p>
             </div>
         </div>
 
-        <!-- 第13页：综合练习1 -->
+        <!-- 第13页：图形计数2 -->
         <div class="slide" data-slide="13">
-            <h2 class="slide-title">📝 综合练习1：图形拼拼乐</h2>
+            <h2 class="slide-title">🔢 图形计数（二）</h2>
             <div class="content-card">
-                <h3>用4个相同的小正方形，可以拼成什么图形？</h3>
-                <div style="display: flex; justify-content: center; gap: 20px; margin: 30px 0;">
-                    <div style="text-align: center;">
-                        <div style="font-size: 40px;">⬜⬜<br>⬜⬜</div>
-                        <p>大正方形</p>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 40px;">⬜⬜⬜⬜</div>
-                        <p>长方形</p>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 40px;">⬜⬜<br>&nbsp;&nbsp;⬜⬜</div>
-                        <p>L形</p>
-                    </div>
+                <h3>数一数，下图中有几个三角形？</h3>
+                <div style="text-align: center; margin: 30px 0;">
+                    <svg width="300" height="200" viewBox="0 0 300 200">
+                        <polygon points="150,20 280,180 20,180" fill="#FFF3E0" stroke="#333" stroke-width="2"/>
+                        <line x1="150" y1="20" x2="150" y2="180" stroke="#333" stroke-width="2"/>
+                        <line x1="85" y1="100" x2="215" y2="100" stroke="#333" stroke-width="2"/>
+                    </svg>
                 </div>
-                <div class="answer-section">
-                    <p style="font-size: 18px; margin-bottom: 15px;">上面三种拼法，哪些是正确的？（多选）</p>
-                    <div style="text-align: center;">
-                        <button class="check-btn" onclick="checkPuzzle('all')">全部正确</button>
-                        <button class="check-btn" onclick="checkPuzzle('some')">只有部分正确</button>
-                    </div>
-                    <div id="puzzleFeedback2" class="feedback"></div>
+                <div style="text-align: center; margin: 20px 0;">
+                    <input type="text" class="answer-input" id="count2" placeholder="?">
+                    <button class="check-btn" onclick="checkCount2()">检查答案</button>
                 </div>
+                <div class="feedback" id="feedback_count2"></div>
+            </div>
+            <div class="content-card" style="background: #e8f5e9; border-color: #4CAF50;">
+                <h3 style="color: #2E7D32;">🎯 分层计数法</h3>
+                <p style="font-size: 18px;">小三角形3个 → 2个组合的2个 → 3个组合的1个 → 总共6个</p>
             </div>
         </div>
 
-        <!-- 第14页：综合练习2 -->
+        <!-- 第14页：模块二总结 -->
         <div class="slide" data-slide="14">
-            <h2 class="slide-title">📝 综合练习2：分割挑战</h2>
-            <div class="content-card">
-                <h3>一个正方形，剪一刀，可以变成什么图形？</h3>
-                <div style="display: flex; justify-content: center; gap: 30px; margin: 30px 0; flex-wrap: wrap;">
-                    <div style="text-align: center; padding: 20px; background: #f5f5f5; border-radius: 10px;">
-                        <div style="font-size: 60px;">⬜</div>
-                        <div style="font-size: 24px; margin: 10px 0;">✂️ 横着剪</div>
-                        <div style="font-size: 40px;">▭▭</div>
-                    </div>
-                    <div style="text-align: center; padding: 20px; background: #f5f5f5; border-radius: 10px;">
-                        <div style="font-size: 60px;">⬜</div>
-                        <div style="font-size: 24px; margin: 10px 0;">✂️ 斜着剪</div>
-                        <div style="font-size: 40px;">📐📐</div>
-                    </div>
+            <h2 class="slide-title">📋 模块总结：图形计数技巧</h2>
+            <div class="content-card" style="background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);">
+                <h3>💡 计数方法</h3>
+                <div style="font-size: 18px; line-height: 2;">
+                    <p><strong>方法一：分类计数</strong></p>
+                    <ul style="margin-left: 30px;">
+                        <li>先数单个的基本图形</li>
+                        <li>再数2个组合的图形</li>
+                        <li>再数3个组合的图形</li>
+                        <li>最后相加得到总数</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>方法二：标记法</strong></p>
+                    <ul style="margin-left: 30px;">
+                        <li>给每个基本图形编号</li>
+                        <li>按编号组合，避免遗漏</li>
+                    </ul>
                 </div>
-                <div class="answer-section">
-                    <p style="font-size: 18px; margin-bottom: 15px;">如果剪两刀，最多可以把正方形分成几块？</p>
-                    <div style="text-align: center;">
-                        <input type="number" class="answer-input" id="cutCount" placeholder="?">
-                        <button class="check-btn" onclick="checkCutCount()">检查答案</button>
-                    </div>
-                    <div id="cutFeedback" class="feedback"></div>
+            </div>
+            <div class="content-card" style="background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);">
+                <h3>⚠️ 易错提醒</h3>
+                <div style="font-size: 18px; line-height: 2;">
+                    <p>❌ 不要漏数组合的图形</p>
+                    <p>❌ 不要重复计数</p>
+                    <p>❌ 注意区分不同大小的图形</p>
+                </div>
+            </div>
+            <div class="content-card" style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);">
+                <h3>✅ 学生应掌握</h3>
+                <div style="font-size: 18px; line-height: 2;">
+                    <p>1. 掌握分类计数法</p>
+                    <p>2. 能有序地数出复杂图形中的基本图形</p>
+                    <p>3. 理解"单个+组合"的计数思想</p>
                 </div>
             </div>
         </div>
 
-        <!-- 第15页：速度挑战 -->
+        <!-- 第15页：正方体展开图 -->
         <div class="slide" data-slide="15">
-            <h2 class="slide-title">⚡ 速度挑战：图形闪电战</h2>
+            <h2 class="slide-title">🎲 正方体展开图（11种类型）</h2>
             <div class="content-card">
-                <h3>在30秒内，快速回答以下问题！</h3>
-                <div id="challengeArea" style="margin: 20px 0;">
-                    <div style="text-align: center; margin: 20px 0;">
-                        <button class="check-btn" onclick="startShapeChallenge()" style="font-size: 24px; padding: 20px 50px;">开始挑战！</button>
+                <h3>正方体展开图有且仅有11种不同的平面展开方式</h3>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin: 20px 0;">
+                    <!-- 类型1：1-4-1型（6种） -->
+                    <div style="text-align: center; padding: 10px; background: #e3f2fd; border-radius: 8px;">
+                        <svg width="80" height="100" viewBox="0 0 80 100">
+                            <rect x="20" y="0" width="20" height="20" fill="#2196F3" stroke="#333" stroke-width="1"/>
+                            <rect x="0" y="20" width="20" height="20" fill="#90CAF9" stroke="#333" stroke-width="1"/>
+                            <rect x="20" y="20" width="20" height="20" fill="#90CAF9" stroke="#333" stroke-width="1"/>
+                            <rect x="40" y="20" width="20" height="20" fill="#90CAF9" stroke="#333" stroke-width="1"/>
+                            <rect x="60" y="20" width="20" height="20" fill="#90CAF9" stroke="#333" stroke-width="1"/>
+                            <rect x="20" y="40" width="20" height="20" fill="#2196F3" stroke="#333" stroke-width="1"/>
+                        </svg>
+                        <div style="font-size: 12px; margin-top: 5px;">1-4-1型①</div>
                     </div>
-                </div>
-                <div id="challengeQuestions" style="display: none;">
-                    <div class="counting-game">
-                        <p style="font-size: 20px; margin-bottom: 15px;"><strong>问题1：</strong> 🔺🔺🔺 有几个三角形？</p>
-                        <input type="number" class="answer-input" id="speed1" placeholder="?">
+                    <div style="text-align: center; padding: 10px; background: #e3f2fd; border-radius: 8px;">
+                        <svg width="80" height="100" viewBox="0 0 80 100">
+                            <rect x="0" y="0" width="20" height="20" fill="#2196F3" stroke="#333" stroke-width="1"/>
+                            <rect x="0" y="20" width="20" height="20" fill="#90CAF9" stroke="#333" stroke-width="1"/>
+                            <rect x="20" y="20" width="20" height="20" fill="#90CAF9" stroke="#333" stroke-width="1"/>
+                            <rect x="40" y="20" width="20" height="20" fill="#90CAF9" stroke="#333" stroke-width="1"/>
+                            <rect x="60" y="20" width="20" height="20" fill="#90CAF9" stroke="#333" stroke-width="1"/>
+                            <rect x="20" y="40" width="20" height="20" fill="#2196F3" stroke="#333" stroke-width="1"/>
+                        </svg>
+                        <div style="font-size: 12px; margin-top: 5px;">1-4-1型②</div>
                     </div>
-                    <div class="counting-game">
-                        <p style="font-size: 20px; margin-bottom: 15px;"><strong>问题2：</strong> ⬜⬜⬜⬜ 拼成的是什么图形？（填：正方形/长方形）</p>
-                        <input type="text" class="answer-input" id="speed2" placeholder="?" style="width: 150px;">
+                    <div style="text-align: center; padding: 10px; background: #e3f2fd; border-radius: 8px;">
+                        <svg width="80" height="100" viewBox="0 0 80 100">
+                            <rect x="60" y="0" width="20" height="20" fill="#2196F3" stroke="#333" stroke-width="1"/>
+                            <rect x="0" y="20" width="20" height="20" fill="#90CAF9" stroke="#333" stroke-width="1"/>
+                            <rect x="20" y="20" width="20" height="20" fill="#90CAF9" stroke="#333" stroke-width="1"/>
+                            <rect x="40" y="20" width="20" height="20" fill="#90CAF9" stroke="#333" stroke-width="1"/>
+                            <rect x="60" y="20" width="20" height="20" fill="#90CAF9" stroke="#333" stroke-width="1"/>
+                            <rect x="20" y="40" width="20" height="20" fill="#2196F3" stroke="#333" stroke-width="1"/>
+                        </svg>
+                        <div style="font-size: 12px; margin-top: 5px;">1-4-1型③</div>
                     </div>
-                    <div style="text-align: center; margin-top: 20px;">
-                        <button class="check-btn" onclick="checkShapeChallenge()">提交答案</button>
+                    <div style="text-align: center; padding: 10px; background: #e3f2fd; border-radius: 8px;">
+                        <svg width="80" height="100" viewBox="0 0 80 100">
+                            <rect x="20" y="0" width="20" height="20" fill="#2196F3" stroke="#333" stroke-width="1"/>
+                            <rect x="0" y="20" width="20" height="20" fill="#90CAF9" stroke="#333" stroke-width="1"/>
+                            <rect x="20" y="20" width="20" height="20" fill="#90CAF9" stroke="#333" stroke-width="1"/>
+                            <rect x="40" y="20" width="20" height="20" fill="#90CAF9" stroke="#333" stroke-width="1"/>
+                            <rect x="60" y="20" width="20" height="20" fill="#90CAF9" stroke="#333" stroke-width="1"/>
+                            <rect x="40" y="40" width="20" height="20" fill="#2196F3" stroke="#333" stroke-width="1"/>
+                        </svg>
+                        <div style="font-size: 12px; margin-top: 5px;">1-4-1型④</div>
                     </div>
-                </div>
-                <div id="challengeFeedback" class="feedback"></div>
-            </div>
-        </div>
-
-        <!-- 第16页：小组竞赛 -->
-        <div class="slide" data-slide="16">
-            <h2 class="slide-title">🏆 小组竞赛：图形创意赛</h2>
-            <div class="content-card">
-                <h3>比赛规则</h3>
-                <div style="background: #fff8e1; padding: 20px; border-radius: 10px; margin: 20px 0;">
-                    <p style="font-size: 18px; line-height: 2;">
-                        1️⃣ 每组发放一套图形卡片（正方形、长方形、三角形各4个）<br>
-                        2️⃣ 用这些图形拼出一个创意图案（如房子、汽车、动物等）<br>
-                        3️⃣ 限时5分钟，看哪组拼得最有创意！<br>
-                        4️⃣ 每组派代表介绍自己的作品
-                    </p>
+                    <div style="text-align: center; padding: 10px; background: #e3f2fd; border-radius: 8px;">
+                        <svg width="80" height="100" viewBox="0 0 80 100">
+                            <rect x="20" y="0" width="20" height="20" fill="#2196F3" stroke="#333" stroke-width="1"/>
+                            <rect x="0" y="20" width="20" height="20" fill="#90CAF9" stroke="#333" stroke-width="1"/>
+                            <rect x="20" y="20" width="20" height="20" fill="#90CAF9" stroke="#333" stroke-width="1"/>
+                            <rect x="40" y="20" width="20" height="20" fill="#90CAF9" stroke="#333" stroke-width="1"/>
+                            <rect x="60" y="20" width="20" height="20" fill="#90CAF9" stroke="#333" stroke-width="1"/>
+                            <rect x="60" y="40" width="20" height="20" fill="#2196F3" stroke="#333" stroke-width="1"/>
+                        </svg>
+                        <div style="font-size: 12px; margin-top: 5px;">1-4-1型⑤</div>
+                    </div>
+                    <div style="text-align: center; padding: 10px; background: #e3f2fd; border-radius: 8px;">
+                        <svg width="80" height="100" viewBox="0 0 80 100">
+                            <rect x="20" y="0" width="20" height="20" fill="#2196F3" stroke="#333" stroke-width="1"/>
+                            <rect x="0" y="20" width="20" height="20" fill="#90CAF9" stroke="#333" stroke-width="1"/>
+                            <rect x="20" y="20" width="20" height="20" fill="#90CAF9" stroke="#333" stroke-width="1"/>
+                            <rect x="40" y="20" width="20" height="20" fill="#90CAF9" stroke="#333" stroke-width="1"/>
+                            <rect x="60" y="20" width="20" height="20" fill="#90CAF9" stroke="#333" stroke-width="1"/>
+                            <rect x="0" y="40" width="20" height="20" fill="#2196F3" stroke="#333" stroke-width="1"/>
+                        </svg>
+                        <div style="font-size: 12px; margin-top: 5px;">1-4-1型⑥</div>
+                    </div>
+                    <!-- 类型2：2-3-1型（3种） -->
+                    <div style="text-align: center; padding: 10px; background: #fff3e0; border-radius: 8px;">
+                        <svg width="80" height="100" viewBox="0 0 80 100">
+                            <rect x="0" y="0" width="20" height="20" fill="#FF9800" stroke="#333" stroke-width="1"/>
+                            <rect x="20" y="0" width="20" height="20" fill="#FF9800" stroke="#333" stroke-width="1"/>
+                            <rect x="0" y="20" width="20" height="20" fill="#FFCC80" stroke="#333" stroke-width="1"/>
+                            <rect x="20" y="20" width="20" height="20" fill="#FFCC80" stroke="#333" stroke-width="1"/>
+                            <rect x="40" y="20" width="20" height="20" fill="#FFCC80" stroke="#333" stroke-width="1"/>
+                            <rect x="20" y="40" width="20" height="20" fill="#FF9800" stroke="#333" stroke-width="1"/>
+                        </svg>
+                        <div style="font-size: 12px; margin-top: 5px;">2-3-1型①</div>
+                    </div>
+                    <div style="text-align: center; padding: 10px; background: #fff3e0; border-radius: 8px;">
+                        <svg width="80" height="100" viewBox="0 0 80 100">
+                            <rect x="0" y="0" width="20" height="20" fill="#FF9800" stroke="#333" stroke-width="1"/>
+                            <rect x="20" y="0" width="20" height="20" fill="#FF9800" stroke="#333" stroke-width="1"/>
+                            <rect x="20" y="20" width="20" height="20" fill="#FFCC80" stroke="#333" stroke-width="1"/>
+                            <rect x="40" y="20" width="20" height="20" fill="#FFCC80" stroke="#333" stroke-width="1"/>
+                            <rect x="60" y="20" width="20" height="20" fill="#FFCC80" stroke="#333" stroke-width="1"/>
+                            <rect x="20" y="40" width="20" height="20" fill="#FF9800" stroke="#333" stroke-width="1"/>
+                        </svg>
+                        <div style="font-size: 12px; margin-top: 5px;">2-3-1型②</div>
+                    </div>
+                    <div style="text-align: center; padding: 10px; background: #fff3e0; border-radius: 8px;">
+                        <svg width="80" height="100" viewBox="0 0 80 100">
+                            <rect x="0" y="0" width="20" height="20" fill="#FF9800" stroke="#333" stroke-width="1"/>
+                            <rect x="20" y="0" width="20" height="20" fill="#FF9800" stroke="#333" stroke-width="1"/>
+                            <rect x="0" y="20" width="20" height="20" fill="#FFCC80" stroke="#333" stroke-width="1"/>
+                            <rect x="20" y="20" width="20" height="20" fill="#FFCC80" stroke="#333" stroke-width="1"/>
+                            <rect x="40" y="20" width="20" height="20" fill="#FFCC80" stroke="#333" stroke-width="1"/>
+                            <rect x="0" y="40" width="20" height="20" fill="#FF9800" stroke="#333" stroke-width="1"/>
+                        </svg>
+                        <div style="font-size: 12px; margin-top: 5px;">2-3-1型③</div>
+                    </div>
+                    <!-- 类型3：2-2-2型（1种） -->
+                    <div style="text-align: center; padding: 10px; background: #f3e5f5; border-radius: 8px;">
+                        <svg width="80" height="100" viewBox="0 0 80 100">
+                            <rect x="0" y="0" width="20" height="20" fill="#9C27B0" stroke="#333" stroke-width="1"/>
+                            <rect x="20" y="0" width="20" height="20" fill="#9C27B0" stroke="#333" stroke-width="1"/>
+                            <rect x="20" y="20" width="20" height="20" fill="#CE93D8" stroke="#333" stroke-width="1"/>
+                            <rect x="40" y="20" width="20" height="20" fill="#CE93D8" stroke="#333" stroke-width="1"/>
+                            <rect x="40" y="40" width="20" height="20" fill="#9C27B0" stroke="#333" stroke-width="1"/>
+                            <rect x="60" y="40" width="20" height="20" fill="#9C27B0" stroke="#333" stroke-width="1"/>
+                        </svg>
+                        <div style="font-size: 12px; margin-top: 5px;">2-2-2型</div>
+                    </div>
+                    <!-- 类型4：3-3型（1种） -->
+                    <div style="text-align: center; padding: 10px; background: #e8f5e9; border-radius: 8px;">
+                        <svg width="80" height="80" viewBox="0 0 80 80">
+                            <rect x="0" y="0" width="20" height="20" fill="#4CAF50" stroke="#333" stroke-width="1"/>
+                            <rect x="20" y="0" width="20" height="20" fill="#4CAF50" stroke="#333" stroke-width="1"/>
+                            <rect x="40" y="0" width="20" height="20" fill="#4CAF50" stroke="#333" stroke-width="1"/>
+                            <rect x="20" y="20" width="20" height="20" fill="#A5D6A7" stroke="#333" stroke-width="1"/>
+                            <rect x="40" y="20" width="20" height="20" fill="#A5D6A7" stroke="#333" stroke-width="1"/>
+                            <rect x="60" y="20" width="20" height="20" fill="#A5D6A7" stroke="#333" stroke-width="1"/>
+                        </svg>
+                        <div style="font-size: 12px; margin-top: 5px;">3-3型</div>
+                    </div>
                 </div>
             </div>
             <div class="content-card" style="background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);">
-                <h3>🎨 创意示例</h3>
-                <div style="display: flex; justify-content: space-around; font-size: 60px; margin-top: 20px; flex-wrap: wrap; gap: 20px;">
-                    <div style="text-align: center;">
-                        <div>🏠</div>
-                        <div style="font-size: 16px;">房子</div>
+                <h3>💡 记忆口诀</h3>
+                <p style="font-size: 16px; line-height: 1.8;">
+                    <strong>1-4-1型有6种</strong>：中间四个面，上下各一面<br>
+                    <strong>2-3-1型有3种</strong>：二三错开排，一在任一端<br>
+                    <strong>2-2-2型有1种</strong>：阶梯状排列<br>
+                    <strong>3-3型有1种</strong>：两排各三个
+                </p>
+            </div>
+        </div>
+
+        <!-- 第16页：模块三总结 - 空间想象 -->
+        <div class="slide" data-slide="16">
+            <h2 class="slide-title">📋 模块总结：空间想象与展开图</h2>
+            <div class="content-card" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);">
+                <h3>🎯 核心知识点</h3>
+                <div style="background: white; padding: 20px; border-radius: 15px; margin: 15px 0;">
+                    <div style="font-size: 18px; line-height: 2;">
+                        <p><strong>🔷 正方体的特征：</strong></p>
+                        <ul style="margin-left: 30px;">
+                            <li>6个面，每个面都是正方形</li>
+                            <li>12条棱，长度都相等</li>
+                            <li>8个顶点</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>🔷 展开图规律：</strong></p>
+                        <ul style="margin-left: 30px;">
+                            <li>正方体展开图共有<strong>11种</strong></li>
+                            <li>分为4种类型：1-4-1型、2-3-1型、2-2-2型、3-3型</li>
+                            <li>相对的面在展开图中不相邻</li>
+                        </ul>
                     </div>
-                    <div style="text-align: center;">
-                        <div>🚗</div>
-                        <div style="font-size: 16px;">汽车</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div>🐟</div>
-                        <div style="font-size: 16px;">小鱼</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div>🌲</div>
-                        <div style="font-size: 16px;">大树</div>
-                    </div>
+                </div>
+            </div>
+            <div class="content-card" style="background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);">
+                <h3>💡 判断技巧</h3>
+                <div style="font-size: 18px; line-height: 2;">
+                    <p><strong>能折成正方体的条件：</strong></p>
+                    <ul style="margin-left: 30px;">
+                        <li>必须有6个正方形</li>
+                        <li>不能出现"田"字形（2×2的正方形块）</li>
+                        <li>不能出现"凹"字形</li>
+                        <li>最多只能有一行（或一列）超过4个正方形</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content-card" style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);">
+                <h3>✅ 学生应掌握</h3>
+                <div style="font-size: 18px; line-height: 2;">
+                    <p>1. 知道正方体展开图共有11种</p>
+                    <p>2. 能识别4种基本类型（1-4-1型、2-3-1型、2-2-2型、3-3型）</p>
+                    <p>3. 能判断一个展开图能否折成正方体</p>
+                    <p>4. 培养空间想象能力</p>
                 </div>
             </div>
         </div>
 
-        <!-- 第17页：易错点总结 -->
+        <!-- 第17页：综合练习1 -->
         <div class="slide" data-slide="17">
-            <h2 class="slide-title">⚠️ 易错点总结</h2>
-            <div class="content-card" style="background: #ffebee; border-color: #f44336;">
-                <h3 style="color: #c62828;">❌ 常见错误</h3>
-                <ul style="font-size: 18px; line-height: 2;">
-                    <li>🔴 把长方形和正方形混淆（记住：正方形四边相等）</li>
-                    <li>🔴 数图形时漏数合起来的大图形</li>
-                    <li>🔴 图形分割时，分割线画得不直</li>
-                    <li>🔴 拼组图形时，边不对齐</li>
-                </ul>
+            <h2 class="slide-title">✏️ 综合练习（一）</h2>
+            <div class="content-card">
+                <h3>题目：用4个相同的小正方形，可以拼成哪些不同的图形？</h3>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 30px 0;">
+                    <div style="text-align: center; padding: 15px; background: #f5f5f5; border-radius: 10px;">
+                        <svg width="80" height="80" viewBox="0 0 80 80">
+                            <rect x="0" y="0" width="20" height="20" fill="#2196F3" stroke="#333" stroke-width="1"/>
+                            <rect x="20" y="0" width="20" height="20" fill="#2196F3" stroke="#333" stroke-width="1"/>
+                            <rect x="40" y="0" width="20" height="20" fill="#2196F3" stroke="#333" stroke-width="1"/>
+                            <rect x="60" y="0" width="20" height="20" fill="#2196F3" stroke="#333" stroke-width="1"/>
+                        </svg>
+                        <div>一字型</div>
+                    </div>
+                    <div style="text-align: center; padding: 15px; background: #f5f5f5; border-radius: 10px;">
+                        <svg width="80" height="80" viewBox="0 0 80 80">
+                            <rect x="0" y="0" width="20" height="20" fill="#4CAF50" stroke="#333" stroke-width="1"/>
+                            <rect x="20" y="0" width="20" height="20" fill="#4CAF50" stroke="#333" stroke-width="1"/>
+                            <rect x="0" y="20" width="20" height="20" fill="#4CAF50" stroke="#333" stroke-width="1"/>
+                            <rect x="20" y="20" width="20" height="20" fill="#4CAF50" stroke="#333" stroke-width="1"/>
+                        </svg>
+                        <div>正方形（2×2）</div>
+                    </div>
+                    <div style="text-align: center; padding: 15px; background: #f5f5f5; border-radius: 10px;">
+                        <svg width="80" height="80" viewBox="0 0 80 80">
+                            <rect x="0" y="0" width="20" height="20" fill="#FF9800" stroke="#333" stroke-width="1"/>
+                            <rect x="20" y="0" width="20" height="20" fill="#FF9800" stroke="#333" stroke-width="1"/>
+                            <rect x="40" y="0" width="20" height="20" fill="#FF9800" stroke="#333" stroke-width="1"/>
+                            <rect x="20" y="20" width="20" height="20" fill="#FF9800" stroke="#333" stroke-width="1"/>
+                        </svg>
+                        <div>T字型</div>
+                    </div>
+                    <div style="text-align: center; padding: 15px; background: #f5f5f5; border-radius: 10px;">
+                        <svg width="80" height="80" viewBox="0 0 80 80">
+                            <rect x="20" y="0" width="20" height="20" fill="#9C27B0" stroke="#333" stroke-width="1"/>
+                            <rect x="0" y="20" width="20" height="20" fill="#9C27B0" stroke="#333" stroke-width="1"/>
+                            <rect x="20" y="20" width="20" height="20" fill="#9C27B0" stroke="#333" stroke-width="1"/>
+                            <rect x="40" y="20" width="20" height="20" fill="#9C27B0" stroke="#333" stroke-width="1"/>
+                        </svg>
+                        <div>十字型</div>
+                    </div>
+                    <div style="text-align: center; padding: 15px; background: #f5f5f5; border-radius: 10px;">
+                        <svg width="80" height="80" viewBox="0 0 80 80">
+                            <rect x="0" y="0" width="20" height="20" fill="#E91E63" stroke="#333" stroke-width="1"/>
+                            <rect x="0" y="20" width="20" height="20" fill="#E91E63" stroke="#333" stroke-width="1"/>
+                            <rect x="20" y="20" width="20" height="20" fill="#E91E63" stroke="#333" stroke-width="1"/>
+                            <rect x="20" y="40" width="20" height="20" fill="#E91E63" stroke="#333" stroke-width="1"/>
+                        </svg>
+                        <div>L字型</div>
+                    </div>
+                </div>
             </div>
             <div class="content-card" style="background: #e8f5e9; border-color: #4CAF50;">
-                <h3 style="color: #2e7d32;">✅ 成功秘诀</h3>
-                <ul style="font-size: 18px; line-height: 2;">
-                    <li>🟢 比较边长：用尺子量或用手指比</li>
-                    <li>🟢 有序计数：从小到大，从左到右</li>
-                    <li>🟢 拼组对齐：相等的边拼在一起</li>
-                    <li>🟢 多动手：折一折、剪一剪、拼一拼</li>
-                </ul>
+                <h3 style="color: #2E7D32;">💡 提示</h3>
+                <p style="font-size: 18px;">4个小正方形拼成的图形叫<strong>四连块</strong>，共有5种不同的形状！</p>
             </div>
         </div>
 
-        <!-- 第18页：知识总结 -->
+        <!-- 第18页：综合练习2 -->
         <div class="slide" data-slide="18">
+            <h2 class="slide-title">✏️ 综合练习（二）</h2>
+            <div class="content-card">
+                <h3>判断：下面的展开图能否折成正方体？</h3>
+                <div style="display: flex; justify-content: space-around; margin: 30px 0; flex-wrap: wrap; gap: 30px;">
+                    <div style="text-align: center;">
+                        <svg width="120" height="120" viewBox="0 0 120 120">
+                            <rect x="40" y="0" width="40" height="40" fill="#E3F2FD" stroke="#333" stroke-width="2"/>
+                            <rect x="0" y="40" width="40" height="40" fill="#E3F2FD" stroke="#333" stroke-width="2"/>
+                            <rect x="40" y="40" width="40" height="40" fill="#E3F2FD" stroke="#333" stroke-width="2"/>
+                            <rect x="80" y="40" width="40" height="40" fill="#E3F2FD" stroke="#333" stroke-width="2"/>
+                            <rect x="40" y="80" width="40" height="40" fill="#E3F2FD" stroke="#333" stroke-width="2"/>
+                        </svg>
+                        <div style="margin-top: 10px;">图①</div>
+                        <div style="font-size: 14px; color: #4CAF50;">✅ 能（1-4-1型）</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <svg width="120" height="120" viewBox="0 0 120 120">
+                            <rect x="0" y="0" width="40" height="40" fill="#FFEBEE" stroke="#333" stroke-width="2"/>
+                            <rect x="40" y="0" width="40" height="40" fill="#FFEBEE" stroke="#333" stroke-width="2"/>
+                            <rect x="0" y="40" width="40" height="40" fill="#FFEBEE" stroke="#333" stroke-width="2"/>
+                            <rect x="40" y="40" width="40" height="40" fill="#FFEBEE" stroke="#333" stroke-width="2"/>
+                            <rect x="40" y="80" width="40" height="40" fill="#FFEBEE" stroke="#333" stroke-width="2"/>
+                        </svg>
+                        <div style="margin-top: 10px;">图②</div>
+                        <div style="font-size: 14px; color: #f44336;">❌ 不能（有田字）</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <svg width="120" height="120" viewBox="0 0 120 120">
+                            <rect x="0" y="0" width="40" height="40" fill="#E8F5E9" stroke="#333" stroke-width="2"/>
+                            <rect x="40" y="0" width="40" height="40" fill="#E8F5E9" stroke="#333" stroke-width="2"/>
+                            <rect x="40" y="40" width="40" height="40" fill="#E8F5E9" stroke="#333" stroke-width="2"/>
+                            <rect x="80" y="40" width="40" height="40" fill="#E8F5E9" stroke="#333" stroke-width="2"/>
+                            <rect x="40" y="80" width="40" height="40" fill="#E8F5E9" stroke="#333" stroke-width="2"/>
+                        </svg>
+                        <div style="margin-top: 10px;">图③</div>
+                        <div style="font-size: 14px; color: #4CAF50;">✅ 能（2-3-1型）</div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-card" style="background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);">
+                <h3>🎯 判断要点</h3>
+                <p style="font-size: 18px;">
+                    • 有"田"字形的<strong>不能</strong>折成正方体<br>
+                    • 有"凹"字形的<strong>不能</strong>折成正方体<br>
+                    • 一行超过4个正方形的<strong>不能</strong>折成正方体
+                </p>
+            </div>
+        </div>
+
+        <!-- 第19页：易错点总结 -->
+        <div class="slide" data-slide="19">
+            <h2 class="slide-title">⚠️ 易错点总结</h2>
+            <div class="content-card" style="background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);">
+                <h3>❌ 常见错误</h3>
+                <div style="font-size: 18px; line-height: 2;">
+                    <p><strong>1. 图形计数时漏数或重复</strong></p>
+                    <ul style="margin-left: 30px;">
+                        <li>忘记数由多个小图形组成的大图形</li>
+                        <li>相同位置的图形重复计数</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>2. 混淆正方形和长方形</strong></p>
+                    <ul style="margin-left: 30px;">
+                        <li>认为正方形不是长方形</li>
+                        <li>忽略"正方形是特殊的长方形"</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>3. 正方体展开图判断错误</strong></p>
+                    <ul style="margin-left: 30px;">
+                        <li>没有记住11种标准类型</li>
+                        <li>不能识别"田"字形陷阱</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content-card" style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);">
+                <h3>✅ 正确做法</h3>
+                <div style="font-size: 18px; line-height: 2;">
+                    <p>• 计数时：先标号，再按顺序组合</p>
+                    <p>• 分类时：记住正方形是特殊的长方形</p>
+                    <p>• 展开图：记住11种类型和判断口诀</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第20页：知识总结 -->
+        <div class="slide" data-slide="20">
             <h2 class="slide-title">🌟 知识总结</h2>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-                <div class="content-card" style="text-align: center;">
+                <div class="content-card" style="text-align: center; background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);">
                     <div style="font-size: 60px; margin-bottom: 10px;">🔲</div>
-                    <h3>正方形</h3>
-                    <p>四边相等<br>四个直角</p>
+                    <h3>认识图形</h3>
+                    <p>正方形、长方形<br>三角形、圆形</p>
                 </div>
-                <div class="content-card" style="text-align: center;">
-                    <div style="font-size: 60px; margin-bottom: 10px;">▭</div>
-                    <h3>长方形</h3>
-                    <p>对边相等<br>四个直角</p>
+                <div class="content-card" style="text-align: center; background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);">
+                    <div style="font-size: 60px; margin-bottom: 10px;">🧩</div>
+                    <h3>图形拼组</h3>
+                    <p>小变大<br>相等的边拼一起</p>
                 </div>
-                <div class="content-card" style="text-align: center;">
-                    <div style="font-size: 60px; margin-bottom: 10px;">🔺</div>
-                    <h3>三角形</h3>
-                    <p>三边三角<br>具有稳定性</p>
+                <div class="content-card" style="text-align: center; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);">
+                    <div style="font-size: 60px; margin-bottom: 10px;">✂️</div>
+                    <h3>图形分割</h3>
+                    <p>大变小<br>横分、竖分、对角分</p>
                 </div>
-                <div class="content-card" style="text-align: center;">
-                    <div style="font-size: 60px; margin-bottom: 10px;">🔵</div>
-                    <h3>圆形</h3>
-                    <p>没有边角<br>可以滚动</p>
+                <div class="content-card" style="text-align: center; background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);">
+                    <div style="font-size: 60px; margin-bottom: 10px;">🔢</div>
+                    <h3>图形计数</h3>
+                    <p>分类计数法<br>单个+组合</p>
+                </div>
+                <div class="content-card" style="text-align: center; background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);">
+                    <div style="font-size: 60px; margin-bottom: 10px;">🎲</div>
+                    <h3>正方体展开图</h3>
+                    <p>11种类型<br>4种基本形式</p>
                 </div>
             </div>
             <div class="content-card" style="background: linear-gradient(135deg, #e8d5ff 0%, #d1c4e9 100%); margin-top: 20px;">
                 <h3 style="text-align: center;">🎯 本课核心</h3>
                 <p style="text-align: center; font-size: 20px;">
-                    认识图形 → 拼组图形 → 分割图形 → 计数图形
+                    认识图形 → 拼组分割 → 图形计数 → 空间想象
                 </p>
             </div>
         </div>
 
-        <!-- 第19页：作业布置 -->
-        <div class="slide" data-slide="19">
+        <!-- 第21页：课后作业 -->
+        <div class="slide" data-slide="21">
             <h2 class="slide-title">📝 课后作业</h2>
             <div class="content-card">
                 <h3>📚 基础作业（必做）</h3>
@@ -970,8 +843,8 @@
             </p>
         </div>
 
-        <!-- 第20页：结束页 -->
-        <div class="slide cover-slide" data-slide="20">
+        <!-- 第22页：结束页 -->
+        <div class="slide cover-slide" data-slide="22">
             <h1>🎉 课程结束</h1>
             <div class="subtitle">你真棒！今天学到了很多图形知识！</div>
             <div style="font-size: 100px; margin: 30px 0;">⭐🏆⭐</div>
@@ -982,10 +855,7 @@
         </div>
     </div>
 
-    <div class="page-indicator">
-        <span id="currentPage">1</span> / 20
-    </div>
-
+    <div class="page-indicator"><span id="currentPage">1</span> / 22</div>
     <div class="nav-container">
         <button class="nav-btn" onclick="prevSlide()">⬅️ 上一页</button>
         <button class="nav-btn" onclick="nextSlide()">下一页 ➡️</button>
@@ -993,193 +863,79 @@
 
     <script>
         let currentSlide = 1;
-        const totalSlides = 20;
+        const totalSlides = 22;
         let score = 0;
         let timerInterval = null;
 
         function showSlide(n) {
             const slides = document.querySelectorAll('.slide');
             slides.forEach(slide => slide.classList.remove('active'));
-            document.querySelector(`[data-slide="${n}"]`).classList.add('active');
-            currentSlide = n;
-            document.getElementById('currentPage').textContent = n;
-            document.getElementById('progressBar').style.width = (n / totalSlides * 100) + '%';
-            
-            // 显示/隐藏计时器和得分板
-            if (n === 15) {
-                document.getElementById('timer').style.display = 'block';
-                document.getElementById('scoreBoard').style.display = 'block';
-            } else {
-                document.getElementById('timer').style.display = 'none';
-                document.getElementById('scoreBoard').style.display = 'none';
-                if (timerInterval) clearInterval(timerInterval);
+            const targetSlide = document.querySelector(`[data-slide="${n}"]`);
+            if (targetSlide) {
+                targetSlide.classList.add('active');
+                currentSlide = n;
+                document.getElementById('currentPage').textContent = n;
+                document.getElementById('progressBar').style.width = (n / totalSlides * 100) + '%';
             }
         }
 
         function nextSlide() {
-            if (currentSlide < totalSlides) {
-                showSlide(currentSlide + 1);
-            }
+            if (currentSlide < totalSlides) showSlide(currentSlide + 1);
         }
 
         function prevSlide() {
-            if (currentSlide > 1) {
-                showSlide(currentSlide - 1);
-            }
+            if (currentSlide > 1) showSlide(currentSlide - 1);
         }
 
-        // 键盘导航
         document.addEventListener('keydown', function(e) {
             if (e.key === 'ArrowRight') nextSlide();
             if (e.key === 'ArrowLeft') prevSlide();
         });
 
-        // 图形信息展示
         function showShapeInfo(shape) {
             const info = {
                 square: '🔲 <strong>正方形</strong>：四条边相等，四个角都是直角',
                 rectangle: '▭ <strong>长方形</strong>：对边相等，四个角都是直角',
                 triangle: '🔺 <strong>三角形</strong>：三条边，三个角，具有稳定性',
-                circle: '🔵 <strong>圆形</strong>：没有边和角，可以滚动'
+                circle: '🔵 <strong>圆形</strong>：没有边角，可以滚动'
             };
-            document.getElementById('shapeInfo').innerHTML = info[shape];
-            document.getElementById('shapeInfo').style.display = 'block';
+            const infoDiv = document.getElementById('shapeInfo');
+            infoDiv.innerHTML = info[shape];
+            infoDiv.style.display = 'block';
         }
 
-        // 拼图答案
-        function showPuzzleAnswer(type) {
-            const feedback = document.getElementById('puzzleFeedback');
-            if (type === 'rectangle' || type === 'triangle') {
-                feedback.className = 'feedback success';
-                feedback.textContent = '🎉 正确！两个直角三角形可以拼成长方形或大三角形';
-            } else {
-                feedback.className = 'feedback error';
-                feedback.textContent = '❌ 两个三角形不能直接拼成正方形哦';
-            }
+        function showFeedback(id, type, message) {
+            const fb = document.getElementById(id);
+            fb.className = 'feedback ' + type;
+            fb.textContent = message;
         }
 
-        // 分割答案
-        function checkDivisionAnswer(answer) {
-            const feedback = document.getElementById('divisionFeedback');
-            if (answer === 'sometimes') {
-                feedback.className = 'feedback success';
-                feedback.textContent = '🎉 正确！当长方形的长是宽的2倍时，可以分成两个正方形';
-            } else {
-                feedback.className = 'feedback error';
-                feedback.textContent = '❌ 再想想，要看长方形的长和宽的关系';
-            }
-        }
-
-        // 计数检查1
         function checkCount1() {
             const input = document.getElementById('count1');
-            const feedback = document.getElementById('countFeedback1');
-            if (input.value === '3') {
-                input.className = 'answer-input correct';
-                feedback.className = 'feedback success';
-                feedback.textContent = '🎉 正确！两个小的 + 一个大的 = 3个长方形';
+            if (input.value === '9') {
+                input.classList.add('correct');
+                showFeedback('feedback_count1', 'success', '🎉 太棒了！4个小长方形 + 4个组合 + 1个大长方形 = 9个');
             } else {
-                input.className = 'answer-input wrong';
-                feedback.className = 'feedback error';
-                feedback.textContent = '❌ 提示：别忘了数合起来的大长方形';
+                input.classList.add('wrong');
+                showFeedback('feedback_count1', 'error', '❌ 再想想看，记得要数组合的图形哦！');
+                setTimeout(() => input.classList.remove('wrong'), 1000);
             }
         }
 
-        // 计数检查2
         function checkCount2() {
             const input = document.getElementById('count2');
-            const feedback = document.getElementById('countFeedback2');
-            if (input.value === '3') {
-                input.className = 'answer-input correct';
-                feedback.className = 'feedback success';
-                feedback.textContent = '🎉 正确！3个三角形';
+            if (input.value === '6') {
+                input.classList.add('correct');
+                showFeedback('feedback_count2', 'success', '🎉 正确！3个小三角形 + 2个组合 + 1个大三角形 = 6个');
             } else {
-                input.className = 'answer-input wrong';
-                feedback.className = 'feedback error';
-                feedback.textContent = '❌ 再数一数';
+                input.classList.add('wrong');
+                showFeedback('feedback_count2', 'error', '❌ 再想想看，用分层计数法！');
+                setTimeout(() => input.classList.remove('wrong'), 1000);
             }
         }
 
-        // 拼图检查
-        function checkPuzzle(answer) {
-            const feedback = document.getElementById('puzzleFeedback2');
-            if (answer === 'all') {
-                feedback.className = 'feedback success';
-                feedback.textContent = '🎉 正确！三种拼法都可以';
-            } else {
-                feedback.className = 'feedback error';
-                feedback.textContent = '❌ 其实三种拼法都是正确的哦';
-            }
-        }
-
-        // 剪切计数
-        function checkCutCount() {
-            const input = document.getElementById('cutCount');
-            const feedback = document.getElementById('cutFeedback');
-            if (input.value === '4') {
-                input.className = 'answer-input correct';
-                feedback.className = 'feedback success';
-                feedback.textContent = '🎉 正确！两刀最多可以分成4块';
-            } else {
-                input.className = 'answer-input wrong';
-                feedback.className = 'feedback error';
-                feedback.textContent = '❌ 提示：两刀交叉切，可以分成4块';
-            }
-        }
-
-        // 速度挑战
-        function startShapeChallenge() {
-            document.getElementById('challengeArea').style.display = 'none';
-            document.getElementById('challengeQuestions').style.display = 'block';
-            score = 0;
-            document.getElementById('scoreValue').textContent = score;
-            
-            let timeLeft = 30;
-            document.getElementById('timeValue').textContent = timeLeft;
-            
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                document.getElementById('timeValue').textContent = timeLeft;
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    document.getElementById('challengeFeedback').className = 'feedback error';
-                    document.getElementById('challengeFeedback').textContent = '⏰ 时间到！';
-                }
-            }, 1000);
-        }
-
-        function checkShapeChallenge() {
-            const speed1 = document.getElementById('speed1');
-            const speed2 = document.getElementById('speed2');
-            const feedback = document.getElementById('challengeFeedback');
-            
-            let correct = 0;
-            if (speed1.value === '3') {
-                speed1.className = 'answer-input correct';
-                correct++;
-            } else {
-                speed1.className = 'answer-input wrong';
-            }
-            
-            if (speed2.value.trim() === '长方形') {
-                speed2.className = 'answer-input correct';
-                correct++;
-            } else {
-                speed2.className = 'answer-input wrong';
-            }
-            
-            if (correct === 2) {
-                clearInterval(timerInterval);
-                const timeBonus = parseInt(document.getElementById('timeValue').textContent);
-                score += timeBonus * 10;
-                document.getElementById('scoreValue').textContent = score;
-                feedback.className = 'feedback success';
-                feedback.textContent = `🎉 全对！获得 ${timeBonus * 10} 分！`;
-            } else {
-                feedback.className = 'feedback error';
-                feedback.textContent = '❌ 还有错误，再检查一下';
-            }
-        }
+        // 初始化显示第一页
+        showSlide(1);
     </script>
 </body>
 </html>

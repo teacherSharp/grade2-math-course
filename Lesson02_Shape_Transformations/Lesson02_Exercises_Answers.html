@@ -826,7 +826,7 @@
                 <div class="question-number">9</div>
                 <div class="question-info">
                     <div class="question-title">图形分割进阶</div>
-                    <div class="question-meta">考查知识点：十字形等分</div>
+                    <div class="question-meta">考查知识点：十字形四等分</div>
                 </div>
                 <span class="difficulty-badge difficulty-challenge">拔高</span>
             </div>
@@ -835,27 +835,34 @@
                 <div class="section-title">正确答案</div>
                 <div class="answer-content">
                     <p><span class="answer-highlight">每块是一个"L"形（或称为"角形"）</span></p>
-                    <p>分割方法：从十字形的中心点向四个外角方向分割，每个"L"形包含中心的一个小正方形和相邻的一个外伸小正方形的一半？不对，重新思考...</p>
-                    <p><strong>正确分法</strong>：十字形由5个小正方形组成，要分成5块，每块包含1个小正方形。因此每块就是1个小正方形加上从中心分割出来的部分。</p>
+                    <p><strong>分割方法</strong>：找到十字形的中心点，从中心点向四个"凹角"方向连线，将十字分成4个全等的"L"形。</p>
                 </div>
             </div>
             
             <div class="answer-section">
                 <div class="section-title">详细解析</div>
                 <div class="answer-content">
+                    <p><strong>步骤分析：</strong></p>
                     <ol class="solution-steps">
-                        <li>十字形的中心有一个小正方形</li>
-                        <li>上下左右各连接一个小正方形</li>
-                        <li>要将十字分成5块，每块包含1个小正方形</li>
-                        <li>分割方法：从中心正方形的四个角向十字的四个"凹角"连线</li>
-                        <li>这样每个"L"形区域包含：1个外伸小正方形 + 中心正方形的1/4</li>
+                        <li>十字形由5个小正方形组成，总面积 = 5个小正方形</li>
+                        <li>要分成4块面积相等的图形，每块面积 = 5÷4 = 1.25个小正方形</li>
+                        <li>找到十字形的中心点（中间小正方形的中心）</li>
+                        <li>十字形有4个"凹角"（左上、右上、左下、右下四个角落）</li>
+                        <li>从中心点向这4个凹角连线，形成4条分割线</li>
+                        <li>这样分割后，每块包含：1个外伸小正方形 + 中心正方形的1/4</li>
+                        <li>每块面积 = 1 + 0.25 = 1.25个小正方形 ✓</li>
                     </ol>
-                    <p>等等，这样分割后每块形状不同。让我重新考虑...</p>
-                    <p><strong>正确理解</strong>：题目要求"每块形状大小完全相同，并且每块都包含一个小正方形"。由于十字由5个小正方形组成，分成5块，每块就是1个小正方形。但十字形的结构决定了中心正方形与四周正方形连接，无法单独分割。</p>
-                    <p><strong>正确分法</strong>：实际上，应该将十字形沿中心十字线分割，得到5个全等的"凸"字形或"T"字形？不对。</p>
-                    <p>让我重新分析：十字形中心1格，上下左右各1格。要分成5块全等图形，每块包含1格。唯一的办法是...</p>
-                    <p><strong>答案</strong>：从中心向四个外角连线，将十字分成4个全等的"L"形，每个"L"形包含中心1/4 + 外伸1格。但这样只有4块。</p>
-                    <p>实际上，这道题的答案是：<span class="answer-highlight">每块是一个包含中心点的小正方形区域</span>，通过从中心发出的射线将十字分成5个全等的扇形区域，每个区域包含1个小正方形。</p>
+                    
+                    <p><strong>每块的组成：</strong></p>
+                    <ul>
+                        <li>上面那块：上方小正方形 + 中心正方形上1/4</li>
+                        <li>下面那块：下方小正方形 + 中心正方形下1/4</li>
+                        <li>左面那块：左方小正方形 + 中心正方形左1/4</li>
+                        <li>右面那块：右方小正方形 + 中心正方形右1/4</li>
+                    </ul>
+                    
+                    <p><strong>形状特征：</strong></p>
+                    <p>每块都是一个"L"形（直角形），形状完全相同，面积相等。</p>
                 </div>
             </div>
             
@@ -868,25 +875,38 @@
                     <rect x="165" y="95" width="60" height="60" fill="#FFE4B5" stroke="#333" stroke-width="2"/>
                     <rect x="95" y="165" width="60" height="60" fill="#FFE4B5" stroke="#333" stroke-width="2"/>
                     
-                    <!-- 分割线 -->
-                    <line x1="125" y1="125" x2="55" y2="55" stroke="#FF0000" stroke-width="2"/>
-                    <line x1="125" y1="125" x2="195" y2="55" stroke="#FF0000" stroke-width="2"/>
-                    <line x1="125" y1="125" x2="55" y2="195" stroke="#FF0000" stroke-width="2"/>
-                    <line x1="125" y1="125" x2="195" y2="195" stroke="#FF0000" stroke-width="2"/>
+                    <!-- 分割线（从中心向四个凹角） -->
+                    <line x1="125" y1="125" x2="25" y2="25" stroke="#FF0000" stroke-width="3"/>
+                    <line x1="125" y1="125" x2="225" y2="25" stroke="#FF0000" stroke-width="3"/>
+                    <line x1="125" y1="125" x2="25" y2="225" stroke="#FF0000" stroke-width="3"/>
+                    <line x1="125" y1="125" x2="225" y2="225" stroke="#FF0000" stroke-width="3"/>
                     
                     <!-- 中心点 -->
-                    <circle cx="125" cy="125" r="5" fill="#FF0000"/>
+                    <circle cx="125" cy="125" r="6" fill="#FF0000"/>
+                    
+                    <!-- 标注 -->
+                    <text x="125" y="240" text-anchor="middle" font-size="14" fill="#333">从中心点向四个凹角连线</text>
                 </svg>
             </div>
             
             <div class="key-point">
                 <div class="key-point-title">🔑 解题关键</div>
-                <p>这道题的关键是找到十字形的中心点，从中心向四个"凹角"方向分割。每块形状像一个"逗号"或"水滴"，包含1个小正方形。</p>
+                <p>这道题的关键是：<strong>找到中心点</strong>，并识别出十字形的<strong>四个凹角</strong>。从中心向凹角连线，可以将十字形分成4个全等的"L"形。每块都包含1个完整的外伸小正方形和中心正方形的1/4。</p>
             </div>
             
             <div class="common-mistake">
                 <div class="common-mistake-title">⚠️ 常见错误</div>
-                <p>学生可能会尝试横向或纵向分割，但这样无法得到5块全等的图形。需要引导学生发现中心点的重要性。</p>
+                <p>1. 试图横向或纵向分割，这样无法得到4块全等的图形</p>
+                <p>2. 忽略中心点的重要性，不知道从何处开始分割</p>
+                <p>3. 没有理解"面积相等"的含义，误以为每块必须包含整数个小正方形</p>
+            </div>
+            
+            <div class="extension-box">
+                <div class="extension-title">🚀 拓展思考</div>
+                <div class="answer-content">
+                    <p>如果要将十字形分成<strong>5块</strong>面积相等的图形，每块面积应该是多少？能办到吗？</p>
+                    <p><strong>答案：</strong>每块面积 = 5÷5 = 1个小正方形。但十字形的结构决定了中心正方形与四周相连，无法单独分割成5块各含1个小正方形的全等图形。这就是为什么题目要求分成4块而不是5块的原因！</p>
+                </div>
             </div>
         </div>
 
