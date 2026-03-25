@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>第06课《图形数一数》答案解析</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            color: #333;
+            line-height: 1.8;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #660099;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            color: #660099;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 18px;
+            color: #666;
+        }
+        
+        .answer-item {
+            margin-bottom: 35px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #660099;
+        }
+        
+        .question-title {
+            font-size: 20px;
+            color: #660099;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .answer-section {
+            background: #E8F5E9;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .answer-title {
+            font-weight: bold;
+            color: #2E7D32;
+            margin-bottom: 8px;
+        }
+        
+        .explanation-section {
+            background: #E3F2FD;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .explanation-title {
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 8px;
+        }
+        
+        .tips-box {
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            border-radius: 10px;
+            padding: 15px;
+            border-left: 4px solid #FFD700;
+        }
+        
+        .tips-title {
+            font-weight: bold;
+            color: #FF8F00;
+            margin-bottom: 8px;
+        }
+        
+        .svg-container {
+            text-align: center;
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+        }
+        
+        .formula {
+            background: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            display: inline-block;
+            font-family: 'Courier New', monospace;
+            color: #660099;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        
+        .bonus-answer {
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            border-radius: 15px;
+            border: 3px solid #FFD700;
+        }
+        
+        .bonus-answer h3 {
+            color: #FF8F00;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #e0e0e0;
+            color: #666;
+        }
+        
+        .footer a {
+            color: #660099;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔷 第06课《图形数一数》</h1>
+            <p>答案解析</p>
+        </div>
+
+        <!-- 第1题 -->
+        <div class="answer-item">
+            <div class="question-title">第1题：数一数，下图中有几条线段？</div>
+            <div class="svg-container">
+                <svg height="100" width="300">
+                    <line stroke="#660099" stroke-width="5" x1="50" x2="130" y1="50" y2="50"></line>
+                    <line stroke="#660099" stroke-width="5" x1="130" x2="210" y1="50" y2="50"></line>
+                    <line stroke="#660099" stroke-width="5" x1="210" x2="290" y1="50" y2="50"></line>
+                    <circle cx="50" cy="50" fill="#94070A" r="8"></circle>
+                    <circle cx="130" cy="50" fill="#94070A" r="8"></circle>
+                    <circle cx="210" cy="50" fill="#94070A" r="8"></circle>
+                    <circle cx="290" cy="50" fill="#94070A" r="8"></circle>
+                </svg>
+            </div>
+            
+            <div class="answer-section">
+                <div class="answer-title">✅ 标准答案</div>
+                <div><strong>6</strong> 条线段</div>
+            </div>
+            
+            <div class="explanation-section">
+                <div class="explanation-title">📝 详细解析</div>
+                <p>图中共有3条基本线段：</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>基本线段：3条</li>
+                    <li>由2条基本线段组成的线段：2条</li>
+                    <li>由3条基本线段组成的线段：1条</li>
+                </ul>
+                <p style="margin-top: 10px;">总数 = 3 + 2 + 1 = <strong>6条</strong></p>
+            </div>
+            
+            <div class="tips-box">
+                <div class="tips-title">💡 思维点拨</div>
+                <p>数线段时，可以用<strong>公式法</strong>：如果有n条基本线段，总线段数 = n + (n-1) + ... + 1。这里n=3，所以3+2+1=6。</p>
+            </div>
+        </div>
+
+        <!-- 第2题 -->
+        <div class="answer-item">
+            <div class="question-title">第2题：数一数，下图中有几个角？</div>
+            <div class="svg-container">
+                <svg height="150" width="200">
+                    <line stroke="#660099" stroke-width="4" x1="100" x2="30" y1="75" y2="20"></line>
+                    <line stroke="#660099" stroke-width="4" x1="100" x2="100" y1="75" y2="20"></line>
+                    <line stroke="#660099" stroke-width="4" x1="100" x2="170" y1="75" y2="20"></line>
+                    <line stroke="#660099" stroke-width="4" x1="100" x2="170" y1="75" y2="130"></line>
+                    <circle cx="100" cy="75" fill="#94070A" r="8"></circle>
+                </svg>
+            </div>
+            
+            <div class="answer-section">
+                <div class="answer-title">✅ 标准答案</div>
+                <div><strong>6</strong> 个角</div>
+            </div>
+            
+            <div class="explanation-section">
+                <div class="explanation-title">📝 详细解析</div>
+                <p>从一个顶点出发有4条射线，形成3个基本角：</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>基本角：3个</li>
+                    <li>由2个基本角组成的角：2个</li>
+                    <li>由3个基本角组成的角：1个</li>
+                </ul>
+                <p style="margin-top: 10px;">总数 = 3 + 2 + 1 = <strong>6个</strong></p>
+            </div>
+            
+            <div class="tips-box">
+                <div class="tips-title">💡 思维点拨</div>
+                <p>数角的方法和数线段<strong>完全相同</strong>！因为角也是由射线组成的，n条射线形成的基本角数也是n+(n-1)+...+1。关键是找到从一个顶点出发的射线数量。</p>
+            </div>
+        </div>
+
+        <!-- 第3题 -->
+        <div class="answer-item">
+            <div class="question-title">第3题：数一数，下图中有几个三角形？</div>
+            <div class="svg-container">
+                <svg height="160" width="240">
+                    <polygon fill="rgba(102,0,153,0.1)" points="120,20 40,140 200,140" stroke="#660099" stroke-width="3"></polygon>
+                    <line stroke="#94070A" stroke-width="3" x1="120" x2="120" y1="20" y2="140"></line>
+                    <line stroke="#94070A" stroke-width="3" x1="80" x2="120" y1="80" y2="20"></line>
+                    <line stroke="#94070A" stroke-width="3" x1="120" x2="160" y1="20" y2="80"></line>
+                </svg>
+            </div>
+            
+            <div class="answer-section">
+                <div class="answer-title">✅ 标准答案</div>
+                <div><strong>6</strong> 个三角形</div>
+            </div>
+            
+            <div class="explanation-section">
+                <div class="explanation-title">📝 详细解析</div>
+                <p>使用<strong>分层计数法</strong>：</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>由1个小三角形组成的：4个</li>
+                    <li>由2个小三角形组成的：1个</li>
+                    <li>由4个小三角形组成的：1个</li>
+                </ul>
+                <p style="margin-top: 10px;">总数 = 4 + 1 + 1 = <strong>6个</strong></p>
+            </div>
+            
+            <div class="tips-box">
+                <div class="tips-title">💡 思维点拨</div>
+                <p>数三角形的关键是<strong>分层计数</strong>，按大小分类。先数最小的，再数由2个组成的，再数由3个、4个...组成的。给每个小三角形编号（如①②③④）可以帮助避免重复和遗漏。</p>
+            </div>
+        </div>
+
+        <!-- 第4题 -->
+        <div class="answer-item">
+            <div class="question-title">第4题：数一数，下图中有几个长方形？</div>
+            <div class="svg-container">
+                <svg height="140" width="220">
+                    <rect fill="rgba(255,152,0,0.1)" height="80" stroke="#FF9800" stroke-width="3" width="80" x="40" y="30"></rect>
+                    <rect fill="rgba(255,152,0,0.1)" height="80" stroke="#FF9800" stroke-width="3" width="80" x="120" y="30"></rect>
+                    <line stroke="#660099" stroke-width="3" x1="120" x2="120" y1="30" y2="110"></line>
+                </svg>
+            </div>
+            
+            <div class="answer-section">
+                <div class="answer-title">✅ 标准答案</div>
+                <div><strong>3</strong> 个长方形</div>
+            </div>
+            
+            <div class="explanation-section">
+                <div class="explanation-title">📝 详细解析</div>
+                <p>这是一个1×2的长方形网格：</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>小长方形：2个</li>
+                    <li>由2个小长方形组成的大长方形：1个</li>
+                </ul>
+                <p style="margin-top: 10px;">总数 = 2 + 1 = <strong>3个</strong></p>
+                <p style="margin-top: 10px;">或用公式法：横向线段数=1+2=3，纵向线段数=1，总数=3×1=<strong>3个</strong></p>
+            </div>
+            
+            <div class="tips-box">
+                <div class="tips-title">💡 思维点拨</div>
+                <p>对于规则的长方形网格，可以用<strong>公式法</strong>：长方形总数 = 横向线段数 × 纵向线段数。横向线段数=1+2+...+列数，纵向线段数=1+2+...+行数。</p>
+            </div>
+        </div>
+
+        <!-- 第5题 -->
+        <div class="answer-item">
+            <div class="question-title">第5题：数一数，下图中有几条线段？</div>
+            <div class="svg-container">
+                <svg height="100" width="400">
+                    <line stroke="#660099" stroke-width="5" x1="50" x2="110" y1="50" y2="50"></line>
+                    <line stroke="#660099" stroke-width="5" x1="110" x2="170" y1="50" y2="50"></line>
+                    <line stroke="#660099" stroke-width="5" x1="170" x2="230" y1="50" y2="50"></line>
+                    <line stroke="#660099" stroke-width="5" x1="230" x2="290" y1="50" y2="50"></line>
+                    <line stroke="#660099" stroke-width="5" x1="290" x2="350" y1="50" y2="50"></line>
+                    <circle cx="50" cy="50" fill="#94070A" r="8"></circle>
+                    <circle cx="110" cy="50" fill="#94070A" r="8"></circle>
+                    <circle cx="170" cy="50" fill="#94070A" r="8"></circle>
+                    <circle cx="230" cy="50" fill="#94070A" r="8"></circle>
+                    <circle cx="290" cy="50" fill="#94070A" r="8"></circle>
+                    <circle cx="350" cy="50" fill="#94070A" r="8"></circle>
+                </svg>
+            </div>
+            
+            <div class="answer-section">
+                <div class="answer-title">✅ 标准答案</div>
+                <div><strong>15</strong> 条线段</div>
+            </div>
+            
+            <div class="explanation-section">
+                <div class="explanation-title">📝 详细解析</div>
+                <p>图中共有5条基本线段，使用公式法：</p>
+                <div class="formula">5 + 4 + 3 + 2 + 1 = 15</div>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>基本线段：5条</li>
+                    <li>由2条组成的：4条</li>
+                    <li>由3条组成的：3条</li>
+                    <li>由4条组成的：2条</li>
+                    <li>由5条组成的：1条</li>
+                </ul>
+            </div>
+            
+            <div class="tips-box">
+                <div class="tips-title">💡 思维点拨</div>
+                <p>当基本线段较多时，<strong>公式法</strong>特别有用。记住规律：n条基本线段，总线段数=1+2+3+...+n。这个和也可以用公式 n×(n+1)÷2 快速计算。</p>
+            </div>
+        </div>
+
+        <!-- 第6题 -->
+        <div class="answer-item">
+            <div class="question-title">第6题：数一数，下图中有几个三角形？</div>
+            <div class="svg-container">
+                <svg height="180" width="260">
+                    <polygon fill="rgba(102,0,153,0.1)" points="130,20 20,160 240,160" stroke="#660099" stroke-width="3"></polygon>
+                    <line stroke="#94070A" stroke-width="3" x1="130" x2="130" y1="20" y2="160"></line>
+                    <line stroke="#94070A" stroke-width="3" x1="75" x2="130" y1="90" y2="20"></line>
+                    <line stroke="#94070A" stroke-width="3" x1="130" x2="185" y1="20" y2="90"></line>
+                    <line stroke="#94070A" stroke-width="3" x1="75" x2="185" y1="90" y2="90"></line>
+                </svg>
+            </div>
+            
+            <div class="answer-section">
+                <div class="answer-title">✅ 标准答案</div>
+                <div><strong>12</strong> 个三角形</div>
+            </div>
+            
+            <div class="explanation-section">
+                <div class="explanation-title">📝 详细解析</div>
+                <p>使用分层计数法：</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>由1个小三角形组成的：6个</li>
+                    <li>由2个小三角形组成的：3个</li>
+                    <li>由3个小三角形组成的：2个</li>
+                    <li>由6个小三角形组成的：1个</li>
+                </ul>
+                <p style="margin-top: 10px;">总数 = 6 + 3 + 2 + 1 = <strong>12个</strong></p>
+            </div>
+            
+            <div class="tips-box">
+                <div class="tips-title">💡 思维点拨</div>
+                <p>复杂的三角形图形，建议<strong>先编号再计数</strong>。给每个最小的三角形标上数字，然后按"1个组成的"、"2个组成的"...依次统计。这样可以确保不重复、不遗漏。</p>
+            </div>
+        </div>
+
+        <!-- 第7题 -->
+        <div class="answer-item">
+            <div class="question-title">第7题：数一数，下图中有几个长方形？</div>
+            <div class="svg-container">
+                <svg height="160" width="200">
+                    <rect fill="rgba(255,152,0,0.1)" height="60" stroke="#FF9800" stroke-width="3" width="70" x="40" y="30"></rect>
+                    <rect fill="rgba(255,152,0,0.1)" height="60" stroke="#FF9800" stroke-width="3" width="70" x="110" y="30"></rect>
+                    <rect fill="rgba(255,152,0,0.1)" height="60" stroke="#FF9800" stroke-width="3" width="70" x="40" y="90"></rect>
+                    <rect fill="rgba(255,152,0,0.1)" height="60" stroke="#FF9800" stroke-width="3" width="70" x="110" y="90"></rect>
+                    <line stroke="#660099" stroke-width="3" x1="110" x2="110" y1="30" y2="150"></line>
+                    <line stroke="#660099" stroke-width="3" x1="40" x2="180" y1="90" y2="90"></line>
+                </svg>
+            </div>
+            
+            <div class="answer-section">
+                <div class="answer-title">✅ 标准答案</div>
+                <div><strong>9</strong> 个长方形</div>
+            </div>
+            
+            <div class="explanation-section">
+                <div class="explanation-title">📝 详细解析</div>
+                <p>这是一个2×2的长方形网格，使用公式法：</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>横向线段数 = 1 + 2 = 3</li>
+                    <li>纵向线段数 = 1 + 2 = 3</li>
+                    <li>长方形总数 = 3 × 3 = 9</li>
+                </ul>
+                <p style="margin-top: 10px;">分层验证：小长方形4个，由2个组成的4个，由4个组成的1个，共9个。</p>
+            </div>
+            
+            <div class="tips-box">
+                <div class="tips-title">💡 思维点拨</div>
+                <p>对于m×n的长方形网格，公式是：<strong>长方形总数 = (1+2+...+m) × (1+2+...+n)</strong>。这个公式来源于：选两条横向平行线和两条纵向平行线就能确定一个长方形。</p>
+            </div>
+        </div>
+
+        <!-- 第8题 -->
+        <div class="answer-item">
+            <div class="question-title">第8题：数一数，下图中有几个角？</div>
+            <div class="svg-container">
+                <svg height="150" width="200">
+                    <line stroke="#660099" stroke-width="4" x1="100" x2="20" y1="75" y2="30"></line>
+                    <line stroke="#660099" stroke-width="4" x1="100" x2="60" y1="75" y2="30"></line>
+                    <line stroke="#660099" stroke-width="4" x1="100" x2="100" y1="75" y2="30"></line>
+                    <line stroke="#660099" stroke-width="4" x1="100" x2="140" y1="75" y2="30"></line>
+                    <line stroke="#660099" stroke-width="4" x1="100" x2="180" y1="75" y2="30"></line>
+                    <circle cx="100" cy="75" fill="#94070A" r="8"></circle>
+                </svg>
+            </div>
+            
+            <div class="answer-section">
+                <div class="answer-title">✅ 标准答案</div>
+                <div><strong>10</strong> 个角</div>
+            </div>
+            
+            <div class="explanation-section">
+                <div class="explanation-title">📝 详细解析</div>
+                <p>从一个顶点出发有5条射线，使用公式法：</p>
+                <div class="formula">4 + 3 + 2 + 1 = 10</div>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>基本角：4个</li>
+                    <li>由2个基本角组成的：3个</li>
+                    <li>由3个基本角组成的：2个</li>
+                    <li>由4个基本角组成的：1个</li>
+                </ul>
+            </div>
+            
+            <div class="tips-box">
+                <div class="tips-title">💡 思维点拨</div>
+                <p>n条射线从一个顶点出发，形成的角的总数是(n-1)+(n-2)+...+1。这里5条射线，就是4+3+2+1=10。记住：<strong>射线数-1=基本角数</strong>。</p>
+            </div>
+        </div>
+
+        <!-- 第9题 -->
+        <div class="answer-item">
+            <div class="question-title">第9题：数一数，下图中有几个三角形？</div>
+            <div class="svg-container">
+                <svg height="160" width="240">
+                    <polygon fill="rgba(102,0,153,0.1)" points="120,20 40,140 200,140" stroke="#660099" stroke-width="3"></polygon>
+                    <line stroke="#94070A" stroke-width="3" x1="120" x2="120" y1="20" y2="140"></line>
+                    <line stroke="#94070A" stroke-width="3" x1="80" x2="120" y1="80" y2="20"></line>
+                    <line stroke="#94070A" stroke-width="3" x1="120" x2="160" y1="20" y2="80"></line>
+                    <line stroke="#94070A" stroke-width="3" x1="80" x2="160" y1="80" y2="80"></line>
+                </svg>
+            </div>
+            
+            <div class="answer-section">
+                <div class="answer-title">✅ 标准答案</div>
+                <div><strong>12</strong> 个三角形</div>
+            </div>
+            
+            <div class="explanation-section">
+                <div class="explanation-title">📝 详细解析</div>
+                <p>使用分层计数法：</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>由1个小三角形组成的：6个</li>
+                    <li>由2个小三角形组成的：3个</li>
+                    <li>由3个小三角形组成的：2个</li>
+                    <li>由6个小三角形组成的：1个</li>
+                </ul>
+                <p style="margin-top: 10px;">总数 = 6 + 3 + 2 + 1 = <strong>12个</strong></p>
+            </div>
+            
+            <div class="tips-box">
+                <div class="tips-title">💡 思维点拨</div>
+                <p>这道题和第6题类似，都是复杂的三角形图形。关键是<strong>仔细观察图形的结构</strong>，找出所有可能的组合方式。可以用铅笔在图上轻轻标记，帮助计数。</p>
+            </div>
+        </div>
+
+        <!-- 第10题 -->
+        <div class="answer-item">
+            <div class="question-title">第10题：数一数，下图中有几个长方形？</div>
+            <div class="svg-container">
+                <svg height="140" width="300">
+                    <rect fill="rgba(255,152,0,0.1)" height="70" stroke="#FF9800" stroke-width="3" width="70" x="40" y="35"></rect>
+                    <rect fill="rgba(255,152,0,0.1)" height="70" stroke="#FF9800" stroke-width="3" width="70" x="110" y="35"></rect>
+                    <rect fill="rgba(255,152,0,0.1)" height="70" stroke="#FF9800" stroke-width="3" width="70" x="180" y="35"></rect>
+                    <line stroke="#660099" stroke-width="3" x1="110" x2="110" y1="35" y2="105"></line>
+                    <line stroke="#660099" stroke-width="3" x1="180" x2="180" y1="35" y2="105"></line>
+                </svg>
+            </div>
+            
+            <div class="answer-section">
+                <div class="answer-title">✅ 标准答案</div>
+                <div><strong>6</strong> 个长方形</div>
+            </div>
+            
+            <div class="explanation-section">
+                <div class="explanation-title">📝 详细解析</div>
+                <p>这是一个1×3的长方形网格：</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>小长方形：3个</li>
+                    <li>由2个小长方形组成的：2个</li>
+                    <li>由3个小长方形组成的：1个</li>
+                </ul>
+                <p style="margin-top: 10px;">总数 = 3 + 2 + 1 = <strong>6个</strong></p>
+                <p style="margin-top: 10px;">或用公式法：横向线段数=1+2+3=6，纵向线段数=1，总数=6×1=<strong>6个</strong></p>
+            </div>
+            
+            <div class="tips-box">
+                <div class="tips-title">💡 思维点拨</div>
+                <p>1×n的长方形网格，长方形总数=1+2+3+...+n。这是一个<strong>等差数列求和</strong>问题，和为n×(n+1)÷2。这里n=3，所以3×4÷2=6。</p>
+            </div>
+        </div>
+
+        <!-- 附加题 -->
+        <div class="bonus-answer">
+            <h3>🌟 附加思考题</h3>
+            <p style="font-size: 18px; margin-bottom: 15px;">如果一条直线上有8个点，一共可以组成多少条线段？</p>
+            
+            <div class="answer-section">
+                <div class="answer-title">✅ 标准答案</div>
+                <div><strong>28</strong> 条线段</div>
+            </div>
+            
+            <div class="explanation-section">
+                <div class="explanation-title">📝 详细解析</div>
+                <p>8个点形成7条基本线段，使用公式法：</p>
+                <div class="formula">7 + 6 + 5 + 4 + 3 + 2 + 1 = 28</div>
+                <p style="margin-top: 10px;">或用求和公式：7×8÷2 = <strong>28</strong></p>
+            </div>
+            
+            <div class="tips-box">
+                <div class="tips-title">💡 思维点拨</div>
+                <p>这是一道拓展题，考察对公式法的灵活运用。关键是理解：n个点形成(n-1)条基本线段，总线段数=(n-1)+(n-2)+...+1 = (n-1)×n÷2。这个公式在解决复杂问题时非常有用！</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>答案解析完成！</p>
+            <p style="margin-top: 10px;"><a href="Lesson06_Exercises.html">返回练习题</a></p>
+        </div>
+    </div>
+</body>
+</html>

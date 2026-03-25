@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>第06课《图形数一数》家长协同方案</title>
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            color: #333;
+            line-height: 1.8;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* 头部样式 */
+        .header {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(102, 0, 153, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        /* 内容卡片 */
+        .content-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 5px solid #660099;
+        }
+        
+        .content-card h2 {
+            color: #660099;
+            font-size: 24px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .content-card h3 {
+            color: #94070A;
+            font-size: 20px;
+            margin: 20px 0 15px 0;
+        }
+        
+        .content-card p, .content-card li {
+            font-size: 17px;
+            line-height: 1.8;
+            color: #444;
+        }
+        
+        .content-card ul {
+            margin-left: 25px;
+            margin-top: 10px;
+        }
+        
+        .content-card li {
+            margin-bottom: 10px;
+        }
+        
+        /* 重点框 */
+        .highlight-box {
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            border: 2px solid #FFD700;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .highlight-box h3 {
+            color: #FF8F00;
+            margin-top: 0;
+        }
+        
+        /* 步骤框 */
+        .step-box {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid #4CAF50;
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #4CAF50;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        /* 二维码区域 */
+        .qr-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            margin: 15px auto;
+            background: white;
+            border: 2px solid #660099;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        
+        .qr-code img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 5px;
+            display: block;
+        }
+        
+        /* 页脚 */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .content-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+<!-- 头部 -->
+<div class="header">
+<h1>🔷 第06课《图形数一数》</h1>
+<div class="subtitle">家长协同方案</div>
+</div>
+<!-- 课程目标 -->
+<div class="content-card">
+<h2>🎯 本课学习目标</h2>
+<p style="font-size: 18px; line-height: 1.8; margin-bottom: 15px;">
+                通过本课学习，孩子将掌握：
+            </p>
+<ul style="font-size: 17px; line-height: 1.8;">
+<li><strong>基础图形计数</strong>：数线段、数角、数三角形、数长方形</li>
+<li><strong>分类计数法</strong>：按大小、按方向、按组成方式分类统计</li>
+<li><strong>规律发现</strong>：发现图形计数中的数学规律</li>
+<li><strong>有序思考</strong>：培养不重复、不遗漏的计数习惯</li>
+</ul>
+</div>
+<!-- 课堂重点回顾 -->
+<div class="content-card">
+<h2>📚 课堂重点回顾</h2>
+<h3>1️⃣ 数线段的方法</h3>
+<div class="step-box">
+<span class="step-number">1</span>
+<strong>标数法</strong>：在图形上标出所有端点，按顺序连接计数
+            </div>
+<div class="step-box">
+<span class="step-number">2</span>
+<strong>分类法</strong>：按线段长度分类（基本线段、由2条组成、由3条组成...）
+            </div>
+<div class="step-box">
+<span class="step-number">3</span>
+<strong>公式法</strong>：如果有n条基本线段，总线段数 = n+(n-1)+(n-2)+...+1
+            </div>
+<h3>2️⃣ 数角的方法</h3>
+<p style="margin-bottom: 15px;">与数线段类似，先数基本角，再数组合角。</p>
+<h3>3️⃣ 数三角形的方法</h3>
+<div class="highlight-box">
+<h3>⚠️ 关键技巧</h3>
+<p><strong>分层计数</strong>：按三角形大小分层（1个小三角形组成的、2个组成的、3个组成的...）</p>
+<p style="margin-top: 10px;"><strong>标记法</strong>：给每个小三角形编号，避免重复和遗漏</p>
+</div>
+<h3>4️⃣ 数长方形的方法</h3>
+<p>先数长边上有多少条线段，再数宽边上有多少条线段，相乘得到长方形总数。</p>
+</div>
+<!-- 家庭巩固练习 -->
+<div class="content-card">
+<h2>🏠 家庭巩固练习</h2>
+<p style="font-size: 18px; margin-bottom: 20px;">请家长陪伴孩子完成以下活动：</p>
+<div class="highlight-box">
+<h3>🎮 活动一：生活中的图形计数（15分钟）</h3>
+<p>让孩子观察家里的物品，数一数：</p>
+<ul>
+<li>窗户上有几个长方形？</li>
+<li>地砖上有几个正方形？</li>
+<li>书架上有几个隔层（线段）？</li>
+</ul>
+</div>
+<div class="highlight-box">
+<h3>✏️ 活动二：画图练习（15分钟）</h3>
+<p>让孩子在纸上画出：</p>
+<ul>
+<li>一条线段，上面有4个点，数一数共有几条线段</li>
+<li>一个大三角形，里面画几条线把它分成小三角形，数一数共有几个三角形</li>
+</ul>
+</div>
+<div class="highlight-box">
+<h3>🧩 活动三：亲子游戏（10分钟）</h3>
+<p><strong>游戏名称：图形寻宝</strong></p>
+<p>家长画一个复杂的图形（如多层三角形），和孩子比赛谁数得又快又准。</p>
+</div>
+</div>
+<!-- 亲子互动建议 -->
+<div class="content-card">
+<h2>👨‍👩‍👧 亲子互动建议</h2>
+<ul>
+<li><strong>耐心引导</strong>：当孩子数错时，不要直接告诉答案，引导他重新数一遍</li>
+<li><strong>标记习惯</strong>：教孩子用铅笔在数过的图形上做记号，避免重复</li>
+<li><strong>分类思维</strong>：引导孩子先分类再计数，培养有序思考习惯</li>
+<li><strong>生活联系</strong>：在日常生活中寻找图形计数的机会（如数楼梯台阶、窗户格子等）</li>
+</ul>
+</div>
+<!-- 下节课预告 -->
+<div class="content-card">
+<h2>📖 下节课预告</h2>
+<p style="font-size: 18px; line-height: 1.8;">
+<strong>第07课《简单推理》</strong>
+</p>
+<p style="margin-top: 15px;">我们将学习：</p>
+<ul>
+<li>比较推理（谁高谁矮、谁快谁慢）</li>
+<li>排序推理（按顺序排列）</li>
+<li>排除法（通过排除找到答案）</li>
+</ul>
+<p style="margin-top: 15px; color: #666;">📅 请提醒孩子准备好笔记本，我们将进行有趣的逻辑推理游戏！</p>
+</div>
+<!-- 二维码区域 -->
+<div class="qr-section">
+<h3 style="color: #660099; margin-bottom: 15px;">📱 联系夏老师</h3>
+<p style="margin-bottom: 15px;">如有任何问题，欢迎随时联系</p>
+<div class="qr-code">
+<img alt="夏老师微信二维码" src="../code.jpg"/>
+</div>
+<p style="color: #666; font-size: 14px;">夏老师：19117803360</p>
+</div>
+<!-- 页脚 -->
+<div class="footer">
+<p>🌟 二年级思维训练课程 · 第06课《图形数一数》</p>
+<p style="margin-top: 10px;">让数学思维在快乐中成长</p>
+</div>
+</div>
+</body>
+</html>
