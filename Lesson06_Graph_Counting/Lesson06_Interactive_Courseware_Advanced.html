@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>第06课《图形数一数》交互式课件 - 深度拓展版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .slide {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            min-height: 600px;
+            animation: slideIn 0.5s ease;
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .slide-title {
+            font-size: 36px;
+            color: #660099;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .slide-subtitle {
+            font-size: 20px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .content-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 5px solid #660099;
+        }
+        
+        .content-card h3 {
+            color: #660099;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+        
+        .interactive-area {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .game-area {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        
+        .challenge-area {
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 2px solid #e91e63;
+        }
+        
+        .master-area {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 3px solid #ff9800;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 0, 153, 0.4);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+        }
+        
+        .btn-challenge {
+            background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);
+        }
+        
+        .btn-master {
+            background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
+        }
+        
+        .number-input {
+            width: 100px;
+            height: 50px;
+            font-size: 24px;
+            text-align: center;
+            border: 3px solid #660099;
+            border-radius: 10px;
+            margin: 0 10px;
+        }
+        
+        .number-input.correct {
+            border-color: #4CAF50;
+            background: #E8F5E9;
+        }
+        
+        .number-input.wrong {
+            border-color: #f44336;
+            background: #FFEBEE;
+        }
+        
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            display: none;
+            font-size: 18px;
+        }
+        
+        .feedback.correct {
+            background: #E8F5E9;
+            color: #2E7D32;
+            display: block;
+        }
+        
+        .feedback.wrong {
+            background: #FFEBEE;
+            color: #c62828;
+            display: block;
+        }
+        
+        .hint-box {
+            background: #fff8e1;
+            border-left: 5px solid #FFD700;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 0 10px 10px 0;
+            display: none;
+        }
+        
+        .hint-box.show {
+            display: block;
+        }
+        
+        .step-box {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            background: #660099;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .formula-box {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            border: 2px solid #4CAF50;
+        }
+        
+        .formula {
+            font-size: 28px;
+            color: #2E7D32;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: rgba(255,255,255,0.3);
+            z-index: 1000;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #660099, #94070A);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #660099;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .page-indicator {
+            text-align: center;
+            color: white;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        
+        .line-segment {
+            stroke: #660099;
+            stroke-width: 4;
+            fill: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .line-segment:hover {
+            stroke: #94070A;
+            stroke-width: 6;
+        }
+        
+        .line-segment.counted {
+            stroke: #4CAF50;
+        }
+        
+        .triangle-shape {
+            fill: rgba(102, 0, 153, 0.2);
+            stroke: #660099;
+            stroke-width: 3;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .triangle-shape:hover {
+            fill: rgba(102, 0, 153, 0.4);
+        }
+        
+        .triangle-shape.counted {
+            fill: rgba(76, 175, 80, 0.3);
+            stroke: #4CAF50;
+        }
+        
+        .rectangle-shape {
+            fill: rgba(255, 152, 0, 0.2);
+            stroke: #FF9800;
+            stroke-width: 3;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .rectangle-shape:hover {
+            fill: rgba(255, 152, 0, 0.4);
+        }
+        
+        .rectangle-shape.counted {
+            fill: rgba(76, 175, 80, 0.3);
+            stroke: #4CAF50;
+        }
+        
+        .difficulty-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .difficulty-easy {
+            background: #C8E6C9;
+            color: #2E7D32;
+        }
+        
+        .difficulty-medium {
+            background: #FFF9C4;
+            color: #F57F17;
+        }
+        
+        .difficulty-hard {
+            background: #FFCDD2;
+            color: #C62828;
+        }
+        
+        .difficulty-master {
+            background: #E1BEE7;
+            color: #7B1FA2;
+        }
+        
+        .method-card {
+            background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 5px solid #3f51b5;
+        }
+        
+        .method-card h4 {
+            color: #3f51b5;
+            margin-bottom: 10px;
+        }
+        
+        .summary-box {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 2px solid #9c27b0;
+        }
+        
+        .summary-box h3 {
+            color: #7b1fa2;
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .slide { padding: 20px; }
+            .slide-title { font-size: 28px; }
+            .nav-controls { padding: 10px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <div class="container">
+        <!-- 第1页：封面 -->
+        <div class="slide active" data-slide="1">
+            <h1 class="slide-title">🔷 图形数一数</h1>
+            <p class="slide-subtitle">第06课 · 深度拓展版 · 掌握高阶图形计数技巧</p>
+            <div class="interactive-area" style="margin-top: 50px;">
+                <div style="font-size: 100px; margin: 30px 0;">📐 🔢 🎯</div>
+                <p style="font-size: 20px; color: #666; line-height: 1.8;">
+                    本节课深度拓展：<br/>
+                    复杂图形计数策略 · 多层嵌套图形分析<br/>
+                    公式推导与应用 · 奥数级挑战题目
+                </p>
+                <button class="btn" onclick="nextSlide()" style="margin-top: 30px;">开始挑战 👉</button>
+            </div>
+        </div>
+
+        <!-- 第2页：课程目标 -->
+        <div class="slide" data-slide="2">
+            <h2 class="slide-title">🎯 课程目标</h2>
+            <p class="slide-subtitle">深度学习目标</p>
+            <div class="content-card">
+                <h3>📚 知识深化</h3>
+                <ul style="font-size: 18px; line-height: 2;">
+                    <li>掌握数线段、数角的<strong>公式推导与证明</strong></li>
+                    <li>学会复杂图形中的<strong>分层计数法与排除法</strong></li>
+                    <li>理解图形计数的<strong>组合数学原理</strong></li>
+                    <li>掌握多层嵌套长方形的<strong>高级计数技巧</strong></li>
+                </ul>
+            </div>
+            <div class="content-card">
+                <h3>🧠 能力提升</h3>
+                <ul style="font-size: 18px; line-height: 2;">
+                    <li>培养<strong>系统性思维</strong>和<strong>逻辑推理</strong>能力</li>
+                    <li>学会从特殊到一般的<strong>归纳推理</strong></li>
+                    <li>掌握解决奥数级计数问题的<strong>通用策略</strong></li>
+                </ul>
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="btn" onclick="nextSlide()">继续学习 👉</button>
+            </div>
+        </div>
+
+        <!-- 第3页：数线段原理深度解析 -->
+        <div class="slide" data-slide="3">
+            <h2 class="slide-title">📏 数线段原理深度解析</h2>
+            <p class="slide-subtitle">从规律发现到公式证明</p>
+            <div class="content-card">
+                <h3>📍 问题引入</h3>
+                <p style="font-size: 18px; line-height: 1.8;">
+                    一条直线上有n个点，能组成多少条线段？<br/>
+                    让我们从简单情况开始，发现规律，推导出通用公式！
+                </p>
+            </div>
+            <div class="step-box">
+                <h4 style="color: #660099; margin-bottom: 15px;">🔍 探索规律</h4>
+                <table style="width: 100%; border-collapse: collapse; margin: 15px 0;">
+                    <tr style="background: #f0f0f0;">
+                        <th style="padding: 10px; border: 1px solid #ddd;">点数n</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">基本线段</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">线段总数</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">计算方法</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">2</td>
+                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">1</td>
+                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">1</td>
+                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">1</td>
+                    </tr>
+                    <tr style="background: #f9f9f9;">
+                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">3</td>
+                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">2</td>
+                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">3</td>
+                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">2+1</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">4</td>
+                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">3</td>
+                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">6</td>
+                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">3+2+1</td>
+                    </tr>
+                    <tr style="background: #f9f9f9;">
+                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">5</td>
+                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">4</td>
+                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">10</td>
+                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">4+3+2+1</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="formula-box">
+                <h3 style="color: #2E7D32; margin-bottom: 15px;">🎯 核心公式</h3>
+                <p class="formula">线段总数 = 1 + 2 + 3 + ... + (n-1) = n×(n-1)÷2</p>
+                <p style="margin-top: 15px; color: #666;">其中n是点的个数（包括端点）</p>
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="btn" onclick="nextSlide()">公式推导 👉</button>
+            </div>
+        </div>
+
+        <!-- 第4页：公式推导与证明 -->
+        <div class="slide" data-slide="4">
+            <h2 class="slide-title">📏 公式推导与证明</h2>
+            <p class="slide-subtitle">理解公式背后的数学原理</p>
+            <div class="method-card">
+                <h4>方法一：配对计数法</h4>
+                <p style="line-height: 1.8;">
+                    每个线段由两个端点确定。<br/>
+                    从n个点中选2个点，就能确定一条线段。<br/>
+                    这是一个组合问题：C(n,2) = n×(n-1)÷2
+                </p>
+            </div>
+            <div class="method-card">
+                <h4>方法二：累加求和法</h4>
+                <p style="line-height: 1.8;">
+                    第1个点可以和后面(n-1)个点连线 → (n-1)条<br/>
+                    第2个点可以和后面(n-2)个点连线 → (n-2)条<br/>
+                    ...<br/>
+                    第(n-1)个点可以和后面1个点连线 → 1条<br/>
+                    总数 = (n-1) + (n-2) + ... + 1 = n×(n-1)÷2
+                </p>
+            </div>
+            <div class="method-card">
+                <h4>方法三：倒序相加法（高斯求和）</h4>
+                <p style="line-height: 1.8;">
+                    设 S = 1 + 2 + 3 + ... + (n-1)<br/>
+                    则 S = (n-1) + (n-2) + ... + 1<br/>
+                    两式相加：2S = n + n + ... + n = n×(n-1)<br/>
+                    所以 S = n×(n-1)÷2
+                </p>
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="btn" onclick="nextSlide()">实战演练 👉</button>
+            </div>
+        </div>
+
+        <!-- 第5页：数线段进阶练习1 -->
+        <div class="slide" data-slide="5">
+            <h2 class="slide-title">📏 数线段练习 <span class="difficulty-badge difficulty-easy">基础</span></h2>
+            <p class="slide-subtitle">运用公式解决问题</p>
+            <div class="interactive-area">
+                <h3 style="color: #660099; margin-bottom: 20px;">🌰 例题1：数一数有几条线段</h3>
+                <svg height="150" style="margin: 20px 0;" width="500">
+                    <line class="line-segment" onclick="toggleLine(this)" style="stroke: #660099; stroke-width: 5;" x1="50" x2="130" y1="75" y2="75"></line>
+                    <line class="line-segment" onclick="toggleLine(this)" style="stroke: #660099; stroke-width: 5;" x1="130" x2="210" y1="75" y2="75"></line>
+                    <line class="line-segment" onclick="toggleLine(this)" style="stroke: #660099; stroke-width: 5;" x1="210" x2="290" y1="75" y2="75"></line>
+                    <line class="line-segment" onclick="toggleLine(this)" style="stroke: #660099; stroke-width: 5;" x1="290" x2="370" y1="75" y2="75"></line>
+                    <line class="line-segment" onclick="toggleLine(this)" style="stroke: #660099; stroke-width: 5;" x1="370" x2="450" y1="75" y2="75"></line>
+                    <circle cx="50" cy="75" fill="#94070A" r="8"></circle>
+                    <circle cx="130" cy="75" fill="#94070A" r="8"></circle>
+                    <circle cx="210" cy="75" fill="#94070A" r="8"></circle>
+                    <circle cx="290" cy="75" fill="#94070A" r="8"></circle>
+                    <circle cx="370" cy="75" fill="#94070A" r="8"></circle>
+                    <circle cx="450" cy="75" fill="#94070A" r="8"></circle>
+                </svg>
+                <p style="font-size: 16px; color: #666; margin-top: 10px;">点击线段标记，或用公式计算</p>
+                <div style="margin-top: 20px;">
+                    <p style="font-size: 20px;">共有 <input class="number-input" id="q5_answer" maxlength="2"/> 条线段</p>
+                    <button class="btn btn-secondary" onclick="checkQ5()">检查答案 ✓</button>
+                </div>
+                <div class="feedback" id="feedback5"></div>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn" onclick="showHint('hint5')">💡 提示</button>
+                <button class="btn" onclick="nextSlide()">下一页 👉</button>
+            </div>
+            <div class="hint-box" id="hint5">
+                <strong>💡 提示：</strong>6个点，用公式：6×5÷2 = 15条线段！也可以用5+4+3+2+1计算。
+            </div>
+        </div>
+
+        <!-- 第6页：数线段进阶练习2（网格） -->
+        <div class="slide" data-slide="6">
+            <h2 class="slide-title">📏 数线段练习 <span class="difficulty-badge difficulty-medium">进阶</span></h2>
+            <p class="slide-subtitle">网格中的线段计数</p>
+            <div class="game-area">
+                <h3 style="color: #660099; margin-bottom: 20px;">🌰 例题2：下图中有几条线段？</h3>
+                <svg height="200" style="margin: 20px 0;" width="500">
+                    <!-- 横向线段 -->
+                    <line style="stroke: #660099; stroke-width: 4;" x1="50" x2="450" y1="50" y2="50"></line>
+                    <line style="stroke: #660099; stroke-width: 4;" x1="50" x2="450" y1="100" y2="100"></line>
+                    <line style="stroke: #660099; stroke-width: 4;" x1="50" x2="450" y1="150" y2="150"></line>
+                    <!-- 竖向线段 -->
+                    <line style="stroke: #94070A; stroke-width: 4;" x1="100" x2="100" y1="50" y2="150"></line>
+                    <line style="stroke: #94070A; stroke-width: 4;" x1="200" x2="200" y1="50" y2="150"></line>
+                    <line style="stroke: #94070A; stroke-width: 4;" x1="300" x2="300" y1="50" y2="150"></line>
+                    <line style="stroke: #94070A; stroke-width: 4;" x1="400" x2="400" y1="50" y2="150"></line>
+                    <!-- 端点 -->
+                    <circle cx="50" cy="50" fill="#333" r="5"></circle>
+                    <circle cx="100" cy="50" fill="#333" r="5"></circle>
+                    <circle cx="200" cy="50" fill="#333" r="5"></circle>
+                    <circle cx="300" cy="50" fill="#333" r="5"></circle>
+                    <circle cx="400" cy="50" fill="#333" r="5"></circle>
+                    <circle cx="450" cy="50" fill="#333" r="5"></circle>
+                    <circle cx="50" cy="100" fill="#333" r="5"></circle>
+                    <circle cx="100" cy="100" fill="#333" r="5"></circle>
+                    <circle cx="200" cy="100" fill="#333" r="5"></circle>
+                    <circle cx="300" cy="100" fill="#333" r="5"></circle>
+                    <circle cx="400" cy="100" fill="#333" r="5"></circle>
+                    <circle cx="450" cy="100" fill="#333" r="5"></circle>
+                    <circle cx="50" cy="150" fill="#333" r="5"></circle>
+                    <circle cx="100" cy="150" fill="#333" r="5"></circle>
+                    <circle cx="200" cy="150" fill="#333" r="5"></circle>
+                    <circle cx="300" cy="150" fill="#333" r="5"></circle>
+                    <circle cx="400" cy="150" fill="#333" r="5"></circle>
+                    <circle cx="450" cy="150" fill="#333" r="5"></circle>
+                </svg>
+                <p style="font-size: 16px; color: #666;">提示：分别数横向和竖向的线段，再相加</p>
+                <div style="margin-top: 20px;">
+                    <p style="font-size: 20px;">共有 <input class="number-input" id="q6_answer" maxlength="3"/> 条线段</p>
+                    <button class="btn btn-secondary" onclick="checkQ6()">检查答案 ✓</button>
+                </div>
+                <div class="feedback" id="feedback6"></div>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn" onclick="showHint('hint6')">💡 提示</button>
+                <button class="btn" onclick="nextSlide()">下一页 👉</button>
+            </div>
+            <div class="hint-box" id="hint6">
+                <strong>💡 提示：</strong>横向有3条线，每条线上有6个点，每条线有5+4+3+2+1=15条线段，横向共45条。竖向有6条线，每条线上有3个点，每条线有2+1=3条线段，竖向共18条。总计63条！
+            </div>
+        </div>
+
+        <!-- 第7页：数角原理深度解析 -->
+        <div class="slide" data-slide="7">
+            <h2 class="slide-title">📐 数角原理深度解析</h2>
+            <p class="slide-subtitle">角的计数与线段计数的联系</p>
+            <div class="content-card">
+                <h3>📍 核心发现</h3>
+                <p style="font-size: 18px; line-height: 1.8;">
+                    数角和数线段有惊人的相似性！<br/>
+                    从一个顶点出发的n条射线，形成的角的数量，<br/>
+                    与一条直线上n个点形成的线段数量完全相同！
+                </p>
+            </div>
+            <div class="formula-box">
+                <h3 style="color: #2E7D32; margin-bottom: 15px;">🎯 角的计数公式</h3>
+                <p class="formula">角的总数 = 1 + 2 + 3 + ... + (n-1) = n×(n-1)÷2</p>
+                <p style="margin-top: 15px; color: #666;">其中n是从顶点出发的射线数量</p>
+            </div>
+            <div class="step-box">
+                <h4 style="color: #660099; margin-bottom: 15px;">🔍 为什么公式相同？</h4>
+                <p style="line-height: 1.8;">
+                    每两条射线确定一个角，就像每两个点确定一条线段。<br/>
+                    从n条射线中选2条，组合数就是C(n,2) = n×(n-1)÷2<br/>
+                    这就是数学的<strong>统一美</strong>！
+                </p>
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="btn" onclick="nextSlide()">实战演练 👉</button>
+            </div>
+        </div>
+
+        <!-- 第8页：数角进阶练习 -->
+        <div class="slide" data-slide="8">
+            <h2 class="slide-title">📐 数角练习 <span class="difficulty-badge difficulty-medium">进阶</span></h2>
+            <p class="slide-subtitle">多射线情况下的角计数</p>
+            <div class="interactive-area">
+                <h3 style="color: #660099; margin-bottom: 20px;">🌰 例题：数一数有几个角？</h3>
+                <svg height="200" style="margin: 20px 0;" width="300">
+                    <line stroke="#660099" stroke-width="4" x1="150" x2="50" y1="100" y2="30"></line>
+                    <line stroke="#660099" stroke-width="4" x1="150" x2="90" y1="100" y2="30"></line>
+                    <line stroke="#660099" stroke-width="4" x1="150" x2="130" y1="100" y2="30"></line>
+                    <line stroke="#660099" stroke-width="4" x1="150" x2="150" y1="100" y2="30"></line>
+                    <line stroke="#660099" stroke-width="4" x1="150" x2="170" y1="100" y2="30"></line>
+                    <line stroke="#660099" stroke-width="4" x1="150" x2="210" y1="100" y2="30"></line>
+                    <line stroke="#660099" stroke-width="4" x1="150" x2="250" y1="100" y2="30"></line>
+                    <circle cx="150" cy="100" fill="#94070A" r="10"></circle>
+                </svg>
+                <p style="font-size: 16px; color: #666; margin-top: 10px;">从顶点出发有几条射线？用公式计算角的总数</p>
+                <div style="margin-top: 20px;">
+                    <p style="font-size: 20px;">共有 <input class="number-input" id="q8_answer" maxlength="2"/> 个角</p>
+                    <button class="btn btn-secondary" onclick="checkQ8()">检查答案 ✓</button>
+                </div>
+                <div class="feedback" id="feedback8"></div>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn" onclick="showHint('hint8')">💡 提示</button>
+                <button class="btn" onclick="nextSlide()">下一页 👉</button>
+            </div>
+            <div class="hint-box" id="hint8">
+                <strong>💡 提示：</strong>从顶点出发有7条射线，用公式：7×6÷2 = 21个角！也可以6+5+4+3+2+1=21。
+            </div>
+        </div>
+
+        <!-- 第9页：数三角形方法总结 -->
+        <div class="slide" data-slide="9">
+            <h2 class="slide-title">🔺 数三角形方法总结</h2>
+            <p class="slide-subtitle">分层计数法的系统应用</p>
+            <div class="method-card">
+                <h4>方法一：基本三角形分类法</h4>
+                <p style="line-height: 1.8;">
+                    1️⃣ 先数单个的基本三角形<br/>
+                    2️⃣ 再数由2个基本三角形组成的三角形<br/>
+                    3️⃣ 再数由3个基本三角形组成的三角形<br/>
+                    4️⃣ 依此类推，直到最大三角形<br/>
+                    5️⃣ 最后把所有数量相加
+                </p>
+            </div>
+            <div class="method-card">
+                <h4>方法二：顶点组合法（进阶）</h4>
+                <p style="line-height: 1.8;">
+                    对于规则排列的三角形，可以用组合思想：<br/>
+                    如果底边被分成n段，则三角形总数 = 1 + 2 + ... + n = n×(n+1)÷2<br/>
+                    这个公式适用于单层三角形排列！
+                </p>
+            </div>
+            <div class="method-card">
+                <h4>方法三：对称分析法（高阶）</h4>
+                <p style="line-height: 1.8;">
+                    利用图形的对称性简化计数：<br/>
+                    - 先分析对称轴一侧的图形<br/>
+                    - 计算单侧三角形数量<br/>
+                    - 考虑跨越对称轴的三角形<br/>
+                    - 适用于复杂的对称图形
+                </p>
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="btn" onclick="nextSlide()">实战演练 👉</button>
+            </div>
+        </div>
+
+        <!-- 第10页：数三角形进阶练习1 -->
+        <div class="slide" data-slide="10">
+            <h2 class="slide-title">🔺 数三角形练习 <span class="difficulty-badge difficulty-medium">进阶</span></h2>
+            <p class="slide-subtitle">多层三角形计数</p>
+            <div class="interactive-area">
+                <h3 style="color: #660099; margin-bottom: 20px;">🌰 例题：数一数有几个三角形？</h3>
+                <svg height="220" style="margin: 20px 0;" width="300">
+                    <!-- 大三角形外框 -->
+                    <polygon fill="none" points="150,30 30,190 270,190" stroke="#660099" stroke-width="3"></polygon>
+                    <!-- 横向分割线 -->
+                    <line stroke="#94070A" stroke-width="2" x1="90" x2="210" y1="110" y2="110"></line>
+                    <!-- 从顶点到底边的线 -->
+                    <line stroke="#94070A" stroke-width="2" x1="150" x2="150" y1="30" y2="190"></line>
+                    <line stroke="#94070A" stroke-width="2" x1="150" x2="90" y1="30" y2="110"></line>
+                    <line stroke="#94070A" stroke-width="2" x1="150" x2="210" y1="30" y2="110"></line>
+                </svg>
+                <p style="font-size: 16px; color: #666; margin-top: 10px;">按大小分类：单个的、2个组合的、3个组合的、最大的</p>
+                <div style="margin-top: 20px;">
+                    <p style="font-size: 20px;">共有 <input class="number-input" id="q10_answer" maxlength="2"/> 个三角形</p>
+                    <button class="btn btn-secondary" onclick="checkQ10()">检查答案 ✓</button>
+                </div>
+                <div class="feedback" id="feedback10"></div>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn" onclick="showHint('hint10')">💡 提示</button>
+                <button class="btn" onclick="nextSlide()">下一页 👉</button>
+            </div>
+            <div class="hint-box" id="hint10">
+                <strong>💡 提示：</strong>上层小三角形4个，下层小三角形4个，由2个小三角形组成的有4个，由4个小三角形组成的有4个，最大的1个。总共4+4+4+4+1=17个？不对，重新数：上层4个，下层4个，上下组合4个，大三角形1个，共13个！
+            </div>
+        </div>
+
+        <!-- 第11页：数长方形原理深度解析 -->
+        <div class="slide" data-slide="11">
+            <h2 class="slide-title">▭ 数长方形原理深度解析</h2>
+            <p class="slide-subtitle">组合计数的高级应用</p>
+            <div class="content-card">
+                <h3>📍 核心原理</h3>
+                <p style="font-size: 18px; line-height: 1.8;">
+                    一个长方形由两组平行线确定：<br/>
+                    - 横向选2条线（上边和下边）<br/>
+                    - 竖向选2条线（左边和右边）<br/>
+                    所以长方形总数 = 横向选法 × 竖向选法
+                </p>
+            </div>
+            <div class="formula-box">
+                <h3 style="color: #2E7D32; margin-bottom: 15px;">🎯 长方形计数公式</h3>
+                <p style="font-size: 20px; color: #333; margin-bottom: 10px;">对于 m×n 的网格（m行n列小长方形）：</p>
+                <p class="formula">长方形总数 = (1+2+...+m) × (1+2+...+n)</p>
+                <p style="margin-top: 10px; color: #666;">= m×(m+1)÷2 × n×(n+1)÷2</p>
+            </div>
+            <div class="step-box">
+                <h4 style="color: #660099; margin-bottom: 15px;">🔍 公式推导</h4>
+                <p style="line-height: 1.8;">
+                    横向有(m+1)条线，选2条作为上下边：C(m+1,2) = m×(m+1)÷2<br/>
+                    竖向有(n+1)条线，选2条作为左右边：C(n+1,2) = n×(n+1)÷2<br/>
+                    根据乘法原理，总数 = 横向选法 × 竖向选法
+                </p>
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="btn" onclick="nextSlide()">实战演练 👉</button>
+            </div>
+        </div>
+
+        <!-- 第12页：数长方形进阶练习 -->
+        <div class="slide" data-slide="12">
+            <h2 class="slide-title">▭ 数长方形练习 <span class="difficulty-badge difficulty-hard">挑战</span></h2>
+            <p class="slide-subtitle">运用公式解决复杂网格</p>
+            <div class="game-area">
+                <h3 style="color: #660099; margin-bottom: 20px;">🌰 例题：下图中有几个长方形？</h3>
+                <svg height="200" style="margin: 20px 0;" width="350">
+                    <!-- 3x2网格 -->
+                    <rect fill="rgba(255,152,0,0.1)" height="50" stroke="#FF9800" stroke-width="2" width="80" x="50" y="30"></rect>
+                    <rect fill="rgba(255,152,0,0.1)" height="50" stroke="#FF9800" stroke-width="2" width="80" x="130" y="30"></rect>
+                    <rect fill="rgba(255,152,0,0.1)" height="50" stroke="#FF9800" stroke-width="2" width="80" x="210" y="30"></rect>
+                    <rect fill="rgba(255,152,0,0.1)" height="50" stroke="#FF9800" stroke-width="2" width="80" x="50" y="80"></rect>
+                    <rect fill="rgba(255,152,0,0.1)" height="50" stroke="#FF9800" stroke-width="2" width="80" x="130" y="80"></rect>
+                    <rect fill="rgba(255,152,0,0.1)" height="50" stroke="#FF9800" stroke-width="2" width="80" x="210" y="80"></rect>
+                    <rect fill="rgba(255,152,0,0.1)" height="50" stroke="#FF9800" stroke-width="2" width="80" x="50" y="130"></rect>
+                    <rect fill="rgba(255,152,0,0.1)" height="50" stroke="#FF9800" stroke-width="2" width="80" x="130" y="130"></rect>
+                    <rect fill="rgba(255,152,0,0.1)" height="50" stroke="#FF9800" stroke-width="2" width="80" x="210" y="130"></rect>
+                </svg>
+                <p style="font-size: 16px; color: #666;">这是一个3×3的网格（3行3列小长方形），用公式计算！</p>
+                <div style="margin-top: 20px;">
+                    <p style="font-size: 20px;">共有 <input class="number-input" id="q12_answer" maxlength="3"/> 个长方形</p>
+                    <button class="btn btn-secondary" onclick="checkQ12()">检查答案 ✓</button>
+                </div>
+                <div class="feedback" id="feedback12"></div>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn" onclick="showHint('hint12')">💡 提示</button>
+                <button class="btn" onclick="nextSlide()">下一页 👉</button>
+            </div>
+            <div class="hint-box" id="hint12">
+                <strong>💡 提示：</strong>3行3列的网格，横向选法：1+2+3=6，竖向选法：1+2+3=6，总数=6×6=36个长方形！
+            </div>
+        </div>
+
+        <!-- 第13页：综合挑战题1 -->
+        <div class="slide" data-slide="13">
+            <h2 class="slide-title">🎯 综合挑战题 <span class="difficulty-badge difficulty-hard">高难度</span></h2>
+            <p class="slide-subtitle">五角星中的线段计数</p>
+            <div class="challenge-area">
+                <h3 style="color: #e91e63; margin-bottom: 20px;">🌟 挑战题1：数一数下图中有几条线段？</h3>
+                <svg height="250" style="margin: 20px 0;" width="300">
+                    <!-- 五角星 -->
+                    <line stroke="#660099" stroke-width="3" x1="150" x2="80" y1="50" y2="200"></line>
+                    <line stroke="#660099" stroke-width="3" x1="80" x2="220" y1="200" y2="110"></line>
+                    <line stroke="#660099" stroke-width="3" x1="220" x2="80" y1="110" y2="110"></line>
+                    <line stroke="#660099" stroke-width="3" x1="80" x2="220" y1="110" y2="200"></line>
+                    <line stroke="#660099" stroke-width="3" x1="220" x2="150" y1="200" y2="50"></line>
+                    <!-- 交点 -->
+                    <circle cx="150" cy="50" fill="#94070A" r="6"></circle>
+                    <circle cx="80" cy="110" fill="#94070A" r="6"></circle>
+                    <circle cx="220" cy="110" fill="#94070A" r="6"></circle>
+                    <circle cx="80" cy="200" fill="#94070A" r="6"></circle>
+                    <circle cx="220" cy="200" fill="#94070A" r="6"></circle>
+                    <!-- 内部交点 -->
+                    <circle cx="150" cy="130" fill="#333" r="4"></circle>
+                    <circle cx="115" cy="155" fill="#333" r="4"></circle>
+                    <circle cx="185" cy="155" fill="#333" r="4"></circle>
+                    <circle cx="130" cy="100" fill="#333" r="4"></circle>
+                    <circle cx="170" cy="100" fill="#333" r="4"></circle>
+                </svg>
+                <p style="font-size: 16px; color: #666;">提示：五角星的每条边被交点分成了几段？</p>
+                <div style="margin-top: 20px;">
+                    <p style="font-size: 20px;">共有 <input class="number-input" id="q13_answer" maxlength="3"/> 条线段</p>
+                    <button class="btn btn-challenge" onclick="checkQ13()">检查答案 ✓</button>
+                </div>
+                <div class="feedback" id="feedback13"></div>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn" onclick="showHint('hint13')">💡 提示</button>
+                <button class="btn" onclick="nextSlide()">下一页 👉</button>
+            </div>
+            <div class="hint-box" id="hint13">
+                <strong>💡 提示：</strong>五角星有5条边，每条边被2个交点分成3段小线段。每条边上的线段数：3+2+1=6条。5条边共30条线段！
+            </div>
+        </div>
+
+        <!-- 第14页：综合挑战题2 -->
+        <div class="slide" data-slide="14">
+            <h2 class="slide-title">🎯 综合挑战题 <span class="difficulty-badge difficulty-hard">高难度</span></h2>
+            <p class="slide-subtitle">复杂三角形计数</p>
+            <div class="challenge-area">
+                <h3 style="color: #e91e63; margin-bottom: 20px;">🌟 挑战题2：数一数下图中有几个三角形？</h3>
+                <svg height="220" style="margin: 20px 0;" width="320">
+                    <!-- 大三角形 -->
+                    <polygon fill="none" points="160,30 30,190 290,190" stroke="#660099" stroke-width="3"></polygon>
+                    <!-- 从顶点到底边的线 -->
+                    <line stroke="#94070A" stroke-width="2" x1="160" x2="160" y1="30" y2="190"></line>
+                    <line stroke="#94070A" stroke-width="2" x1="160" x2="95" y1="30" y2="190"></line>
+                    <line stroke="#94070A" stroke-width="2" x1="160" x2="225" y1="30" y2="190"></line>
+                    <!-- 横向线 -->
+                    <line stroke="#2196F3" stroke-width="2" x1="77" x2="243" y1="145" y2="145"></line>
+                    <line stroke="#2196F3" stroke-width="2" x1="113" x2="207" y1="100" y2="100"></line>
+                </svg>
+                <p style="font-size: 16px; color: #666;">提示：按层分类，注意不同方向的三角形</p>
+                <div style="margin-top: 20px;">
+                    <p style="font-size: 20px;">共有 <input class="number-input" id="q14_answer" maxlength="3"/> 个三角形</p>
+                    <button class="btn btn-challenge" onclick="checkQ14()">检查答案 ✓</button>
+                </div>
+                <div class="feedback" id="feedback14"></div>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn" onclick="showHint('hint14')">💡 提示</button>
+                <button class="btn" onclick="nextSlide()">下一页 👉</button>
+            </div>
+            <div class="hint-box" id="hint14">
+                <strong>💡 提示：</strong>顶层（尖朝上）：1+2+3+4=10个；中层（尖朝上）：1+2+3=6个；底层（尖朝上）：1+2=3个；尖朝下的：1+2+3=6个。总共25个！
+            </div>
+        </div>
+
+        <!-- 第15页：大师级挑战 -->
+        <div class="slide" data-slide="15">
+            <h2 class="slide-title">🏆 大师级挑战 <span class="difficulty-badge difficulty-master">大师</span></h2>
+            <p class="slide-subtitle">复合图形综合计数</p>
+            <div class="master-area">
+                <h3 style="color: #ff9800; margin-bottom: 20px;">👑 大师题：下图中有几个长方形和几个三角形？</h3>
+                <svg height="250" style="margin: 20px 0;" width="400">
+                    <!-- 房子形状 -->
+                    <!-- 屋顶三角形 -->
+                    <polygon fill="rgba(102,0,153,0.1)" points="200,30 50,120 350,120" stroke="#660099" stroke-width="3"></polygon>
+                    <!-- 屋顶分割线 -->
+                    <line stroke="#94070A" stroke-width="2" x1="200" x2="200" y1="30" y2="120"></line>
+                    <line stroke="#94070A" stroke-width="2" x1="125" x2="200" y1="75" y2="30"></line>
+                    <line stroke="#94070A" stroke-width="2" x1="200" x2="275" y1="30" y2="75"></line>
+                    <!-- 房子主体长方形 -->
+                    <rect fill="rgba(255,152,0,0.1)" height="100" stroke="#FF9800" stroke-width="3" width="200" x="100" y="120"></rect>
+                    <!-- 房子内部分割 -->
+                    <line stroke="#2196F3" stroke-width="2" x1="200" x2="200" y1="120" y2="220"></line>
+                    <line stroke="#2196F3" stroke-width="2" x1="100" x2="300" y1="170" y2="170"></line>
+                    <!-- 门 -->
+                    <rect fill="none" height="50" stroke="#4CAF50" stroke-width="2" width="40" x="130" y="170"></rect>
+                </svg>
+                <p style="font-size: 16px; color: #666;">分别数出长方形和三角形的数量</p>
+                <div style="margin-top: 20px;">
+                    <p style="font-size: 18px;">长方形：<input class="number-input" id="q15_rect" maxlength="2"/> 个</p>
+                    <p style="font-size: 18px; margin-top: 10px;">三角形：<input class="number-input" id="q15_tri" maxlength="2"/> 个</p>
+                    <button class="btn btn-master" onclick="checkQ15()" style="margin-top: 15px;">检查答案 ✓</button>
+                </div>
+                <div class="feedback" id="feedback15"></div>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn" onclick="showHint('hint15')">💡 提示</button>
+                <button class="btn" onclick="nextSlide()">下一页 👉</button>
+            </div>
+            <div class="hint-box" id="hint15">
+                <strong>💡 提示：</strong>长方形：主体是2×1网格，(1+2)×(1+2)=9个。三角形：屋顶单层4个基本三角形，共4+3+2+1=10个？不对，再仔细数：小三角形4个，由2个组成的2个，由4个组成的2个，共8个！
+            </div>
+        </div>
+
+        <!-- 第16页：方法总结 -->
+        <div class="slide" data-slide="16">
+            <h2 class="slide-title">📋 方法总结与技巧提炼</h2>
+            <p class="slide-subtitle">图形计数的通用策略</p>
+            <div class="summary-box">
+                <h3>🎯 核心策略</h3>
+                <ul style="font-size: 18px; line-height: 2;">
+                    <li><strong>分类计数法</strong>：按大小、方向、组成方式分类</li>
+                    <li><strong>公式法</strong>：掌握线段、角、长方形计数公式</li>
+                    <li><strong>组合思想</strong>：理解C(n,2)在计数中的应用</li>
+                    <li><strong>分层法</strong>：复杂图形分层处理</li>
+                </ul>
+            </div>
+            <div class="summary-box">
+                <h3>⚠️ 常见错误</h3>
+                <ul style="font-size: 18px; line-height: 2;">
+                    <li>❌ 漏数由多个基本图形组成的大图形</li>
+                    <li>❌ 重复计数同一图形</li>
+                    <li>❌ 忽视不同方向的图形（如尖朝下的三角形）</li>
+                    <li>❌ 混淆基本图形数量与总数量</li>
+                </ul>
+            </div>
+            <div class="summary-box">
+                <h3>💡 解题技巧</h3>
+                <ul style="font-size: 18px; line-height: 2;">
+                    <li>✅ 标记已数过的图形，避免重复</li>
+                    <li>✅ 从简单到复杂，逐步推进</li>
+                    <li>✅ 利用对称性简化计算</li>
+                    <li>✅ 验证答案的合理性</li>
+                </ul>
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="btn" onclick="nextSlide()">课程总结 👉</button>
+            </div>
+        </div>
+
+        <!-- 第17页：课程总结 -->
+        <div class="slide" data-slide="17">
+            <h2 class="slide-title">🎉 课程总结</h2>
+            <p class="slide-subtitle">你掌握了哪些技能？</p>
+            <div class="content-card">
+                <h3>📚 知识收获</h3>
+                <ul style="font-size: 18px; line-height: 2;">
+                    <li>✅ 数线段公式：n×(n-1)÷2</li>
+                    <li>✅ 数角公式：n×(n-1)÷2（n条射线）</li>
+                    <li>✅ 数长方形公式：(1+...+m)×(1+...+n)</li>
+                    <li>✅ 数三角形：分类计数法</li>
+                </ul>
+            </div>
+            <div class="content-card">
+                <h3>🧠 能力提升</h3>
+                <ul style="font-size: 18px; line-height: 2;">
+                    <li>✅ 系统性思维和分类讨论能力</li>
+                    <li>✅ 从特殊到一般的归纳推理</li>
+                    <li>✅ 解决复杂计数问题的策略</li>
+                    <li>✅ 数学公式推导与应用</li>
+                </ul>
+            </div>
+            <div class="interactive-area" style="margin-top: 30px;">
+                <p style="font-size: 24px; color: #660099; font-weight: bold;">🌟 继续加油，数学小达人！</p>
+                <p style="font-size: 18px; color: #666; margin-top: 15px;">完成课后练习，巩固所学知识！</p>
+                <button class="btn" onclick="nextSlide()" style="margin-top: 20px;">查看课后练习 👉</button>
+            </div>
+        </div>
+
+        <!-- 第18页：课后练习引导 -->
+        <div class="slide" data-slide="18">
+            <h2 class="slide-title">📝 课后练习</h2>
+            <p class="slide-subtitle">巩固提升，挑战自我</p>
+            <div class="content-card">
+                <h3>📋 练习内容</h3>
+                <p style="font-size: 18px; line-height: 1.8; margin-bottom: 15px;">
+                    课后练习包含10道精选题目和1道附加思考题：
+                </p>
+                <ul style="font-size: 17px; line-height: 2;">
+                    <li>🔹 基础题：巩固线段、角、三角形、长方形的计数方法</li>
+                    <li>🔹 进阶题：运用公式解决复杂图形计数</li>
+                    <li>🔹 挑战题：综合应用多种计数技巧</li>
+                    <li>🔹 附加题：拓展思维，挑战极限</li>
+                </ul>
+            </div>
+            <div class="content-card">
+                <h3>💡 练习建议</h3>
+                <ul style="font-size: 17px; line-height: 2;">
+                    <li>1. 先独立完成，再对照答案</li>
+                    <li>2. 错题要分析原因，理解正确思路</li>
+                    <li>3. 尝试用不同方法解决同一问题</li>
+                    <li>4. 家长可参与讨论，共同探索</li>
+                </ul>
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="btn" onclick="nextSlide()">学习资源 👉</button>
+            </div>
+        </div>
+
+        <!-- 第19页：学习资源 -->
+        <div class="slide" data-slide="19">
+            <h2 class="slide-title">📚 学习资源</h2>
+            <p class="slide-subtitle">延伸阅读与练习</p>
+            <div class="content-card">
+                <h3>🔗 相关链接</h3>
+                <ul style="font-size: 18px; line-height: 2;">
+                    <li>📖 <a href="Lesson06_Exercises.html" style="color: #660099;">课后练习题</a></li>
+                    <li>📖 <a href="Lesson06_Exercises_Answers.html" style="color: #660099;">答案解析</a></li>
+                    <li>📖 <a href="Lesson06_Parent_Guide.html" style="color: #660099;">家长协同方案</a></li>
+                </ul>
+            </div>
+            <div class="content-card">
+                <h3>📖 拓展阅读</h3>
+                <ul style="font-size: 18px; line-height: 2;">
+                    <li>🔹 组合数学入门：排列与组合</li>
+                    <li>🔹 图论初步：点与线的关系</li>
+                    <li>🔹 数学归纳法思想</li>
+                    <li>🔹 高斯求和故事</li>
+                </ul>
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="btn" onclick="nextSlide()">结束课程 👉</button>
+            </div>
+        </div>
+
+        <!-- 第20页：结束页 -->
+        <div class="slide" data-slide="20">
+            <h1 class="slide-title">🎊 课程结束</h1>
+            <p class="slide-subtitle">感谢你的认真学习！</p>
+            <div class="interactive-area" style="margin-top: 50px;">
+                <div style="font-size: 120px; margin: 30px 0;">🏆 🎉 ⭐</div>
+                <p style="font-size: 22px; color: #660099; font-weight: bold; margin-bottom: 15px;">
+                    恭喜你完成了《图形数一数》深度拓展课程！
+                </p>
+                <p style="font-size: 18px; color: #666; line-height: 1.8;">
+                    你不仅掌握了基础的图形计数方法，<br/>
+                    还学会了公式推导、组合思想等高阶技巧。<br/>
+                    继续保持好奇心，数学的世界无限精彩！
+                </p>
+                <div style="margin-top: 40px;">
+                    <button class="btn" onclick="goToSlide(1)">重新学习 🔄</button>
+                    <button class="btn btn-secondary" onclick="window.location.href='Lesson06_Exercises.html'">去做练习 ✍️</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="nav-controls">
+        <button class="nav-btn" onclick="prevSlide()">👈 上一页</button>
+        <button class="nav-btn" onclick="nextSlide()">下一页 👉</button>
+    </div>
+    
+    <div class="page-indicator">
+        <span id="pageIndicator">第 1 / 20 页</span>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 20;
+        
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            const progressBar = document.getElementById('progressBar');
+            const pageIndicator = document.getElementById('pageIndicator');
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            if (n > totalSlides) currentSlide = 1;
+            if (n < 1) currentSlide = totalSlides;
+            
+            slides[currentSlide - 1].classList.add('active');
+            
+            const progress = (currentSlide / totalSlides) * 100;
+            progressBar.style.width = progress + '%';
+            pageIndicator.textContent = `第 ${currentSlide} / ${totalSlides} 页`;
+            
+            window.scrollTo(0, 0);
+        }
+        
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+        
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+        
+        function goToSlide(n) {
+            currentSlide = n;
+            showSlide(currentSlide);
+        }
+        
+        function showHint(hintId) {
+            const hint = document.getElementById(hintId);
+            hint.classList.toggle('show');
+        }
+        
+        function toggleLine(element) {
+            element.classList.toggle('counted');
+        }
+        
+        function checkQ5() {
+            const answer = document.getElementById('q5_answer').value;
+            const feedback = document.getElementById('feedback5');
+            
+            if (answer === '15') {
+                feedback.textContent = '🎉 太棒了！答案正确！6个点，用公式6×5÷2=15条线段！';
+                feedback.className = 'feedback correct';
+                document.getElementById('q5_answer').classList.add('correct');
+            } else {
+                feedback.textContent = '❌ 再想想！6个点，基本线段5条，用公式法计算。';
+                feedback.className = 'feedback wrong';
+                document.getElementById('q5_answer').classList.add('wrong');
+            }
+        }
+        
+        function checkQ6() {
+            const answer = document.getElementById('q6_answer').value;
+            const feedback = document.getElementById('feedback6');
+            
+            if (answer === '63') {
+                feedback.textContent = '🎉 太棒了！答案正确！横向：3条线×15条=45条，竖向：6条线×3条=18条，总计63条！';
+                feedback.className = 'feedback correct';
+                document.getElementById('q6_answer').classList.add('correct');
+            } else {
+                feedback.textContent = '❌ 再算算！横向有3条线，每条6个点；竖向有6条线，每条3个点。';
+                feedback.className = 'feedback wrong';
+                document.getElementById('q6_answer').classList.add('wrong');
+            }
+        }
+        
+        function checkQ8() {
+            const answer = document.getElementById('q8_answer').value;
+            const feedback = document.getElementById('feedback8');
+            
+            if (answer === '21') {
+                feedback.textContent = '🎉 太棒了！答案正确！7条射线，用公式7×6÷2=21个角！';
+                feedback.className = 'feedback correct';
+                document.getElementById('q8_answer').classList.add('correct');
+            } else {
+                feedback.textContent = '❌ 再想想！先数有几条射线，再用公式计算。';
+                feedback.className = 'feedback wrong';
+                document.getElementById('q8_answer').classList.add('wrong');
+            }
+        }
+        
+        function checkQ10() {
+            const answer = document.getElementById('q10_answer').value;
+            const feedback = document.getElementById('feedback10');
+            
+            if (answer === '13') {
+                feedback.textContent = '🎉 太棒了！答案正确！上层4个+下层4个+上下组合4个+最大1个=13个！';
+                feedback.className = 'feedback correct';
+                document.getElementById('q10_answer').classList.add('correct');
+            } else {
+                feedback.textContent = '❌ 再数数！按大小分类：单个的、2个组合的、4个组合的、最大的。';
+                feedback.className = 'feedback wrong';
+                document.getElementById('q10_answer').classList.add('wrong');
+            }
+        }
+        
+        function checkQ12() {
+            const answer = document.getElementById('q12_answer').value;
+            const feedback = document.getElementById('feedback12');
+            
+            if (answer === '36') {
+                feedback.textContent = '🎉 太棒了！答案正确！横向选法1+2+3=6，竖向选法1+2+3=6，总数6×6=36个！';
+                feedback.className = 'feedback correct';
+                document.getElementById('q12_answer').classList.add('correct');
+            } else {
+                feedback.textContent = '❌ 再用公式算算！这是一个3×3的网格。';
+                feedback.className = 'feedback wrong';
+                document.getElementById('q12_answer').classList.add('wrong');
+            }
+        }
+        
+        function checkQ13() {
+            const answer = document.getElementById('q13_answer').value;
+            const feedback = document.getElementById('feedback13');
+            
+            if (answer === '30') {
+                feedback.textContent = '🎉 太棒了！答案正确！五角星5条边，每条边被分成3段，每条边有3+2+1=6条线段，5×6=30条！';
+                feedback.className = 'feedback correct';
+                document.getElementById('q13_answer').classList.add('correct');
+            } else {
+                feedback.textContent = '❌ 再想想！五角星每条边被几个交点分成几段？';
+                feedback.className = 'feedback wrong';
+                document.getElementById('q13_answer').classList.add('wrong');
+            }
+        }
+        
+        function checkQ14() {
+            const answer = document.getElementById('q14_answer').value;
+            const feedback = document.getElementById('feedback14');
+            
+            if (answer === '25') {
+                feedback.textContent = '🎉 太棒了！答案正确！尖朝上：10+6+3=19个，尖朝下：6个，总共25个！';
+                feedback.className = 'feedback correct';
+                document.getElementById('q14_answer').classList.add('correct');
+            } else {
+                feedback.textContent = '❌ 再数数！注意尖朝下的三角形，按层分类计数。';
+                feedback.className = 'feedback wrong';
+                document.getElementById('q14_answer').classList.add('wrong');
+            }
+        }
+        
+        function checkQ15() {
+            const rect = document.getElementById('q15_rect').value;
+            const tri = document.getElementById('q15_tri').value;
+            const feedback = document.getElementById('feedback15');
+            
+            if (rect === '9' && tri === '8') {
+                feedback.textContent = '🎉 太棒了！两个答案都正确！长方形9个，三角形8个！';
+                feedback.className = 'feedback correct';
+                document.getElementById('q15_rect').classList.add('correct');
+                document.getElementById('q15_tri').classList.add('correct');
+            } else if (rect === '9') {
+                feedback.textContent = '✓ 长方形数量正确！三角形数量再想想，屋顶部分仔细数。';
+                feedback.className = 'feedback wrong';
+                document.getElementById('q15_rect').classList.add('correct');
+            } else if (tri === '8') {
+                feedback.textContent = '✓ 三角形数量正确！长方形数量再想想，用公式法。';
+                feedback.className = 'feedback wrong';
+                document.getElementById('q15_tri').classList.add('correct');
+            } else {
+                feedback.textContent = '❌ 两个答案都需要再想想！长方形用网格公式，三角形分类数。';
+                feedback.className = 'feedback wrong';
+            }
+        }
+        
+        // 键盘导航
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+        
+        // 初始化
+        showSlide(1);
+    </script>
+</body>
+</html>
