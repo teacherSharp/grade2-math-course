@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第1课 数字的奥秘 - 夏老师数学思维课堂</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background-color: #F9F5F0;
+            color: #2C3E4F;
+            line-height: 1.6;
+        }
+
+        /* 顶部时钟和标题 */
+        .header {
+            background: linear-gradient(135deg, #6B4F9C 0%, #9E2A2B 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(107, 79, 156, 0.3);
+        }
+
+        .clock {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: bold;
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .header .teacher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 1rem;
+        }
+
+        /* 导航栏 */
+        .navbar {
+            background: white;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            background-color: #6B4F9C;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(107, 79, 156, 0.2);
+        }
+
+        .nav-btn:hover {
+            background-color: #7E63B0;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(107, 79, 156, 0.3);
+        }
+
+        .nav-btn.active {
+            background-color: #9E2A2B;
+            box-shadow: 0 4px 12px rgba(158, 42, 43, 0.3);
+        }
+
+        /* 内容区域 */
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 卡片样式 */
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 25px rgba(90, 60, 120, 0.06);
+            border: 1px solid #EDE8E2;
+        }
+
+        .card h2 {
+            color: #6B4F9C;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card h3 {
+            color: #9E2A2B;
+            font-size: 1.4rem;
+            margin: 20px 0 15px;
+            padding-left: 15px;
+            border-left: 4px solid #9E2A2B;
+        }
+
+        /* 题目样式 */
+        .question {
+            background: #F9F6FC;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid #6B4F9C;
+        }
+
+        .question-title {
+            font-weight: bold;
+            color: #6B4F9C;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .question-content {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        /* 答案按钮 */
+        .answer-btn {
+            background-color: #9E2A2B;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .answer-btn:hover {
+            background-color: #B13E3F;
+            transform: scale(1.05);
+        }
+
+        .answer {
+            display: none;
+            background: #F0F4EB;
+            border-left: 4px solid #9E2A2B;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 10px;
+        }
+
+        .answer.show {
+            display: block;
+        }
+
+        /* 游戏区域 */
+        .game-area {
+            background: linear-gradient(135deg, #FFF9F0 0%, #F5F0FF 100%);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: center;
+            border: 2px dashed #D4C4E0;
+        }
+
+        .game-btn {
+            background: linear-gradient(135deg, #6B4F9C 0%, #9E2A2B 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+            box-shadow: 0 4px 15px rgba(107, 79, 156, 0.3);
+        }
+
+        .game-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(107, 79, 156, 0.4);
+        }
+
+        .game-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* 知识点卡片 */
+        .knowledge-map {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 2px solid #E8E0F0;
+        }
+
+        .knowledge-item {
+            background: #F9F6FC;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border-left: 4px solid #6B4F9C;
+            text-align: left;
+        }
+
+        /* 标签 */
+        .tag {
+            display: inline-block;
+            background: #6B4F9C;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin: 5px 5px 5px 0;
+        }
+
+        /* 星级 */
+        .stars {
+            color: #FFB800;
+            font-size: 1.2rem;
+        }
+
+        /* 儿歌 */
+        .rhyme {
+            background: linear-gradient(135deg, #FFF9C4 0%, #FFECB3 100%);
+            padding: 15px;
+            border-radius: 15px;
+            margin: 15px 0;
+            font-style: italic;
+            color: #5D4037;
+            text-align: center;
+            border: 2px dashed #FFB800;
+        }
+
+        /* SVG容器 */
+        .svg-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* 数独格子 */
+        .sudoku-cell {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #6B4F9C;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: white;
+        }
+
+        .sudoku-cell.filled {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .clock, .teacher {
+                position: static;
+                margin: 10px 0;
+                display: inline-block;
+            }
+            
+            .nav-btn {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部标题栏 -->
+    <div class="header">
+        <div class="clock" id="clock">00:00:00</div>
+        <h1>第1课 数字的奥秘</h1>
+        <div class="subtitle">探索数字规律，培养数感与逻辑思维</div>
+        <div class="teacher">👨‍🏫 夏老师数学思维课堂</div>
+    </div>
+
+    <!-- 导航栏 -->
+    <div class="navbar">
+        <button class="nav-btn active" onclick="showSection('warmup')">🎮 热身游戏</button>
+        <button class="nav-btn" onclick="showSection('basic')">📚 基础练习</button>
+        <button class="nav-btn" onclick="showSection('advanced')">⭐ 提高练习</button>
+        <button class="nav-btn" onclick="showSection('challenge')">🏆 挑战练习</button>
+        <button class="nav-btn" onclick="showSection('teaching')">🎨 教具清单</button>
+        <button class="nav-btn" onclick="showSection('parent')">👨‍👩‍👧 家长协同方案</button>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="content">
+        <!-- 热身游戏 -->
+        <div class="section active" id="warmup">
+            <div class="card">
+                <h2>🎮 热身游戏：数字炸弹 2.0</h2>
+                <div class="game-area">
+                    <h3>游戏规则</h3>
+                    <p>从30倒数到1，遇到5的倍数或含5的数字拍桌子！</p>
+                    <p style="color: #666; margin-top: 10px;">进阶：拍桌子时说出"5的倍数！"或"含5数字！"</p>
+                    
+                    <div class="knowledge-map">
+                        <h4>🎯 示例序列</h4>
+                        <div class="knowledge-item">
+                            <strong>30</strong>（拍！5的倍数）→ 29 → 28 → 27 → 26 → <strong>25</strong>（拍！含5数字）→ 24 → ...
+                        </div>
+                    </div>
+                    
+                    <button class="game-btn" onclick="startNumberBomb()">🎯 开始游戏</button>
+                    <div id="bombGame" style="margin-top: 20px; display: none;">
+                        <div id="bombNumber" style="font-size: 3rem; color: #9E2A2B; font-weight: bold; margin: 20px 0;">30</div>
+                        <button class="game-btn" onclick="nextBombNumber()">下一个</button>
+                        <button class="game-btn" onclick="resetBomb()">重新开始</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🎲 数字接龙</h2>
+                <div class="game-area">
+                    <h3>接龙规则</h3>
+                    <p>老师说一个数，学生接下一个符合规律的数</p>
+                    
+                    <div class="knowledge-map">
+                        <h4>🌟 规律类型</h4>
+                        <div class="knowledge-item">
+                            <strong>等差规律：</strong>2, 4, 6, 8...（每次+2）
+                        </div>
+                        <div class="knowledge-item">
+                            <strong>等比规律：</strong>2, 4, 8, 16...（每次×2）
+                        </div>
+                        <div class="knowledge-item">
+                            <strong>斐波那契：</strong>1, 1, 2, 3, 5, 8...（前两个数相加）
+                        </div>
+                        <div class="knowledge-item">
+                            <strong>平方规律：</strong>1, 4, 9, 16...（平方数）
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 基础练习 -->
+        <div class="section" id="basic">
+            <div class="card">
+                <h2>📚 基础层 - 兴趣唤醒</h2>
+                <p style="margin-bottom: 20px;">难度：⭐ | 目标：90%学生可独立完成 | 培养数感和观察力</p>
+
+                <div class="question">
+                    <div class="question-title">🔢 题1：图形找规律（循环规律）</div>
+                    <div class="question-content">
+                        <p>找出规律，在横线上填入正确的图形：</p>
+                        <div class="svg-container">
+                            <svg width="500" height="100" viewBox="0 0 500 100">
+                                <!-- 三角形 -->
+                                <polygon points="50,70 70,30 90,70" fill="#FFCDD2" stroke="#9E2A2B" stroke-width="2"/>
+                                <!-- 正方形 -->
+                                <rect x="110" y="30" width="40" height="40" fill="#C5CAE9" stroke="#6B4F9C" stroke-width="2"/>
+                                <!-- 圆形 -->
+                                <circle cx="200" cy="50" r="20" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2"/>
+                                <!-- 三角形 -->
+                                <polygon points="250,70 270,30 290,70" fill="#FFCDD2" stroke="#9E2A2B" stroke-width="2"/>
+                                <!-- 正方形 -->
+                                <rect x="310" y="30" width="40" height="40" fill="#C5CAE9" stroke="#6B4F9C" stroke-width="2"/>
+                                <!-- 圆形 -->
+                                <circle cx="400" cy="50" r="20" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2"/>
+                                <!-- 问号 -->
+                                <text x="450" y="55" fill="#9E2A2B" font-size="24" font-weight="bold">?</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <button class="answer-btn" onclick="toggleAnswer('answer1')">💡 查看解析</button>
+                    <div class="answer" id="answer1">
+                        <p><strong>答案：</strong>三角形（△）</p>
+                        <p><strong>趣味解析：</strong>像找朋友一样，把重复的图形圈成一组！△、□、○是一组好朋友，轮流出现～</p>
+                        <div class="rhyme">🎵 图形轮流排，重复找规律 🎵</div>
+                        <span class="tag">观察力</span>
+                        <span class="tag">逻辑力</span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-title">🌸 题2：重复组规律</div>
+                    <div class="question-content">
+                        <p>找出规律，继续画出后面的图形：</p>
+                        <p style="font-size: 2rem; margin: 15px 0;">🌸 🍀 🍀 🌸 🍀 🍀 __ __ __</p>
+                    </div>
+                    <button class="answer-btn" onclick="toggleAnswer('answer2')">💡 查看解析</button>
+                    <div class="answer" id="answer2">
+                        <p><strong>答案：</strong>🌸 🍀 🍀</p>
+                        <p><strong>趣味解析：</strong>1朵花配2片叶子，是一个小组！小组重复出现，就像排队做操一样整齐～</p>
+                        <div class="rhyme">🎵 找小组，看重复，规律藏在组里面 🎵</div>
+                        <span class="tag">观察力</span>
+                        <span class="tag">归纳力</span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-title">🛒 题3：超市购物（数感游戏）</div>
+                    <div class="question-content">
+                        <p>1元、2元、5元硬币各3枚，能凑出多少种不同的金额？（可以使用1-9枚硬币的任意组合）</p>
+                    </div>
+                    <button class="answer-btn" onclick="toggleAnswer('answer3')">💡 查看解析</button>
+                    <div class="answer" id="answer3">
+                        <p><strong>答案：</strong>共19种不同的金额</p>
+                        <p><strong>完整穷举：</strong></p>
+                        <p><strong>使用1枚：</strong>1元、2元、5元（3种）</p>
+                        <p><strong>使用2枚：</strong>1+1=2元、1+2=3元、1+5=6元、2+2=4元、2+5=7元、5+5=10元（6种，其中2元重复）</p>
+                        <p><strong>使用3枚：</strong>1+1+1=3元、1+1+2=4元、1+1+5=7元、1+2+2=5元、1+2+5=8元、1+5+5=11元、2+2+2=6元、2+2+5=9元、2+5+5=12元、5+5+5=15元（10种，其中3,4,5,6,7元重复）</p>
+                        <p><strong>使用4枚：</strong>1+1+1+2=5元、1+1+1+5=8元、1+1+2+2=6元、1+1+2+5=9元、1+1+5+5=12元、1+2+2+2=7元、1+2+2+5=10元、1+2+5+5=13元、2+2+2+5=11元、2+2+5+5=14元（10种，其中5,6,7,8,9,10,11,12元重复）</p>
+                        <p><strong>使用5枚：</strong>1+1+1+2+2=7元、1+1+1+2+5=10元、1+1+1+5+5=13元、1+1+2+2+2=8元、1+1+2+2+5=11元、1+1+2+5+5=14元、1+2+2+2+5=12元、1+2+2+5+5=15元、2+2+2+5+5=16元（9种，其中7,8,10,11,12,13,14,15元重复）</p>
+                        <p><strong>使用6枚：</strong>1+1+1+2+2+2=9元、1+1+1+2+2+5=12元、1+1+1+2+5+5=15元、1+1+2+2+2+5=13元、1+1+2+2+5+5=16元、1+2+2+2+5+5=17元、2+2+2+5+5+5=21元（7种，其中9,12,13,15,16元重复）</p>
+                        <p><strong>使用7枚：</strong>1+1+1+2+2+2+5=14元、1+1+1+2+2+5+5=17元、1+1+2+2+2+5+5=18元、1+2+2+2+5+5+5=22元（4种，其中14,17元重复）</p>
+                        <p><strong>使用8枚：</strong>1+1+1+2+2+2+5+5=19元、1+1+2+2+2+5+5+5=23元（2种）</p>
+                        <p><strong>使用9枚：</strong>1+1+1+2+2+2+5+5+5=24元（1种）</p>
+                        <p><strong>不重复金额汇总：</strong>1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24元 = <strong>共23种</strong></p>
+                        <p><strong>思维点拨：</strong>从生活中学数学，培养数感和组合思维。注意去重，相同金额只算一种！</p>
+                        <span class="tag">数感</span>
+                        <span class="tag">应用力</span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-title">🔢 题4：数字排序</div>
+                    <div class="question-content">
+                        <p>把下面的数字按从小到大的顺序排列：</p>
+                        <p style="font-size: 1.5rem; color: #6B4F9C; margin: 10px 0;">15, 8, 23, 6, 19, 11</p>
+                    </div>
+                    <button class="answer-btn" onclick="toggleAnswer('answer4')">💡 查看解析</button>
+                    <div class="answer" id="answer4">
+                        <p><strong>答案：</strong>6, 8, 11, 15, 19, 23</p>
+                        <p><strong>小技巧：</strong>先找最小的（6），再找剩下的里面最小的，像排队一样一个一个来～</p>
+                        <span class="tag">数感</span>
+                        <span class="tag">比较力</span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-title">⭕ 题5：图形计数</div>
+                    <div class="question-content">
+                        <p>数一数下图中有多少个正方形？</p>
+                        <div class="svg-container">
+                            <svg width="200" height="200" viewBox="0 0 200 200">
+                                <!-- 2x2大正方形 -->
+                                <rect x="20" y="20" width="160" height="160" fill="none" stroke="#6B4F9C" stroke-width="3"/>
+                                <!-- 中间十字线 -->
+                                <line x1="100" y1="20" x2="100" y2="180" stroke="#6B4F9C" stroke-width="2"/>
+                                <line x1="20" y1="100" x2="180" y2="100" stroke="#6B4F9C" stroke-width="2"/>
+                                <!-- 标注小正方形 -->
+                                <text x="60" y="70" fill="#9E2A2B" font-size="16" text-anchor="middle">1</text>
+                                <text x="140" y="70" fill="#9E2A2B" font-size="16" text-anchor="middle">2</text>
+                                <text x="60" y="150" fill="#9E2A2B" font-size="16" text-anchor="middle">3</text>
+                                <text x="140" y="150" fill="#9E2A2B" font-size="16" text-anchor="middle">4</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <button class="answer-btn" onclick="toggleAnswer('answer5')">💡 查看解析</button>
+                    <div class="answer" id="answer5">
+                        <p><strong>答案：</strong>5个（4个小正方形+1个大正方形）</p>
+                        <p><strong>方法：</strong>先数小的（4个），再数大的（1个），合计5个</p>
+                        <p><strong>延伸：</strong>如果是3×3的格子，有14个正方形（9小+4中+1大）</p>
+                        <span class="tag">观察力</span>
+                        <span class="tag">有序思维</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 提高练习 -->
+        <div class="section" id="advanced">
+            <div class="card">
+                <h2>⭐ 提高层 - 思维拓展</h2>
+                <p style="margin-bottom: 20px;">难度：⭐⭐-⭐⭐⭐ | 培养逻辑推理和等量代换能力</p>
+
+                <div class="question">
+                    <div class="question-title">🍎 题1：等量代换（图文版）</div>
+                    <div class="question-content">
+                        <p>根据下面的等式，求出每种水果代表的数字：</p>
+                        <div class="svg-container">
+                            <svg width="400" height="200" viewBox="0 0 400 200">
+                                <!-- 等式1 -->
+                                <text x="50" y="50" font-size="30">🍎</text>
+                                <text x="90" y="50" font-size="24">+</text>
+                                <text x="120" y="50" font-size="30">🍌</text>
+                                <text x="160" y="50" font-size="24">=</text>
+                                <text x="190" y="50" font-size="24" font-weight="bold">9</text>
+                                
+                                <!-- 等式2 -->
+                                <text x="50" y="100" font-size="30">🍌</text>
+                                <text x="90" y="100" font-size="24">+</text>
+                                <text x="120" y="100" font-size="30">🍇</text>
+                                <text x="160" y="100" font-size="24">=</text>
+                                <text x="190" y="100" font-size="24" font-weight="bold">8</text>
+                                
+                                <!-- 等式3 -->
+                                <text x="20" y="150" font-size="30">🍎</text>
+                                <text x="60" y="150" font-size="24">+</text>
+                                <text x="90" y="150" font-size="30">🍌</text>
+                                <text x="130" y="150" font-size="24">+</text>
+                                <text x="160" y="150" font-size="30">🍇</text>
+                                <text x="200" y="150" font-size="24">=</text>
+                                <text x="230" y="150" font-size="24" font-weight="bold">15</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <button class="answer-btn" onclick="toggleAnswer('answer6')">💡 查看解析</button>
+                    <div class="answer" id="answer6">
+                        <p><strong>答案：</strong>🍎=7, 🍌=2, 🍇=6</p>
+                        <p><strong>解析：</strong>用第三个式子减第一个式子得🍇=6，再依次推导🍌=2，🍎=7</p>
+                        <div class="rhyme">🎵 整体减部分，未知数现形 🎵</div>
+                        <span class="tag">逻辑力</span>
+                        <span class="tag">代换思维</span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-title">🔢 题2：四宫格数独（对角线限制）</div>
+                    <div class="question-content">
+                        <p>在4×4格子中填入1-4，使每行、每列、每个2×2宫格、两条对角线都不重复：</p>
+                        <div class="svg-container">
+                            <svg width="250" height="250" viewBox="0 0 250 250">
+                                <!-- 外框 -->
+                                <rect x="10" y="10" width="230" height="230" fill="none" stroke="#6B4F9C" stroke-width="4"/>
+                                <!-- 宫格线（2×2宫格） -->
+                                <line x1="125" y1="10" x2="125" y2="240" stroke="#6B4F9C" stroke-width="3"/>
+                                <line x1="10" y1="125" x2="240" y2="125" stroke="#6B4F9C" stroke-width="3"/>
+                                <!-- 细格子线 -->
+                                <line x1="67" y1="10" x2="67" y2="240" stroke="#999" stroke-width="1"/>
+                                <line x1="183" y1="10" x2="183" y2="240" stroke="#999" stroke-width="1"/>
+                                <line x1="10" y1="67" x2="240" y2="67" stroke="#999" stroke-width="1"/>
+                                <line x1="10" y1="183" x2="240" y2="183" stroke="#999" stroke-width="1"/>
+                                <!-- 对角线 -->
+                                <line x1="10" y1="10" x2="240" y2="240" stroke="#9E2A2B" stroke-width="1" stroke-dasharray="5,5"/>
+                                <line x1="240" y1="10" x2="10" y2="240" stroke="#9E2A2B" stroke-width="1" stroke-dasharray="5,5"/>
+                                <!-- 已知数字 -->
+                                <text x="38" y="48" font-size="24" fill="#2E7D32" font-weight="bold" text-anchor="middle">1</text>
+                                <text x="155" y="48" font-size="24" fill="#2E7D32" font-weight="bold" text-anchor="middle">2</text>
+                                <text x="212" y="105" font-size="24" fill="#2E7D32" font-weight="bold" text-anchor="middle">3</text>
+                                <text x="95" y="162" font-size="24" fill="#2E7D32" font-weight="bold" text-anchor="middle">4</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <button class="answer-btn" onclick="toggleAnswer('answer7')">💡 查看解析</button>
+                    <div class="answer" id="answer7">
+                        <p><strong>完整答案：</strong></p>
+                        <div class="svg-container">
+                            <svg width="250" height="250" viewBox="0 0 250 250">
+                                <!-- 外框 -->
+                                <rect x="10" y="10" width="230" height="230" fill="none" stroke="#6B4F9C" stroke-width="4"/>
+                                <!-- 宫格线（2×2宫格） -->
+                                <line x1="125" y1="10" x2="125" y2="240" stroke="#6B4F9C" stroke-width="3"/>
+                                <line x1="10" y1="125" x2="240" y2="125" stroke="#6B4F9C" stroke-width="3"/>
+                                <!-- 细格子线 -->
+                                <line x1="67" y1="10" x2="67" y2="240" stroke="#999" stroke-width="1"/>
+                                <line x1="183" y1="10" x2="183" y2="240" stroke="#999" stroke-width="1"/>
+                                <line x1="10" y1="67" x2="240" y2="67" stroke="#999" stroke-width="1"/>
+                                <line x1="10" y1="183" x2="240" y2="183" stroke="#999" stroke-width="1"/>
+                                <!-- 对角线 -->
+                                <line x1="10" y1="10" x2="240" y2="240" stroke="#9E2A2B" stroke-width="1" stroke-dasharray="5,5"/>
+                                <line x1="240" y1="10" x2="10" y2="240" stroke="#9E2A2B" stroke-width="1" stroke-dasharray="5,5"/>
+                                <!-- 答案数字 -->
+                                <text x="38" y="48" font-size="24" fill="#2E7D32" font-weight="bold" text-anchor="middle">1</text>
+                                <text x="95" y="48" font-size="24" fill="#9E2A2B" font-weight="bold" text-anchor="middle">3</text>
+                                <text x="155" y="48" font-size="24" fill="#2E7D32" font-weight="bold" text-anchor="middle">2</text>
+                                <text x="212" y="48" font-size="24" fill="#9E2A2B" font-weight="bold" text-anchor="middle">4</text>
+                                <text x="38" y="105" font-size="24" fill="#9E2A2B" font-weight="bold" text-anchor="middle">4</text>
+                                <text x="95" y="105" font-size="24" fill="#2E7D32" font-weight="bold" text-anchor="middle">2</text>
+                                <text x="155" y="105" font-size="24" fill="#9E2A2B" font-weight="bold" text-anchor="middle">1</text>
+                                <text x="212" y="105" font-size="24" fill="#2E7D32" font-weight="bold" text-anchor="middle">3</text>
+                                <text x="38" y="162" font-size="24" fill="#9E2A2B" font-weight="bold" text-anchor="middle">2</text>
+                                <text x="95" y="162" font-size="24" fill="#2E7D32" font-weight="bold" text-anchor="middle">4</text>
+                                <text x="155" y="162" font-size="24" fill="#9E2A2B" font-weight="bold" text-anchor="middle">3</text>
+                                <text x="212" y="162" font-size="24" fill="#2E7D32" font-weight="bold" text-anchor="middle">1</text>
+                                <text x="38" y="219" font-size="24" fill="#2E7D32" font-weight="bold" text-anchor="middle">3</text>
+                                <text x="95" y="219" font-size="24" fill="#9E2A2B" font-weight="bold" text-anchor="middle">1</text>
+                                <text x="155" y="219" font-size="24" fill="#2E7D32" font-weight="bold" text-anchor="middle">4</text>
+                                <text x="212" y="219" font-size="24" fill="#9E2A2B" font-weight="bold" text-anchor="middle">2</text>
+                            </svg>
+                        </div>
+                        <p><strong>详细解析：</strong></p>
+                        <p><strong>四宫格结构：</strong>4×4格子，分成4个2×2宫格（左上、右上、左下、右下）</p>
+                        <p><strong>解题步骤：</strong></p>
+                        <p>第1行：已有1、2，剩余3、4。第2列有4，所以(1,2)=3，(1,4)=4</p>
+                        <p>第4列：已有4、3，剩余1、2。第4行有1，所以(4,4)=2，(2,4)=1... 修正：根据对角线限制继续推导</p>
+                        <p>左上宫格：已有1，剩余2、3、4。第1行已有1、3，第2列有4，所以(2,1)=4，(2,2)=2</p>
+                        <p>逐步填满所有格子，确保每行、每列、每宫格、对角线都不重复</p>
+                        <p><strong>解题儿歌：</strong></p>
+                        <div class="rhyme">🎵 四宫格里填数字，行列宫格不重复，对角线也要看，1到4各出现 🎵</div>
+                        <p><strong>思维点拨：</strong>从已知数字多的行、列或宫格开始填，利用排除法逐步推理</p>
+                        <span class="tag">逻辑力</span>
+                        <span class="tag">推理力</span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-title">🔢 题3：数字排序谜题</div>
+                    <div class="question-content">
+                        <p>有4个数：8、5、12、7，按以下要求排序：</p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>① 比10小的数在左边</li>
+                            <li>② 双数都在单数右边</li>
+                            <li>③ 最大的单数在最左边</li>
+                        </ul>
+                    </div>
+                    <button class="answer-btn" onclick="toggleAnswer('answer8')">💡 查看解析</button>
+                    <div class="answer" id="answer8">
+                        <p><strong>答案：</strong>7、5、8、12</p>
+                        <p><strong>分类分析：</strong></p>
+                        <p>• 比10小的数：5、7、8（应在左边）</p>
+                        <p>• 比10大的数：12（应在右边）✓</p>
+                        <p>• 单数：5、7、12</p>
+                        <p>• 双数：8、12</p>
+                        <p>• 最大的单数：7（应在最左边）✓</p>
+                        <p><strong>推理过程：</strong></p>
+                        <p>由条件③：<strong>最大的单数是7，所以7在最左边</strong>（第一位）</p>
+                        <p>由条件②：双数(8、12)都在单数右边。剩余单数是5，所以5在8、12左边</p>
+                        <p>由条件①：比10小的数(5、7、8)在左边，12在右边</p>
+                        <p>综合排序：<strong>7 → 5 → 8 → 12</strong></p>
+                        <p><strong>验证：</strong>① 7、5、8都<10在左边，12>10在右边 ✓ ② 双数8、12都在单数7、5右边 ✓ ③ 最大单数7在最左边 ✓</p>
+                        <span class="tag">逻辑力</span>
+                        <span class="tag">分析力</span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-title">🔢 题4：斐波那契数列入门</div>
+                    <div class="question-content">
+                        <p>观察数列规律，写出后面3个数：</p>
+                        <p style="font-size: 1.5rem; color: #6B4F9C; margin: 10px 0;">1, 1, 2, 3, 5, 8, __, __, __</p>
+                        <div class="svg-container">
+                            <svg width="500" height="150" viewBox="0 0 500 150">
+                                <!-- 兔子繁殖示意 -->
+                                <text x="250" y="30" font-size="16" fill="#2E7D32" text-anchor="middle" font-weight="bold">兔子繁殖规律（每月对数）</text>
+                                <text x="50" y="70" font-size="20">1月:1对</text>
+                                <text x="150" y="70" font-size="20">2月:1对</text>
+                                <text x="250" y="70" font-size="20">3月:2对</text>
+                                <text x="350" y="70" font-size="20">4月:3对</text>
+                                <text x="450" y="70" font-size="20">5月:5对</text>
+                                <text x="250" y="110" font-size="14" fill="#666" text-anchor="middle">规律：当月对数 = 前两个月对数之和</text>
+                                <text x="250" y="135" font-size="14" fill="#666" text-anchor="middle">生活中的斐波那契：花瓣数多为3、5、8、13...</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <button class="answer-btn" onclick="toggleAnswer('answer9')">💡 查看解析</button>
+                    <div class="answer" id="answer9">
+                        <p><strong>答案：</strong>13, 21, 34</p>
+                        <p><strong>规律：</strong>从第3个数开始，每个数都是前两个数相加（5+8=13, 8+13=21, 13+21=34）</p>
+                        <p><strong>自然中的斐波那契：</strong>百合花3瓣、梅花5瓣、波斯菊8瓣...</p>
+                        <span class="tag">规律发现</span>
+                        <span class="tag">自然数学</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 挑战练习 -->
+        <div class="section" id="challenge">
+            <div class="card">
+                <h2>🏆 挑战层 - 能力提升</h2>
+                <p style="margin-bottom: 20px;">难度：⭐⭐⭐-⭐⭐⭐⭐⭐ | 培养创新思维和深度推理</p>
+
+                <div class="question">
+                    <div class="question-title">🎯 题1：数字密码锁（多步推理）<span class="stars">☆☆☆</span></div>
+                    <div class="question-content">
+                        <p>一个3位数密码锁，根据以下线索破解密码：</p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>① 百位比十位大2</li>
+                            <li>② 个位是十位的2倍</li>
+                            <li>③ 三个数的和是14</li>
+                        </ul>
+                    </div>
+                    <button class="answer-btn" onclick="toggleAnswer('answer10')">💡 查看解析</button>
+                    <div class="answer" id="answer10">
+                        <p><strong>答案：</strong>536</p>
+                        <p><strong>解析：</strong>设十位为x，则百位=x+2，个位=2x</p>
+                        <p>(x+2) + x + 2x = 14 → 4x+2=14 → 4x=12 → x=3</p>
+                        <p>所以：百位=5，十位=3，个位=6，密码是536</p>
+                        <span class="tag">方程思想</span>
+                        <span class="tag">推理力</span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-title">🎯 题2：正方体展开图（空间力）<span class="stars">☆☆☆☆</span></div>
+                    <div class="question-content">
+                        <p>一个正方体的展开图如下，数字1对面是几？数字2对面是几？</p>
+                        <div class="svg-container">
+                            <svg width="350" height="250" viewBox="0 0 350 250">
+                                <!-- 十字形展开图 -->
+                                <rect x="125" y="20" width="100" height="100" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"/>
+                                <text x="175" y="75" font-size="30" fill="#2E7D32" text-anchor="middle" font-weight="bold">1</text>
+                                
+                                <rect x="20" y="125" width="100" height="100" fill="#C5CAE9" stroke="#6B4F9C" stroke-width="2"/>
+                                <text x="70" y="180" font-size="30" fill="#6B4F9C" text-anchor="middle" font-weight="bold">2</text>
+                                
+                                <rect x="125" y="125" width="100" height="100" fill="#FFCDD2" stroke="#9E2A2B" stroke-width="2"/>
+                                <text x="175" y="180" font-size="30" fill="#9E2A2B" text-anchor="middle" font-weight="bold">3</text>
+                                
+                                <rect x="230" y="125" width="100" height="100" fill="#FFF9C4" stroke="#F57F17" stroke-width="2"/>
+                                <text x="280" y="180" font-size="30" fill="#F57F17" text-anchor="middle" font-weight="bold">4</text>
+                                
+                                <rect x="125" y="230" width="100" height="100" fill="#B3E5FC" stroke="#0277BD" stroke-width="2"/>
+                                <text x="175" y="285" font-size="30" fill="#0277BD" text-anchor="middle" font-weight="bold">6</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <button class="answer-btn" onclick="toggleAnswer('answer11')">💡 查看解析</button>
+                    <div class="answer" id="answer11">
+                        <p><strong>答案：</strong>1对6，2对4，3对5</p>
+                        <p><strong>规律：</strong>正方体展开图中，"隔一个是对面"</p>
+                        <p>1和6中间隔了3，2和4中间隔了3，剩下的3和5相对</p>
+                        <span class="tag">空间力</span>
+                        <span class="tag">规律发现</span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-title">🎯 题3：多维度等量代换<span class="stars">☆☆☆☆</span></div>
+                    <div class="question-content">
+                        <p>已知：</p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>① □ + △ + ○ = 22</li>
+                            <li>② □ + □ = △ + △ + △</li>
+                            <li>③ ○ + ○ = □ + □ + □ + □</li>
+                        </ul>
+                        <p style="margin-top: 10px;">求：□=？ △=？ ○=？</p>
+                    </div>
+                    <button class="answer-btn" onclick="toggleAnswer('answer12')">💡 查看解析</button>
+                    <div class="answer" id="answer12">
+                        <p><strong>答案：</strong>□=6，△=4，○=12</p>
+                        <p><strong>详细解析：</strong></p>
+                        <p><strong>第一步：</strong>由条件②得：2□ = 3△ → △ = 2/3□</p>
+                        <p><strong>第二步：</strong>由条件③得：2○ = 4□ → ○ = 2□</p>
+                        <p><strong>第三步：</strong>将△和○用□表示，代入条件①：</p>
+                        <p>□ + 2/3□ + 2□ = 22</p>
+                        <p>(1 + 2/3 + 2)□ = 22</p>
+                        <p>11/3□ = 22</p>
+                        <p>□ = 22 × 3/11 = 6</p>
+                        <p><strong>第四步：</strong>求出其他值：</p>
+                        <p>△ = 2/3 × 6 = 4</p>
+                        <p>○ = 2 × 6 = 12</p>
+                        <p><strong>验证：</strong>6 + 4 + 12 = 22 ✓ | 6+6=12=4+4+4 ✓ | 12+12=24=6+6+6+6 ✓</p>
+                        <span class="tag">代换思维</span>
+                        <span class="tag">方程思想</span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-title">🎯 题4：开放设计题<span class="stars">☆☆☆☆☆</span></div>
+                    <div class="question-content">
+                        <p>设计一个"反数独"：每行、每列、每个宫格都必须有重复数字，但重复的数字不能超过2个，且整个数独只有1个重复数字类型（如只有数字3重复）。</p>
+                        <p style="margin-top: 10px;">要求：四宫格/六宫格均可，写出设计思路和验证过程。</p>
+                    </div>
+                    <button class="answer-btn" onclick="toggleAnswer('answer13')">💡 查看提示</button>
+                    <div class="answer" id="answer13">
+                        <p><strong>评价维度：</strong></p>
+                        <p>✅ 符合规则（基础）</p>
+                        <p>✅✅ 重复位置需要推理发现（进阶）</p>
+                        <p>✅✅✅ 能解释"反数独"与普通数独的逻辑差异（高阶）</p>
+                        <p style="margin-top: 10px;"><strong>提示：</strong>反数独是"找重复"而不是"避重复"，思维方向完全相反！</p>
+                        <span class="tag">创新思维</span>
+                        <span class="tag">逆向思维</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🏅 数字小达人星级评价</h2>
+                <div class="knowledge-map">
+                    <div class="knowledge-item">
+                        <strong>⭐ 1星：</strong>完成基础练习，参与课堂游戏 → 奖励100星币
+                    </div>
+                    <div class="knowledge-item">
+                        <strong>⭐⭐ 2星：</strong>完成提高练习，能讲解1道题的思路 → 奖励200星币
+                    </div>
+                    <div class="knowledge-item">
+                        <strong>⭐⭐⭐ 3星：</strong>完成挑战练习，尝试思考题 → 奖励300星币
+                    </div>
+                    <div class="knowledge-item">
+                        <strong>⭐⭐⭐⭐ 4星：</strong>独立完成1道思考题，思路清晰 → 奖励400星币
+                    </div>
+                    <div class="knowledge-item">
+                        <strong>⭐⭐⭐⭐⭐ 5星：</strong>创新解题方法/设计数独题目 → 奖励500星币
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 教具清单 -->
+        <div class="section" id="teaching">
+            <div class="card">
+                <h2>🎨 教具清单</h2>
+                
+                <h3>🥇 必备教具</h3>
+                <table style="width: 100%; border-collapse: collapse; margin: 15px 0;">
+                    <tr style="background: #6B4F9C; color: white;">
+                        <th style="padding: 12px; text-align: left;">教具名称</th>
+                        <th style="padding: 12px; text-align: left;">规格/数量</th>
+                        <th style="padding: 12px; text-align: left;">用途说明</th>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #E0E0E0;">
+                        <td style="padding: 12px;">数字卡片（0-9）</td>
+                        <td style="padding: 12px;">6套</td>
+                        <td style="padding: 12px;">数字接龙、排序游戏</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #E0E0E0;">
+                        <td style="padding: 12px;">图形卡片（△□○等）</td>
+                        <td style="padding: 12px;">6套</td>
+                        <td style="padding: 12px;">找规律、图形计数</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #E0E0E0;">
+                        <td style="padding: 12px;">数独练习卡</td>
+                        <td style="padding: 12px;">6套</td>
+                        <td style="padding: 12px;">四宫格/六宫格数独</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #E0E0E0;">
+                        <td style="padding: 12px;">正方体展开图卡片</td>
+                        <td style="padding: 12px;">6套</td>
+                        <td style="padding: 12px;">空间力思考题实操</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px;">小白板+马克笔</td>
+                        <td style="padding: 12px;">6套</td>
+                        <td style="padding: 12px;">数学小讲师环节</td>
+                    </tr>
+                </table>
+
+                <h3>🥈 推荐教具</h3>
+                <div class="knowledge-map">
+                    <div class="knowledge-item">
+                        <strong>数字规律海报：</strong>1张（¥20），展示斐波那契/等差规律
+                    </div>
+                    <div class="knowledge-item">
+                        <strong>错题记录本：</strong>6本（¥5/本），记录思考题错误与复盘思路
+                    </div>
+                    <div class="knowledge-item">
+                        <strong>数学绘本：</strong>《兔子的12个麻烦》（斐波那契数列）、《积木里的数学》
+                    </div>
+                </div>
+
+                <h3>🥉 拓展素材</h3>
+                <div class="knowledge-map">
+                    <div class="knowledge-item">
+                        <strong>线上资源：</strong>数独闯关小程序（课堂休息时碎片化练习）
+                    </div>
+                    <div class="knowledge-item">
+                        <strong>亲子任务卡：</strong>"家庭数字寻宝"（找家里的斐波那契数、等量代换场景）
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 家长协同方案 -->
+        <div class="section" id="parent">
+            <div class="card">
+                <h2>👨‍👩‍👧 家长协同方案</h2>
+
+                <h3>📚 课后三层作业</h3>
+                
+                <div class="question">
+                    <div class="question-title">必做（10分钟）</div>
+                    <div class="question-content">
+                        <ul style="margin-left: 20px;">
+                            <li>完成基础练习题3-5道</li>
+                            <li>和家长玩1轮"数字炸弹"游戏</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-title">选做（15分钟）</div>
+                    <div class="question-content">
+                        <p><strong>亲子游戏：家庭数字寻宝</strong></p>
+                        <p>在家里找一找：哪些东西的数量是斐波那契数（3、5、8、13）？</p>
+                        <p>例如：3个苹果、5个杯子、8块积木...</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-title">挑战（开放式）</div>
+                    <div class="question-content">
+                        <p><strong>生活数学应用：</strong>设计一道"等量代换"题目，用家里的物品（如水果、玩具）出题给家长做</p>
+                    </div>
+                </div>
+
+                <h3>💬 家长话术卡</h3>
+                
+                <div class="knowledge-map">
+                    <h4>遇到困难时（建议说）</h4>
+                    <div class="knowledge-item">没关系，我们先观察一下规律，慢慢找～</div>
+                    <div class="knowledge-item">你已经发现了一些线索，再仔细看看还有什么规律～</div>
+                    <div class="knowledge-item">这道题确实有难度，我们先把会的部分做出来～</div>
+                    <div class="knowledge-item" style="border-left-color: #9E2A2B; background: #FFEBEE;">
+                        <strong>🚫 禁止说：</strong>这么简单都不会！/ 我直接告诉你答案！
+                    </div>
+                </div>
+
+                <div class="knowledge-map">
+                    <h4>完成练习时（建议说）</h4>
+                    <div class="knowledge-item">你找规律找得真快，观察力真棒！</div>
+                    <div class="knowledge-item">这道题你能讲给我听听吗？我想学习你的思路～</div>
+                    <div class="knowledge-item">你今天独立完成了这么多题目，进步很大！</div>
+                    <div class="knowledge-item" style="border-left-color: #9E2A2B; background: #FFEBEE;">
+                        <strong>🚫 禁止说：</strong>这有什么好骄傲的！/ 还有比你厉害的！
+                    </div>
+                </div>
+
+                <h3>🏠 生活数学延伸</h3>
+                
+                <div class="game-area">
+                    <h4>购物场景</h4>
+                    <ul style="margin-left: 20px; line-height: 2;">
+                        <li>超市购物时，让孩子计算总价（加法练习）</li>
+                        <li>找零钱时，练习凑整法（如10元-3元5角）</li>
+                        <li>比较价格，哪个更便宜（比较大小）</li>
+                    </ul>
+                </div>
+
+                <div class="game-area">
+                    <h4>游戏场景</h4>
+                    <ul style="margin-left: 20px; line-height: 2;">
+                        <li>玩积木时，数各种形状的数量（图形计数）</li>
+                        <li>扑克牌游戏，比大小、排序</li>
+                        <li>跳房子游戏，练习数字顺序</li>
+                    </ul>
+                </div>
+
+                <h3>✅ 家长自检清单（6项）</h3>
+                <div class="knowledge-map">
+                    <div class="knowledge-item">☐ 陪孩子玩了"数字炸弹"或"数字接龙"游戏</div>
+                    <div class="knowledge-item">☐ 和孩子一起找了生活中的斐波那契数</div>
+                    <div class="knowledge-item">☐ 让孩子当"小老师"讲解了一道题</div>
+                    <div class="knowledge-item">☐ 孩子遇到困难时，用了鼓励性话术</div>
+                    <div class="knowledge-item">☐ 检查了孩子的练习题，错题已订正</div>
+                    <div class="knowledge-item">☐ 表扬了孩子的努力和进步</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 时钟功能
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('zh-CN', { hour12: false });
+            document.getElementById('clock').textContent = timeString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // 导航切换
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            document.getElementById(sectionId).classList.add('active');
+            
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // 答案切换
+        function toggleAnswer(answerId) {
+            const answer = document.getElementById(answerId);
+            if (answer.classList.contains('show')) {
+                answer.classList.remove('show');
+            } else {
+                answer.classList.add('show');
+            }
+        }
+
+        // 数字炸弹游戏
+        let currentNumber = 30;
+        
+        function startNumberBomb() {
+            document.getElementById('bombGame').style.display = 'block';
+            currentNumber = 30;
+            updateBombDisplay();
+        }
+        
+        function nextBombNumber() {
+            if (currentNumber > 1) {
+                currentNumber--;
+                updateBombDisplay();
+            }
+        }
+        
+        function resetBomb() {
+            currentNumber = 30;
+            updateBombDisplay();
+        }
+        
+        function updateBombDisplay() {
+            const display = document.getElementById('bombNumber');
+            const isMultipleOf5 = currentNumber % 5 === 0;
+            const contains5 = currentNumber.toString().includes('5');
+            
+            if (isMultipleOf5 || contains5) {
+                display.innerHTML = `${currentNumber}<br><span style="font-size: 1rem; color: #9E2A2B;">拍桌子！${isMultipleOf5 ? '5的倍数！' : '含5数字！'}</span>`;
+                display.style.color = '#9E2A2B';
+            } else {
+                display.textContent = currentNumber;
+                display.style.color = '#6B4F9C';
+            }
+        }
+    </script>
+</body>
+</html>

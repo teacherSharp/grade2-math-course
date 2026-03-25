@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第1课：数字的奥秘 - 二年级思维训练</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .card h2 {
+            color: #667eea;
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card h3 {
+            color: #764ba2;
+            font-size: 1.3em;
+            margin: 25px 0 15px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .info-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .info-item strong {
+            display: block;
+            color: #667eea;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #667eea, #764ba2);
+            border-radius: 3px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -26px;
+            top: 25px;
+            width: 15px;
+            height: 15px;
+            background: #667eea;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .time-badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .activity-title {
+            font-size: 1.2em;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .content-box {
+            background: #e3f2fd;
+            border-left: 5px solid #2196F3;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .example-box {
+            background: #fff3e0;
+            border-left: 5px solid #FF9800;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .tip-box {
+            background: #e8f5e9;
+            border-left: 5px solid #4CAF50;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .tip-box::before {
+            content: "💡 ";
+            font-size: 1.2em;
+        }
+        
+        .sudoku-grid {
+            display: inline-grid;
+            grid-template-columns: repeat(4, 50px);
+            gap: 2px;
+            background: #333;
+            padding: 2px;
+            margin: 10px 0;
+        }
+        
+        .sudoku-cell {
+            width: 50px;
+            height: 50px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        
+        .sudoku-cell.filled {
+            background: #e3f2fd;
+        }
+        
+        .sudoku-cell.empty {
+            background: white;
+        }
+        
+        .number-pattern {
+            font-family: 'Courier New', monospace;
+            font-size: 1.3em;
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            text-align: center;
+        }
+        
+        .homework-list {
+            list-style: none;
+            counter-reset: homework;
+        }
+        
+        .homework-list li {
+            counter-increment: homework;
+            position: relative;
+            padding-left: 40px;
+            margin: 15px 0;
+            padding: 15px 15px 15px 50px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .homework-list li::before {
+            content: counter(homework);
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 28px;
+            height: 28px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            .card {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <div class="header">
+            <h1>🔢 第1课：数字的奥秘</h1>
+            <p class="subtitle">二年级思维训练 · 奥数预备课程</p>
+        </div>
+
+        <!-- 课程信息 -->
+        <div class="card">
+            <h2>📋 课程信息</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <strong>适用年级</strong>
+                    二年级
+                </div>
+                <div class="info-item">
+                    <strong>班级规模</strong>
+                    6人小班
+                </div>
+                <div class="info-item">
+                    <strong>课时长度</strong>
+                    60分钟
+                </div>
+                <div class="info-item">
+                    <strong>课程类型</strong>
+                    思维训练
+                </div>
+            </div>
+        </div>
+
+        <!-- 教学目标 -->
+        <div class="card">
+            <h2>🎯 教学目标</h2>
+            <div class="content-box">
+                <h3>知识目标</h3>
+                <ul style="margin-left: 20px; line-height: 2;">
+                    <li>认识数独游戏，了解基本规则</li>
+                    <li>发现数字排列的规律</li>
+                    <li>学会用排除法解决问题</li>
+                </ul>
+            </div>
+            <div class="content-box">
+                <h3>能力目标</h3>
+                <ul style="margin-left: 20px; line-height: 2;">
+                    <li>培养观察力和专注力</li>
+                    <li>训练逻辑推理能力</li>
+                    <li>建立有序思考的习惯</li>
+                </ul>
+            </div>
+            <div class="content-box">
+                <h3>情感目标</h3>
+                <ul style="margin-left: 20px; line-height: 2;">
+                    <li>感受数学的趣味性</li>
+                    <li>建立学习数学的信心</li>
+                    <li>养成独立思考的习惯</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 教学重难点 -->
+        <div class="card">
+            <h2>⚡ 教学重难点</h2>
+            <div class="example-box">
+                <strong>重点：</strong>数独规则的掌握和排除法的应用
+            </div>
+            <div class="example-box">
+                <strong>难点：</strong>从多个角度观察数字规律
+            </div>
+            <div class="tip-box">
+                <strong>突破策略：</strong>从简单到复杂，先用实物操作，再用纸笔练习
+            </div>
+        </div>
+
+        <!-- 教学流程 -->
+        <div class="card">
+            <h2>📚 教学流程</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="time-badge">0-5分钟</span>
+                    <div class="activity-title">🎮 热身游戏：数字炸弹</div>
+                    <div class="content-box">
+                        <strong>规则：</strong>从1开始轮流报数，遇到3的倍数或含3的数字要拍手跳过
+                        <br><strong>目的：</strong>活跃气氛，集中注意力
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="time-badge">5-15分钟</span>
+                    <div class="activity-title">🔍 情境导入：数字王国</div>
+                    <div class="content-box">
+                        <strong>故事：</strong>数字王国的居民要排队，但每行每列都不能重复，怎么办？
+                        <br><strong>展示：</strong>出示4×4数独，引发思考
+                    </div>
+                    <div class="example-box">
+                        <strong>示例数独：</strong>
+                        <div class="sudoku-grid">
+                            <div class="sudoku-cell filled">1</div>
+                            <div class="sudoku-cell empty"></div>
+                            <div class="sudoku-cell empty"></div>
+                            <div class="sudoku-cell filled">4</div>
+                            <div class="sudoku-cell empty"></div>
+                            <div class="sudoku-cell filled">3</div>
+                            <div class="sudoku-cell filled">4</div>
+                            <div class="sudoku-cell empty"></div>
+                            <div class="sudoku-cell empty"></div>
+                            <div class="sudoku-cell filled">4</div>
+                            <div class="sudoku-cell filled">1</div>
+                            <div class="sudoku-cell empty"></div>
+                            <div class="sudoku-cell filled">3</div>
+                            <div class="sudoku-cell empty"></div>
+                            <div class="sudoku-cell empty"></div>
+                            <div class="sudoku-cell filled">2</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="time-badge">15-30分钟</span>
+                    <div class="activity-title">📖 新知探究：认识数独</div>
+                    <div class="content-box">
+                        <h3>数独规则（4×4）</h3>
+                        <ol style="margin-left: 20px; line-height: 2;">
+                            <li>每行都要有1、2、3、4</li>
+                            <li>每列都要有1、2、3、4</li>
+                            <li>每个2×2小格都要有1、2、3、4</li>
+                            <li>不能重复！</li>
+                        </ol>
+                    </div>
+                    <div class="tip-box">
+                        <strong>解题方法：排除法</strong>
+                        <br>看某一行/列/宫格，缺什么数字就填什么
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="time-badge">30-45分钟</span>
+                    <div class="activity-title">✏️ 练习巩固</div>
+                    <div class="content-box">
+                        <h3>练习1：教师示范</h3>
+                        <p>带领学生完成示例数独，边做边讲解思路</p>
+                    </div>
+                    <div class="content-box">
+                        <h3>练习2：小组合作</h3>
+                        <p>2人一组，共同完成一道数独</p>
+                    </div>
+                    <div class="content-box">
+                        <h3>练习3：个人挑战</h3>
+                        <p>独立完成一道数独，计时比赛</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="time-badge">45-55分钟</span>
+                    <div class="activity-title">🌟 拓展提升：数字规律</div>
+                    <div class="example-box">
+                        <strong>找规律填数：</strong>
+                        <div class="number-pattern">
+                            2, 4, 6, 8, __, __<br>
+                            1, 3, 5, 7, __, __<br>
+                            1, 2, 4, 7, 11, __, __
+                        </div>
+                    </div>
+                    <div class="tip-box">
+                        引导学生观察：是+2规律？还是+1、+2、+3...？
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="time-badge">55-60分钟</span>
+                    <div class="activity-title">📝 总结与作业</div>
+                    <div class="content-box">
+                        <h3>课堂小结</h3>
+                        <ul style="margin-left: 20px; line-height: 2;">
+                            <li>数独规则：行、列、宫格不重复</li>
+                            <li>解题方法：排除法</li>
+                            <li>找规律：观察变化，发现模式</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 课后作业 -->
+        <div class="card">
+            <h2>📝 课后作业</h2>
+            <ol class="homework-list">
+                <li>
+                    <strong>数独练习：</strong>完成练习册第1页（2道4×4数独）
+                    <br><span style="color: #666; font-size: 0.9em;">建议用时：10-15分钟</span>
+                </li>
+                <li>
+                    <strong>找规律：</strong>观察家里的门牌号、车牌号，看看有没有规律
+                    <br><span style="color: #666; font-size: 0.9em;">和家长分享你的发现</span>
+                </li>
+                <li>
+                    <strong>亲子游戏：</strong>和家长一起玩数字炸弹游戏
+                    <br><span style="color: #666; font-size: 0.9em;">可以换成4的倍数或含4的数字</span>
+                </li>
+            </ol>
+        </div>
+
+        <!-- 板书设计 -->
+        <div class="card">
+            <h2>📋 板书设计</h2>
+            <div class="content-box">
+                <pre style="font-family: 'Courier New', monospace; line-height: 1.6;">
+┌─────────────────────────────────┐
+│      第1课：数字的奥秘          │
+├─────────────────────────────────┤
+│                                 │
+│  数独规则：                     │
+│  1. 每行：1、2、3、4            │
+│  2. 每列：1、2、3、4            │
+│  3. 每宫：1、2、3、4            │
+│  4. 不重复！                    │
+│                                 │
+│  方法：排除法                   │
+│  → 缺什么填什么                 │
+│                                 │
+│  找规律：                       │
+│  2、4、6、8...（+2）            │
+│  1、3、5、7...（+2）            │
+│                                 │
+└─────────────────────────────────┘
+                </pre>
+            </div>
+        </div>
+
+        <!-- 教学反思 -->
+        <div class="card">
+            <h2>💭 教学反思（课后填写）</h2>
+            <div class="content-box">
+                <h3>学生表现</h3>
+                <p>□ 积极参与 &nbsp;&nbsp; □ 基本参与 &nbsp;&nbsp; □ 需要鼓励</p>
+                <p>□ 理解良好 &nbsp;&nbsp; □ 基本理解 &nbsp;&nbsp; □ 需要复习</p>
+            </div>
+            <div class="content-box">
+                <h3>教学效果</h3>
+                <p>成功之处：______________________________</p>
+                <p>改进之处：______________________________</p>
+            </div>
+            <div class="content-box">
+                <h3>个别学生情况</h3>
+                <p>需关注：______________________________</p>
+                <p>表扬：______________________________</p>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <div class="footer">
+            <p>二年级思维训练课程 · 第1课教案</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">文件位置：/root/.openclaw/workspace/teaching/教案/二年级思维训练/第01课_数字的奥秘_教案.html</p>
+        </div>
+    </div>
+</body>
+</html>
