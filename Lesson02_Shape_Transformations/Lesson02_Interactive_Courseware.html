@@ -707,8 +707,19 @@
             <h2 class="slide-title">🔢 图形计数入门</h2>
             <div class="content-card">
                 <h3>数一数，下面有多少个长方形？</h3>
-                <div style="font-size: 120px; text-align: center; margin: 30px 0;">
-                    ▭▭
+                <div style="text-align: center; margin: 30px 0;">
+                    <svg width="300" height="150" viewBox="0 0 300 150">
+                        <!-- 左边长方形 -->
+                        <rect x="50" y="25" width="100" height="100" fill="#E6E6FA" stroke="#333" stroke-width="3"/>
+                        <!-- 右边长方形（共边） -->
+                        <rect x="150" y="25" width="100" height="100" fill="#FFE4E1" stroke="#333" stroke-width="3"/>
+                        <!-- 共边标注 -->
+                        <line x1="150" y1="25" x2="150" y2="125" stroke="#FF0000" stroke-width="2" stroke-dasharray="5,3"/>
+                        <!-- 标注文字 -->
+                        <text x="100" y="145" text-anchor="middle" font-size="14" fill="#666">长方形①</text>
+                        <text x="200" y="145" text-anchor="middle" font-size="14" fill="#666">长方形②</text>
+                        <text x="150" y="15" text-anchor="middle" font-size="12" fill="#FF0000">共边</text>
+                    </svg>
                 </div>
                 <div class="answer-section">
                     <div style="text-align: center;">
@@ -721,9 +732,9 @@
             <div class="content-card" style="background: #fff8e1;">
                 <h3>💡 计数小技巧</h3>
                 <p style="font-size: 18px;">
-                    1️⃣ 先数单个的图形<br>
-                    2️⃣ 再数由多个小图形组成的大图形<br>
-                    3️⃣ 最后加起来，不要漏数！
+                    1️⃣ 先数单个的图形（2个）<br>
+                    2️⃣ 再数由多个小图形组成的大图形（1个大的）<br>
+                    3️⃣ 最后加起来：2 + 1 = 3，不要漏数！
                 </p>
             </div>
         </div>
