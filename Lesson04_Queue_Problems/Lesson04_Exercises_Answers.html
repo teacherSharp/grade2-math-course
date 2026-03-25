@@ -202,6 +202,50 @@
             font-weight: bold;
         }
         
+        /* 思维点拨框 */
+        .tips-box {
+            background: #fff3e0;
+            border-left: 5px solid #FF9800;
+            border-radius: 0 10px 10px 0;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .tips-title {
+            color: #E65100;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .tips-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+        }
+        
+        /* 拓展问题框 */
+        .extension-box {
+            background: #f3e5f5;
+            border-left: 5px solid #9C27B0;
+            border-radius: 0 10px 10px 0;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .extension-title {
+            color: #7B1FA2;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .extension-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+        }
+        
         .footer {
             background: #f5f5f5;
             padding: 30px;
@@ -250,6 +294,19 @@
                         </div>
                     </div>
                 </div>
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div class="tips-content">
+                        教孩子区分"第几个"和"有几个"："第4个"包含自己，"前面有4人"不包含自己。可以用手指演示：伸出4根手指，最右边那根代表小明，左边3根就是前面的人。
+                    </div>
+                </div>
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div class="extension-content">
+                        如果小明排第4，他后面有5人，这一队一共有多少人？<br>
+                        <strong>答案：</strong>4 + 5 = 9人（小明排第4说明包括小明在内前面有4人，后面5人不包括小明）
+                    </div>
+                </div>
             </div>
 
             <!-- 第2题 -->
@@ -290,6 +347,19 @@
                         </div>
                     </div>
                 </div>
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div class="tips-content">
+                        这是排队问题的"三明治结构"：前面的人 + 自己 + 后面的人 = 总人数。教孩子画出示意图：○○○○○○●○○○（●代表小红），一目了然。
+                    </div>
+                </div>
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div class="extension-content">
+                        小红从前往后数排第7，从后往前数排第4，这一队一共有多少人？<br>
+                        <strong>答案：</strong>7 + 4 - 1 = 10人（小红被重复计算了一次，要减去1）
+                    </div>
+                </div>
             </div>
 
             <!-- 第3题 -->
@@ -326,6 +396,19 @@
                             </div>
                             <p style="color: #666; margin-top: 10px;">👆 小华从前数是第5，从后数是第3（7-5+1=3）</p>
                         </div>
+                    </div>
+                </div>
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div class="tips-content">
+                        这是排队问题的经典题型！关键理解：小华被从前数和从后数各算了一次，所以重复计算了1次，必须减去。可以用"握手原理"来理解：两个人握手，只算一次，不能算两次。
+                    </div>
+                </div>
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div class="extension-content">
+                        如果小华从前往后数排第5，这一队一共有8人，那么小华从后往前数排第几？<br>
+                        <strong>答案：</strong>8 - 5 + 1 = 4，从后往前数排第4
                     </div>
                 </div>
             </div>
@@ -368,6 +451,19 @@
                         </div>
                     </div>
                 </div>
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div class="tips-content">
+                        "之间"是排队问题最容易出错的地方！关键理解：之间不包括两端的两个人。教孩子画图时，把两端的两个人用不同颜色标记，中间的人就是"之间"的人数。记住口诀："之间人数要减一，两端不算要牢记"。
+                    </div>
+                </div>
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div class="extension-content">
+                        小明排第3，小红排第8，从明到小红一共有多少人？<br>
+                        <strong>答案：</strong>8 - 3 + 1 = 6人（"从...到..."包含两端，与"之间"不同！）
+                    </div>
+                </div>
             </div>
 
             <!-- 第5题 -->
@@ -405,6 +501,19 @@
                             </div>
                             <p style="color: #666; margin-top: 10px;">👆 包含小李和小王，共8人</p>
                         </div>
+                    </div>
+                </div>
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div class="tips-content">
+                        "从A到B"和"之间"是易混淆的两个概念！关键区别："从A到B"包含A和B两个人，"之间"不包含。教孩子用数手指的方法：从第4根手指数到第11根，一共要数8根（4、5、6、7、8、9、10、11）。
+                    </div>
+                </div>
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div class="extension-content">
+                        小李排第4，小王排第11，他们中间有几人？<br>
+                        <strong>答案：</strong>11 - 4 - 1 = 6人（注意区分"之间"和"从...到..."！）
                     </div>
                 </div>
             </div>
@@ -445,6 +554,19 @@
                         </ul>
                     </div>
                 </div>
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div class="tips-content">
+                        复杂排队问题的解题策略：分段画图法。把队伍分成几个部分：左边部分 + 小明 + 中间部分 + 小红 + 右边部分。每部分分别计算，最后相加。关键是找准每个部分与已知条件的关系。
+                    </div>
+                </div>
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div class="extension-content">
+                        如果小明从左边数排第7，小红从右边数排第5，他们之间有4人，但小红在小明的左边，这一排有多少人？<br>
+                        <strong>答案：</strong>4 + 1 + 4 + 1 + 6 = 16人（注意小明和小红位置互换，但总数相同，这是巧合吗？）
+                    </div>
+                </div>
             </div>
 
             <!-- 第7题 -->
@@ -473,6 +595,19 @@
                         <p>每行人数 = 从左数 + 从右数 - 1 = 3 + 6 - 1 = 8人</p>
                         <p><strong>第三步：计算总人数</strong></p>
                         <p>总人数 = 每列人数 × 每行人数 = 8 × 8 = 64人</p>
+                    </div>
+                </div>
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div class="tips-content">
+                        长方形队伍问题是排队问题的二维扩展。关键理解：前后方向决定每列人数，左右方向决定每行人数。总人数的求法与长方形面积公式类似：总人数 = 每列人数 × 每行人数。可以画一个表格帮助学生理解。
+                    </div>
+                </div>
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div class="extension-content">
+                        如果小明从前面数排第4，从后面数排第5，从左边数排第3，从右边数排第6，小明所在的这一列和这一行各有多少人？<br>
+                        <strong>答案：</strong>每列8人，每行8人。这一列有8人，这一行也有8人。
                     </div>
                 </div>
             </div>
@@ -504,6 +639,19 @@
                         <p><strong>第三步：计算之间人数</strong></p>
                         <p>之间人数 = 13 - 12 - 1 = 0人</p>
                         <p>所以小红和小明是相邻的，中间没有人！</p>
+                    </div>
+                </div>
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div class="tips-content">
+                        这道题容易让学生陷入惯性思维！很多人会自动套用"之间人数 = 后位置 - 前位置 - 1"，得出13-12-1=0，然后怀疑自己算错了。其实答案就是0，表示两人相邻。要告诉学生：数学答案可以是0，0也是一个合理的答案！
+                    </div>
+                </div>
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div class="extension-content">
+                        20个小朋友排成一队，小红排第12，小明排第15，他们中间有几人？<br>
+                        <strong>答案：</strong>15 - 12 - 1 = 2人（第13、14位）
                     </div>
                 </div>
             </div>
@@ -538,6 +686,19 @@
                         <p>之间人数 = 15 - 8 - 1 = 6人</p>
                     </div>
                 </div>
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div class="tips-content">
+                        这道题数据设计有"陷阱"——根据小明计算总人数是13人，根据小红计算是17人，两者不一致。这是题目设计的问题，但我们可以教孩子：当数据不一致时，可以选择相信其中一组数据继续解题，或者指出题目有误。这培养了学生的批判性思维。
+                    </div>
+                </div>
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div class="extension-content">
+                        如果小明从前往后报数报"8"，从后往前报数报"10"，这一队一共有多少人？小红从前往后报数报"15"，从后往前报数报"3"，数据是否一致？<br>
+                        <strong>答案：</strong>根据小明：8+10-1=17人；根据小红：15+3-1=17人。数据一致，这一队有17人。
+                    </div>
+                </div>
             </div>
 
             <!-- 第10题 -->
@@ -566,6 +727,19 @@
                         <p>向后移动3个位置后，从前往后数排第：9 + 3 = 12</p>
                         <p><strong>第三步：计算从后往前的位置</strong></p>
                         <p>从后往前数排第：18 - 12 + 1 = 7</p>
+                    </div>
+                </div>
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div class="tips-content">
+                        位置移动问题的解题关键：先确定原来的位置，再计算移动后的新位置，最后根据新位置计算其他信息。可以教孩子用"坐标"的思想：每个人在队伍中都有一个"坐标"（位置），移动就是改变坐标。向后移动3个位置，坐标+3。
+                    </div>
+                </div>
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div class="extension-content">
+                        18个小朋友排成一队，小明从前往后数排第9。如果小明向前移动3个位置，他从后往前数排第几？<br>
+                        <strong>答案：</strong>向前移动3个位置后，小明排第9-3=6。从后往前数排第18-6+1=13。
                     </div>
                 </div>
             </div>
@@ -599,6 +773,19 @@
                             <li>总人数 = 8 + 6 - 1 = 13人</li>
                         </ul>
                         <p><strong>与直线排队的区别：</strong>直线排队有明确的起点和终点，圆圈排队首尾相连。</p>
+                    </div>
+                </div>
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div class="tips-content">
+                        圆圈排队是排队问题的变式，也是小学奥数的常见题型。关键理解：圆圈没有起点和终点，是一个闭合的环形。顺时针数和逆时针数会相遇在小明处。可以让孩子用玩具围成一个圈实际演示，帮助理解。
+                    </div>
+                </div>
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div class="extension-content">
+                        小朋友们围成一个圆圈做游戏。从A开始顺时针数，数到小明是第5；从A开始逆时针数，数到小明是第3。如果小红在小明顺时针方向的第2个位置，从A顺时针数到小红是第几？<br>
+                        <strong>答案：</strong>总人数=5+3-1=7人。小红在小明顺时针第2个位置，所以从小明（第5）再数2个是第7（或第7-7=0，即第7个）。
                     </div>
                 </div>
             </div>
