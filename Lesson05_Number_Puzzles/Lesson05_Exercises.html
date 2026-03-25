@@ -97,7 +97,7 @@
         
         /* 竖式样式 */
         .vertical-math {
-            font-family: 'Courier New', monospace;
+            font-family: 'Courier New', 'Consolas', monospace;
             font-size: 28px;
             line-height: 1.8;
             text-align: center;
@@ -105,12 +105,14 @@
             padding: 20px;
             background: white;
             border-radius: 10px;
+            white-space: pre;
         }
         
         .vertical-math .line {
             border-bottom: 3px solid #333;
             display: inline-block;
-            padding: 0 15px;
+            min-width: 100px;
+            padding: 0 20px;
         }
         
         /* 横式样式 */
