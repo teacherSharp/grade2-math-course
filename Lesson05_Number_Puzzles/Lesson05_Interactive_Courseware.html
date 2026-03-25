@@ -145,21 +145,33 @@
             background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
         }
         
-        /* 竖式样式 */
+        /* 竖式样式 - 使用表格确保右对齐 */
         .vertical-math {
             font-family: 'Courier New', 'Consolas', monospace;
             font-size: 32px;
-            line-height: 1.8;
-            text-align: center;
-            margin: 20px 0;
-            white-space: pre;
+            line-height: 1.6;
+            margin: 20px auto;
+            display: inline-block;
         }
         
-        .vertical-math .line {
+        .vertical-math table {
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+        
+        .vertical-math td {
+            text-align: right;
+            padding: 2px 8px;
+            min-width: 35px;
+        }
+        
+        .vertical-math .operator {
+            text-align: left;
+        }
+        
+        .vertical-math .line td {
             border-bottom: 3px solid #333;
-            display: inline-block;
-            min-width: 100px;
-            padding: 0 20px;
+            padding-bottom: 5px;
         }
         
         /* 导航控制 */
@@ -416,10 +428,12 @@
 <div class="interactive-area">
 <h3 style="color: #660099; margin-bottom: 20px;">🌰 举个例子</h3>
 <div class="vertical-math">
-                    3☐<br/>
-                    + 25<br/>
-                    <span class="line">----</span><br/>
-                    58
+                    <table>
+                        <tr><td></td><td>3</td><td>☐</td></tr>
+                        <tr><td class="operator">+</td><td>2</td><td>5</td></tr>
+                        <tr class="line"><td></td><td></td><td></td></tr>
+                        <tr><td></td><td>5</td><td>8</td></tr>
+                    </table>
                 </div>
 <p style="margin-top: 20px; font-size: 18px;">
                     ☐ 代表什么数字呢？<br/>
@@ -448,10 +462,12 @@
 <div class="game-area">
 <h3 style="color: #2E7D32; margin-bottom: 20px;">🎮 互动练习</h3>
 <div class="vertical-math">
-                    4☐<br/>
-                    + 37<br/>
-                    <span class="line">----</span><br/>
-                    76
+                    <table>
+                        <tr><td></td><td>4</td><td>☐</td></tr>
+                        <tr><td class="operator">+</td><td>3</td><td>7</td></tr>
+                        <tr class="line"><td></td><td></td><td></td></tr>
+                        <tr><td></td><td>7</td><td>6</td></tr>
+                    </table>
                 </div>
 <p style="margin: 20px 0;">个位上：☐ + 7 = 6 ？</p>
 <p style="color: #FF9800; font-weight: bold;">等等！☐ + 7 怎么会等于6呢？</p>

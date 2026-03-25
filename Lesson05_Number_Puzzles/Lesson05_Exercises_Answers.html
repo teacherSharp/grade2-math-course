@@ -168,24 +168,36 @@
             margin-bottom: 8px;
         }
         
-        /* 竖式样式 */
+        /* 竖式样式 - 使用表格确保右对齐 */
         .vertical-math {
             font-family: 'Courier New', 'Consolas', monospace;
             font-size: 24px;
-            line-height: 1.8;
-            text-align: center;
-            margin: 15px 0;
+            line-height: 1.6;
+            margin: 15px auto;
             padding: 15px;
             background: white;
             border-radius: 8px;
-            white-space: pre;
+            display: inline-block;
         }
         
-        .vertical-math .line {
+        .vertical-math table {
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+        
+        .vertical-math td {
+            text-align: right;
+            padding: 2px 5px;
+            min-width: 30px;
+        }
+        
+        .vertical-math .operator {
+            text-align: left;
+        }
+        
+        .vertical-math .line td {
             border-bottom: 3px solid #333;
-            display: inline-block;
-            min-width: 100px;
-            padding: 0 20px;
+            padding-bottom: 5px;
         }
         
         /* 思维点拨框 */
@@ -267,10 +279,12 @@
 <div class="explanation-title">💡 详细解析</div>
 <div class="explanation-content">
 <div class="vertical-math">
-                        2☐<br/>
-                        + 35<br/>
-                        <span class="line">----</span><br/>
-                        61
+                        <table>
+                            <tr><td></td><td>2</td><td>☐</td></tr>
+                            <tr><td class="operator">+</td><td>3</td><td>5</td></tr>
+                            <tr class="line"><td></td><td></td><td></td></tr>
+                            <tr><td></td><td>6</td><td>1</td></tr>
+                        </table>
                     </div>
 <ul>
 <li><strong>分析个位：</strong>☐ + 5 = 1（个位），这说明有进位！</li>
@@ -311,10 +325,12 @@
 <div class="explanation-title">💡 详细解析</div>
 <div class="explanation-content">
 <div class="vertical-math">
-                        ☐4<br/>
-                        + 3☐<br/>
-                        <span class="line">----</span><br/>
-                        72
+                        <table>
+                            <tr><td></td><td>☐</td><td>4</td></tr>
+                            <tr><td class="operator">+</td><td>3</td><td>☐</td></tr>
+                            <tr class="line"><td></td><td></td><td></td></tr>
+                            <tr><td></td><td>7</td><td>2</td></tr>
+                        </table>
                     </div>
 <ul>
 <li><strong>分析个位：</strong>4 + ☐ = 2（个位），有进位！</li>
@@ -356,10 +372,12 @@
 <div class="explanation-title">💡 详细解析</div>
 <div class="explanation-content">
 <div class="vertical-math">
-                        5☐<br/>
-                        + ☐7<br/>
-                        <span class="line">----</span><br/>
-                        82
+                        <table>
+                            <tr><td></td><td>5</td><td>☐</td></tr>
+                            <tr><td class="operator">+</td><td>☐</td><td>7</td></tr>
+                            <tr class="line"><td></td><td></td><td></td></tr>
+                            <tr><td></td><td>8</td><td>2</td></tr>
+                        </table>
                     </div>
 <ul>
 <li><strong>分析个位：</strong>☐ + 7 = 2（个位），有进位！</li>
@@ -401,10 +419,12 @@
 <div class="explanation-title">💡 详细解析</div>
 <div class="explanation-content">
 <div class="vertical-math">
-                        7☐<br/>
-                        - 29<br/>
-                        <span class="line">----</span><br/>
-                        4☐
+                        <table>
+                            <tr><td></td><td>7</td><td>☐</td></tr>
+                            <tr><td class="operator">-</td><td>2</td><td>9</td></tr>
+                            <tr class="line"><td></td><td></td><td></td></tr>
+                            <tr><td></td><td>4</td><td>☐</td></tr>
+                        </table>
                     </div>
 <ul>
 <li><strong>分析十位：</strong>7 - 2 = 5，但结果是4，说明个位向十位借了1</li>
@@ -714,10 +734,12 @@
 <div class="explanation-title">💡 详细解析</div>
 <div class="explanation-content">
 <div class="vertical-math">
-                        数学<br/>
-                        + 学数<br/>
-                        <span class="line">----</span><br/>
-                        99
+                        <table>
+                            <tr><td></td><td>数</td><td>学</td></tr>
+                            <tr><td class="operator">+</td><td>学</td><td>数</td></tr>
+                            <tr class="line"><td></td><td></td><td></td></tr>
+                            <tr><td></td><td>9</td><td>9</td></tr>
+                        </table>
                     </div>
 <ul>
 <li><strong>设未知数：</strong>设"数"=a，"学"=b</li>

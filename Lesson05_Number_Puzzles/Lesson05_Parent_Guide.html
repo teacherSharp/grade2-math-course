@@ -257,21 +257,33 @@
             white-space: pre;
         }
         
-        /* 竖式样式 */
+        /* 竖式样式 - 使用表格确保右对齐 */
         .vertical-math {
             font-family: 'Courier New', 'Consolas', monospace;
             font-size: 24px;
-            line-height: 1.8;
-            text-align: center;
-            margin: 20px 0;
-            white-space: pre;
+            line-height: 1.6;
+            margin: 20px auto;
+            display: inline-block;
         }
         
-        .vertical-math .line {
+        .vertical-math table {
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+        
+        .vertical-math td {
+            text-align: right;
+            padding: 2px 5px;
+            min-width: 30px;
+        }
+        
+        .vertical-math .operator {
+            text-align: left;
+        }
+        
+        .vertical-math .line td {
             border-bottom: 3px solid #333;
-            display: inline-block;
-            min-width: 80px;
-            padding: 0 15px;
+            padding-bottom: 5px;
         }
     </style>
 </head>

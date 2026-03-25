@@ -95,24 +95,36 @@
             margin-bottom: 15px;
         }
         
-        /* 竖式样式 */
+        /* 竖式样式 - 使用表格确保右对齐 */
         .vertical-math {
             font-family: 'Courier New', 'Consolas', monospace;
             font-size: 28px;
-            line-height: 1.8;
-            text-align: center;
-            margin: 20px 0;
+            line-height: 1.6;
+            margin: 20px auto;
             padding: 20px;
             background: white;
             border-radius: 10px;
-            white-space: pre;
+            display: inline-block;
         }
         
-        .vertical-math .line {
+        .vertical-math table {
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+        
+        .vertical-math td {
+            text-align: right;
+            padding: 2px 5px;
+            min-width: 30px;
+        }
+        
+        .vertical-math .operator {
+            text-align: left;
+        }
+        
+        .vertical-math .line td {
             border-bottom: 3px solid #333;
-            display: inline-block;
-            min-width: 100px;
-            padding: 0 20px;
+            padding-bottom: 5px;
         }
         
         /* 横式样式 */
@@ -241,10 +253,12 @@
                 在下面的竖式中，☐ 代表什么数字？
             </div>
 <div class="vertical-math">
-                2☐<br/>
-                + 35<br/>
-                <span class="line">----</span><br/>
-                61
+                <table>
+                    <tr><td></td><td>2</td><td>☐</td></tr>
+                    <tr><td class="operator">+</td><td>3</td><td>5</td></tr>
+                    <tr class="line"><td></td><td></td><td></td></tr>
+                    <tr><td></td><td>6</td><td>1</td></tr>
+                </table>
             </div>
 <div class="answer-area">
 <div class="answer-label">答案：☐ = </div>
@@ -261,10 +275,12 @@
                 在下面的竖式中，两个 ☐ 分别代表什么数字？
             </div>
 <div class="vertical-math">
-                ☐4<br/>
-                + 3☐<br/>
-                <span class="line">----</span><br/>
-                72
+                <table>
+                    <tr><td></td><td>☐</td><td>4</td></tr>
+                    <tr><td class="operator">+</td><td>3</td><td>☐</td></tr>
+                    <tr class="line"><td></td><td></td><td></td></tr>
+                    <tr><td></td><td>7</td><td>2</td></tr>
+                </table>
             </div>
 <div class="answer-area">
 <div class="answer-label">答案：第一个 ☐ = <span class="answer-line"></span>，第二个 ☐ = <span class="answer-line"></span></div>
@@ -283,10 +299,12 @@
                 在下面的竖式中，☐ 代表什么数字？
             </div>
 <div class="vertical-math">
-                5☐<br/>
-                + ☐7<br/>
-                <span class="line">----</span><br/>
-                82
+                <table>
+                    <tr><td></td><td>5</td><td>☐</td></tr>
+                    <tr><td class="operator">+</td><td>☐</td><td>7</td></tr>
+                    <tr class="line"><td></td><td></td><td></td></tr>
+                    <tr><td></td><td>8</td><td>2</td></tr>
+                </table>
             </div>
 <div class="answer-area">
 <div class="answer-label">答案：个位的 ☐ = <span class="answer-line"></span>，十位的 ☐ = <span class="answer-line"></span></div>
@@ -302,10 +320,12 @@
                 在下面的减法竖式中，☐ 代表什么数字？
             </div>
 <div class="vertical-math">
-                7☐<br/>
-                - 29<br/>
-                <span class="line">----</span><br/>
-                4☐
+                <table>
+                    <tr><td></td><td>7</td><td>☐</td></tr>
+                    <tr><td class="operator">-</td><td>2</td><td>9</td></tr>
+                    <tr class="line"><td></td><td></td><td></td></tr>
+                    <tr><td></td><td>4</td><td>☐</td></tr>
+                </table>
             </div>
 <div class="answer-area">
 <div class="answer-label">答案：被减数个位的 ☐ = <span class="answer-line"></span>，差的个位 = <span class="answer-line"></span></div>
@@ -395,10 +415,12 @@
                 在下面的竖式中，☐ 代表什么数字？
             </div>
 <div class="vertical-math">
-                ☐☐<br/>
-                + ☐☐<br/>
-                <span class="line">----</span><br/>
-                99
+                <table>
+                    <tr><td></td><td>☐</td><td>☐</td></tr>
+                    <tr><td class="operator">+</td><td>☐</td><td>☐</td></tr>
+                    <tr class="line"><td></td><td></td><td></td></tr>
+                    <tr><td></td><td>9</td><td>9</td></tr>
+                </table>
             </div>
 <div class="answer-area">
 <div class="answer-label">答案：请写出一组可能的答案</div>
