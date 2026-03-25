@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>第05课《巧填数字》- 交互式课件</title>
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* 幻灯片样式 */
+        .slide {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            padding: 40px;
+            margin-bottom: 30px;
+            min-height: 600px;
+            display: none;
+        }
+        
+        .slide.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* 标题样式 */
+        .slide-title {
+            font-size: 36px;
+            color: #660099;
+            text-align: center;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .slide-subtitle {
+            font-size: 20px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        /* 内容卡片 */
+        .content-card {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 5px solid #660099;
+        }
+        
+        .content-card h3 {
+            color: #660099;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .content-card p, .content-card li {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #333;
+        }
+        
+        /* 互动区域 */
+        .interactive-area {
+            background: #f8f9fa;
+            border: 3px dashed #660099;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        /* 数字输入框 */
+        .number-input {
+            width: 60px;
+            height: 60px;
+            font-size: 28px;
+            text-align: center;
+            border: 3px solid #660099;
+            border-radius: 10px;
+            margin: 5px;
+            background: white;
+            color: #660099;
+            font-weight: bold;
+        }
+        
+        .number-input:focus {
+            outline: none;
+            border-color: #94070A;
+            box-shadow: 0 0 10px rgba(102, 0, 153, 0.3);
+        }
+        
+        .number-input.correct {
+            border-color: #4CAF50;
+            background: #E8F5E9;
+        }
+        
+        .number-input.wrong {
+            border-color: #f44336;
+            background: #FFEBEE;
+        }
+        
+        /* 按钮样式 */
+        .btn {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 0, 153, 0.4);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+        }
+        
+        /* 竖式样式 */
+        .vertical-math {
+            font-family: 'Courier New', monospace;
+            font-size: 32px;
+            line-height: 1.8;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .vertical-math .line {
+            border-bottom: 3px solid #333;
+            display: inline-block;
+            padding: 0 15px;
+        }
+        
+        /* 导航控制 */
+        .nav-controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #660099;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .nav-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .page-indicator {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        /* 提示框 */
+        .hint-box {
+            background: #FFF3E0;
+            border-left: 5px solid #FF9800;
+            border-radius: 0 10px 10px 0;
+            padding: 15px;
+            margin: 15px 0;
+            display: none;
+        }
+        
+        .hint-box.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        /* 成功提示 */
+        .success-message {
+            background: linear-gradient(135deg, #C8E6C9 0%, #A5D6A7 100%);
+            border: 2px solid #4CAF50;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            display: none;
+        }
+        
+        .success-message.show {
+            display: block;
+            animation: bounceIn 0.5s ease;
+        }
+        
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        /* 游戏区域 */
+        .game-area {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+        }
+        
+        /* 计时器 */
+        .timer {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            font-size: 20px;
+            font-weight: bold;
+            color: #660099;
+        }
+        
+        /* 进度条 */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #660099 0%, #94070A 100%);
+            transition: width 0.3s ease;
+        }
+        
+        /* 图形代数 */
+        .shape-equation {
+            font-size: 36px;
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+        }
+        
+        /* 拖拽区域 */
+        .drag-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .drag-item {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: move;
+            user-select: none;
+        }
+        
+        .drop-zone {
+            width: 70px;
+            height: 70px;
+            border: 3px dashed #660099;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 5px;
+            background: white;
+        }
+        
+        /* 答案反馈 */
+        .feedback {
+            font-size: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .feedback.correct {
+            background: #E8F5E9;
+            color: #2E7D32;
+            border: 2px solid #4CAF50;
+        }
+        
+        .feedback.wrong {
+            background: #FFEBEE;
+            color: #C62828;
+            border: 2px solid #f44336;
+        }
+        
+        /* 步骤说明 */
+        .step-box {
+            background: #E3F2FD;
+            border-left: 5px solid #2196F3;
+            border-radius: 0 10px 10px 0;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #2196F3;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar" style="width: 5%;"></div>
+<div class="timer" id="timer">⏱️ 00:00</div>
+<div class="container">
+<!-- 第1页：封面 -->
+<div class="slide active" data-slide="1">
+<div style="text-align: center; padding-top: 100px;">
+<h1 class="slide-title" style="font-size: 48px;">🔢 巧填数字</h1>
+<p class="slide-subtitle" style="font-size: 28px;">第05课 · 数字谜题大挑战</p>
+<div style="margin-top: 50px; font-size: 120px;">🔐</div>
+<p style="margin-top: 30px; font-size: 20px; color: #666;">像侦探一样破解数字密码！</p>
+<button class="btn" onclick="nextSlide()" style="margin-top: 40px; font-size: 22px; padding: 18px 40px;">开始挑战 🚀</button>
+</div>
+</div>
+<!-- 第2页：学习目标 -->
+<div class="slide" data-slide="2">
+<h2 class="slide-title">🎯 学习目标</h2>
+<p class="slide-subtitle">今天我们要掌握这些本领</p>
+<div class="content-card">
+<h3>📚 知识目标</h3>
+<ul style="font-size: 18px; line-height: 2;">
+<li>理解竖式数字谜的结构和解题方法</li>
+<li>掌握从个位开始分析的解题策略</li>
+<li>学会考虑进位和借位的情况</li>
+</ul>
+</div>
+<div class="content-card" style="border-color: #FF9800;">
+<h3 style="color: #FF9800;">💡 能力目标</h3>
+<ul style="font-size: 18px; line-height: 2;">
+<li>培养逻辑推理能力</li>
+<li>提高数学思维的灵活性</li>
+<li>学会用倒推法解决问题</li>
+</ul>
+</div>
+<div style="text-align: center; margin-top: 30px;">
+<button class="btn" onclick="nextSlide()">继续学习 👉</button>
+</div>
+</div>
+<!-- 第3页：什么是数字谜题 -->
+<div class="slide" data-slide="3">
+<h2 class="slide-title">🤔 什么是数字谜题？</h2>
+<p class="slide-subtitle">像侦探一样破解数字密码</p>
+<div class="content-card">
+<h3>🔍 数字谜题的定义</h3>
+<p style="font-size: 20px; line-height: 1.8;">
+                    数字谜题是一种数学游戏，其中某些数字被隐藏或用符号代替，需要我们通过逻辑推理找出这些数字。
+                </p>
+</div>
+<div class="interactive-area">
+<h3 style="color: #660099; margin-bottom: 20px;">🌰 举个例子</h3>
+<div class="vertical-math">
+                    3☐<br/>
+                    + 25<br/>
+                    <span class="line">----</span><br/>
+                    58
+                </div>
+<p style="margin-top: 20px; font-size: 18px;">
+                    ☐ 代表什么数字呢？<br/>
+                    <span style="color: #666;">（提示：从个位开始分析）</span>
+</p>
+</div>
+<div style="text-align: center;">
+<button class="btn" onclick="showHint('hint3')">💡 提示</button>
+<button class="btn btn-secondary" onclick="nextSlide()">查看答案 👉</button>
+</div>
+<div class="hint-box" id="hint3">
+<strong>💡 提示：</strong>个位上 ☐ + 5 = 8，所以 ☐ = 3。验证：33 + 25 = 58 ✓
+            </div>
+</div>
+<!-- 第4页：解题技巧1 - 从个位开始 -->
+<div class="slide" data-slide="4">
+<h2 class="slide-title">🔑 解题技巧（一）</h2>
+<p class="slide-subtitle">从个位开始分析</p>
+<div class="content-card">
+<h3>📍 为什么要从个位开始？</h3>
+<p style="font-size: 18px; line-height: 1.8;">
+                    竖式计算时，我们是从右往左计算的（先算个位，再算十位，再算百位...）。<br/>
+                    解数字谜题也要遵循这个顺序！
+                </p>
+</div>
+<div class="game-area">
+<h3 style="color: #2E7D32; margin-bottom: 20px;">🎮 互动练习</h3>
+<div class="vertical-math">
+                    4☐<br/>
+                    + 37<br/>
+                    <span class="line">----</span><br/>
+                    76
+                </div>
+<p style="margin: 20px 0;">个位上：☐ + 7 = 6 ？</p>
+<p style="color: #FF9800; font-weight: bold;">等等！☐ + 7 怎么会等于6呢？</p>
+</div>
+<div class="step-box">
+<span class="step-number">1</span>
+<strong>思考：</strong>这说明有进位！☐ + 7 = 16，所以 ☐ = 9
+            </div>
+<div style="text-align: center; margin-top: 20px;">
+<button class="btn" onclick="nextSlide()">学习技巧二 👉</button>
+</div>
+</div>
+<!-- 第5页：解题技巧2 - 考虑进位 -->
+<div class="slide" data-slide="5">
+<h2 class="slide-title">🔑 解题技巧（二）</h2>
+<p class="slide-subtitle">考虑进位的情况</p>
+<div class="content-card">
+<h3>➕ 进位的规律</h3>
+<div style="background: white; padding: 20px; border-radius: 10px; margin: 15px 0;">
+<p style="font-size: 18px;"><strong>关键发现：</strong></p>
+<ul style="font-size: 17px; line-height: 2; margin-top: 10px;">
+<li>两个一位数相加，最大是 9 + 9 = 18</li>
+<li>所以进位只能是 <strong>1</strong>（不可能是2或更多）</li>
+<li>如果个位相加 ≥ 10，就要向十位进1</li>
+</ul>
+</div>
+</div>
+<div class="interactive-area">
+<h3 style="color: #660099; margin-bottom: 15px;">📝 判断练习</h3>
+<p style="font-size: 18px; margin-bottom: 20px;">下面的计算有进位吗？</p>
+<div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px;">
+<div style="text-align: center;">
+<div style="font-size: 24px; margin-bottom: 10px;">5 + 3 = 8</div>
+<button class="btn" onclick="showFeedback(this, 'wrong')">有进位</button>
+<button class="btn btn-secondary" onclick="showFeedback(this, 'correct')">无进位</button>
+</div>
+<div style="text-align: center;">
+<div style="font-size: 24px; margin-bottom: 10px;">7 + 6 = 13</div>
+<button class="btn" onclick="showFeedback(this, 'correct')">有进位</button>
+<button class="btn btn-secondary" onclick="showFeedback(this, 'wrong')">无进位</button>
+</div>
+<div style="text-align: center;">
+<div style="font-size: 24px; margin-bottom: 10px;">9 + 8 = 17</div>
+<button class="btn" onclick="showFeedback(this, 'correct')">有进位</button>
+<button class="btn btn-secondary" onclick="showFeedback(this, 'wrong')">无进位</button>
+</div>
+</div>
+<div class="feedback" id="feedback5"></div>
+</div>
+<div style="text-align: center;">
+<button class="btn" onclick="nextSlide()">继续学习 👉</button>
+</div>
+</div>
+<!-- 第6页：竖式谜题实战1 -->
+<div class="slide" data-slide="6">
+<h2 class="slide-title">🎯 实战演练（一）</h2>
+<p class="slide-subtitle">一起来解这道题</p>
+<div class="interactive-area">
+<div class="vertical-math" style="font-size: 40px;">
+                    2☐<br/>
+                    + ☐7<br/>
+                    <span class="line">----</span><br/>
+                    61
+                </div>
+</div>
+<div class="step-box">
+<span class="step-number">1</span>
+<strong>分析个位：</strong>☐ + 7 = 1（个位）<br/>
+                这说明有进位！☐ + 7 = 11，所以个位的 ☐ = <strong>4</strong>
+            </div>
+<div class="step-box">
+<span class="step-number">2</span>
+<strong>分析十位：</strong>2 + ☐ + 1（进位）= 6<br/>
+                所以十位的 ☐ = <strong>3</strong>
+            </div>
+<div class="step-box">
+<span class="step-number">3</span>
+<strong>验证：</strong>24 + 37 = 61 ✓
+            </div>
+<div class="success-message" id="success6">
+<h3>🎉 太棒了！你学会了！</h3>
+<p>个位 ☐ = 4，十位 ☐ = 3</p>
+</div>
+<div style="text-align: center; margin-top: 20px;">
+<button class="btn" onclick="document.getElementById('success6').classList.add('show')">查看答案 ✅</button>
+<button class="btn btn-secondary" onclick="nextSlide()">下一题 👉</button>
+</div>
+</div>
+<!-- 第7页：竖式谜题实战2 -->
+<div class="slide" data-slide="7">
+<h2 class="slide-title">🎯 实战演练（二）</h2>
+<p class="slide-subtitle">挑战升级！</p>
+<div class="interactive-area">
+<div class="vertical-math" style="font-size: 40px;">
+                    ☐5<br/>
+                    + 3☐<br/>
+                    <span class="line">----</span><br/>
+                    82
+                </div>
+</div>
+<div class="game-area">
+<h3 style="color: #2E7D32;">🤔 思考过程</h3>
+<div style="text-align: left; font-size: 18px; line-height: 2;">
+<p><strong>第一步：看个位</strong></p>
+<p>5 + ☐ = 2（个位）→ 有进位！5 + ☐ = 12</p>
+<p>所以个位的 ☐ = <input class="number-input" id="q7_1" maxlength="1"/></p>
+<p style="margin-top: 15px;"><strong>第二步：看十位</strong></p>
+<p>☐ + 3 + 1（进位）= 8</p>
+<p>所以十位的 ☐ = <input class="number-input" id="q7_2" maxlength="1"/></p>
+</div>
+</div>
+<div style="text-align: center;">
+<button class="btn" onclick="checkQ7()">检查答案 ✓</button>
+<button class="btn btn-secondary" onclick="showHint('hint7')">💡 提示</button>
+</div>
+<div class="hint-box" id="hint7">
+<strong>💡 提示：</strong>个位 5 + 7 = 12，写2进1；十位 4 + 3 + 1 = 8
+            </div>
+<div class="feedback" id="feedback7"></div>
+</div>
+<!-- 第8页：减法竖式谜题 -->
+<div class="slide" data-slide="8">
+<h2 class="slide-title">➖ 减法竖式谜题</h2>
+<p class="slide-subtitle">减法也有谜题哦</p>
+<div class="content-card">
+<h3>📍 减法的特点</h3>
+<p style="font-size: 18px; line-height: 1.8;">
+                    减法中要注意<strong>借位</strong>的情况！<br/>
+                    当被减数的某位不够减时，需要向高位借1当10。
+                </p>
+</div>
+<div class="interactive-area">
+<h3 style="color: #660099; margin-bottom: 20px;">📝 例题</h3>
+<div class="vertical-math" style="font-size: 40px;">
+                    7☐<br/>
+                    - 28<br/>
+                    <span class="line">----</span><br/>
+                    4☐
+                </div>
+</div>
+<div class="step-box">
+<span class="step-number">1</span>
+<strong>分析个位：</strong>☐ - 8 = ☐<br/>
+                被减数的个位比8小，需要借位！变成 1☐ - 8 = ☐
+            </div>
+<div style="text-align: center; margin-top: 20px;">
+<button class="btn" onclick="nextSlide()">查看完整解答 👉</button>
+</div>
+</div>
+<!-- 第9页：减法谜题详解 -->
+<div class="slide" data-slide="9">
+<h2 class="slide-title">➖ 减法谜题详解</h2>
+<p class="slide-subtitle">完整解题过程</p>
+<div class="interactive-area">
+<div class="vertical-math" style="font-size: 40px;">
+                    7☐<br/>
+                    - 28<br/>
+                    <span class="line">----</span><br/>
+                    4☐
+                </div>
+</div>
+<div class="content-card">
+<h3>🔍 详细分析</h3>
+<div style="font-size: 18px; line-height: 2;">
+<p><strong>第一步：个位分析</strong></p>
+<p>☐ - 8 = ☐，需要借位，所以被减数个位 &lt; 8</p>
+<p>借位后：1☐ - 8 = ☐</p>
+<p>可能的组合：10-8=2, 11-8=3, 12-8=4... 15-8=7</p>
+<p style="margin-top: 15px;"><strong>第二步：十位分析</strong></p>
+<p>7 借走1后剩 6，6 - 2 = 4 ✓（符合！）</p>
+<p style="margin-top: 15px;"><strong>答案：</strong>被减数个位可以是 0-7，差的个位对应是 2-9</p>
+<p>例如：70 - 28 = 42，71 - 28 = 43，72 - 28 = 44...</p>
+</div>
+</div>
+<div style="text-align: center;">
+<button class="btn" onclick="nextSlide()">学习新类型 👉</button>
+</div>
+</div>
+<!-- 第10页：横式数字谜 -->
+<div class="slide" data-slide="10">
+<h2 class="slide-title">📐 横式数字谜</h2>
+<p class="slide-subtitle">水平排列的数字谜题</p>
+<div class="content-card">
+<h3>📍 横式谜题的特点</h3>
+<p style="font-size: 18px; line-height: 1.8;">
+                    横式谜题没有竖式的格式限制，但需要理解等号两边的关系。<br/>
+                    解题关键是：<strong>先计算确定的一边，再求未知数</strong>。
+                </p>
+</div>
+<div class="interactive-area">
+<h3 style="color: #660099; margin-bottom: 20px;">🌰 例题</h3>
+<div style="font-size: 32px; margin: 20px 0;">
+                    15 + ☐ = 30 - 5
+                </div>
+<div class="step-box">
+<span class="step-number">1</span>
+<strong>先算右边：</strong>30 - 5 = 25
+                </div>
+<div class="step-box">
+<span class="step-number">2</span>
+<strong>再求左边：</strong>15 + ☐ = 25，所以 ☐ = 10
+                </div>
+</div>
+<div style="text-align: center; margin-top: 20px;">
+<button class="btn" onclick="nextSlide()">互动练习 👉</button>
+</div>
+</div>
+<!-- 第11页：横式谜题练习 -->
+<div class="slide" data-slide="11">
+<h2 class="slide-title">🎮 横式谜题挑战</h2>
+<p class="slide-subtitle">动手试一试</p>
+<div class="game-area">
+<h3 style="color: #2E7D32; margin-bottom: 20px;">题目 1</h3>
+<div style="font-size: 28px; margin-bottom: 20px;">
+                    28 - ☐ = 10 + 8
+                </div>
+<p>先算右边 = <input class="number-input" id="q11_1" maxlength="2"/></p>
+<p>再求左边：28 - ☐ = <span id="q11_right"></span>，所以 ☐ = <input class="number-input" id="q11_2" maxlength="2"/></p>
+<button class="btn" onclick="checkQ11()" style="margin-top: 15px;">检查答案 ✓</button>
+<div class="feedback" id="feedback11"></div>
+</div>
+<div class="game-area" style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);">
+<h3 style="color: #E65100; margin-bottom: 20px;">题目 2</h3>
+<div style="font-size: 28px; margin-bottom: 20px;">
+                    ☐ + 17 = 40 - 12
+                </div>
+<p>☐ = <input class="number-input" id="q11_3" maxlength="2"/></p>
+<button class="btn btn-secondary" onclick="checkQ11_2()" style="margin-top: 15px;">检查答案 ✓</button>
+<div class="feedback" id="feedback11_2"></div>
+</div>
+<div style="text-align: center; margin-top: 20px;">
+<button class="btn" onclick="nextSlide()">学习图形代数 👉</button>
+</div>
+</div>
+<!-- 第12页：图形代数 -->
+<div class="slide" data-slide="12">
+<h2 class="slide-title">🔷 图形代数</h2>
+<p class="slide-subtitle">用图形代表数字</p>
+<div class="content-card">
+<h3>📍 什么是图形代数？</h3>
+<p style="font-size: 18px; line-height: 1.8;">
+                    用图形（⭐、🟦、🔴等）代表未知数，相同的图形代表相同的数字。<br/>
+                    这是代数思维的启蒙！
+                </p>
+</div>
+<div class="interactive-area">
+<h3 style="color: #660099; margin-bottom: 20px;">🌰 例题</h3>
+<div class="shape-equation">
+                    🔴 + 🔴 = 12<br/>
+                    🔴 + 🟦 = 15
+                </div>
+<div class="step-box">
+<span class="step-number">1</span>
+<strong>从第一个式子：</strong>🔴 + 🔴 = 12，所以 🔴 = 6
+                </div>
+<div class="step-box">
+<span class="step-number">2</span>
+<strong>代入第二个式子：</strong>6 + 🟦 = 15，所以 🟦 = 9
+                </div>
+</div>
+<div style="text-align: center; margin-top: 20px;">
+<button class="btn" onclick="nextSlide()">实战演练 👉</button>
+</div>
+</div>
+<!-- 第13页：图形代数练习 -->
+<div class="slide" data-slide="13">
+<h2 class="slide-title">🎮 图形代数挑战</h2>
+<p class="slide-subtitle">破解图形密码</p>
+<div class="game-area">
+<h3 style="color: #2E7D32; margin-bottom: 20px;">题目 1</h3>
+<div class="shape-equation">
+                    ⭐ + ⭐ + ⭐ = 15<br/>
+                    ⭐ + 🌙 = 9
+                </div>
+<p style="font-size: 18px;">⭐ = <input class="number-input" id="q13_1" maxlength="1"/></p>
+<p style="font-size: 18px;">🌙 = <input class="number-input" id="q13_2" maxlength="1"/></p>
+<button class="btn" onclick="checkQ13()">检查答案 ✓</button>
+<div class="feedback" id="feedback13"></div>
+</div>
+<div class="game-area" style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);">
+<h3 style="color: #E65100; margin-bottom: 20px;">题目 2（挑战）</h3>
+<div class="shape-equation">
+                    🍎 + 🍎 = 16<br/>
+                    🍎 + 🍊 = 13<br/>
+                    🍊 + 🍇 = 11
+                </div>
+<p style="font-size: 18px;">🍎 = <input class="number-input" id="q13_3" maxlength="1"/></p>
+<p style="font-size: 18px;">🍊 = <input class="number-input" id="q13_4" maxlength="1"/></p>
+<p style="font-size: 18px;">🍇 = <input class="number-input" id="q13_5" maxlength="1"/></p>
+<button class="btn btn-secondary" onclick="checkQ13_2()">检查答案 ✓</button>
+<div class="feedback" id="feedback13_2"></div>
+</div>
+<div style="text-align: center; margin-top: 20px;">
+<button class="btn" onclick="nextSlide()">学习枚举法 👉</button>
+</div>
+</div>
+<!-- 第14页：枚举法 -->
+<div class="slide" data-slide="14">
+<h2 class="slide-title">🔍 枚举法</h2>
+<p class="slide-subtitle">逐个尝试，找出答案</p>
+<div class="content-card">
+<h3>📍 什么时候用枚举法？</h3>
+<p style="font-size: 18px; line-height: 1.8;">
+                    当有多种可能时，可以<strong>按顺序逐个尝试</strong>，验证哪个符合要求。<br/>
+                    枚举法虽然看起来"笨"，但很可靠！
+                </p>
+</div>
+<div class="interactive-area">
+<h3 style="color: #660099; margin-bottom: 20px;">🌰 例题</h3>
+<div style="font-size: 28px; margin-bottom: 20px;">
+                    ☐ + ☐ = 10<br/>
+                    （两个相同的数字相加）
+                </div>
+<div style="text-align: left; font-size: 18px;">
+<p><strong>枚举过程：</strong></p>
+<p>0 + 0 = 0 ❌</p>
+<p>1 + 1 = 2 ❌</p>
+<p>2 + 2 = 4 ❌</p>
+<p>3 + 3 = 6 ❌</p>
+<p>4 + 4 = 8 ❌</p>
+<p>5 + 5 = 10 ✓ <strong>找到了！</strong></p>
+</div>
+</div>
+<div class="tip-box" style="display: block;">
+<div class="tip-title">💡 枚举技巧</div>
+<p>按顺序枚举（0,1,2,3...）不会遗漏，做好记录方便检查。</p>
+</div>
+<div style="text-align: center; margin-top: 20px;">
+<button class="btn" onclick="nextSlide()">综合练习 👉</button>
+</div>
+</div>
+<!-- 第15页：综合练习1 -->
+<div class="slide" data-slide="15">
+<h2 class="slide-title">🎯 综合练习（一）</h2>
+<p class="slide-subtitle">挑战你的大脑</p>
+<div class="game-area">
+<h3 style="color: #2E7D32; margin-bottom: 20px;">竖式谜题</h3>
+<div class="vertical-math" style="font-size: 36px;">
+                    5☐<br/>
+                    + ☐6<br/>
+                    <span class="line">----</span><br/>
+                    81
+                </div>
+<div style="margin-top: 20px;">
+<p>个位的 ☐ = <input class="number-input" id="q15_1" maxlength="1"/></p>
+<p>十位的 ☐ = <input class="number-input" id="q15_2" maxlength="1"/></p>
+</div>
+<button class="btn" onclick="checkQ15()">检查答案 ✓</button>
+<div class="feedback" id="feedback15"></div>
+</div>
+<div style="text-align: center; margin-top: 20px;">
+<button class="btn btn-secondary" onclick="showHint('hint15')">💡 提示</button>
+<button class="btn" onclick="nextSlide()">下一题 👉</button>
+</div>
+<div class="hint-box" id="hint15">
+<strong>💡 提示：</strong>个位 ☐ + 6 = 1（有进位），所以 ☐ = 5；十位 5 + ☐ + 1 = 8，所以 ☐ = 2
+            </div>
+</div>
+<!-- 第16页：综合练习2 -->
+<div class="slide" data-slide="16">
+<h2 class="slide-title">🎯 综合练习（二）</h2>
+<p class="slide-subtitle">继续挑战</p>
+<div class="game-area" style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);">
+<h3 style="color: #E65100; margin-bottom: 20px;">横式谜题</h3>
+<div style="font-size: 28px; margin-bottom: 20px;">
+                    35 + ☐ = 60 - ☐
+                </div>
+<p style="font-size: 18px;">两个 ☐ 填相同的数字</p>
+<div style="margin-top: 20px;">
+<p>☐ = <input class="number-input" id="q16_1" maxlength="2"/></p>
+</div>
+<button class="btn btn-secondary" onclick="checkQ16()">检查答案 ✓</button>
+<div class="feedback" id="feedback16"></div>
+</div>
+<div class="content-card" style="margin-top: 20px;">
+<h3>🔍 解题思路</h3>
+<p style="font-size: 17px; line-height: 1.8;">
+                    设 ☐ = x，则 35 + x = 60 - x<br/>
+                    移项得：x + x = 60 - 35<br/>
+                    2x = 25，所以 x = 12.5？<br/>
+                    <span style="color: #f44336;">等等，这不是整数！说明题目有问题吗？</span><br/>
+                    <span style="color: #4CAF50;">实际上，如果允许小数，答案就是12.5。但在小学阶段，我们通常要求整数解。</span>
+</p>
+</div>
+<div style="text-align: center; margin-top: 20px;">
+<button class="btn" onclick="nextSlide()">学习总结 👉</button>
+</div>
+</div>
+<!-- 第17页：本课总结 -->
+<div class="slide" data-slide="17">
+<h2 class="slide-title">📚 本课总结</h2>
+<p class="slide-subtitle">今天我们学到了什么？</p>
+<div class="content-card">
+<h3>🔑 核心知识点</h3>
+<div style="font-size: 18px; line-height: 2;">
+<p><strong>1. 竖式数字谜</strong></p>
+<ul>
+<li>从个位开始分析</li>
+<li>注意进位（加法）和借位（减法）</li>
+<li>进位只能是1</li>
+</ul>
+<p style="margin-top: 15px;"><strong>2. 横式数字谜</strong></p>
+<ul>
+<li>先计算确定的一边</li>
+<li>用倒推法求未知数</li>
+</ul>
+<p style="margin-top: 15px;"><strong>3. 图形代数</strong></p>
+<ul>
+<li>相同图形代表相同数字</li>
+<li>从只有一个未知数的式子开始</li>
+</ul>
+<p style="margin-top: 15px;"><strong>4. 枚举法</strong></p>
+<ul>
+<li>按顺序逐个尝试</li>
+<li>做好记录，不遗漏</li>
+</ul>
+</div>
+</div>
+<div style="text-align: center; margin-top: 30px;">
+<button class="btn" onclick="nextSlide()">课堂小游戏 👉</button>
+</div>
+</div>
+<!-- 第18页：课堂小游戏 -->
+<div class="slide" data-slide="18">
+<h2 class="slide-title">🎮 课堂小游戏</h2>
+<p class="slide-subtitle">数字炸弹</p>
+<div class="game-area">
+<h3 style="color: #2E7D32; margin-bottom: 20px;">🎯 游戏规则</h3>
+<div style="font-size: 18px; line-height: 2; text-align: left;">
+<p>1. 老师心里想一个1-100之间的数字</p>
+<p>2. 同学们轮流猜一个数字</p>
+<p>3. 老师说"大了"或"小了"</p>
+<p>4. 猜中数字的同学获胜！</p>
+</div>
+</div>
+<div class="interactive-area">
+<h3 style="color: #660099; margin-bottom: 20px;">💡 游戏技巧</h3>
+<p style="font-size: 18px;">
+                    先猜50，如果大了就猜25，如果小了就猜75...<br/>
+                    这样每次都能排除一半的可能！
+                </p>
+<div style="margin-top: 20px; font-size: 48px;">💣</div>
+</div>
+<div style="text-align: center; margin-top: 20px;">
+<button class="btn" onclick="nextSlide()">课后作业 👉</button>
+</div>
+</div>
+<!-- 第19页：课后作业 -->
+<div class="slide" data-slide="19">
+<h2 class="slide-title">📝 课后作业</h2>
+<p class="slide-subtitle">巩固今天学到的知识</p>
+<div class="content-card">
+<h3>📚 必做题</h3>
+<p style="font-size: 18px; line-height: 1.8;">
+                    完成课后练习题（共10道题）<br/>
+                    请家长协助检查，有问题可以随时问我！
+                </p>
+</div>
+<div class="content-card" style="border-color: #FF9800;">
+<h3 style="color: #FF9800;">🌟 挑战题</h3>
+<p style="font-size: 18px; line-height: 1.8;">
+                    尝试创编一道数字谜题，给爸爸妈妈挑战！<br/>
+                    创编题目能帮助你更深入地理解数字关系。
+                </p>
+</div>
+<div class="content-card" style="border-color: #4CAF50;">
+<h3 style="color: #4CAF50;">👨‍👩‍👧‍👦 亲子活动</h3>
+<p style="font-size: 18px; line-height: 1.8;">
+                    和爸爸妈妈一起玩"数字炸弹"游戏！<br/>
+                    看看谁能用最少次数猜中数字！
+                </p>
+</div>
+<div style="text-align: center; margin-top: 30px;">
+<button class="btn" onclick="nextSlide()">结束课程 👉</button>
+</div>
+</div>
+<!-- 第20页：结束页 -->
+<div class="slide" data-slide="20">
+<div style="text-align: center; padding-top: 80px;">
+<h1 class="slide-title" style="font-size: 42px;">🎉 课程结束</h1>
+<p class="slide-subtitle" style="font-size: 24px;">恭喜你完成了第05课《巧填数字》</p>
+<div style="margin-top: 40px; font-size: 100px;">🏆</div>
+<div style="margin-top: 40px; font-size: 20px; color: #666;">
+<p>今天你学会了：</p>
+<p style="margin-top: 15px;">✓ 竖式数字谜的解法</p>
+<p>✓ 横式数字谜的解法</p>
+<p>✓ 图形代数的思维</p>
+<p>✓ 枚举法的应用</p>
+</div>
+<div style="margin-top: 40px; padding: 20px; background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); border-radius: 15px;">
+<p style="font-size: 18px; color: #2E7D32;">
+<strong>下节课预告：</strong><br/>
+                        第06课《图形数一数》<br/>
+                        我们将学习如何有序地数图形
+                    </p>
+</div>
+<p style="margin-top: 30px; font-size: 16px; color: #999;">
+                    课件制作：夏老师<br/>
+                    联系方式：19117803360
+                </p>
+</div>
+</div>
+</div>
+<!-- 导航控制 -->
+<div class="nav-controls">
+<button class="nav-btn" onclick="prevSlide()">上一页</button>
+<div class="page-indicator">
+                第 <span id="currentPage">1</span> / <span id="totalPages">20</span> 页
+            </div>
+<button class="nav-btn" onclick="nextSlide()">下一页</button>
+</div>
+<script>
+        let currentSlide = 1;
+        const totalSlides = 20;
+        let timerInterval;
+        let seconds = 0;
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            updatePageIndicator();
+            startTimer();
+        });
+
+        // 更新页面指示器
+        function updatePageIndicator() {
+            document.getElementById('currentPage').textContent = currentSlide;
+            document.getElementById('totalPages').textContent = totalSlides;
+            
+            // 更新进度条
+            const progress = (currentSlide / totalSlides) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        // 下一页
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                document.querySelector(`[data-slide="${currentSlide}"]`).classList.remove('active');
+                currentSlide++;
+                document.querySelector(`[data-slide="${currentSlide}"]`).classList.add('active');
+                updatePageIndicator();
+                window.scrollTo(0, 0);
+            }
+        }
+
+        // 上一页
+        function prevSlide() {
+            if (currentSlide > 1) {
+                document.querySelector(`[data-slide="${currentSlide}"]`).classList.remove('active');
+                currentSlide--;
+                document.querySelector(`[data-slide="${currentSlide}"]`).classList.add('active');
+                updatePageIndicator();
+                window.scrollTo(0, 0);
+            }
+        }
+
+        // 显示提示
+        function showHint(hintId) {
+            document.getElementById(hintId).classList.add('show');
+        }
+
+        // 显示反馈
+        function showFeedback(btn, type) {
+            const feedback = document.getElementById('feedback5');
+            if (type === 'correct') {
+                feedback.textContent = '🎉 回答正确！';
+                feedback.className = 'feedback correct';
+            } else {
+                feedback.textContent = '❌ 再想想，两个数字相加≥10才有进位哦！';
+                feedback.className = 'feedback wrong';
+            }
+        }
+
+        // 检查第7题
+        function checkQ7() {
+            const a1 = document.getElementById('q7_1').value;
+            const a2 = document.getElementById('q7_2').value;
+            const feedback = document.getElementById('feedback7');
+            
+            if (a1 === '7' && a2 === '3') {
+                feedback.textContent = '🎉 太棒了！答案正确！个位是7，十位是3';
+                feedback.className = 'feedback correct';
+                document.getElementById('q7_1').classList.add('correct');
+                document.getElementById('q7_2').classList.add('correct');
+            } else {
+                feedback.textContent = '❌ 再试试！提示：个位5+7=12，有进位1';
+                feedback.className = 'feedback wrong';
+            }
+        }
+
+        // 检查第11题
+        function checkQ11() {
+            const a1 = document.getElementById('q11_1').value;
+            const a2 = document.getElementById('q11_2').value;
+            const feedback = document.getElementById('feedback11');
+            
+            if (a1 === '18' && a2 === '10') {
+                feedback.textContent = '🎉 正确！右边=18，28-10=18';
+                feedback.className = 'feedback correct';
+            } else {
+                feedback.textContent = '❌ 再算算：10+8=？，28-？=这个结果';
+                feedback.className = 'feedback wrong';
+            }
+        }
+
+        function checkQ11_2() {
+            const a3 = document.getElementById('q11_3').value;
+            const feedback = document.getElementById('feedback11_2');
+            
+            if (a3 === '11') {
+                feedback.textContent = '🎉 正确！11+17=28，40-12=28';
+                feedback.className = 'feedback correct';
+            } else {
+                feedback.textContent = '❌ 先算右边40-12=28，再想？+17=28';
+                feedback.className = 'feedback wrong';
+            }
+        }
+
+        // 检查第13题
+        function checkQ13() {
+            const a1 = document.getElementById('q13_1').value;
+            const a2 = document.getElementById('q13_2').value;
+            const feedback = document.getElementById('feedback13');
+            
+            if (a1 === '5' && a2 === '4') {
+                feedback.textContent = '🎉 正确！⭐=5，🌙=4';
+                feedback.className = 'feedback correct';
+            } else {
+                feedback.textContent = '❌ 再想想：三个相同的数相加=15，每个是几？';
+                feedback.className = 'feedback wrong';
+            }
+        }
+
+        function checkQ13_2() {
+            const a3 = document.getElementById('q13_3').value;
+            const a4 = document.getElementById('q13_4').value;
+            const a5 = document.getElementById('q13_5').value;
+            const feedback = document.getElementById('feedback13_2');
+            
+            if (a3 === '8' && a4 === '5' && a5 === '6') {
+                feedback.textContent = '🎉 太棒了！🍎=8，🍊=5，🍇=6';
+                feedback.className = 'feedback correct';
+            } else {
+                feedback.textContent = '❌ 从第一个式子开始：🍎+🍎=16';
+                feedback.className = 'feedback wrong';
+            }
+        }
+
+        // 检查第15题
+        function checkQ15() {
+            const a1 = document.getElementById('q15_1').value;
+            const a2 = document.getElementById('q15_2').value;
+            const feedback = document.getElementById('feedback15');
+            
+            if (a1 === '5' && a2 === '2') {
+                feedback.textContent = '🎉 正确！55+26=81';
+                feedback.className = 'feedback correct';
+            } else {
+                feedback.textContent = '❌ 再试试！注意个位相加有进位';
+                feedback.className = 'feedback wrong';
+            }
+        }
+
+        // 检查第16题
+        function checkQ16() {
+            const a1 = document.getElementById('q16_1').value;
+            const feedback = document.getElementById('feedback16');
+            
+            // 35 + x = 60 - x
+            // 2x = 25
+            // x = 12.5
+            if (a1 === '12.5' || a1 === '12') {
+                feedback.textContent = '🎉 正确！35+12.5=47.5，60-12.5=47.5（或近似整数解12）';
+                feedback.className = 'feedback correct';
+            } else {
+                feedback.textContent = '❌ 设☐=x，35+x=60-x，解这个方程';
+                feedback.className = 'feedback wrong';
+            }
+        }
+
+        // 计时器
+        function startTimer() {
+            timerInterval = setInterval(function() {
+                seconds++;
+                const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
+                const secs = (seconds % 60).toString().padStart(2, '0');
+                document.getElementById('timer').textContent = `⏱️ ${mins}:${secs}`;
+            }, 1000);
+        }
+
+        // 键盘导航
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+    </script>
+</body>
+</html>

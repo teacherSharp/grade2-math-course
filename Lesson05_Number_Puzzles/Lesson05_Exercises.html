@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>第05课《巧填数字》- 课后练习题</title>
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        /* 头部样式 */
+        .header {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+        
+        /* 内容区域 */
+        .content {
+            padding: 40px;
+        }
+        
+        /* 题目卡片 */
+        .question-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 5px solid #660099;
+        }
+        
+        .question-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .question-number {
+            width: 40px;
+            height: 40px;
+            background: #660099;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            margin-right: 15px;
+        }
+        
+        .question-type {
+            background: #E3F2FD;
+            color: #1976D2;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 14px;
+        }
+        
+        .question-content {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        /* 竖式样式 */
+        .vertical-math {
+            font-family: 'Courier New', monospace;
+            font-size: 28px;
+            line-height: 1.8;
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+        }
+        
+        .vertical-math .line {
+            border-bottom: 3px solid #333;
+            display: inline-block;
+            padding: 0 15px;
+        }
+        
+        /* 横式样式 */
+        .horizontal-math {
+            font-size: 24px;
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+        }
+        
+        /* 图形代数样式 */
+        .shape-math {
+            font-size: 28px;
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+        }
+        
+        /* 答案输入区 */
+        .answer-area {
+            background: white;
+            border: 2px dashed #660099;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+        
+        .answer-label {
+            font-weight: bold;
+            color: #660099;
+            margin-bottom: 10px;
+        }
+        
+        .answer-line {
+            border-bottom: 2px solid #333;
+            display: inline-block;
+            width: 100px;
+            margin: 0 10px;
+        }
+        
+        /* 附加题样式 */
+        .bonus-card {
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            border: 3px solid #FFD700;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+        
+        .bonus-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .bonus-icon {
+            font-size: 32px;
+            margin-right: 10px;
+        }
+        
+        .bonus-title {
+            font-size: 24px;
+            color: #FF8F00;
+            font-weight: bold;
+        }
+        
+        .difficulty-badge {
+            background: #f44336;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        
+        /* 页脚 */
+        .footer {
+            background: #f5f5f5;
+            padding: 30px;
+            text-align: center;
+            color: #666;
+        }
+        
+        /* 提示框 */
+        .hint-box {
+            background: #FFF3E0;
+            border-left: 5px solid #FF9800;
+            border-radius: 0 10px 10px 0;
+            padding: 15px;
+            margin-top: 15px;
+            font-size: 16px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+<!-- 头部 -->
+<div class="header">
+<h1>🔢 第05课《巧填数字》</h1>
+<p class="subtitle">课后练习题</p>
+</div>
+<!-- 内容区域 -->
+<div class="content">
+<!-- 说明 -->
+<div style="background: #E3F2FD; border-radius: 10px; padding: 20px; margin-bottom: 30px;">
+<p style="font-size: 16px; color: #1976D2;">
+<strong>📋 答题说明：</strong><br/>
+                    1. 本练习共10道基础题 + 1道附加思考题<br/>
+                    2. 请在横线上写出答案<br/>
+                    3. 竖式题请写出每个 ☐ 代表的数字<br/>
+                    4. 完成后请家长检查或对照答案解析
+                </p>
+</div>
+<!-- 第1题 -->
+<div class="question-card">
+<div class="question-header">
+<div class="question-number">1</div>
+<div class="question-type">竖式谜题</div>
+</div>
+<div class="question-content">
+                在下面的竖式中，☐ 代表什么数字？
+            </div>
+<div class="vertical-math">
+                2☐<br/>
+                + 35<br/>
+                <span class="line">----</span><br/>
+                61
+            </div>
+<div class="answer-area">
+<div class="answer-label">答案：☐ = </div>
+<div class="answer-line"></div>
+</div>
+</div>
+<!-- 第2题 -->
+<div class="question-card">
+<div class="question-header">
+<div class="question-number">2</div>
+<div class="question-type">竖式谜题</div>
+</div>
+<div class="question-content">
+                在下面的竖式中，两个 ☐ 分别代表什么数字？
+            </div>
+<div class="vertical-math">
+                ☐4<br/>
+                + 3☐<br/>
+                <span class="line">----</span><br/>
+                72
+            </div>
+<div class="answer-area">
+<div class="answer-label">答案：第一个 ☐ = <span class="answer-line"></span>，第二个 ☐ = <span class="answer-line"></span></div>
+</div>
+<div class="hint-box">
+<strong>💡 提示：</strong>从个位开始分析，注意是否有进位
+            </div>
+</div>
+<!-- 第3题 -->
+<div class="question-card">
+<div class="question-header">
+<div class="question-number">3</div>
+<div class="question-type">竖式谜题</div>
+</div>
+<div class="question-content">
+                在下面的竖式中，☐ 代表什么数字？
+            </div>
+<div class="vertical-math">
+                5☐<br/>
+                + ☐7<br/>
+                <span class="line">----</span><br/>
+                82
+            </div>
+<div class="answer-area">
+<div class="answer-label">答案：个位的 ☐ = <span class="answer-line"></span>，十位的 ☐ = <span class="answer-line"></span></div>
+</div>
+</div>
+<!-- 第4题 -->
+<div class="question-card">
+<div class="question-header">
+<div class="question-number">4</div>
+<div class="question-type">减法竖式</div>
+</div>
+<div class="question-content">
+                在下面的减法竖式中，☐ 代表什么数字？
+            </div>
+<div class="vertical-math">
+                7☐<br/>
+                - 29<br/>
+                <span class="line">----</span><br/>
+                4☐
+            </div>
+<div class="answer-area">
+<div class="answer-label">答案：被减数个位的 ☐ = <span class="answer-line"></span>，差的个位 = <span class="answer-line"></span></div>
+</div>
+<div class="hint-box">
+<strong>💡 提示：</strong>减法中要注意是否需要借位
+            </div>
+</div>
+<!-- 第5题 -->
+<div class="question-card">
+<div class="question-header">
+<div class="question-number">5</div>
+<div class="question-type">横式谜题</div>
+</div>
+<div class="question-content">
+                在下面的横式中，☐ 代表什么数字？
+            </div>
+<div class="horizontal-math">
+                18 + ☐ = 35 - 8
+            </div>
+<div class="answer-area">
+<div class="answer-label">答案：☐ = </div>
+<div class="answer-line"></div>
+</div>
+</div>
+<!-- 第6题 -->
+<div class="question-card">
+<div class="question-header">
+<div class="question-number">6</div>
+<div class="question-type">横式谜题</div>
+</div>
+<div class="question-content">
+                在下面的横式中，☐ 代表什么数字？
+            </div>
+<div class="horizontal-math">
+                42 - ☐ = 15 + 9
+            </div>
+<div class="answer-area">
+<div class="answer-label">答案：☐ = </div>
+<div class="answer-line"></div>
+</div>
+</div>
+<!-- 第7题 -->
+<div class="question-card">
+<div class="question-header">
+<div class="question-number">7</div>
+<div class="question-type">图形代数</div>
+</div>
+<div class="question-content">
+                下面的图形各代表什么数字？
+            </div>
+<div class="shape-math">
+                🔴 + 🔴 = 14<br/>
+                🔴 + 🟦 = 18
+            </div>
+<div class="answer-area">
+<div class="answer-label">答案：🔴 = <span class="answer-line"></span>，🟦 = <span class="answer-line"></span></div>
+</div>
+</div>
+<!-- 第8题 -->
+<div class="question-card">
+<div class="question-header">
+<div class="question-number">8</div>
+<div class="question-type">图形代数</div>
+</div>
+<div class="question-content">
+                下面的图形各代表什么数字？
+            </div>
+<div class="shape-math">
+                ⭐ + ⭐ + ⭐ = 18<br/>
+                ⭐ + 🌙 = 11
+            </div>
+<div class="answer-area">
+<div class="answer-label">答案：⭐ = <span class="answer-line"></span>，🌙 = <span class="answer-line"></span></div>
+</div>
+<div class="hint-box">
+<strong>💡 提示：</strong>先根据第一个式子求出⭐，再代入第二个式子
+            </div>
+</div>
+<!-- 第9题 -->
+<div class="question-card">
+<div class="question-header">
+<div class="question-number">9</div>
+<div class="question-type">综合应用</div>
+</div>
+<div class="question-content">
+                在下面的竖式中，☐ 代表什么数字？
+            </div>
+<div class="vertical-math">
+                ☐☐<br/>
+                + ☐☐<br/>
+                <span class="line">----</span><br/>
+                99
+            </div>
+<div class="answer-area">
+<div class="answer-label">答案：请写出一组可能的答案</div>
+<div style="margin-top: 10px;">
+                    第一个数是 <span class="answer-line"></span>，第二个数是 <span class="answer-line"></span>
+                </div>
+</div>
+<div class="hint-box">
+<strong>💡 提示：</strong>答案不唯一，只要两个数相加等于99即可
+            </div>
+</div>
+<!-- 第10题 -->
+<div class="question-card">
+<div class="question-header">
+<div class="question-number">10</div>
+<div class="question-type">综合应用</div>
+</div>
+<div class="question-content">
+                小明做一道加法题时，把一个加数个位上的6看成了9，十位上的3看成了5，结果算出的和是87。正确的和应该是多少？
+            </div>
+<div class="answer-area">
+<div class="answer-label">答案：正确的和是 </div>
+<div class="answer-line"></div>
+</div>
+<div class="hint-box">
+<strong>💡 提示：</strong>先算出看错的加数是多少，再找出正确的加数，最后重新计算
+            </div>
+</div>
+<!-- 附加题 -->
+<div class="bonus-card">
+<div class="bonus-header">
+<div class="bonus-icon">🌟</div>
+<div class="bonus-title">思维拓展（附加题）</div>
+<div class="difficulty-badge">挑战</div>
+</div>
+<div class="question-content" style="font-size: 18px;">
+                在下面的竖式中，每个汉字代表一个不同的数字，相同的汉字代表相同的数字。求"数学"代表的数字。
+            </div>
+<div class="vertical-math" style="font-size: 32px;">
+                数学<br/>
+                + 学数<br/>
+                <span class="line">----</span><br/>
+                99
+            </div>
+<div class="answer-area" style="background: white;">
+<div class="answer-label">答案：</div>
+<div style="margin-top: 10px; font-size: 18px;">
+                    数 = <span class="answer-line"></span>，学 = <span class="answer-line"></span><br/>
+                    所以"数学"代表的数字是 <span class="answer-line"></span>
+                </div>
+</div>
+<div class="hint-box">
+<strong>💡 提示：</strong>设"数"=a，"学"=b，则(10a+b)+(10b+a)=99，化简得11(a+b)=99
+            </div>
+</div>
+</div>
+<!-- 页脚 -->
+<div class="footer">
+<p>🌟 二年级思维训练课程 · 第05课《巧填数字》</p>
+<p style="margin-top: 10px;">完成时间：___________  正确率：___________</p>
+<p style="margin-top: 10px; font-size: 14px;">夏老师：19117803360</p>
+</div>
+</div>
+</body>
+</html>

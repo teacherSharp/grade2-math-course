@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>第05课《巧填数字》- 练习题答案解析</title>
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        /* 头部样式 */
+        .header {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+        
+        /* 内容区域 */
+        .content {
+            padding: 40px;
+        }
+        
+        /* 答案卡片 */
+        .answer-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .answer-card.correct {
+            border-color: #4CAF50;
+            background: #f8fff8;
+        }
+        
+        .answer-card.challenge {
+            border-color: #FFD700;
+            background: linear-gradient(135deg, #fffdf5 0%, #fff9e6 100%);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .question-number {
+            width: 45px;
+            height: 45px;
+            background: #660099;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 20px;
+            margin-right: 15px;
+        }
+        
+        .question-number.bonus {
+            background: #FFD700;
+            color: #333;
+            font-size: 28px;
+        }
+        
+        .card-title {
+            font-size: 22px;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        .difficulty-badge {
+            background: #4CAF50;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        
+        .difficulty-badge.difficulty-challenge {
+            background: #f44336;
+        }
+        
+        /* 标准答案区域 */
+        .answer-section {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border-left: 5px solid #4CAF50;
+            border-radius: 0 10px 10px 0;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .answer-title {
+            color: #2E7D32;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .answer-content {
+            font-size: 18px;
+            color: #333;
+            line-height: 1.8;
+        }
+        
+        /* 详细解析区域 */
+        .explanation-section {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            border-left: 5px solid #2196F3;
+            border-radius: 0 10px 10px 0;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .explanation-title {
+            color: #1976D2;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .explanation-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+        }
+        
+        .explanation-content ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .explanation-content li {
+            margin-bottom: 8px;
+        }
+        
+        /* 竖式样式 */
+        .vertical-math {
+            font-family: 'Courier New', monospace;
+            font-size: 24px;
+            line-height: 1.8;
+            text-align: center;
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+        }
+        
+        .vertical-math .line {
+            border-bottom: 3px solid #333;
+            display: inline-block;
+            padding: 0 10px;
+        }
+        
+        /* 思维点拨框 */
+        .tips-box {
+            background: #fff3e0;
+            border-left: 5px solid #FF9800;
+            border-radius: 0 10px 10px 0;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .tips-title {
+            color: #E65100;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .tips-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+        }
+        
+        /* 拓展问题框 */
+        .extension-box {
+            background: #f3e5f5;
+            border-left: 5px solid #9C27B0;
+            border-radius: 0 10px 10px 0;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .extension-title {
+            color: #7B1FA2;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .extension-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+        }
+        
+        /* 页脚 */
+        .footer {
+            background: #f5f5f5;
+            padding: 30px;
+            text-align: center;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+<!-- 头部 -->
+<div class="header">
+<h1>🔢 第05课《巧填数字》</h1>
+<p class="subtitle">练习题答案解析（教师版）</p>
+</div>
+<!-- 内容区域 -->
+<div class="content">
+<!-- 第1题 -->
+<div class="answer-card correct">
+<div class="card-header">
+<div class="question-number">1</div>
+<div class="card-title">竖式谜题</div>
+<span class="difficulty-badge">基础</span>
+</div>
+<div class="answer-section">
+<div class="answer-title">✅ 标准答案</div>
+<div class="answer-content">
+                    ☐ = <strong>6</strong>
+                </div>
+</div>
+<div class="explanation-section">
+<div class="explanation-title">💡 详细解析</div>
+<div class="explanation-content">
+<div class="vertical-math">
+                        2☐<br/>
+                        + 35<br/>
+                        <span class="line">----</span><br/>
+                        61
+                    </div>
+<ul>
+<li><strong>分析个位：</strong>☐ + 5 = 1（个位），这说明有进位！</li>
+<li>实际上：☐ + 5 = 11，所以 ☐ = 6</li>
+<li><strong>验证十位：</strong>2 + 3 + 1（进位）= 6 ✓</li>
+<li><strong>最终验证：</strong>26 + 35 = 61 ✓</li>
+</ul>
+</div>
+</div>
+<div class="tips-box">
+<div class="tips-title">💡 思维点拨</div>
+<div class="tips-content">
+                    这道题的关键是发现"个位相加有进位"。当孩子看到"☐ + 5 = 1"时，可能会困惑。这时要引导他们思考："一个数加5，个位怎么会是1呢？"让孩子意识到只有进位才能解释这个现象。可以教孩子记住口诀："个位相加若变小，必定有进位"。
+                </div>
+</div>
+<div class="extension-box">
+<div class="extension-title">🚀 拓展问题</div>
+<div class="extension-content">
+                    如果改成：2☐ + 35 = 51，☐ = ?<br/>
+<strong>答案：</strong>☐ = 6，但这时没有进位（6+5=11，还是有进位）。实际上这道题无解，因为无论个位填几，2☐ + 35 的结果十位至少是5（20+35=55）。这可以让孩子理解：不是所有数字谜题都有解！
+                </div>
+</div>
+</div>
+<!-- 第2题 -->
+<div class="answer-card correct">
+<div class="card-header">
+<div class="question-number">2</div>
+<div class="card-title">竖式谜题</div>
+<span class="difficulty-badge">基础</span>
+</div>
+<div class="answer-section">
+<div class="answer-title">✅ 标准答案</div>
+<div class="answer-content">
+                    第一个 ☐ = <strong>3</strong>，第二个 ☐ = <strong>8</strong>
+                </div>
+</div>
+<div class="explanation-section">
+<div class="explanation-title">💡 详细解析</div>
+<div class="explanation-content">
+<div class="vertical-math">
+                        ☐4<br/>
+                        + 3☐<br/>
+                        <span class="line">----</span><br/>
+                        72
+                    </div>
+<ul>
+<li><strong>分析个位：</strong>4 + ☐ = 2（个位），有进位！</li>
+<li>实际上：4 + ☐ = 12，所以第二个 ☐ = 8</li>
+<li><strong>分析十位：</strong>☐ + 3 + 1（进位）= 7</li>
+<li>所以第一个 ☐ = 3</li>
+<li><strong>验证：</strong>34 + 38 = 72 ✓</li>
+</ul>
+</div>
+</div>
+<div class="tips-box">
+<div class="tips-title">💡 思维点拨</div>
+<div class="tips-content">
+                    这道题有两个未知数，但解题顺序很重要：必须先解个位，再解十位。因为个位的计算结果会影响十位（通过进位）。可以教孩子用"倒推法"：从已知的个位数字4出发，思考"4加几等于12"（因为结果的个位是2，且4+任何数都不可能等于2）。
+                </div>
+</div>
+<div class="extension-box">
+<div class="extension-title">🚀 拓展问题</div>
+<div class="extension-content">
+                    ☐4 + 3☐ = 71，两个 ☐ 相同，求 ☐ = ?<br/>
+<strong>答案：</strong>无解。个位分析：4+☐=11（有进位），☐=7；十位分析：7+3+1=11≠7。这说明当两个 ☐ 必须相同时，此题无解。可以让孩子理解：约束条件越多，有解的可能性越小。
+                </div>
+</div>
+</div>
+<!-- 第3题 -->
+<div class="answer-card correct">
+<div class="card-header">
+<div class="question-number">3</div>
+<div class="card-title">竖式谜题</div>
+<span class="difficulty-badge">基础</span>
+</div>
+<div class="answer-section">
+<div class="answer-title">✅ 标准答案</div>
+<div class="answer-content">
+                    个位的 ☐ = <strong>5</strong>，十位的 ☐ = <strong>2</strong>
+                </div>
+</div>
+<div class="explanation-section">
+<div class="explanation-title">💡 详细解析</div>
+<div class="explanation-content">
+<div class="vertical-math">
+                        5☐<br/>
+                        + ☐7<br/>
+                        <span class="line">----</span><br/>
+                        82
+                    </div>
+<ul>
+<li><strong>分析个位：</strong>☐ + 7 = 2（个位），有进位！</li>
+<li>实际上：☐ + 7 = 12，所以个位的 ☐ = 5</li>
+<li><strong>分析十位：</strong>5 + ☐ + 1（进位）= 8</li>
+<li>所以十位的 ☐ = 2</li>
+<li><strong>验证：</strong>55 + 27 = 82 ✓</li>
+</ul>
+</div>
+</div>
+<div class="tips-box">
+<div class="tips-title">💡 思维点拨</div>
+<div class="tips-content">
+                    这道题虽然两个 ☐ 符号相同，但它们代表不同的数字（个位是5，十位是2）。这是一个重要的概念：相同的符号在不同的位置可以代表不同的数字，除非题目明确说明"相同的 ☐ 代表相同的数字"。要提醒孩子仔细读题，不要想当然。
+                </div>
+</div>
+<div class="extension-box">
+<div class="extension-title">🚀 拓展问题</div>
+<div class="extension-content">
+                    如果题目改为"相同的 ☐ 代表相同的数字"，5☐ + ☐7 = 82，是否有解？<br/>
+<strong>答案：</strong>无解。个位：☐+7=12，☐=5；十位：5+☐+1=8，☐=2。矛盾！所以无解。
+                </div>
+</div>
+</div>
+<!-- 第4题 -->
+<div class="answer-card correct">
+<div class="card-header">
+<div class="question-number">4</div>
+<div class="card-title">减法竖式</div>
+<span class="difficulty-badge">进阶</span>
+</div>
+<div class="answer-section">
+<div class="answer-title">✅ 标准答案</div>
+<div class="answer-content">
+                    被减数个位的 ☐ 可以是 <strong>0、1、2、3、4、5、6、7</strong> 中的任意一个，差的个位对应为 <strong>1、2、3、4、5、6、7、8</strong>
+                </div>
+</div>
+<div class="explanation-section">
+<div class="explanation-title">💡 详细解析</div>
+<div class="explanation-content">
+<div class="vertical-math">
+                        7☐<br/>
+                        - 29<br/>
+                        <span class="line">----</span><br/>
+                        4☐
+                    </div>
+<ul>
+<li><strong>分析十位：</strong>7 - 2 = 5，但结果是4，说明个位向十位借了1</li>
+<li><strong>分析个位：</strong>被减数个位 &lt; 9，需要借位，变成 1☐ - 9</li>
+<li>可能的组合：
+                            <ul>
+<li>10 - 9 = 1（被减数个位=0，差的个位=1）</li>
+<li>11 - 9 = 2（被减数个位=1，差的个位=2）</li>
+<li>...</li>
+<li>17 - 9 = 8（被减数个位=7，差的个位=8）</li>
+</ul>
+</li>
+<li>被减数个位不能是8或9（那样就不需要借位了）</li>
+</ul>
+</div>
+</div>
+<div class="tips-box">
+<div class="tips-title">💡 思维点拨</div>
+<div class="tips-content">
+                    减法竖式谜题比加法更难，因为涉及"借位"的概念。关键观察点是：如果被减数的十位减少了1（比如7变成6，但结果是4），说明个位发生了借位。可以教孩子用"倒推法"：从十位的结果4出发，思考"7借走1后剩6，6-2=4"，确认借位发生，然后分析个位。
+                </div>
+</div>
+<div class="extension-box">
+<div class="extension-title">🚀 拓展问题</div>
+<div class="extension-content">
+                    7☐ - 29 = 4☐，如果要求被减数和差的个位相同，求 ☐ = ?<br/>
+<strong>答案：</strong>无解。设被减数个位=差的个位=x，则1x-9=x，即10+x-9=x，1+x=x，矛盾。
+                </div>
+</div>
+</div>
+<!-- 第5题 -->
+<div class="answer-card correct">
+<div class="card-header">
+<div class="question-number">5</div>
+<div class="card-title">横式谜题</div>
+<span class="difficulty-badge">基础</span>
+</div>
+<div class="answer-section">
+<div class="answer-title">✅ 标准答案</div>
+<div class="answer-content">
+                    ☐ = <strong>9</strong>
+                </div>
+</div>
+<div class="explanation-section">
+<div class="explanation-title">💡 详细解析</div>
+<div class="explanation-content">
+<p style="font-size: 20px; text-align: center; margin: 15px 0;">
+                        18 + ☐ = 35 - 8
+                    </p>
+<ul>
+<li><strong>第一步：</strong>先计算等式右边：35 - 8 = 27</li>
+<li><strong>第二步：</strong>等式变成：18 + ☐ = 27</li>
+<li><strong>第三步：</strong>用倒推法：☐ = 27 - 18 = 9</li>
+<li><strong>验证：</strong>18 + 9 = 27，35 - 8 = 27 ✓</li>
+</ul>
+</div>
+</div>
+<div class="tips-box">
+<div class="tips-title">💡 思维点拨</div>
+<div class="tips-content">
+                    横式谜题的解题策略是"先化简，再求解"。教孩子：如果等式一边是完全确定的（没有未知数），就先算出这边的值，然后把等式变成"简单形式"。这种方法体现了数学中的"化归思想"——把复杂问题转化为简单问题。
+                </div>
+</div>
+<div class="extension-box">
+<div class="extension-title">🚀 拓展问题</div>
+<div class="extension-content">
+                    18 + ☐ = 35 - ☐（两个 ☐ 相同），求 ☐ = ?<br/>
+<strong>答案：</strong>☐ = 8.5。18 + ☐ = 35 - ☐ → 2☐ = 17 → ☐ = 8.5。如果要求整数解，则无解。可以引导孩子思考：什么时候有整数解？（当两边常数之差为偶数时）
+                </div>
+</div>
+</div>
+<!-- 第6题 -->
+<div class="answer-card correct">
+<div class="card-header">
+<div class="question-number">6</div>
+<div class="card-title">横式谜题</div>
+<span class="difficulty-badge">基础</span>
+</div>
+<div class="answer-section">
+<div class="answer-title">✅ 标准答案</div>
+<div class="answer-content">
+                    ☐ = <strong>18</strong>
+                </div>
+</div>
+<div class="explanation-section">
+<div class="explanation-title">💡 详细解析</div>
+<div class="explanation-content">
+<p style="font-size: 20px; text-align: center; margin: 15px 0;">
+                        42 - ☐ = 15 + 9
+                    </p>
+<ul>
+<li><strong>第一步：</strong>先计算等式右边：15 + 9 = 24</li>
+<li><strong>第二步：</strong>等式变成：42 - ☐ = 24</li>
+<li><strong>第三步：</strong>用倒推法：☐ = 42 - 24 = 18</li>
+<li><strong>验证：</strong>42 - 18 = 24，15 + 9 = 24 ✓</li>
+</ul>
+</div>
+</div>
+<div class="tips-box">
+<div class="tips-title">💡 思维点拨</div>
+<div class="tips-content">
+                    这道题涉及减法，要提醒孩子：求减数要用"被减数 - 差"。很多孩子容易混淆，会用"被减数 + 差"或"差 - 被减数"。可以教孩子用"加法验算"的方法检验：如果 42 - 18 = 24，那么 24 + 18 应该等于 42。养成验算的习惯能减少错误。
+                </div>
+</div>
+<div class="extension-box">
+<div class="extension-title">🚀 拓展问题</div>
+<div class="extension-content">
+                    42 - ☐ = 15 - 9，求 ☐ = ?<br/>
+<strong>答案：</strong>☐ = 36。右边15-9=6，所以42-☐=6，☐=36。注意这道题右边是减法，结果变小，所以左边的减数要很大。
+                </div>
+</div>
+</div>
+<!-- 第7题 -->
+<div class="answer-card correct">
+<div class="card-header">
+<div class="question-number">7</div>
+<div class="card-title">图形代数</div>
+<span class="difficulty-badge">进阶</span>
+</div>
+<div class="answer-section">
+<div class="answer-title">✅ 标准答案</div>
+<div class="answer-content">
+                    🔴 = <strong>7</strong>，🟦 = <strong>11</strong>
+                </div>
+</div>
+<div class="explanation-section">
+<div class="explanation-title">💡 详细解析</div>
+<div class="explanation-content">
+<p style="font-size: 24px; text-align: center; margin: 15px 0;">
+                        🔴 + 🔴 = 14<br/>
+                        🔴 + 🟦 = 18
+                    </p>
+<ul>
+<li><strong>第一步：</strong>从第一个式子求出 🔴</li>
+<li>🔴 + 🔴 = 14，所以 🔴 = 7</li>
+<li><strong>第二步：</strong>把 🔴 = 7 代入第二个式子</li>
+<li>7 + 🟦 = 18，所以 🟦 = 11</li>
+<li><strong>验证：</strong>7 + 7 = 14 ✓，7 + 11 = 18 ✓</li>
+</ul>
+</div>
+</div>
+<div class="tips-box">
+<div class="tips-title">💡 思维点拨</div>
+<div class="tips-content">
+                    图形代数是"代数思维"的启蒙。解题关键是：从只有一个未知数的等式开始。这道题第一个式子只有🔴，第二个式子有🔴和🟦，所以必须先解第一个式子。可以教孩子用"替换法"：求出🔴后，在心里把第二个式子中的🔴都换成7，变成"7 + 🟦 = 18"。
+                </div>
+</div>
+<div class="extension-box">
+<div class="extension-title">🚀 拓展问题</div>
+<div class="extension-content">
+                    🔴 + 🟦 = 14，🔴 - 🟦 = 4，求 🔴 和 🟦。<br/>
+<strong>答案：</strong>🔴 = 9，🟦 = 5。这是和差问题的基本形式，可以用"大数 = (和+差)÷2，小数 = (和-差)÷2"的公式。
+                </div>
+</div>
+</div>
+<!-- 第8题 -->
+<div class="answer-card correct">
+<div class="card-header">
+<div class="question-number">8</div>
+<div class="card-title">图形代数</div>
+<span class="difficulty-badge">进阶</span>
+</div>
+<div class="answer-section">
+<div class="answer-title">✅ 标准答案</div>
+<div class="answer-content">
+                    ⭐ = <strong>6</strong>，🌙 = <strong>5</strong>
+                </div>
+</div>
+<div class="explanation-section">
+<div class="explanation-title">💡 详细解析</div>
+<div class="explanation-content">
+<p style="font-size: 24px; text-align: center; margin: 15px 0;">
+                        ⭐ + ⭐ + ⭐ = 18<br/>
+                        ⭐ + 🌙 = 11
+                    </p>
+<ul>
+<li><strong>第一步：</strong>从第一个式子求出 ⭐</li>
+<li>三个⭐相加等于18，所以 ⭐ = 18 ÷ 3 = 6</li>
+<li><strong>第二步：</strong>把 ⭐ = 6 代入第二个式子</li>
+<li>6 + 🌙 = 11，所以 🌙 = 5</li>
+<li><strong>验证：</strong>6 + 6 + 6 = 18 ✓，6 + 5 = 11 ✓</li>
+</ul>
+</div>
+</div>
+<div class="tips-box">
+<div class="tips-title">💡 思维点拨</div>
+<div class="tips-content">
+                    这道题涉及"乘法思维"：三个相同的数相加等于18，可以用除法快速求解。如果孩子还没学除法，可以用枚举法：1+1+1=3，2+2+2=6...直到找到6+6+6=18。两种方法都可以，但除法更高效。可以让孩子体会：学更多的运算方法，解题会更快捷。
+                </div>
+</div>
+<div class="extension-box">
+<div class="extension-title">🚀 拓展问题</div>
+<div class="extension-content">
+                    ⭐ + ⭐ + ⭐ + 🌙 = 25，⭐ + 🌙 = 12，求 ⭐ 和 🌙。<br/>
+<strong>答案：</strong>⭐ = 6.5，🌙 = 5.5。或如果要求整数：把第一个式子改写为(⭐+🌙)+⭐+⭐=25，即12+2⭐=25，⭐=6.5。这说明整数解不存在。
+                </div>
+</div>
+</div>
+<!-- 第9题 -->
+<div class="answer-card correct">
+<div class="card-header">
+<div class="question-number">9</div>
+<div class="card-title">综合应用</div>
+<span class="difficulty-badge">进阶</span>
+</div>
+<div class="answer-section">
+<div class="answer-title">✅ 标准答案</div>
+<div class="answer-content">
+                    答案不唯一。例如：第一个数是 <strong>45</strong>，第二个数是 <strong>54</strong>（或其他相加等于99的组合）
+                </div>
+</div>
+<div class="explanation-section">
+<div class="explanation-title">💡 详细解析</div>
+<div class="explanation-content">
+<p style="font-size: 20px; text-align: center; margin: 15px 0;">
+                        ☐☐ + ☐☐ = 99
+                    </p>
+<ul>
+<li>这道题要求找出两个两位数，相加等于99</li>
+<li>可能的组合有：
+                            <ul>
+<li>10 + 89 = 99</li>
+<li>23 + 76 = 99</li>
+<li>45 + 54 = 99</li>
+<li>50 + 49 = 99</li>
+<li>...</li>
+</ul>
+</li>
+<li>实际上，只要两个数的和是99，都是正确答案</li>
+<li>最简单的规律：如果第一个数是AB，第二个数可以是(9-A)(9-B)</li>
+</ul>
+</div>
+</div>
+<div class="tips-box">
+<div class="tips-title">💡 思维点拨</div>
+<div class="tips-content">
+                    这道题设计为"开放题"，目的是让孩子理解：数字谜题不一定只有一个答案。可以引导孩子发现规律：如果两个数相加等于99，它们的个位相加等于9，十位相加也等于9。例如45+54=99，个位5+4=9，十位4+5=9。这个规律可以帮助孩子快速构造答案。
+                </div>
+</div>
+<div class="extension-box">
+<div class="extension-title">🚀 拓展问题</div>
+<div class="extension-content">
+                    ☐☐ + ☐☐ = 100，两个 ☐☐ 相同，求这个数。<br/>
+<strong>答案：</strong>50。50+50=100。这是唯一的整数解。可以让孩子思考：为什么相加等于99有多个解，而相加等于100只有一个解？（因为100是偶数，99是奇数）
+                </div>
+</div>
+</div>
+<!-- 第10题 -->
+<div class="answer-card correct">
+<div class="card-header">
+<div class="question-number">10</div>
+<div class="card-title">综合应用</div>
+<span class="difficulty-badge">拔高</span>
+</div>
+<div class="answer-section">
+<div class="answer-title">✅ 标准答案</div>
+<div class="answer-content">
+                    正确的和是 <strong>64</strong>
+                </div>
+</div>
+<div class="explanation-section">
+<div class="explanation-title">💡 详细解析</div>
+<div class="explanation-content">
+<ul>
+<li><strong>第一步：</strong>找出看错的加数</li>
+<li>个位6看成9，十位3看成5</li>
+<li>所以看错的加数是 59</li>
+<li><strong>第二步：</strong>找出正确的加数</li>
+<li>正确的加数是 36</li>
+<li><strong>第三步：</strong>找出另一个加数</li>
+<li>错误的和是87，看错的加数是59</li>
+<li>另一个加数 = 87 - 59 = 28</li>
+<li><strong>第四步：</strong>计算正确的和</li>
+<li>正确的和 = 36 + 28 = 64</li>
+</ul>
+</div>
+</div>
+<div class="tips-box">
+<div class="tips-title">💡 思维点拨</div>
+<div class="tips-content">
+                    这是一道"错中求解"的经典题型。解题关键是：虽然一个加数看错了，但另一个加数是正确的！所以可以用"错误的和 - 错误的加数 = 正确的另一个加数"，然后再用正确的两个加数重新计算。这类题可以培养孩子的"还原思维"——从错误的结果倒推正确的信息。
+                </div>
+</div>
+<div class="extension-box">
+<div class="extension-title">🚀 拓展问题</div>
+<div class="extension-content">
+                    小明做减法时，把被减数个位上的3看成了8，十位上的5看成了7，结果算出的差是24。正确的差是多少？<br/>
+<strong>答案：</strong>被减数看成了78，实际应该是53。根据78-减数=24，减数=54。正确的差=53-54=-1。这超出了小学范围，可以改为：被减数个位3看成8（多看了5），十位5看成7（多看了20），共多看了25。所以正确的差=24-25=-1。如果孩子没学负数，可以修改题目数字。
+                </div>
+</div>
+</div>
+<!-- 附加题 -->
+<div class="answer-card challenge">
+<div class="card-header">
+<div class="question-number bonus">★</div>
+<div class="card-title">思维拓展（附加题）</div>
+<span class="difficulty-badge difficulty-challenge">奥数</span>
+</div>
+<div class="answer-section">
+<div class="answer-title">✅ 标准答案</div>
+<div class="answer-content">
+                    数 = <strong>4</strong>，学 = <strong>5</strong>（或数=5，学=4）<br/>
+                    "数学"代表的数字是 <strong>45</strong>（或54）
+                </div>
+</div>
+<div class="explanation-section">
+<div class="explanation-title">💡 详细解析</div>
+<div class="explanation-content">
+<div class="vertical-math">
+                        数学<br/>
+                        + 学数<br/>
+                        <span class="line">----</span><br/>
+                        99
+                    </div>
+<ul>
+<li><strong>设未知数：</strong>设"数"=a，"学"=b</li>
+<li>"数学"表示的数值是 10a + b</li>
+<li>"学数"表示的数值是 10b + a</li>
+<li><strong>列方程：</strong>(10a + b) + (10b + a) = 99</li>
+<li><strong>化简：</strong>11a + 11b = 99</li>
+<li><strong>进一步化简：</strong>11(a + b) = 99</li>
+<li><strong>解得：</strong>a + b = 9</li>
+<li><strong>可能的解：</strong>
+                            <ul>
+<li>a=1, b=8 → 数学=18，学数=81，18+81=99 ✓</li>
+<li>a=2, b=7 → 数学=27，学数=72，27+72=99 ✓</li>
+<li>a=3, b=6 → 数学=36，学数=63，36+63=99 ✓</li>
+<li>a=4, b=5 → 数学=45，学数=54，45+54=99 ✓</li>
+<li>a=5, b=4 → 数学=54，学数=45，54+45=99 ✓</li>
+<li>...</li>
+</ul>
+</li>
+<li>答案不唯一，只要两个数字相加等于9即可</li>
+</ul>
+</div>
+</div>
+<div class="tips-box">
+<div class="tips-title">💡 思维点拨</div>
+<div class="tips-content">
+                    这是一道经典的"数字谜"奥数题，涉及"文字代表数字"的概念。关键理解："数学"不是两个独立的字，而是一个两位数，十位是"数"，个位是"学"。这道题可以引入"代数思维"的启蒙：用字母代表未知数，列方程求解。虽然孩子可能还没学方程，但可以直观理解：两个数字交换位置相加，和是99，说明这两个数字相加等于9。
+                </div>
+</div>
+<div class="extension-box">
+<div class="extension-title">🚀 拓展问题</div>
+<div class="extension-content">
+                    如果"数学"+"数学"="学数"，求"数"和"学"。<br/>
+<strong>答案：</strong>设数=a，学=b，则2×(10a+b)=10b+a，20a+2b=10b+a，19a=8b。因为a、b是一位数，所以无解。可以让孩子体会：不是所有数字谜题都有解，这也是数学的魅力之一。
+                </div>
+</div>
+</div>
+</div>
+<!-- 页脚 -->
+<div class="footer">
+<p>🌟 二年级思维训练课程 · 第05课《巧填数字》</p>
+<p style="margin-top: 10px;">答案解析仅供参考，如有疑问请联系夏老师</p>
+<p style="margin-top: 10px; font-size: 14px;">夏老师：19117803360</p>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>第05课《巧填数字》- 家长协同方案</title>
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        /* 头部样式 */
+        .header {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header .subtitle {
+            font-size: 20px;
+            opacity: 0.95;
+        }
+        
+        .header .badge {
+            display: inline-block;
+            background: #FFD700;
+            color: #333;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        
+        /* 内容区域 */
+        .content {
+            padding: 40px;
+        }
+        
+        /* 卡片样式 */
+        .card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 5px solid #660099;
+        }
+        
+        .card h2 {
+            color: #660099;
+            font-size: 24px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card h3 {
+            color: #94070A;
+            font-size: 20px;
+            margin: 20px 0 10px 0;
+        }
+        
+        .card p, .card li {
+            font-size: 17px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .card ul {
+            margin-left: 20px;
+        }
+        
+        .card li {
+            margin-bottom: 8px;
+        }
+        
+        /* 重点框 */
+        .highlight-box {
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            border: 2px solid #FFD700;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .highlight-box h3 {
+            color: #FF8F00;
+            margin-top: 0;
+        }
+        
+        /* 公式框 */
+        .formula-box {
+            background: #e3f2fd;
+            border: 2px solid #2196F3;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 18px;
+            color: #1976D2;
+            font-weight: bold;
+        }
+        
+        /* 游戏区域 */
+        .game-area {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .game-title {
+            font-size: 22px;
+            color: #2E7D32;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        /* 提示框 */
+        .tip-box {
+            background: #E3F2FD;
+            border-left: 5px solid #2196F3;
+            border-radius: 0 10px 10px 0;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .tip-title {
+            color: #1976D2;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        /* 二维码区域 */
+        .qr-section {
+            text-align: center;
+            padding: 30px;
+            background: #f5f5f5;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            background: white;
+            border: 3px solid #660099;
+            border-radius: 10px;
+            margin: 15px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #666;
+            overflow: hidden;
+        }
+        
+        .qr-code img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* 页脚 */
+        .footer {
+            background: #f5f5f5;
+            padding: 30px;
+            text-align: center;
+            color: #666;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+        
+        /* 步骤样式 */
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .step-number {
+            width: 35px;
+            height: 35px;
+            background: #660099;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .step-title {
+            font-weight: bold;
+            color: #660099;
+            margin-bottom: 5px;
+        }
+        
+        /* 数字谜题示例 */
+        .puzzle-example {
+            background: white;
+            border: 2px dashed #660099;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: 20px;
+        }
+        
+        .vertical-equation {
+            display: inline-block;
+            text-align: right;
+            line-height: 1.5;
+        }
+        
+        /* 竖式样式 */
+        .vertical-math {
+            font-family: 'Courier New', monospace;
+            font-size: 24px;
+            line-height: 1.6;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .vertical-math .line {
+            border-bottom: 2px solid #333;
+            display: inline-block;
+            padding: 0 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+<!-- 头部 -->
+<div class="header">
+<h1>🔢 第05课《巧填数字》</h1>
+<div class="subtitle">家长协同方案</div>
+<div class="badge">🏠 家庭学习指南</div>
+</div>
+<!-- 内容区域 -->
+<div class="content">
+<!-- 学习目标 -->
+<div class="card">
+<h2>🎯 学习目标</h2>
+<p>通过本课学习，孩子将能够：</p>
+<ul>
+<li>理解数字谜题的基本类型和解题思路</li>
+<li>掌握竖式数字谜的填数方法</li>
+<li>学会运用倒推法和枚举法解决数字问题</li>
+<li>培养逻辑推理和数学思维能力</li>
+</ul>
+</div>
+<!-- 核心知识点 -->
+<div class="card">
+<h2>📚 核心知识点</h2>
+<h3>1️⃣ 竖式数字谜</h3>
+<div class="puzzle-example">
+<div class="vertical-equation">
+                    3☐ + ☐5 = 58<br/>
+                    求：☐ = ?
+                </div>
+</div>
+<div class="formula-box">
+                解题思路：从个位开始分析 → 考虑进位 → 逐步推导
+            </div>
+<div class="highlight-box">
+<h3>🔑 关键技巧</h3>
+<p><strong>技巧一：从个位开始</strong></p>
+<p>竖式计算从右往左，所以解谜也从个位开始分析。</p>
+<p><strong>技巧二：考虑进位</strong></p>
+<p>加法中，两个数字相加可能产生进位（≥10），这是解题的关键。</p>
+<p><strong>技巧三：枚举验证</strong></p>
+<p>当有多种可能时，可以逐个尝试，验证哪个符合要求。</p>
+</div>
+<h3>2️⃣ 横式数字谜</h3>
+<div class="puzzle-example">
+                12 + ☐ = 20 - 3<br/>
+                求：☐ = ?
+            </div>
+<div class="tip-box">
+<div class="tip-title">💡 解题方法</div>
+<p>先计算等式一边的确定值，再用倒推法求未知数。</p>
+<p>上例：右边 20 - 3 = 17，所以 12 + ☐ = 17，☐ = 5</p>
+</div>
+<h3>3️⃣ 图形代数</h3>
+<div class="puzzle-example">
+                🔴 + 🔴 + 🔴 = 15<br/>
+                🔴 + 🟦 = 9<br/>
+                求：🔴 = ? ，🟦 = ?
+            </div>
+<div class="tip-box">
+<div class="tip-title">💡 解题策略</div>
+<p>第一步：从只有一个未知数的等式开始</p>
+<p>第二步：求出一个图形代表的数字</p>
+<p>第三步：代入其他等式求解</p>
+</div>
+</div>
+<!-- 课前准备 -->
+<div class="card">
+<h2>🎒 课前准备</h2>
+<div class="step">
+<div class="step-number">1</div>
+<div class="step-content">
+<div class="step-title">知识复习</div>
+<p>回顾100以内加减法的竖式计算，特别是进位和退位的概念。</p>
+</div>
+</div>
+<div class="step">
+<div class="step-number">2</div>
+<div class="step-content">
+<div class="step-title">材料准备</div>
+<p>准备草稿纸、铅笔、橡皮，方便孩子试算和修改。</p>
+</div>
+</div>
+<div class="step">
+<div class="step-number">3</div>
+<div class="step-content">
+<div class="step-title">心理准备</div>
+<p>告诉孩子数字谜题就像"数学侦探游戏"，需要耐心和细心，错了可以重新尝试。</p>
+</div>
+</div>
+</div>
+<!-- 家庭练习活动 -->
+<div class="card">
+<h2>🏠 家庭练习活动</h2>
+<div class="game-area">
+<div class="game-title">🎮 活动一：数字侦探</div>
+<p style="margin-bottom: 15px;">家长和孩子一起解决下面的数字谜题：</p>
+<div class="puzzle-example">
+<div class="vertical-equation">
+                        2☐<br/>
+                        + ☐7<br/>
+                        ----<br/>
+                        61
+                    </div>
+</div>
+<p style="color: #666; margin-top: 10px;">提示：从个位开始分析，☐ + 7 的个位是1，说明有进位</p>
+</div>
+<div class="game-area" style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);">
+<div class="game-title" style="color: #E65100;">🎮 活动二：图形密码</div>
+<p style="margin-bottom: 15px;">用图形代表数字，让孩子体验"代数"思维：</p>
+<div class="puzzle-example">
+                    ⭐ + ⭐ = 12<br/>
+                    ⭐ + 🌙 = 15<br/>
+                    求：⭐ = ? ，🌙 = ?
+                </div>
+<p style="color: #666; margin-top: 10px;">先求⭐，再代入第二个式子求🌙</p>
+</div>
+<div class="game-area" style="background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);">
+<div class="game-title" style="color: #C2185B;">🎮 活动三：创编谜题</div>
+<p>鼓励孩子自己创编数字谜题，给家长或其他家人挑战。</p>
+<p style="color: #666; margin-top: 10px;">创编谜题能帮助孩子更深入理解数字关系</p>
+</div>
+</div>
+<!-- 常见困难与对策 -->
+<div class="card">
+<h2>💡 常见困难与对策</h2>
+<table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+<tr style="background: #660099; color: white;">
+<th style="padding: 12px; text-align: left; border: 1px solid #ddd;">常见困难</th>
+<th style="padding: 12px; text-align: left; border: 1px solid #ddd;">解决对策</th>
+</tr>
+<tr>
+<td style="padding: 12px; border: 1px solid #ddd;">忘记考虑进位</td>
+<td style="padding: 12px; border: 1px solid #ddd;">提醒孩子：两个数字相加，最大可能是 9+9=18，所以进位只能是1</td>
+</tr>
+<tr style="background: #f9f9f9;">
+<td style="padding: 12px; border: 1px solid #ddd;">不知道从哪入手</td>
+<td style="padding: 12px; border: 1px solid #ddd;">引导孩子：从个位开始，或者从只有一个未知数的式子开始</td>
+</tr>
+<tr>
+<td style="padding: 12px; border: 1px solid #ddd;">试算时混乱</td>
+<td style="padding: 12px; border: 1px solid #ddd;">教孩子有序枚举：从0到9逐个尝试，做好记录</td>
+</tr>
+<tr style="background: #f9f9f9;">
+<td style="padding: 12px; border: 1px solid #ddd;">缺乏耐心</td>
+<td style="padding: 12px; border: 1px solid #ddd;">把大题拆成小步骤，每完成一步给予鼓励</td>
+</tr>
+</table>
+</div>
+<!-- 教学建议 -->
+<div class="card">
+<h2>🎓 给家长的建议</h2>
+<div class="highlight-box">
+<h3>✅ 鼓励尝试</h3>
+<p>数字谜题允许试错，鼓励孩子大胆尝试，错了再换，培养 resilience（抗挫折能力）。</p>
+</div>
+<div class="highlight-box" style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-color: #4CAF50;">
+<h3 style="color: #2E7D32;">✅ 引导而非告知</h3>
+<p>当孩子卡住时，不要直接告诉答案，而是用问题引导：</p>
+<ul>
+<li>"你觉得个位上应该填几？"</li>
+<li>"如果这里填5，会发生什么？"</li>
+<li>"还有其他的可能吗？"</li>
+</ul>
+</div>
+<div class="highlight-box" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-color: #2196F3;">
+<h3 style="color: #1976D2;">✅ 联系生活</h3>
+<p>把数字谜题和生活场景联系起来：</p>
+<ul>
+<li>"就像解密码锁一样，需要找到正确的数字组合"</li>
+<li>"就像侦探破案，要根据线索推理"</li>
+</ul>
+</div>
+</div>
+<!-- 下节课预告 -->
+<div class="card" style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); border-color: #9C27B0;">
+<h2 style="color: #7B1FA2;">🔮 下节课预告</h2>
+<p><strong>第06课《图形数一数》</strong></p>
+<p>我们将学习：</p>
+<ul>
+<li>如何有序地数图形（不重复、不遗漏）</li>
+<li>复杂图形中的基本图形计数</li>
+<li>分类计数的方法和技巧</li>
+</ul>
+<p style="margin-top: 15px; color: #666;">📅 请提醒孩子带好学具，准备好探索图形的奥秘！</p>
+</div>
+<!-- 二维码区域 -->
+<div class="qr-section">
+<h3 style="color: #660099; margin-bottom: 15px;">📱 联系夏老师</h3>
+<p style="margin-bottom: 15px;">如有任何问题，欢迎随时联系</p>
+<div class="qr-code">
+<img alt="夏老师微信二维码" src="code.jpg"/>
+</div>
+<p style="color: #666; font-size: 14px;">夏老师：19117803360</p>
+</div>
+</div>
+<!-- 页脚 -->
+<div class="footer">
+<p>🌟 二年级思维训练课程 · 第05课《巧填数字》</p>
+<p style="margin-top: 10px;">让数学思维在快乐中成长</p>
+</div>
+</div>
+</body>
+</html>
