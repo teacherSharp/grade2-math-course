@@ -815,7 +815,7 @@
 <div class="game-area" style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);">
 <h3 style="color: #E65100; margin-bottom: 20px;">横式谜题</h3>
 <div style="font-size: 28px; margin-bottom: 20px;">
-                    35 + ☐ = 60 - ☐
+                    20 + ☐ = 60 - ☐
                 </div>
 <p style="font-size: 18px;">两个 ☐ 填相同的数字</p>
 <div style="margin-top: 20px;">
@@ -827,12 +827,12 @@
 <div class="content-card" style="margin-top: 20px;">
 <h3>🔍 解题思路</h3>
 <p style="font-size: 17px; line-height: 1.8;">
-                    设 ☐ = x，则 35 + x = 60 - x<br/>
-                    移项得：x + x = 60 - 35<br/>
-                    2x = 25，所以 x = 12.5？<br/>
-                    <span style="color: #f44336;">等等，这不是整数！说明题目有问题吗？</span><br/>
-                    <span style="color: #4CAF50;">实际上，如果允许小数，答案就是12.5。但在小学阶段，我们通常要求整数解。</span>
-</p>
+                    设 ☐ = x，则 20 + x = 60 - x<br/>
+                    移项得：x + x = 60 - 20<br/>
+                    2x = 40<br/>
+                    x = <strong>20</strong><br/>
+                    <span style="color: #4CAF50;">验证：20 + 20 = 40，60 - 20 = 40 ✓</span>
+                </p>
 </div>
 <div style="text-align: center; margin-top: 20px;">
 <button class="btn" onclick="nextSlide()">学习总结 👉</button>
@@ -1117,14 +1117,14 @@
             const a1 = document.getElementById('q16_1').value;
             const feedback = document.getElementById('feedback16');
             
-            // 35 + x = 60 - x
-            // 2x = 25
-            // x = 12.5
-            if (a1 === '12.5' || a1 === '12') {
-                feedback.textContent = '🎉 正确！35+12.5=47.5，60-12.5=47.5（或近似整数解12）';
+            // 20 + x = 60 - x
+            // 2x = 40
+            // x = 20
+            if (a1 === '20') {
+                feedback.textContent = '🎉 正确！20+20=40，60-20=40';
                 feedback.className = 'feedback correct';
             } else {
-                feedback.textContent = '❌ 设☐=x，35+x=60-x，解这个方程';
+                feedback.textContent = '❌ 设☐=x，20+x=60-x，2x=40';
                 feedback.className = 'feedback wrong';
             }
         }
