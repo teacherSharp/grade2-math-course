@@ -627,48 +627,57 @@
 <div class="answer-card correct">
 <div class="card-header">
 <div class="question-number">9</div>
-<div class="card-title">综合应用</div>
+<div class="card-title">减法竖式谜</div>
 <span class="difficulty-badge">进阶</span>
 </div>
 <div class="answer-section">
 <div class="answer-title">✅ 标准答案</div>
 <div class="answer-content">
-                    答案不唯一。例如：第一个数是 <strong>45</strong>，第二个数是 <strong>54</strong>（或其他相加等于99的组合）
+                    被减数个位 ☐ = <strong>6</strong>，减数十位 ☐ = <strong>5</strong>
                 </div>
 </div>
 <div class="explanation-section">
 <div class="explanation-title">💡 详细解析</div>
 <div class="explanation-content">
-<p style="font-size: 20px; text-align: center; margin: 15px 0;">
-                        ☐☐ + ☐☐ = 99
-                    </p>
+<div class="vertical-math">
+                        <table>
+                            <tr><td></td><td>8</td><td>6</td></tr>
+                            <tr><td class="operator">-</td><td>5</td><td>7</td></tr>
+                            <tr class="line"><td></td><td></td><td></td></tr>
+                            <tr><td></td><td>2</td><td>9</td></tr>
+                        </table>
+                    </div>
 <ul>
-<li>这道题要求找出两个两位数，相加等于99</li>
-<li>可能的组合有：
+<li><strong>第一步：分析个位</strong>
                             <ul>
-<li>10 + 89 = 99</li>
-<li>23 + 76 = 99</li>
-<li>45 + 54 = 99</li>
-<li>50 + 49 = 99</li>
-<li>...</li>
+<li>个位上：☐ - 7 = 9</li>
+<li>因为 9 + 7 = 16，所以被减数个位是 6</li>
+<li>6 减 7 不够，需要向十位借 1，变成 16 - 7 = 9 ✓</li>
 </ul>
 </li>
-<li>实际上，只要两个数的和是99，都是正确答案</li>
-<li>最简单的规律：如果第一个数是AB，第二个数可以是(9-A)(9-B)</li>
+<li><strong>第二步：分析十位</strong>
+                            <ul>
+<li>被减数十位原来是 8，借走 1 后剩 7</li>
+<li>7 - ☐ = 2，所以减数十位是 5</li>
+<li>验证：7 - 5 = 2 ✓</li>
+</ul>
+</li>
+<li><strong>验证：</strong>86 - 57 = 29 ✓</li>
 </ul>
 </div>
 </div>
 <div class="tips-box">
 <div class="tips-title">💡 思维点拨</div>
 <div class="tips-content">
-                    这道题设计为"开放题"，目的是让孩子理解：数字谜题不一定只有一个答案。可以引导孩子发现规律：如果两个数相加等于99，它们的个位相加等于9，十位相加也等于9。例如45+54=99，个位5+4=9，十位4+5=9。这个规律可以帮助孩子快速构造答案。
+                    减法竖式谜题的关键是判断是否需要<strong>借位</strong>。当被减数的某位小于减数的对应位时，就需要向高位借1当10。借位后，被减数的高位要减1。这道题中，个位 6 < 7，需要借位；借位后十位 8 变成 7，正好可以减 5 得到 2。
                 </div>
 </div>
 <div class="extension-box">
 <div class="extension-title">🚀 拓展问题</div>
 <div class="extension-content">
-                    ☐☐ + ☐☐ = 100，两个 ☐☐ 相同，求这个数。<br/>
-<strong>答案：</strong>50。50+50=100。这是唯一的整数解。可以让孩子思考：为什么相加等于99有多个解，而相加等于100只有一个解？（因为100是偶数，99是奇数）
+                    如果竖式变成：<br/>
+                    7☐ - ☐8 = 29，答案是多少？<br/>
+<strong>答案：</strong>被减数个位是 7，减数十位是 4。77 - 48 = 29。注意这里个位 7 < 8 需要借位，借位后十位 7 变 6，6 - 4 = 2。
                 </div>
 </div>
 </div>
