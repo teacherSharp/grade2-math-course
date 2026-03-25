@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第08课 阶段游戏 - 家长协同方案（奥数巅峰版）</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 35px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #660099;
+        }
+        
+        .section h2 {
+            color: #660099;
+            font-size: 24px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section p, .section li {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+        }
+        
+        .section ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .section li {
+            margin-bottom: 8px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #2196F3;
+        }
+        
+        .tip-box {
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #FF9800;
+        }
+        
+        .activity-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            transition: all 0.3s;
+        }
+        
+        .activity-card:hover {
+            border-color: #660099;
+            box-shadow: 0 5px 15px rgba(102, 0, 153, 0.1);
+        }
+        
+        .activity-card h3 {
+            color: #660099;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .olympiad-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #fff;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .qr-section {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .qr-section h3 {
+            color: #660099;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info {
+            background: white;
+            border: 3px solid #660099;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px auto;
+            max-width: 300px;
+        }
+        
+        .phone-number {
+            font-size: 24px;
+            color: #660099;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            margin: 15px auto;
+            background: white;
+            border: 2px solid #660099;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        
+        .qr-code img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 5px;
+        }
+        
+        .next-lesson {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border: 2px solid #4CAF50;
+        }
+        
+        .next-lesson h3 {
+            color: #2E7D32;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #f5f5f5;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .difficulty-tag {
+            display: inline-block;
+            background: #FFEBEE;
+            color: #C62828;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 第08课 阶段游戏</h1>
+            <p>奥数巅峰挑战 · 华罗庚金杯难度 · 家长协同方案</p>
+        </div>
+        
+        <div class="content">
+            <!-- 课程主题与目标 -->
+            <div class="section">
+                <h2>🎯 课程主题与目标</h2>
+                <div class="olympiad-badge">🏆 奥数巅峰难度</div>
+                <p>本课是第一阶段的总结课程，采用<strong>奥数竞赛</strong>形式，通过团队挑战检验前7课的奥数学习成果。题目难度达到<strong>华罗庚金杯、希望杯</strong>水平。</p>
+                <div class="highlight-box">
+                    <strong>奥数复习内容：</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>第01课：三级等差数列、双重数列进阶、平方数列、阶乘数列</li>
+                        <li>第02课：复杂图形计数（正方形公式、长方形公式、三角形计数）</li>
+                        <li>第03课：复杂数字迷宫、多路径规划</li>
+                        <li>第04课：多人排序、复杂位置关系推理</li>
+                        <li>第05课：复杂竖式谜、汉字数字谜、图形代数</li>
+                        <li>第06课：6×6数独、高级解题技巧</li>
+                        <li>第07课：复杂比较推理、列表推理法、体育比赛逻辑</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 课前准备 -->
+            <div class="section">
+                <h2>📋 课前准备</h2>
+                <p>本课为奥数巅峰竞赛课，建议家长协助孩子做好以下准备：</p>
+                <ul>
+                    <li>提醒孩子带齐学习用品（铅笔、橡皮、尺子、草稿纸）</li>
+                    <li>确保孩子充足睡眠，以饱满精神参与竞赛</li>
+                    <li>鼓励孩子积极参与团队合作，培养竞赛意识</li>
+                    <li>可以和孩子一起回顾前7课的奥数重点内容</li>
+                    <li>心理准备：题目较难，重在参与和学习</li>
+                </ul>
+            </div>
+            
+            <!-- 课堂重点回顾 -->
+            <div class="section">
+                <h2>📝 课堂重点回顾</h2>
+                <p>本课采用<strong>奥数竞赛</strong>形式，主要环节包括：</p>
+                
+                <div class="activity-card">
+                    <h3>🎮 环节一：奥数数字炸弹 <span class="difficulty-tag">★★★★★</span></h3>
+                    <p>挑战三级等差数列、双重数列进阶、平方数列、阶乘数列等奥数难题，培养快速反应和深度思考能力</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>🔷 环节二：图形计数大师 <span class="difficulty-tag">★★★★★</span></h3>
+                    <p>运用公式法数正方形（1²+2²+...+n²）、长方形计数公式（C(n+1,2)×C(m+1,2)），解决复杂图形计数问题</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>🧩 环节三：数独达人 <span class="difficulty-tag">★★★★★</span></h3>
+                    <p>团队合作完成6×6数独，运用排除法、唯一候选数法、隐性唯一法、区块排除法等高级技巧</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>🕵️ 环节四：推理小侦探 <span class="difficulty-tag">★★★★★</span></h3>
+                    <p>攻克多条件综合逻辑推理题，包括复杂比较推理、列表推理法、体育比赛逻辑问题</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>🏆 环节五：奥数之王终极挑战 <span class="difficulty-tag">★★★★★</span></h3>
+                    <p>60秒限时答题，5道奥数巅峰综合题，检验第一阶段学习成果</p>
+                </div>
+            </div>
+            
+            <!-- 家庭巩固练习 -->
+            <div class="section">
+                <h2>🏠 家庭巩固练习</h2>
+                <p>为了帮助孩子巩固第一阶段的奥数学习成果，建议在家进行以下活动：</p>
+                
+                <div class="activity-card">
+                    <h3>活动1：家庭奥数挑战赛 🏆</h3>
+                    <p>准备华罗庚金杯、希望杯二年级组真题，全家一起挑战。可以购买《华罗庚金杯少年数学邀请赛试题解析》等参考书。</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>活动2：数独进阶训练 🧩</h3>
+                    <p>练习6×6数独和9×9数独，培养逻辑推理能力。推荐APP：数独玩家、Sudoku.com</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>活动3：生活中的奥数推理 🕵️</h3>
+                    <p>在日常生活中引导孩子进行奥数推理，例如："如果小明比小红高，小红比小刚高，那么谁最高？"</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>活动4：图形计数游戏 🔷</h3>
+                    <p>在方格纸上画出不同大小的方格，让孩子用公式法计算正方形和长方形的数量。</p>
+                </div>
+            </div>
+            
+            <!-- 亲子互动建议 -->
+            <div class="section">
+                <h2>👨‍👩‍👧 亲子互动建议</h2>
+                <div class="tip-box">
+                    <strong>💡 给家长的建议：</strong>
+                    <ul style="margin-top: 10px;">
+                        <li><strong>正确看待难度：</strong>奥数题目确实较难，孩子做错很正常，重点是培养思维能力</li>
+                        <li><strong>积极鼓励：</strong>无论竞赛结果如何，都要肯定孩子的努力和进步</li>
+                        <li><strong>关注过程：</strong>询问孩子在游戏中学到了什么，而不仅仅是得分</li>
+                        <li><strong>团队合作：</strong>强调团队协作的重要性，而非个人胜负</li>
+                        <li><strong>建立错题本：</strong>帮助孩子记录易错知识点，定期复习</li>
+                        <li><strong>保持兴趣：</strong>通过游戏方式继续练习，保持学习热情</li>
+                        <li><strong>循序渐进：</strong>如果孩子觉得太难，可以先从简单题目开始</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 常见问题解答 -->
+            <div class="section">
+                <h2>❓ 常见问题解答</h2>
+                <div class="highlight-box">
+                    <p><strong>Q：奥数题目太难了，孩子做不出来怎么办？</strong></p>
+                    <p>A：奥数本身就有一定难度，二年级孩子刚开始接触，做不出来很正常。建议从简单题目开始，逐步提升难度，重点是培养思维习惯。</p>
+                </div>
+                <div class="highlight-box">
+                    <p><strong>Q：孩子在竞赛中表现不理想怎么办？</strong></p>
+                    <p>A：竞赛的目的是检验学习效果和培养竞争意识，不是排名。帮助孩子分析原因，鼓励下次继续努力。</p>
+                </div>
+                <div class="highlight-box">
+                    <p><strong>Q：如何帮助孩子复习前7课奥数内容？</strong></p>
+                    <p>A：可以让孩子当"小老师"，给家长讲解学过的知识。教是最好的学。也可以一起完成课后练习题。</p>
+                </div>
+                <div class="highlight-box">
+                    <p><strong>Q：需要购买额外的奥数教材吗？</strong></p>
+                    <p>A：如果孩子学有余力，可以购买《举一反三》、《高思竞赛数学课本》等经典奥数教材作为补充。</p>
+                </div>
+                <div class="highlight-box">
+                    <p><strong>Q：下一阶段学习什么内容？</strong></p>
+                    <p>A：第二阶段（第9-16课）将学习：找规律填数、图形计数进阶、简单应用题、趣味速算、间隔问题、年龄问题、移多补少等内容，最后以阶段测评结束。</p>
+                </div>
+            </div>
+            
+            <!-- 下节课预告 -->
+            <div class="next-lesson">
+                <h3>📢 下节课预告</h3>
+                <p><strong>第09课：找规律填数</strong></p>
+                <p>我们将学习等差数列、递推数列、斐波那契数列等奥数内容，开启第二阶段的思维拓展之旅！难度依然是奥数竞赛级别。</p>
+            </div>
+            
+            <!-- 联系老师 -->
+            <div class="qr-section">
+                <h3>📱 联系夏老师</h3>
+                <div class="contact-info">
+                    <div class="phone-number">📞 19117803360</div>
+                    <div style="font-size: 14px; color: #666; margin-bottom: 15px;">
+                        欢迎随时咨询奥数学习问题
+                    </div>
+                    <div class="qr-code">
+                        <img src="../code.jpg" alt="夏老师微信二维码" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'font-size: 12px; color: #999;\'>二维码加载失败</div>';">
+                    </div>
+                </div>
+                <div style="font-size: 14px; color: #666; margin-top: 15px;">
+                    如有任何问题，欢迎随时联系<br>
+                    夏老师将为您提供专业奥数指导
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>🌟 让我们共同努力，让奥数成为孩子思维成长的阶梯！</p>
+            <p style="margin-top: 10px;">—— 夏老师</p>
+        </div>
+    </div>
+</body>
+</html>

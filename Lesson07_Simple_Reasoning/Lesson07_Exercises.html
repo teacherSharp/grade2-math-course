@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第07课 简单推理 - 课后练习题</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .question-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 5px solid #660099;
+            transition: all 0.3s ease;
+        }
+        
+        .question-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(102, 0, 153, 0.1);
+        }
+        
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .question-number {
+            font-size: 20px;
+            font-weight: bold;
+            color: #660099;
+        }
+        
+        .difficulty {
+            font-size: 16px;
+            color: #FF9800;
+        }
+        
+        .question-content {
+            font-size: 18px;
+            color: #333;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .answer-input {
+            width: 200px;
+            height: 45px;
+            font-size: 18px;
+            text-align: center;
+            border: 3px solid #660099;
+            border-radius: 10px;
+            margin-right: 10px;
+        }
+        
+        .answer-input.correct {
+            border-color: #4CAF50;
+            background: #E8F5E9;
+        }
+        
+        .answer-input.wrong {
+            border-color: #f44336;
+            background: #FFEBEE;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 0, 153, 0.4);
+        }
+        
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 16px;
+            display: none;
+        }
+        
+        .feedback.success {
+            background: #E8F5E9;
+            color: #2E7D32;
+            border: 2px solid #4CAF50;
+            display: block;
+        }
+        
+        .feedback.error {
+            background: #FFEBEE;
+            color: #C62828;
+            border: 2px solid #f44336;
+            display: block;
+        }
+        
+        .bonus-question {
+            background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%);
+            border: 3px solid #f44336;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+        
+        .bonus-question .question-number {
+            color: #C62828;
+            font-size: 22px;
+        }
+        
+        .bonus-badge {
+            display: inline-block;
+            background: #f44336;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        
+        .hint-btn {
+            background: #FF9800;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            font-size: 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .hint-box {
+            background: #FFF8E1;
+            border-left: 4px solid #FF9800;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 0 8px 8px 0;
+            display: none;
+        }
+        
+        .emoji {
+            font-size: 1.3em;
+        }
+        
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 24px;
+            }
+            .content {
+                padding: 20px;
+            }
+            .question-card {
+                padding: 15px;
+            }
+            .answer-input {
+                width: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>第07课 简单推理</h1>
+            <div class="subtitle">课后练习题</div>
+        </div>
+        
+        <div class="content">
+            <!-- 第1题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">第1题 ★☆☆☆☆</div>
+                    <div class="difficulty">基础巩固</div>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">🐱</span>小猫、<span class="emoji">🐶</span>小狗、<span class="emoji">🐰</span>小兔比赛跳远。<br>
+                    小猫跳得比小狗远，小狗跳得比小兔远。<br><br>
+                    <strong>请问：谁跳得最远？谁跳得最近？</strong>
+                </div>
+                <div>
+                    <input type="text" class="answer-input" id="q1" placeholder="输入答案">
+                    <button class="btn" onclick="checkQ1()">检查</button>
+                </div>
+                <button class="hint-btn" onclick="toggleHint('h1')">💡 提示</button>
+                <div id="h1" class="hint-box">按远近排列：小猫 → 小狗 → 小兔</div>
+                <div id="f1" class="feedback"></div>
+            </div>
+            
+            <!-- 第2题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">第2题 ★☆☆☆☆</div>
+                    <div class="difficulty">基础巩固</div>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">🍎</span>苹果、<span class="emoji">🍊</span>橙子、<span class="emoji">🍇</span>葡萄三个水果比大小。<br>
+                    苹果比橙子大，葡萄比橙子小。<br><br>
+                    <strong>请问：最大的水果是什么？最小的水果是什么？</strong>
+                </div>
+                <div>
+                    <input type="text" class="answer-input" id="q2" placeholder="输入答案">
+                    <button class="btn" onclick="checkQ2()">检查</button>
+                </div>
+                <button class="hint-btn" onclick="toggleHint('h2')">💡 提示</button>
+                <div id="h2" class="hint-box">按大小排列：苹果 > 橙子 > 葡萄</div>
+                <div id="f2" class="feedback"></div>
+            </div>
+            
+            <!-- 第3题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">第3题 ★★☆☆☆</div>
+                    <div class="difficulty">思维拓展</div>
+                </div>
+                <div class="question-content">
+                    小明、小红、小华三人参加跑步比赛。<br>
+                    小明不是第一名，小红是第二名。<br><br>
+                    <strong>请问：谁是第一名？谁是第三名？</strong>
+                </div>
+                <div>
+                    <input type="text" class="answer-input" id="q3" placeholder="输入答案">
+                    <button class="btn" onclick="checkQ3()">检查</button>
+                </div>
+                <button class="hint-btn" onclick="toggleHint('h3')">💡 提示</button>
+                <div id="h3" class="hint-box">小红是第二名，小明不是第一名，那么...</div>
+                <div id="f3" class="feedback"></div>
+            </div>
+            
+            <!-- 第4题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">第4题 ★★☆☆☆</div>
+                    <div class="difficulty">思维拓展</div>
+                </div>
+                <div class="question-content">
+                    三个小朋友 <span class="emoji">👦</span>小明、<span class="emoji">👧</span>小红、<span class="emoji">👶</span>小华分别喜欢红色、黄色、蓝色中的一种颜色。<br><br>
+                    • 小明说："我不喜欢红色。"<br>
+                    • 小红说："我喜欢黄色。"<br><br>
+                    <strong>请问：小明喜欢什么颜色？</strong>
+                </div>
+                <div>
+                    <input type="text" class="answer-input" id="q4" placeholder="输入答案">
+                    <button class="btn" onclick="checkQ4()">检查</button>
+                </div>
+                <button class="hint-btn" onclick="toggleHint('h4')">💡 提示</button>
+                <div id="h4" class="hint-box">小红喜欢黄色，小明不喜欢红色，那么小明喜欢...</div>
+                <div id="f4" class="feedback"></div>
+            </div>
+            
+            <!-- 第5题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">第5题 ★★★☆☆</div>
+                    <div class="difficulty">挑战提升</div>
+                </div>
+                <div class="question-content">
+                    王叔叔、李阿姨、张伯伯三人，分别是医生、老师、警察。<br><br>
+                    • 王叔叔不是医生<br>
+                    • 李阿姨不是老师<br>
+                    • 张伯伯是警察<br><br>
+                    <strong>请问：王叔叔是什么职业？</strong>
+                </div>
+                <div>
+                    <input type="text" class="answer-input" id="q5" placeholder="输入答案">
+                    <button class="btn" onclick="checkQ5()">检查</button>
+                </div>
+                <button class="hint-btn" onclick="toggleHint('h5')">💡 提示</button>
+                <div id="h5" class="hint-box">张伯伯是警察，王叔叔不是医生，所以王叔叔是...</div>
+                <div id="f5" class="feedback"></div>
+            </div>
+            
+            <!-- 第6题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">第6题 ★★★☆☆</div>
+                    <div class="difficulty">挑战提升</div>
+                </div>
+                <div class="question-content">
+                    四个小朋友排成一排照相。<br><br>
+                    • 小明站在最左边<br>
+                    • 小红站在小明的右边<br>
+                    • 小华站在最右边<br><br>
+                    <strong>请问：从左到右，四个人的顺序是什么？</strong>
+                </div>
+                <div>
+                    <input type="text" class="answer-input" id="q6" placeholder="输入答案">
+                    <button class="btn" onclick="checkQ6()">检查</button>
+                </div>
+                <button class="hint-btn" onclick="toggleHint('h6')">💡 提示</button>
+                <div id="h6" class="hint-box">从左到右：小明、小红、？、小华</div>
+                <div id="f6" class="feedback"></div>
+            </div>
+            
+            <!-- 第7题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">第7题 ★★★★☆</div>
+                    <div class="difficulty">烧脑挑战</div>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">🐰</span>兔子、<span class="emoji">🐢</span>乌龟、<span class="emoji">🐿️</span>松鼠、<span class="emoji">🦊</span>狐狸比赛跑步。<br><br>
+                    • 兔子比乌龟跑得快<br>
+                    • 松鼠不是最后一名<br>
+                    • 乌龟不是第一名<br>
+                    • 狐狸比兔子跑得慢<br><br>
+                    <strong>请问：谁是第一名？</strong>
+                </div>
+                <div>
+                    <input type="text" class="answer-input" id="q7" placeholder="输入答案">
+                    <button class="btn" onclick="checkQ7()">检查</button>
+                </div>
+                <button class="hint-btn" onclick="toggleHint('h7')">💡 提示</button>
+                <div id="h7" class="hint-box">兔子比乌龟快，狐狸比兔子慢，所以兔子比狐狸和乌龟都快...</div>
+                <div id="f7" class="feedback"></div>
+            </div>
+            
+            <!-- 第8题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">第8题 ★★★★☆</div>
+                    <div class="difficulty">烧脑挑战</div>
+                </div>
+                <div class="question-content">
+                    三个小朋友小明、小红、小华，分别拿着 <span class="emoji">🔴</span>红球、<span class="emoji">🟡</span>黄球、<span class="emoji">🔵</span>蓝球。<br><br>
+                    • 小明说："我拿的不是红球。"<br>
+                    • 小红说："我拿的不是黄球。"<br>
+                    • 小华说："小明拿的是蓝球。"<br><br>
+                    <strong>请问：小红拿的是什么颜色的球？</strong>
+                </div>
+                <div>
+                    <input type="text" class="answer-input" id="q8" placeholder="输入答案">
+                    <button class="btn" onclick="checkQ8()">检查</button>
+                </div>
+                <button class="hint-btn" onclick="toggleHint('h8')">💡 提示</button>
+                <div id="h8" class="hint-box">小华说小明拿蓝球，小明说自己不拿红球，这两个条件一致...</div>
+                <div id="f8" class="feedback"></div>
+            </div>
+            
+            <!-- 第9题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">第9题 ★★★★★</div>
+                    <div class="difficulty">终极挑战</div>
+                </div>
+                <div class="question-content">
+                    四个同学 A、B、C、D 参加数学竞赛，获得了第1、2、3、4名（没有并列）。<br><br>
+                    • A 不是第1名也不是第4名<br>
+                    • B 不是第2名<br>
+                    • C 比 B 名次高<br>
+                    • D 是第4名<br><br>
+                    <strong>请问：谁是第1名？</strong>
+                </div>
+                <div>
+                    <input type="text" class="answer-input" id="q9" placeholder="输入答案">
+                    <button class="btn" onclick="checkQ9()">检查</button>
+                </div>
+                <button class="hint-btn" onclick="toggleHint('h9')">💡 提示</button>
+                <div id="h9" class="hint-box">D是第4名，A不是第1也不是第4，所以A是第2或第3...</div>
+                <div id="f9" class="feedback"></div>
+            </div>
+            
+            <!-- 第10题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">第10题 ★★★★★</div>
+                    <div class="difficulty">终极挑战</div>
+                </div>
+                <div class="question-content">
+                    小明、小红、小华三人，他们的爸爸分别是医生、教师、工程师。<br><br>
+                    • 小明的爸爸不是医生<br>
+                    • 小红的爸爸不是教师<br>
+                    • 小华说："我爸爸的职业和小明爸爸不同，和小红爸爸也不同。"<br><br>
+                    <strong>请问：小红的爸爸是什么职业？</strong>
+                </div>
+                <div>
+                    <input type="text" class="answer-input" id="q10" placeholder="输入答案">
+                    <button class="btn" onclick="checkQ10()">检查</button>
+                </div>
+                <button class="hint-btn" onclick="toggleHint('h10')">💡 提示</button>
+                <div id="h10" class="hint-box">小华爸爸的职业和小明、小红都不同，说明三家爸爸职业各不相同...</div>
+                <div id="f10" class="feedback"></div>
+            </div>
+            
+            <!-- 附加题 -->
+            <div class="bonus-question">
+                <div class="question-header">
+                    <div class="question-number">★ 思维拓展 <span class="bonus-badge">奥数拔高</span></div>
+                </div>
+                <div class="question-content">
+                    <strong>逻辑大师挑战</strong><br><br>
+                    五个小朋友 A、B、C、D、E 站成一排。<br><br>
+                    • A 站在最左边<br>
+                    • B 站在 E 的左边<br>
+                    • C 站在 B 的右边，D 的左边<br>
+                    • D 不是最右边<br><br>
+                    <strong>请问：从左到右，五个人的顺序是什么？</strong>
+                </div>
+                <div>
+                    <input type="text" class="answer-input" id="bonus" placeholder="输入答案" style="width: 300px;">
+                    <button class="btn" onclick="checkBonus()">检查</button>
+                </div>
+                <button class="hint-btn" onclick="toggleHint('hbonus')">💡 提示</button>
+                <div id="hbonus" class="hint-box">A在最左。C在B右边、D左边，所以顺序是 B-C-D。D不是最右，所以E在最右...</div>
+                <div id="fbonus" class="feedback"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function toggleHint(hintId) {
+            const hint = document.getElementById(hintId);
+            hint.style.display = hint.style.display === 'none' || hint.style.display === '' ? 'block' : 'none';
+        }
+        
+        function showFeedback(feedbackId, isCorrect, message) {
+            const feedback = document.getElementById(feedbackId);
+            feedback.className = 'feedback ' + (isCorrect ? 'success' : 'error');
+            feedback.textContent = message;
+        }
+        
+        function checkQ1() {
+            const answer = document.getElementById('q1').value.trim();
+            if (answer.includes('小猫') && answer.includes('最远') && answer.includes('小兔') && answer.includes('最近')) {
+                document.getElementById('q1').className = 'answer-input correct';
+                showFeedback('f1', true, '🎉 正确！小猫跳得最远，小兔跳得最近！');
+            } else if (answer.includes('小猫') || answer.includes('小兔')) {
+                document.getElementById('q1').className = 'answer-input wrong';
+                showFeedback('f1', false, '❌ 答案不完整。请回答：谁最远？谁最近？');
+            } else {
+                document.getElementById('q1').className = 'answer-input wrong';
+                showFeedback('f1', false, '❌ 再想想看。小猫 > 小狗 > 小兔');
+            }
+        }
+        
+        function checkQ2() {
+            const answer = document.getElementById('q2').value.trim();
+            if ((answer.includes('苹果') && answer.includes('最大')) || (answer.includes('苹果') && answer.includes('大'))) {
+                if (answer.includes('葡萄') && (answer.includes('最小') || answer.includes('小'))) {
+                    document.getElementById('q2').className = 'answer-input correct';
+                    showFeedback('f2', true, '🎉 正确！苹果最大，葡萄最小！');
+                } else {
+                    document.getElementById('q2').className = 'answer-input wrong';
+                    showFeedback('f2', false, '❌ 答案不完整。最大的对了，最小的呢？');
+                }
+            } else {
+                document.getElementById('q2').className = 'answer-input wrong';
+                showFeedback('f2', false, '❌ 再想想看。苹果 > 橙子 > 葡萄');
+            }
+        }
+        
+        function checkQ3() {
+            const answer = document.getElementById('q3').value.trim();
+            if (answer.includes('小华') && answer.includes('第一')) {
+                if (answer.includes('小明') && answer.includes('第三')) {
+                    document.getElementById('q3').className = 'answer-input correct';
+                    showFeedback('f3', true, '🎉 正确！小华第一名，小明第三名！');
+                } else {
+                    document.getElementById('q3').className = 'answer-input correct';
+                    showFeedback('f3', true, '🎉 正确！小华是第一名！小明是第三名。');
+                }
+            } else {
+                document.getElementById('q3').className = 'answer-input wrong';
+                showFeedback('f3', false, '❌ 再想想看。小红是第二，小明不是第一...');
+            }
+        }
+        
+        function checkQ4() {
+            const answer = document.getElementById('q4').value.trim();
+            if (answer.includes('蓝')) {
+                document.getElementById('q4').className = 'answer-input correct';
+                showFeedback('f4', true, '🎉 正确！小明喜欢蓝色！（小红喜欢黄色，小华喜欢红色）');
+            } else {
+                document.getElementById('q4').className = 'answer-input wrong';
+                showFeedback('f4', false, '❌ 再想想看。小红喜欢黄色，剩下红色和蓝色，小明不喜欢红色...');
+            }
+        }
+        
+        function checkQ5() {
+            const answer = document.getElementById('q5').value.trim();
+            if (answer.includes('老师')) {
+                document.getElementById('q5').className = 'answer-input correct';
+                showFeedback('f5', true, '🎉 正确！王叔叔是老师！（张伯伯是警察，李阿姨是医生）');
+            } else {
+                document.getElementById('q5').className = 'answer-input wrong';
+                showFeedback('f5', false, '❌ 再想想看。张伯伯是警察，王叔叔不是医生...');
+            }
+        }
+        
+        function checkQ6() {
+            const answer = document.getElementById('q6').value.trim();
+            if ((answer.includes('小明') && answer.includes('小红')) || answer.includes('小明、小红')) {
+                if (answer.includes('小华')) {
+                    document.getElementById('q6').className = 'answer-input correct';
+                    showFeedback('f6', true, '🎉 正确！从左到右：小明、小红、小亮、小华！');
+                } else {
+                    document.getElementById('q6').className = 'answer-input wrong';
+                    showFeedback('f6', false, '❌ 还缺一个人。从左到右：小明、小红、？、小华');
+                }
+            } else {
+                document.getElementById('q6').className = 'answer-input wrong';
+                showFeedback('f6', false, '❌ 再想想看。小明最左，小红在小明右边，小华最右...');
+            }
+        }
+        
+        function checkQ7() {
+            const answer = document.getElementById('q7').value.trim();
+            if (answer.includes('兔子') || answer.includes('兔')) {
+                document.getElementById('q7').className = 'answer-input correct';
+                showFeedback('f7', true, '🎉 正确！兔子是第一名！');
+            } else {
+                document.getElementById('q7').className = 'answer-input wrong';
+                showFeedback('f7', false, '❌ 再想想看。兔子比乌龟快，狐狸比兔子慢...');
+            }
+        }
+        
+        function checkQ8() {
+            const answer = document.getElementById('q8').value.trim();
+            if (answer.includes('红')) {
+                document.getElementById('q8').className = 'answer-input correct';
+                showFeedback('f8', true, '🎉 正确！小红拿的是红球！（小明拿蓝球，小华拿黄球）');
+            } else {
+                document.getElementById('q8').className = 'answer-input wrong';
+                showFeedback('f8', false, '❌ 再想想看。小华说小明拿蓝球，小明说自己不拿红球，所以小明拿蓝球...');
+            }
+        }
+        
+        function checkQ9() {
+            const answer = document.getElementById('q9').value.trim();
+            if (answer.toUpperCase().includes('C') || answer.includes('c')) {
+                document.getElementById('q9').className = 'answer-input correct';
+                showFeedback('f9', true, '🎉 正确！C是第1名！（C第1，A第2，B第3，D第4）');
+            } else {
+                document.getElementById('q9').className = 'answer-input wrong';
+                showFeedback('f9', false, '❌ 再想想看。D是第4，A不是第1也不是第4，所以A是第2或第3...');
+            }
+        }
+        
+        function checkQ10() {
+            const answer = document.getElementById('q10').value.trim();
+            if (answer.includes('医生')) {
+                document.getElementById('q10').className = 'answer-input correct';
+                showFeedback('f10', true, '🎉 正确！小红的爸爸是医生！（小明爸爸工程师，小华爸爸教师）');
+            } else {
+                document.getElementById('q10').className = 'answer-input wrong';
+                showFeedback('f10', false, '❌ 再想想看。小华爸爸和小明、小红都不同，说明三家职业各不相同...');
+            }
+        }
+        
+        function checkBonus() {
+            const answer = document.getElementById('bonus').value.trim().toUpperCase();
+            if ((answer.includes('A') && answer.includes('B') && answer.includes('C') && answer.includes('D') && answer.includes('E')) ||
+                (answer.includes('A') && answer.includes('B') && answer.includes('C') && answer.includes('E'))) {
+                if (answer.indexOf('A') < answer.indexOf('B') && answer.indexOf('B') < answer.indexOf('C') && 
+                    answer.indexOf('C') < answer.indexOf('E')) {
+                    document.getElementById('bonus').className = 'answer-input correct';
+                    showFeedback('fbonus', true, '🎉 太棒了！正确答案是：A-B-C-D-E！');
+                } else {
+                    document.getElementById('bonus').className = 'answer-input wrong';
+                    showFeedback('fbonus', false, '❌ 顺序不对。再想想看...');
+                }
+            } else {
+                document.getElementById('bonus').className = 'answer-input wrong';
+                showFeedback('fbonus', false, '❌ 再想想看。A在最左，D不是最右...');
+            }
+        }
+    </script>
+</body>
+</html>

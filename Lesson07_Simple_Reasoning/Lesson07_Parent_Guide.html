@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第07课 简单推理 - 家长协同方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #660099;
+        }
+        
+        .section h2 {
+            color: #660099;
+            font-size: 22px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section p, .section li {
+            color: #333;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        
+        .section ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .section li {
+            margin-bottom: 8px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            border: 2px solid #FF9800;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        .highlight-box h3 {
+            color: #E65100;
+            margin-bottom: 10px;
+        }
+        
+        .method-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .method-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(102, 0, 153, 0.1);
+        }
+        
+        .method-card h4 {
+            color: #660099;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .example-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .qr-section {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+        
+        .qr-section h3 {
+            color: #660099;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info {
+            background: white;
+            border: 3px solid #660099;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px auto;
+            max-width: 300px;
+        }
+        
+        .contact-info .phone {
+            font-size: 24px;
+            color: #660099;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            margin: 15px auto;
+            background: white;
+            border: 2px solid #660099;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        
+        .qr-code img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 5px;
+            display: block;
+        }
+        
+        .next-lesson {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .next-lesson h3 {
+            color: #2E7D32;
+            margin-bottom: 10px;
+        }
+        
+        .emoji {
+            font-size: 1.2em;
+        }
+        
+        .tips-list {
+            background: #fff3e0;
+            padding: 15px 20px 15px 40px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        
+        .tips-list li {
+            margin-bottom: 5px;
+            color: #E65100;
+        }
+        
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 24px;
+            }
+            .content {
+                padding: 20px;
+            }
+            .section {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>第07课 简单推理</h1>
+            <div class="subtitle">家长协同指导方案</div>
+        </div>
+        
+        <div class="content">
+            <!-- 课程目标 -->
+            <div class="section">
+                <h2><span class="emoji">🎯</span> 课程目标</h2>
+                <p>本节课将带领孩子进入逻辑推理的世界，通过有趣的推理游戏和数学问题，培养孩子的逻辑思维能力和分析问题的能力。</p>
+                <ul style="margin-top: 15px;">
+                    <li>掌握比较推理的方法（轻重、高低、快慢等）</li>
+                    <li>学会使用排序法解决逻辑问题</li>
+                    <li>理解排除法在推理中的应用</li>
+                    <li>培养假设-验证的思维方式</li>
+                    <li>提升分析问题和解决问题的能力</li>
+                </ul>
+            </div>
+            
+            <!-- 核心知识点 -->
+            <div class="section">
+                <h2><span class="emoji">📚</span> 核心知识点</h2>
+                
+                <div class="method-card">
+                    <h4>1. 比较推理法</h4>
+                    <p>通过已知条件中的比较关系（轻重、高低、快慢、大小等）进行推理。</p>
+                    <div class="example-box">
+                        <strong>示例：</strong>小明比小红高，小红比小亮高，那么谁最高？<br>
+                        <strong>推理：</strong>小明 > 小红 > 小亮，所以小明最高。
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <h4>2. 排序法</h4>
+                    <p>将事物按照某个属性进行排序，通过排序结果得出结论。</p>
+                    <div class="example-box">
+                        <strong>示例：</strong>A、B、C三人比赛，A不是第一，B不是第一也不是最后，谁是第一？<br>
+                        <strong>推理：</strong>B不是第一也不是最后→B是第二；A不是第一→A是第三；所以C是第一。
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <h4>3. 排除法</h4>
+                    <p>根据已知条件排除不可能的选项，逐步缩小范围，最终确定答案。</p>
+                    <div class="example-box">
+                        <strong>示例：</strong>三个小朋友分别喜欢红色、黄色、蓝色。小明不喜欢红色和黄色，他喜欢什么颜色？<br>
+                        <strong>推理：</strong>排除红色和黄色→小明喜欢蓝色。
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <h4>4. 假设验证法</h4>
+                    <p>先做出假设，然后根据条件验证假设是否成立。</p>
+                    <div class="example-box">
+                        <strong>示例：</strong>如果今天是星期一，那么后天是星期几？<br>
+                        <strong>推理：</strong>假设今天是星期一→明天是星期二→后天是星期三。
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <h4>5. 列表分析法</h4>
+                    <p>使用表格整理信息，通过画"√"和"×"来标记可能和不可能的情况。</p>
+                    <div class="example-box">
+                        <strong>方法：</strong>画一个表格，行表示人物，列表示属性，根据条件逐步填充。
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 课堂重点回顾 -->
+            <div class="section">
+                <h2><span class="emoji">📝</span> 课堂重点回顾</h2>
+                
+                <div class="highlight-box">
+                    <h3>今日课堂重点</h3>
+                    <ul>
+                        <li><strong>比较推理：</strong>通过"比...高/重/快"等关系建立逻辑链条</li>
+                        <li><strong>排序推理：</strong>利用排序确定位置关系</li>
+                        <li><strong>排除推理：</strong>通过排除不可能的情况找到答案</li>
+                        <li><strong>列表法：</strong>用表格整理复杂信息，清晰直观</li>
+                    </ul>
+                </div>
+                
+                <p style="margin-top: 15px;"><strong>课堂活动：</strong></p>
+                <ul>
+                    <li>🎮 推理小游戏：通过线索猜出正确答案</li>
+                    <li>🧩 排序挑战：根据条件对事物进行排序</li>
+                    <li>🔍 侦探推理：扮演小侦探解决逻辑谜题</li>
+                    <li>📊 列表分析：使用表格法解决复杂问题</li>
+                </ul>
+            </div>
+            
+            <!-- 家庭巩固练习 -->
+            <div class="section">
+                <h2><span class="emoji">🏠</span> 家庭巩固练习</h2>
+                
+                <p>请家长陪伴孩子完成以下活动，巩固课堂所学：</p>
+                
+                <div class="method-card">
+                    <h4>活动1：家庭推理游戏（15分钟）</h4>
+                    <p>家长说出一个推理题，让孩子解答。</p>
+                    <div class="example-box">
+                        <strong>题目示例：</strong><br>
+                        爸爸、妈妈、孩子三人，爸爸比妈妈高，孩子比妈妈矮。请问谁最高？谁最矮？<br>
+                        <strong>答案：</strong>爸爸最高，孩子最矮。
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <h4>活动2：排序练习（10分钟）</h4>
+                    <p>准备3-4个物品（如水果、玩具），让孩子按大小、重量等属性排序。</p>
+                    <div class="example-box">
+                        <strong>练习：</strong>苹果、西瓜、葡萄按大小排序。<br>
+                        <strong>答案：</strong>西瓜 > 苹果 > 葡萄
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <h4>活动3：排除法游戏（10分钟）</h4>
+                    <p>家长心里想一个数字（1-10之间），让孩子通过提问（只能用是/否回答）猜出数字。</p>
+                    <div class="example-box">
+                        <strong>示例：</strong><br>
+                        孩子："比5大吗？" 家长："是" → 排除1-5<br>
+                        孩子："是偶数吗？" 家长："是" → 可能是6、8、10<br>
+                        继续提问直到猜中答案。
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <h4>活动4：列表法练习（15分钟）</h4>
+                    <p>使用表格解决稍微复杂的推理问题。</p>
+                    <div class="example-box">
+                        <strong>题目：</strong>小明、小红、小华分别喜欢语文、数学、英语中的一门。小明不喜欢语文，小红不喜欢数学，小华喜欢什么？<br>
+                        <strong>方法：</strong>画一个3×3的表格，根据条件打"√"和"×"，逐步推理。
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 亲子互动建议 -->
+            <div class="section">
+                <h2><span class="emoji">👨‍👩‍👧</span> 亲子互动建议</h2>
+                
+                <div class="highlight-box">
+                    <h3>日常生活中的推理训练</h3>
+                    <ul class="tips-list">
+                        <li>购物时让孩子比较价格："苹果5元，香蕉3元，哪个更贵？"</li>
+                        <li>看天气预报时："今天20度，明天25度，哪天更热？"</li>
+                        <li>吃饭时："爸爸吃了2碗，妈妈吃了1碗，谁吃得更多？"</li>
+                        <li>玩游戏时："你赢了3局，我赢了2局，谁赢得多？"</li>
+                    </ul>
+                </div>
+                
+                <p style="margin-top: 15px;"><strong>培养孩子推理能力的小技巧：</strong></p>
+                <ul>
+                    <li>📌 多提问"为什么"，引导孩子说出推理过程</li>
+                    <li>📌 鼓励孩子用"因为...所以..."的句式表达</li>
+                    <li>📌 允许孩子犯错，引导他们发现错误并改正</li>
+                    <li>📌 表扬孩子的逻辑思考过程，而不仅仅是正确答案</li>
+                    <li>📌 使用具体物品辅助理解，再过渡到抽象思考</li>
+                </ul>
+            </div>
+            
+            <!-- 常见问题解答 -->
+            <div class="section">
+                <h2><span class="emoji">❓</span> 常见问题解答</h2>
+                
+                <div class="method-card">
+                    <h4>Q1：孩子总是凭感觉猜答案，不用逻辑推理怎么办？</h4>
+                    <p><strong>A：</strong>引导孩子说出"你是怎么知道的"，要求他们用已知条件解释答案。可以从简单的两步骤推理开始，逐步增加难度。</p>
+                </div>
+                
+                <div class="method-card">
+                    <h4>Q2：孩子在复杂问题中容易混乱，怎么办？</h4>
+                    <p><strong>A：</strong>教给孩子使用列表法或画图法整理信息。将复杂问题分解成几个简单步骤，一步一步解决。</p>
+                </div>
+                
+                <div class="method-card">
+                    <h4>Q3：孩子能得出正确答案，但说不清楚推理过程，怎么办？</h4>
+                    <p><strong>A：</strong>这是正常的，二年级孩子还在发展语言表达能力。家长可以用提问的方式帮助孩子组织语言："第一步你知道了什么？""然后你怎么想的？"</p>
+                </div>
+                
+                <div class="method-card">
+                    <h4>Q4：如何激发孩子对逻辑推理的兴趣？</h4>
+                    <p><strong>A：</strong>使用孩子感兴趣的主题（如喜欢的动画角色、玩具等）设计推理题。将推理融入游戏，让孩子在玩中学。</p>
+                </div>
+            </div>
+            
+            <!-- 下节课预告 -->
+            <div class="next-lesson">
+                <h3><span class="emoji">📢</span> 下节课预告</h3>
+                <p><strong>第08课：阶段游戏</strong></p>
+                <p>下节课是阶段性复习课，我们将通过有趣的游戏和竞赛活动，综合复习第1-7课所学内容。包括数字规律、图形变换、逻辑推理等知识点的综合应用。</p>
+                <p style="margin-top: 10px;"><strong>课前准备：</strong>请孩子复习前7课的笔记和练习题，准备好积极参与课堂互动！</p>
+            </div>
+            
+            <!-- 联系方式 -->
+            <div class="qr-section">
+                <h3>📱 联系夏老师</h3>
+                <div class="contact-info">
+                    <div class="phone">📞 19117803360</div>
+                    <div style="font-size: 14px; color: #666; margin-bottom: 15px;">欢迎随时咨询</div>
+                    <div class="qr-code">
+                        <img src="../code.jpg" alt="夏老师微信二维码">
+                    </div>
+                </div>
+                <p style="color: #666; margin-top: 15px;">如有任何问题，欢迎随时联系<br>夏老师将为您提供专业指导</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第08课 阶段游戏 - 课后练习题（奥数巅峰版）</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .question-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 5px solid #660099;
+        }
+        
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .question-number {
+            font-size: 20px;
+            font-weight: bold;
+            color: #660099;
+        }
+        
+        .difficulty {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .question-content {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .answer-section {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+        }
+        
+        .answer-label {
+            font-weight: bold;
+            color: #660099;
+            margin-bottom: 10px;
+        }
+        
+        .answer-input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        .bonus-question {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border: 3px solid #FF9800;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+        
+        .bonus-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .bonus-header h2 {
+            color: #E65100;
+            font-size: 24px;
+        }
+        
+        .bonus-tag {
+            display: inline-block;
+            background: #FF9800;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #f5f5f5;
+            color: #666;
+        }
+        
+        .emoji {
+            font-size: 24px;
+            margin-right: 5px;
+        }
+
+        .math-formula {
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .olympiad-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #333;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📝 第08课 阶段游戏</h1>
+            <p>课后练习题 · 奥数巅峰版（华罗庚金杯难度）</p>
+        </div>
+        
+        <div class="content">
+            <!-- 第1题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">第1题 ★★★★☆</span>
+                    <span class="difficulty">奥数进阶</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">🔢</span>三级等差数列，找出规律填入括号：<br>
+                    <strong>1, 3, 7, 13, 21, 31, ( ), 57</strong><br><br>
+                    <em>提示：先算一级差，再算二级差，最后看三级差</em>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入数字">
+                </div>
+            </div>
+            
+            <!-- 第2题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">第2题 ★★★★☆</span>
+                    <span class="difficulty">奥数进阶</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">🔢</span>双重数列进阶版：<br>
+                    <strong>1, 2, 4, 3, 9, 4, 16, 5, ( ), ( )</strong><br><br>
+                    <em>提示：奇数项和偶数项分别有不同规律</em>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案（两个数字，用逗号分隔）：</div>
+                    <input type="text" class="answer-input" placeholder="如：10, 6">
+                </div>
+            </div>
+            
+            <!-- 第3题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">第3题 ★★★★☆</span>
+                    <span class="difficulty">奥数进阶</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">�</span>下图是一个5×5的方格，图中一共有多少个正方形？<br><br>
+                    <div style="font-size: 14px; text-align: center; margin: 15px 0; font-family: monospace;">
+                        ┌───┬───┬───┬───┬───┐<br>
+                        │   │   │   │   │   │<br>
+                        ├───┼───┼───┼───┼───┤<br>
+                        │   │   │   │   │   │<br>
+                        ├───┼───┼───┼───┼───┤<br>
+                        │   │   │   │   │   │<br>
+                        ├───┼───┼───┼───┼───┤<br>
+                        │   │   │   │   │   │<br>
+                        ├───┼───┼───┼───┼───┤<br>
+                        │   │   │   │   │   │<br>
+                        └───┴───┴───┴───┴───┘
+                    </div>
+                    <em>提示：正方形总数 = 1² + 2² + 3² + 4² + 5²</em>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入数字">
+                </div>
+            </div>
+            
+            <!-- 第4题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">第4题 ★★★★★</span>
+                    <span class="difficulty">奥数挑战</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">🔷</span>一个3×3的方格中，一共有多少个长方形（包括正方形）？<br><br>
+                    <div style="font-size: 16px; text-align: center; margin: 15px 0; font-family: monospace;">
+                        ┌───┬───┬───┐<br>
+                        │   │   │   │<br>
+                        ├───┼───┼───┤<br>
+                        │   │   │   │<br>
+                        ├───┼───┼───┤<br>
+                        │   │   │   │<br>
+                        └───┴───┴───┘
+                    </div>
+                    <em>提示：长方形个数 = 横向线段数 × 纵向线段数</em>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入数字">
+                </div>
+            </div>
+            
+            <!-- 第5题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">第5题 ★★★★★</span>
+                    <span class="difficulty">奥数挑战</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">🕵️</span>A、B、C、D、E五人比身高，已知：<br><br>
+                    • A比B高，但比C矮<br>
+                    • D比A高，但比B矮<br>
+                    • E比C高<br><br>
+                    <strong>请问：从高到矮的顺序是什么？</strong>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案（按从高到矮顺序填写）：</div>
+                    <input type="text" class="answer-input" placeholder="如：甲、乙、丙、丁、戊">
+                </div>
+            </div>
+            
+            <!-- 第6题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">第6题 ★★★★★</span>
+                    <span class="difficulty">奥数挑战</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">�</span>在下面的竖式中，相同的汉字代表相同的数字，不同的汉字代表不同的数字。求出每个汉字代表的数字：<br><br>
+                    <div style="font-family: monospace; font-size: 20px; text-align: center; margin: 15px 0;">
+                        &nbsp;&nbsp;奥 数 竞<br>
+                        +&nbsp;&nbsp;&nbsp;&nbsp;赛 奥<br>
+                        --------<br>
+                        &nbsp;&nbsp;1 0 0 0<br>
+                    </div>
+                    <em>提示：从个位开始分析，注意进位</em>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="奥=?, 数=?, 竞=?, 赛=?">
+                </div>
+            </div>
+            
+            <!-- 第7题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">第7题 ★★★★★</span>
+                    <span class="difficulty">奥数挑战</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">🧩</span>完成下面的6×6数独（填入数字1-6）：<br>
+                    <div style="font-family: monospace; font-size: 14px; text-align: center; margin: 15px 0; line-height: 1.6;">
+                        1 _ 3 | _ 5 _<br>
+                        _ 5 _ | 3 _ 1<br>
+                        ------+------<br>
+                        _ 3 5 | _ 1 _<br>
+                        4 _ 1 | _ 3 5<br>
+                        ------+------<br>
+                        5 _ 4 | 1 _ 3<br>
+                        _ 1 _ | 5 4 _
+                    </div>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案（按行填写，如：123456）：</div>
+                    <input type="text" class="answer-input" placeholder="第一行">
+                    <input type="text" class="answer-input" placeholder="第二行" style="margin-top: 10px;">
+                    <input type="text" class="answer-input" placeholder="第三行" style="margin-top: 10px;">
+                    <input type="text" class="answer-input" placeholder="第四行" style="margin-top: 10px;">
+                    <input type="text" class="answer-input" placeholder="第五行" style="margin-top: 10px;">
+                    <input type="text" class="answer-input" placeholder="第六行" style="margin-top: 10px;">
+                </div>
+            </div>
+            
+            <!-- 第8题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">第8题 ★★★★★</span>
+                    <span class="difficulty">奥数巅峰</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">�️</span>甲、乙、丙、丁、戊五人参加数学竞赛，分别获得前五名（无并列）。已知：<br><br>
+                    • 甲不是第一名，也不是第五名<br>
+                    • 乙不是第二名<br>
+                    • 丙的名次比丁高，但比戊低<br>
+                    • 丁不是最后一名<br>
+                    • 戊不是第一名<br><br>
+                    <strong>请问：谁是第一名？谁是第五名？</strong>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="第一名是？">
+                    <input type="text" class="answer-input" placeholder="第五名是？" style="margin-top: 10px;">
+                </div>
+            </div>
+            
+            <!-- 第9题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">第9题 ★★★★★</span>
+                    <span class="difficulty">奥数巅峰</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">�</span>在下面的算式中，相同的图形代表相同的数字，不同的图形代表不同的数字：<br><br>
+                    <div style="font-size: 22px; text-align: center; margin: 15px 0;">
+                        🌸 + 🌸 + 🌸 = 27<br>
+                        🌸 + 🍀 = 15<br>
+                        🍀 + ⭐ + ⭐ = 20<br><br>
+                        请问：🌸 + 🍀 + ⭐ = ?
+                    </div>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入数字">
+                </div>
+            </div>
+            
+            <!-- 第10题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">第10题 ★★★★★</span>
+                    <span class="difficulty">奥数巅峰</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">👥</span>A、B、C、D四人参加乒乓球比赛，每两人之间都要赛一场。比赛结束后：<br><br>
+                    • A胜了3场<br>
+                    • B胜了1场<br>
+                    • C胜了2场<br><br>
+                    <strong>请问：D胜了几场？</strong>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入数字">
+                </div>
+            </div>
+            
+            <!-- 附加题 -->
+            <div class="bonus-question">
+                <div class="bonus-header">
+                    <h2>🌟 附加题（奥数巅峰）</h2>
+                    <span class="bonus-tag">华罗庚金杯难度</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">🧩</span><strong>综合推理题：</strong><br><br>
+                    甲、乙、丙、丁、戊五人，分别是教师、医生、工程师、律师、警察。已知：<br><br>
+                    • 甲和乙不是教师<br>
+                    • 丙不是医生，也不是工程师<br>
+                    • 丁是律师<br>
+                    • 戊比工程师年龄大，比医生年龄小<br>
+                    • 甲比警察年龄大<br><br>
+                    <strong>请问：丙是什么职业？戊是什么职业？</strong>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="丙=?, 戊=?">
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>🌟 完成练习后，可以对照答案检查，不懂的地方可以问老师哦！</p>
+            <p style="margin-top: 10px;">建议用时：60-90分钟</p>
+        </div>
+    </div>
+</body>
+</html>

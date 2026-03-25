@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第07课 简单推理 - 交互式课件</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .slide {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 20px auto;
+            max-width: 1000px;
+            min-height: 600px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: slideIn 0.5s ease;
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide-title {
+            color: #660099;
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #94070A;
+            padding-bottom: 15px;
+        }
+        
+        .content-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 5px solid #660099;
+        }
+        
+        .nav-container {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(102, 0, 153, 0.3);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 0, 153, 0.4);
+        }
+        
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .progress-container {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 600px;
+            height: 10px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #660099, #94070A);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .page-indicator {
+            position: fixed;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .interactive-btn {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: all 0.3s;
+        }
+        
+        .interactive-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .answer-input {
+            padding: 10px 15px;
+            font-size: 18px;
+            border: 2px solid #660099;
+            border-radius: 10px;
+            margin: 10px;
+            width: 200px;
+        }
+        
+        .answer-input.correct {
+            border-color: #4CAF50;
+            background: #E8F5E9;
+        }
+        
+        .answer-input.wrong {
+            border-color: #f44336;
+            background: #FFEBEE;
+        }
+        
+        .feedback {
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-size: 16px;
+            display: none;
+        }
+        
+        .feedback.success {
+            background: #E8F5E9;
+            border-left: 5px solid #4CAF50;
+            color: #2E7D32;
+            display: block;
+        }
+        
+        .feedback.error {
+            background: #FFEBEE;
+            border-left: 5px solid #f44336;
+            color: #C62828;
+            display: block;
+        }
+        
+        .character-card {
+            display: inline-block;
+            padding: 20px;
+            margin: 10px;
+            background: white;
+            border: 3px solid #ddd;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 48px;
+        }
+        
+        .character-card:hover {
+            transform: scale(1.1);
+            border-color: #660099;
+        }
+        
+        .character-card.selected {
+            border-color: #4CAF50;
+            background: #E8F5E9;
+            box-shadow: 0 5px 20px rgba(76, 175, 80, 0.3);
+        }
+        
+        .reasoning-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 18px;
+        }
+        
+        .reasoning-table th, .reasoning-table td {
+            border: 2px solid #660099;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .reasoning-table th {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+        }
+        
+        .reasoning-table td {
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .reasoning-table td:hover {
+            background: #f0f0f0;
+        }
+        
+        .timer {
+            font-size: 48px;
+            color: #f44336;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .score-board {
+            position: fixed;
+            top: 80px;
+            right: 30px;
+            background: white;
+            padding: 15px 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            font-size: 20px;
+            color: #660099;
+            font-weight: bold;
+        }
+        
+        .challenge-question {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 3px solid #FF9800;
+        }
+        
+        .emoji-display {
+            font-size: 64px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .cover-animation {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .start-btn {
+            display: block;
+            margin: 40px auto;
+            padding: 20px 50px;
+            font-size: 24px;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+        }
+        
+        .start-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(76, 175, 80, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="page-indicator">
+        <span id="currentPage">1</span> / 22
+    </div>
+
+    <!-- 第1页：封面 -->
+    <div class="slide active" data-slide="1">
+        <div class="emoji-display cover-animation">🕵️‍♀️🔍🧩</div>
+        <h1 style="text-align: center; color: #660099; font-size: 48px; margin: 30px 0;">
+            第07课 简单推理
+        </h1>
+        <h2 style="text-align: center; color: #94070A; font-size: 28px;">
+            成为小小侦探家
+        </h2>
+        <p style="text-align: center; font-size: 20px; color: #666; margin-top: 40px;">
+            学会用逻辑推理解决问题！
+        </p>
+        <button class="start-btn" onclick="nextSlide()">开始探险 ➡️</button>
+    </div>
+
+    <!-- 第2页：课程目标 -->
+    <div class="slide" data-slide="2">
+        <h2 class="slide-title">🎯 本课学习目标</h2>
+        <div class="content-card">
+            <h3>📚 知识目标</h3>
+            <ul style="font-size: 20px; line-height: 2;">
+                <li>理解比较推理的基本方法</li>
+                <li>掌握排序推理的排除法</li>
+                <li>学会使用列表进行逻辑分析</li>
+            </ul>
+        </div>
+        <div class="content-card" style="background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);">
+            <h3>🧠 能力目标</h3>
+            <ul style="font-size: 20px; line-height: 2;">
+                <li>培养逻辑思维能力</li>
+                <li>提高分析问题的条理性</li>
+                <li>学会用多种方法解决问题</li>
+            </ul>
+        </div>
+        <div class="content-card" style="background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);">
+            <h3>🌟 情感目标</h3>
+            <ul style="font-size: 20px; line-height: 2;">
+                <li>体验推理成功的乐趣</li>
+                <li>培养细心观察的习惯</li>
+                <li>增强解决问题的信心</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 第3页：课前热身 -->
+    <div class="slide" data-slide="3">
+        <h2 class="slide-title">🎮 课前热身：猜一猜</h2>
+        <div class="content-card">
+            <h3>🤔 谜语时间</h3>
+            <p style="font-size: 22px; line-height: 1.8; text-align: center; margin: 30px 0;">
+                有面没有口，有脚没有手，<br>
+                虽有四只脚，自己不会走。<br><br>
+                <strong>（打一生活用品）</strong>
+            </p>
+        </div>
+        <div style="text-align: center; margin: 30px 0;">
+            <input type="text" id="riddle_answer" class="answer-input" placeholder="输入答案">
+            <button class="interactive-btn" onclick="checkRiddle()">提交答案</button>
+        </div>
+        <div id="feedback_riddle" class="feedback"></div>
+        <div class="content-card" style="background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);">
+            <h3>💡 提示</h3>
+            <p style="font-size: 18px;">想一想：什么东西有"面"、有"脚"，但是不会自己走路？</p>
+        </div>
+    </div>
+
+    <!-- 第4页：情境导入 -->
+    <div class="slide" data-slide="4">
+        <h2 class="slide-title">🏰 侦探学院</h2>
+        <div class="emoji-display">🕵️‍♂️📚✨</div>
+        <div class="content-card">
+            <p style="font-size: 20px; line-height: 1.8;">
+                欢迎来到<strong>侦探学院</strong>！<br><br>
+                在这里，你将学习成为小小侦探的秘诀。<br>
+                通过观察、分析和推理，解开各种谜题！<br><br>
+                今天我们要学习三种推理方法：
+            </p>
+        </div>
+        <div style="display: flex; justify-content: space-around; margin: 30px 0;">
+            <div style="text-align: center;">
+                <div style="font-size: 48px;">⚖️</div>
+                <p style="font-size: 18px; color: #660099; font-weight: bold;">比较推理</p>
+            </div>
+            <div style="text-align: center;">
+                <div style="font-size: 48px;">📊</div>
+                <p style="font-size: 18px; color: #660099; font-weight: bold;">排序推理</p>
+            </div>
+            <div style="text-align: center;">
+                <div style="font-size: 48px;">📋</div>
+                <p style="font-size: 18px; color: #660099; font-weight: bold;">列表推理</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第5页：比较推理概念 -->
+    <div class="slide" data-slide="5">
+        <h2 class="slide-title">⚖️ 模块一：比较推理</h2>
+        <div class="content-card">
+            <h3>📖 什么是比较推理？</h3>
+            <p style="font-size: 20px; line-height: 1.8;">
+                通过比较事物的大小、轻重、高低等关系，<br>
+                找出它们之间的排列顺序。
+            </p>
+        </div>
+        <div class="content-card" style="background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);">
+            <h3>🌰 例题讲解</h3>
+            <p style="font-size: 18px; margin: 15px 0;">
+                小红、小明、小华三个人比身高：<br><br>
+                • 小红比小明高<br>
+                • 小明比小华高<br><br>
+                <strong>请问：谁最高？谁最矮？</strong>
+            </p>
+        </div>
+        <div class="content-card" style="background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);">
+            <h3>💡 解题方法</h3>
+            <p style="font-size: 18px; line-height: 1.8;">
+                1️⃣ 画箭头：高 → 矮<br>
+                2️⃣ 连起来：小红 → 小明 → 小华<br>
+                3️⃣ 得结论：小红最高，小华最矮
+            </p>
+        </div>
+    </div>
+
+    <!-- 第6页：比较推理练习1 -->
+    <div class="slide" data-slide="6">
+        <h2 class="slide-title">✏️ 练习1：比轻重</h2>
+        <div class="content-card">
+            <p style="font-size: 20px; line-height: 1.8;">
+                有三种水果：🍎苹果、🍌香蕉、🍇葡萄<br><br>
+                • 苹果比香蕉重<br>
+                • 葡萄比香蕉轻<br><br>
+                <strong>请问：最重的水果是什么？</strong>
+            </p>
+        </div>
+        <div style="text-align: center; margin: 30px 0;">
+            <div class="character-card" onclick="selectFruit(this, '苹果')">🍎<br><small>苹果</small></div>
+            <div class="character-card" onclick="selectFruit(this, '香蕉')">🍌<br><small>香蕉</small></div>
+            <div class="character-card" onclick="selectFruit(this, '葡萄')">🍇<br><small>葡萄</small></div>
+        </div>
+        <input type="hidden" id="fruit_answer">
+        <div style="text-align: center;">
+            <button class="interactive-btn" onclick="checkFruit()">检查答案</button>
+        </div>
+        <div id="feedback_fruit" class="feedback"></div>
+    </div>
+
+    <!-- 第7页：比较推理练习2 -->
+    <div class="slide" data-slide="7">
+        <h2 class="slide-title">✏️ 练习2：比速度</h2>
+        <div class="content-card">
+            <p style="font-size: 20px; line-height: 1.8;">
+                小动物们比赛跑：🐰兔子、🐢乌龟、🐿️松鼠<br><br>
+                • 兔子比松鼠跑得快<br>
+                • 乌龟比松鼠跑得慢<br><br>
+                <strong>请按从快到慢的顺序排列：</strong>
+            </p>
+        </div>
+        <div style="text-align: center; margin: 30px 0;">
+            <input type="text" id="speed_order" class="answer-input" style="width: 300px;" placeholder="如：兔子、松鼠、乌龟">
+        </div>
+        <div style="text-align: center;">
+            <button class="interactive-btn" onclick="checkSpeed()">检查答案</button>
+        </div>
+        <div id="feedback_speed" class="feedback"></div>
+        <div class="content-card" style="background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);">
+            <h3>💡 提示</h3>
+            <p style="font-size: 16px;">画箭头帮助思考：快 → 慢</p>
+        </div>
+    </div>
+
+    <!-- 第8页：排序推理概念 -->
+    <div class="slide" data-slide="8">
+        <h2 class="slide-title">📊 模块二：排序推理</h2>
+        <div class="content-card">
+            <h3>📖 什么是排序推理？</h3>
+            <p style="font-size: 20px; line-height: 1.8;">
+                根据已知条件，确定事物的排列顺序或位置关系。<br>
+                常用方法：<strong>排除法</strong>和<strong>确定法</strong>
+            </p>
+        </div>
+        <div class="content-card" style="background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);">
+            <h3>🌰 例题讲解</h3>
+            <p style="font-size: 18px; margin: 15px 0;">
+                四个小朋友排队：小明、小红、小华、小丽<br><br>
+                • 小明站在最前面<br>
+                • 小丽站在最后面<br>
+                • 小红在小华前面<br><br>
+                <strong>请问：从前往后的顺序是什么？</strong>
+            </p>
+        </div>
+        <div class="content-card" style="background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);">
+            <h3>💡 解题方法</h3>
+            <p style="font-size: 18px; line-height: 1.8;">
+                1️⃣ 先确定：第1个是小明，第4个是小丽<br>
+                2️⃣ 再确定：小红在小华前面<br>
+                3️⃣ 得结论：小明、小红、小华、小丽
+            </p>
+        </div>
+    </div>
+
+    <!-- 第9页：排序推理练习1 -->
+    <div class="slide" data-slide="9">
+        <h2 class="slide-title">✏️ 练习3：排座位</h2>
+        <div class="content-card">
+            <p style="font-size: 20px; line-height: 1.8;">
+                四个同学坐一排：👦甲、👧乙、👦丙、👧丁<br><br>
+                • 甲坐在最左边<br>
+                • 丁坐在最右边<br>
+                • 丙在乙的左边<br><br>
+                <strong>请按从左到右的顺序排列：</strong>
+            </p>
+        </div>
+        <div style="text-align: center; margin: 30px 0;">
+            <input type="text" id="seat_order" class="answer-input" style="width: 300px;" placeholder="如：甲、乙、丙、丁">
+        </div>
+        <div style="text-align: center;">
+            <button class="interactive-btn" onclick="checkSeat()">检查答案</button>
+        </div>
+        <div id="feedback_seat" class="feedback"></div>
+    </div>
+
+    <!-- 第10页：排序推理练习2 -->
+    <div class="slide" data-slide="10">
+        <h2 class="slide-title">✏️ 练习4：比名次</h2>
+        <div class="content-card">
+            <p style="font-size: 20px; line-height: 1.8;">
+                四个小朋友参加比赛：🏃‍♀️小红、🏃‍♂️小明、🏃‍♂️小华、🏃‍♀️小丽<br><br>
+                • 小华得了第三名<br>
+                • 小明不是第一名<br>
+                • 小红比小明名次高<br><br>
+                <strong>请问：谁是第一名？</strong>
+            </p>
+        </div>
+        <div style="text-align: center; margin: 30px 0;">
+            <div class="character-card" onclick="selectRank(this, '小红')">🏃‍♀️<br><small>小红</small></div>
+            <div class="character-card" onclick="selectRank(this, '小明')">🏃‍♂️<br><small>小明</small></div>
+            <div class="character-card" onclick="selectRank(this, '小华')">🏃‍♂️<br><small>小华</small></div>
+            <div class="character-card" onclick="selectRank(this, '小丽')">🏃‍♀️<br><small>小丽</small></div>
+        </div>
+        <input type="hidden" id="rank_answer">
+        <div style="text-align: center;">
+            <button class="interactive-btn" onclick="checkRank()">检查答案</button>
+        </div>
+        <div id="feedback_rank" class="feedback"></div>
+    </div>
+
+    <!-- 第11页：模块二总结 -->
+    <div class="slide" data-slide="11">
+        <h2 class="slide-title">📋 模块总结：排序推理</h2>
+        <div class="content-card" style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);">
+            <h3>🎯 核心知识点</h3>
+            <ul style="font-size: 18px; line-height: 2;">
+                <li>排除法：根据条件排除不可能的选项</li>
+                <li>确定法：通过排除确定唯一答案</li>
+                <li>排序法：按位置顺序排列事物</li>
+            </ul>
+        </div>
+        <div class="content-card" style="background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);">
+            <h3>💡 解题技巧</h3>
+            <p style="font-size: 18px; line-height: 1.8;">
+                1️⃣ <strong>读条件</strong> - 仔细阅读每个条件<br>
+                2️⃣ <strong>做排除</strong> - 排除不符合条件的选项<br>
+                3️⃣ <strong>定答案</strong> - 确定唯一正确答案
+            </p>
+        </div>
+        <div class="content-card" style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);">
+            <h3>✅ 学生应掌握</h3>
+            <p style="font-size: 18px; line-height: 1.8;">
+                1. 能根据"不是..."条件进行排除<br>
+                2. 能根据位置条件确定排序<br>
+                3. 能综合运用多个条件推理
+            </p>
+        </div>
+    </div>
+
+    <!-- 第12页：列表推理概念 -->
+    <div class="slide" data-slide="12">
+        <h2 class="slide-title">📚 模块三：列表推理法</h2>
+        <div class="content-card">
+            <h3>📋 什么是列表推理？</h3>
+            <p style="font-size: 20px; line-height: 1.8;">
+                当信息比较复杂时，我们可以用表格来整理信息，<br>
+                通过标记"✓"（是）和"✗"（不是）来推理出答案！
+            </p>
+        </div>
+        <div class="content-card" style="background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);">
+            <h3>🌰 例题</h3>
+            <p style="font-size: 18px; margin: 15px 0;">
+                小明、小红、小华三人，分别喜欢苹果、香蕉、橙子。<br><br>
+                • 小明不喜欢苹果<br>
+                • 小红喜欢香蕉<br><br>
+                <strong>请问：小华喜欢什么水果？</strong>
+            </p>
+            <table class="reasoning-table">
+                <tr>
+                    <th></th>
+                    <th>🍎苹果</th>
+                    <th>🍌香蕉</th>
+                    <th>🍊橙子</th>
+                </tr>
+                <tr>
+                    <td><strong>小明</strong></td>
+                    <td onclick="toggleMark(this)">✗</td>
+                    <td onclick="toggleMark(this)">?</td>
+                    <td onclick="toggleMark(this)">?</td>
+                </tr>
+                <tr>
+                    <td><strong>小红</strong></td>
+                    <td onclick="toggleMark(this)">?</td>
+                    <td onclick="toggleMark(this)">✓</td>
+                    <td onclick="toggleMark(this)">✗</td>
+                </tr>
+                <tr>
+                    <td><strong>小华</strong></td>
+                    <td onclick="toggleMark(this)">?</td>
+                    <td onclick="toggleMark(this)">✗</td>
+                    <td onclick="toggleMark(this)">?</td>
+                </tr>
+            </table>
+            <p style="font-size: 16px; color: #666; text-align: center;">点击表格中的"?"来标记你的推理！</p>
+        </div>
+    </div>
+
+    <!-- 第13页：列表推理练习 -->
+    <div class="slide" data-slide="13">
+        <h2 class="slide-title">✏️ 练习5：职业推理</h2>
+        <div class="content-card">
+            <p style="font-size: 18px; line-height: 1.8;">
+                小王、小李、小张三人，分别是医生、教师、工程师。<br><br>
+                • 小王不是医生<br>
+                • 小李不是教师<br>
+                • 小张是工程师<br><br>
+                <strong>请问：小王是什么职业？</strong>
+            </p>
+        </div>
+        <table class="reasoning-table">
+            <tr>
+                <th></th>
+                <th>👨‍⚕️医生</th>
+                <th>👨‍🏫教师</th>
+                <th>👨‍💻工程师</th>
+            </tr>
+            <tr>
+                <td><strong>小王</strong></td>
+                <td onclick="toggleMark(this)">?</td>
+                <td onclick="toggleMark(this)">?</td>
+                <td onclick="toggleMark(this)">?</td>
+            </tr>
+            <tr>
+                <td><strong>小李</strong></td>
+                <td onclick="toggleMark(this)">?</td>
+                <td onclick="toggleMark(this)">?</td>
+                <td onclick="toggleMark(this)">?</td>
+            </tr>
+            <tr>
+                <td><strong>小张</strong></td>
+                <td onclick="toggleMark(this)">?</td>
+                <td onclick="toggleMark(this)">?</td>
+                <td onclick="toggleMark(this)">?</td>
+            </tr>
+        </table>
+        <div style="text-align: center; margin-top: 20px;">
+            <input type="text" id="job_answer" class="answer-input" placeholder="输入职业">
+            <button class="interactive-btn" onclick="checkJob()">检查答案</button>
+        </div>
+        <div id="feedback_job" class="feedback"></div>
+    </div>
+
+    <!-- 第14页：模块三总结 -->
+    <div class="slide" data-slide="14">
+        <h2 class="slide-title">📋 模块总结：列表推理</h2>
+        <div class="content-card" style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);">
+            <h3>🎯 核心知识点</h3>
+            <ul style="font-size: 18px; line-height: 2;">
+                <li>用表格整理复杂信息</li>
+                <li>✓ 表示"是"，✗ 表示"不是"</li>
+                <li>通过排除法确定答案</li>
+            </ul>
+        </div>
+        <div class="content-card" style="background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);">
+            <h3>💡 解题步骤</h3>
+            <p style="font-size: 18px; line-height: 1.8;">
+                1️⃣ <strong>画表格</strong> - 行列对应不同类别<br>
+                2️⃣ <strong>标已知</strong> - 根据条件标记✓和✗<br>
+                3️⃣ <strong>做排除</strong> - 每行每列只有一个✓<br>
+                4️⃣ <strong>得结论</strong> - 确定所有答案
+            </p>
+        </div>
+        <div class="content-card" style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);">
+            <h3>✅ 学生应掌握</h3>
+            <p style="font-size: 18px; line-height: 1.8;">
+                1. 能根据题目画出正确的表格<br>
+                2. 能根据条件正确标记✓和✗<br>
+                3. 能通过表格推理出答案
+            </p>
+        </div>
+    </div>
+
+    <!-- 第15页：综合练习1 -->
+    <div class="slide" data-slide="15">
+        <h2 class="slide-title">🎯 综合练习1</h2>
+        <div class="content-card">
+            <p style="font-size: 20px; line-height: 1.8;">
+                三个小朋友比体重：👧小红、👦小明、👧小丽<br><br>
+                • 小红比小明轻<br>
+                • 小丽比小红重<br>
+                • 小明不是最重的<br><br>
+                <strong>请按从重到轻的顺序排列：</strong>
+            </p>
+        </div>
+        <div style="text-align: center; margin: 30px 0;">
+            <input type="text" id="weight_order" class="answer-input" style="width: 300px;" placeholder="如：小丽、小明、小红">
+        </div>
+        <div style="text-align: center;">
+            <button class="interactive-btn" onclick="checkWeight()">检查答案</button>
+        </div>
+        <div id="feedback_weight" class="feedback"></div>
+    </div>
+
+    <!-- 第16页：综合练习2 -->
+    <div class="slide" data-slide="16">
+        <h2 class="slide-title">🎯 综合练习2</h2>
+        <div class="content-card">
+            <p style="font-size: 18px; line-height: 1.8;">
+                甲、乙、丙、丁四人参加跳绳比赛。<br><br>
+                • 甲跳得比乙多<br>
+                • 丙跳得比甲少<br>
+                • 丁跳得最多<br>
+                • 乙跳得比丙多<br><br>
+                <strong>请问：谁跳得最少？</strong>
+            </p>
+        </div>
+        <div style="text-align: center; margin: 30px 0;">
+            <div class="character-card" onclick="selectJump(this, '甲')">👦<br><small>甲</small></div>
+            <div class="character-card" onclick="selectJump(this, '乙')">👧<br><small>乙</small></div>
+            <div class="character-card" onclick="selectJump(this, '丙')">👦<br><small>丙</small></div>
+            <div class="character-card" onclick="selectJump(this, '丁')">👧<br><small>丁</small></div>
+        </div>
+        <input type="hidden" id="jump_answer">
+        <div style="text-align: center;">
+            <button class="interactive-btn" onclick="checkJump()">检查答案</button>
+        </div>
+        <div id="feedback_jump" class="feedback"></div>
+    </div>
+
+    <!-- 第17页：奥数衔接 -->
+    <div class="slide" data-slide="17">
+        <h2 class="slide-title">🚀 奥数衔接：真假话推理</h2>
+        <div class="content-card" style="background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);">
+            <h3>🌟 挑战题</h3>
+            <p style="font-size: 18px; line-height: 1.8;">
+                小明、小红、小华三人中，有一人做了好事。<br>
+                老师问是谁做的，他们这样说：<br><br>
+                • 小明说："是小红做的。"<br>
+                • 小红说："不是我做的。"<br>
+                • 小华说："也不是我做的。"<br><br>
+                已知三人中有两人说了真话，一人说了假话。<br>
+                <strong>请问：好事是谁做的？</strong>
+            </p>
+        </div>
+        <div style="text-align: center; margin: 30px 0;">
+            <div class="character-card" onclick="selectGood(this, '小明')">👦<br><small>小明</small></div>
+            <div class="character-card" onclick="selectGood(this, '小红')">👧<br><small>小红</small></div>
+            <div class="character-card" onclick="selectGood(this, '小华')">👦<br><small>小华</small></div>
+        </div>
+        <input type="hidden" id="good_answer">
+        <div style="text-align: center;">
+            <button class="interactive-btn" onclick="checkGood()">检查答案</button>
+        </div>
+        <div id="feedback_good" class="feedback"></div>
+    </div>
+
+    <!-- 第18页：速度挑战 -->
+    <div class="slide" data-slide="18">
+        <h2 class="slide-title">⚡ 速度挑战：60秒推理赛</h2>
+        <div class="score-board">
+            得分: <span id="scoreValue">0</span>
+        </div>
+        <div class="timer">
+            ⏱️ <span id="challengeTimer">60</span>秒
+        </div>
+        <div id="challenge_start">
+            <p style="text-align: center; font-size: 20px; margin: 30px 0;">
+                在60秒内完成尽可能多的推理题！<br>
+                每答对一题得10分！
+            </p>
+            <button class="start-btn" onclick="startChallenge()">开始挑战</button>
+        </div>
+        <div id="challenge_question" style="display: none;">
+            <div class="challenge-question">
+                <p id="challenge_text" style="font-size: 18px;"></p>
+                <div id="challenge_options" style="text-align: center; margin: 20px 0;"></div>
+            </div>
+        </div>
+        <div id="challenge_end" style="display: none; text-align: center;">
+            <h3 style="color: #660099; font-size: 28px;">🎉 挑战结束！</h3>
+            <p style="font-size: 24px; margin: 20px 0;">最终得分：<span id="finalScore">0</span></p>
+            <button class="interactive-btn" onclick="resetChallenge()">再玩一次</button>
+        </div>
+    </div>
+
+    <!-- 第19页：易错点总结 -->
+    <div class="slide" data-slide="19">
+        <h2 class="slide-title">⚠️ 易错点总结</h2>
+        <div class="content-card" style="background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%); border-left-color: #f44336;">
+            <h3>🚫 常见错误</h3>
+            <ul style="font-size: 18px; line-height: 2;">
+                <li><strong>错误1：</strong>忽略"不是"这类否定条件</li>
+                <li><strong>错误2：</strong>比较方向搞反（高低、轻重）</li>
+                <li><strong>错误3：</strong>列表推理时忘记每行每列只有一个✓</li>
+                <li><strong>错误4：</strong>条件多时漏掉某个条件</li>
+            </ul>
+        </div>
+        <div class="content-card" style="background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);">
+            <h3>✅ 成功秘诀</h3>
+            <ul style="font-size: 18px; line-height: 2;">
+                <li>💡 仔细阅读每个条件，圈出关键词</li>
+                <li>💡 画图或列表帮助整理信息</li>
+                <li>💡 做完后检查是否符合所有条件</li>
+                <li>💡 多练习，培养推理直觉</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 第20页：知识回顾 -->
+    <div class="slide" data-slide="20">
+        <h2 class="slide-title">🌟 知识回顾</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="content-card" style="background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);">
+                <h3>⚖️ 比较推理</h3>
+                <p style="font-size: 16px; line-height: 1.6;">
+                    • 画箭头表示关系<br>
+                    • 从大到小/从高到低<br>
+                    • 找出最大和最小
+                </p>
+            </div>
+            <div class="content-card" style="background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);">
+                <h3>📊 排序推理</h3>
+                <p style="font-size: 16px; line-height: 1.6;">
+                    • 排除法排除不可能<br>
+                    • 确定法确定位置<br>
+                    • 综合运用条件
+                </p>
+            </div>
+            <div class="content-card" style="background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);">
+                <h3>📋 列表推理</h3>
+                <p style="font-size: 16px; line-height: 1.6;">
+                    • 画表格整理信息<br>
+                    • ✓表示是，✗表示不是<br>
+                    • 每行每列一个✓
+                </p>
+            </div>
+            <div class="content-card" style="background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);">
+                <h3>🎯 通用技巧</h3>
+                <p style="font-size: 16px; line-height: 1.6;">
+                    • 仔细读题圈重点<br>
+                    • 借助图形或表格<br>
+                    • 验证答案合理性
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第21页：作业布置 -->
+    <div class="slide" data-slide="21">
+        <h2 class="slide-title">📝 课后作业</h2>
+        <div class="content-card">
+            <h3>📚 基础作业</h3>
+            <p style="font-size: 18px; line-height: 2;">
+                1️⃣ 完成课后练习题（共10题）<br>
+                2️⃣ 复习今天学习的三种推理方法<br>
+                3️⃣ 给爸爸妈妈讲一道推理题
+            </p>
+        </div>
+        <div class="content-card" style="background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);">
+            <h3>🌟 拓展作业</h3>
+            <p style="font-size: 18px; line-height: 2;">
+                4️⃣ 自己设计一道推理题，考考同学<br>
+                5️⃣ 观察生活中的推理问题，记录下来
+            </p>
+        </div>
+        <div class="content-card" style="background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);">
+            <h3>⏰ 建议用时</h3>
+            <p style="font-size: 18px;">20-30分钟</p>
+        </div>
+    </div>
+
+    <!-- 第22页：结束页 -->
+    <div class="slide" data-slide="22">
+        <div class="emoji-display cover-animation">🎉🏆🌟</div>
+        <h1 style="text-align: center; color: #660099; font-size: 42px; margin: 30px 0;">
+            恭喜你完成学习！
+        </h1>
+        <p style="text-align: center; font-size: 22px; color: #666; margin: 30px 0;">
+            你已经掌握了简单推理的方法<br>
+            继续加油，成为推理小达人！
+        </p>
+        <div class="content-card" style="background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);">
+            <h3 style="text-align: center;">📢 下节课预告</h3>
+            <p style="text-align: center; font-size: 20px;">
+                第08课：阶段游戏<br>
+                综合复习 + 团队竞赛
+            </p>
+        </div>
+        <button class="start-btn" onclick="showSlide(1)">重新开始 🔁</button>
+    </div>
+
+    <!-- 导航按钮 -->
+    <div class="nav-container">
+        <button class="nav-btn" onclick="prevSlide()" id="prevBtn">⬅️ 上一页</button>
+        <button class="nav-btn" onclick="nextSlide()" id="nextBtn">下一页 ➡️</button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 22;
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            if (n > totalSlides) currentSlide = totalSlides;
+            if (n < 1) currentSlide = 1;
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            document.querySelector(`.slide[data-slide="${currentSlide}"]`).classList.add('active');
+            
+            // 更新进度条
+            const progress = (currentSlide / totalSlides) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('currentPage').textContent = currentSlide;
+            
+            // 更新按钮状态
+            document.getElementById('prevBtn').disabled = currentSlide === 1;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides;
+            
+            // 滚动到顶部
+            window.scrollTo(0, 0);
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+
+        // 键盘导航
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        // 显示反馈
+        function showFeedback(elementId, isSuccess, message) {
+            const feedback = document.getElementById(elementId);
+            feedback.className = 'feedback ' + (isSuccess ? 'success' : 'error');
+            feedback.textContent = message;
+        }
+
+        // 第3页：猜谜语
+        function checkRiddle() {
+            const answer = document.getElementById('riddle_answer').value.trim();
+            if (answer === '桌子' || answer === '桌') {
+                document.getElementById('riddle_answer').classList.add('correct');
+                showFeedback('feedback_riddle', true, '🎉 太棒了！答案正确！桌子有桌面和四条腿，但不会自己走路。');
+            } else {
+                document.getElementById('riddle_answer').classList.add('wrong');
+                showFeedback('feedback_riddle', false, '❌ 再想想看。提示：它是家具，用来放东西。');
+                setTimeout(() => document.getElementById('riddle_answer').classList.remove('wrong'), 1000);
+            }
+        }
+
+        // 第6页：选水果
+        function selectFruit(element, fruit) {
+            document.querySelectorAll('.character-card').forEach(card => card.classList.remove('selected'));
+            element.classList.add('selected');
+            document.getElementById('fruit_answer').value = fruit;
+        }
+
+        function checkFruit() {
+            const answer = document.getElementById('fruit_answer').value;
+            if (answer === '苹果') {
+                showFeedback('feedback_fruit', true, '✅ 正确！苹果比香蕉重，香蕉比葡萄重，所以苹果最重！');
+            } else {
+                showFeedback('feedback_fruit', false, '❌ 再想想看。苹果比香蕉重，葡萄比香蕉轻...');
+            }
+        }
+
+        // 第7页：比速度
+        function checkSpeed() {
+            const answer = document.getElementById('speed_order').value.trim();
+            if (answer.includes('兔子') && answer.includes('松鼠') && answer.includes('乌龟') &&
+                (answer.indexOf('兔子') < answer.indexOf('松鼠')) && 
+                (answer.indexOf('松鼠') < answer.indexOf('乌龟'))) {
+                document.getElementById('speed_order').classList.add('correct');
+                showFeedback('feedback_speed', true, '✅ 正确！兔子最快，松鼠第二，乌龟最慢！');
+            } else {
+                document.getElementById('speed_order').classList.add('wrong');
+                showFeedback('feedback_speed', false, '❌ 顺序不对。再想想看：兔子比松鼠快，松鼠比乌龟快...');
+                setTimeout(() => document.getElementById('speed_order').classList.remove('wrong'), 1000);
+            }
+        }
+
+        // 第9页：排座位
+        function checkSeat() {
+            const answer = document.getElementById('seat_order').value.trim();
+            if (answer === '甲、丙、乙、丁' || answer === '甲,丙,乙,丁' || answer === '甲丙乙丁') {
+                document.getElementById('seat_order').classList.add('correct');
+                showFeedback('feedback_seat', true, '✅ 正确！甲在最左，丁在最右，丙在乙左边，所以是甲、丙、乙、丁！');
+            } else {
+                document.getElementById('seat_order').classList.add('wrong');
+                showFeedback('feedback_seat', false, '❌ 顺序不对。提示：丙在乙的左边。');
+                setTimeout(() => document.getElementById('seat_order').classList.remove('wrong'), 1000);
+            }
+        }
+
+        // 第10页：比名次
+        function selectRank(element, name) {
+            document.querySelectorAll('.character-card').forEach(card => card.classList.remove('selected'));
+            element.classList.add('selected');
+            document.getElementById('rank_answer').value = name;
+        }
+
+        function checkRank() {
+            const answer = document.getElementById('rank_answer').value;
+            if (answer === '小红') {
+                showFeedback('feedback_rank', true, '✅ 正确！小红比小明名次高，小明不是第一，小华第三，所以小红第一，小明第四，小丽第二！');
+            } else {
+                showFeedback('feedback_rank', false, '❌ 再想想看。小华是第三名，小明不是第一名，小红比小明高...');
+            }
+        }
+
+        // 第12页：表格标记
+        function toggleMark(cell) {
+            if (cell.textContent === '?') {
+                cell.textContent = '✓';
+                cell.style.background = '#C8E6C9';
+            } else if (cell.textContent === '✓') {
+                cell.textContent = '✗';
+                cell.style.background = '#FFCDD2';
+            } else {
+                cell.textContent = '?';
+                cell.style.background = '';
+            }
+        }
+
+        // 第13页：职业推理
+        function checkJob() {
+            const answer = document.getElementById('job_answer').value.trim();
+            if (answer === '教师' || answer === '老师') {
+                document.getElementById('job_answer').classList.add('correct');
+                showFeedback('feedback_job', true, '✅ 正确！小张是工程师，小王不是医生，所以小王是教师，小李是医生！');
+            } else {
+                document.getElementById('job_answer').classList.add('wrong');
+                showFeedback('feedback_job', false, '❌ 不对。提示：小张是工程师，小王不是医生。');
+                setTimeout(() => document.getElementById('job_answer').classList.remove('wrong'), 1000);
+            }
+        }
+
+        // 第15页：比体重
+        function checkWeight() {
+            const answer = document.getElementById('weight_order').value.trim();
+            if ((answer.includes('小丽') && answer.includes('小明') && answer.includes('小红')) &&
+                (answer.indexOf('小丽') < answer.indexOf('小明')) && 
+                (answer.indexOf('小明') < answer.indexOf('小红'))) {
+                document.getElementById('weight_order').classList.add('correct');
+                showFeedback('feedback_weight', true, '✅ 正确！小丽最重，小明第二，小红最轻！');
+            } else {
+                document.getElementById('weight_order').classList.add('wrong');
+                showFeedback('feedback_weight', false, '❌ 顺序不对。提示：小明不是最重的。');
+                setTimeout(() => document.getElementById('weight_order').classList.remove('wrong'), 1000);
+            }
+        }
+
+        // 第16页：跳绳比赛
+        function selectJump(element, name) {
+            document.querySelectorAll('.character-card').forEach(card => card.classList.remove('selected'));
+            element.classList.add('selected');
+            document.getElementById('jump_answer').value = name;
+        }
+
+        function checkJump() {
+            const answer = document.getElementById('jump_answer').value;
+            if (answer === '丙') {
+                showFeedback('feedback_jump', true, '✅ 正确！丁最多，甲比乙多，乙比丙多，所以丙最少！');
+            } else {
+                showFeedback('feedback_jump', false, '❌ 再想想看。丁最多，甲比乙多，乙比丙多...');
+            }
+        }
+
+        // 第17页：真假话推理
+        function selectGood(element, name) {
+            document.querySelectorAll('.character-card').forEach(card => card.classList.remove('selected'));
+            element.classList.add('selected');
+            document.getElementById('good_answer').value = name;
+        }
+
+        function checkGood() {
+            const answer = document.getElementById('good_answer').value;
+            if (answer === '小华') {
+                showFeedback('feedback_good', true, '✅ 正确！如果是小华做的，小明说假话，小红和小华说真话，符合两真一假！');
+            } else {
+                showFeedback('feedback_good', false, '❌ 再想想看。假设每个人做好事，看谁说真话谁说假话...');
+            }
+        }
+
+        // 第18页：速度挑战
+        let challengeScore = 0;
+        let timeLeft = 60;
+        let timerInterval = null;
+        let currentChallengeQ = 0;
+
+        const challengeQuestions = [
+            { q: 'A比B高，B比C高，谁最高？', options: ['A', 'B', 'C'], answer: 'A' },
+            { q: '小明不是第一名，小红是第一名，小明是第几名？', options: ['第一', '第二', '不知道'], answer: '第二' },
+            { q: '三个水果：苹果最重，香蕉最轻，葡萄排第几？', options: ['第一', '第二', '第三'], answer: '第二' },
+            { q: '甲、乙、丙排队，甲在最前，丙在最后，乙在第几个？', options: ['第一', '第二', '第三'], answer: '第二' },
+            { q: '小红比小明快，小明比小华快，谁最慢？', options: ['小红', '小明', '小华'], answer: '小华' }
+        ];
+
+        function startChallenge() {
+            document.getElementById('challenge_start').style.display = 'none';
+            document.getElementById('challenge_question').style.display = 'block';
+            challengeScore = 0;
+            timeLeft = 60;
+            currentChallengeQ = 0;
+            updateScore();
+            startTimer();
+            showChallengeQuestion();
+        }
+
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                document.getElementById('challengeTimer').textContent = timeLeft;
+                if (timeLeft <= 0) {
+                    endChallenge();
+                }
+            }, 1000);
+        }
+
+        function showChallengeQuestion() {
+            if (currentChallengeQ >= challengeQuestions.length) {
+                currentChallengeQ = 0; // 循环题目
+            }
+            const q = challengeQuestions[currentChallengeQ];
+            document.getElementById('challenge_text').textContent = `第${currentChallengeQ + 1}题：${q.q}`;
+            
+            let optionsHtml = '';
+            q.options.forEach((opt, idx) => {
+                optionsHtml += `<button class="interactive-btn" onclick="checkChallengeAnswer('${opt}')">${opt}</button>`;
+            });
+            document.getElementById('challenge_options').innerHTML = optionsHtml;
+        }
+
+        function checkChallengeAnswer(answer) {
+            const q = challengeQuestions[currentChallengeQ];
+            if (answer === q.answer) {
+                challengeScore += 10;
+                updateScore();
+            }
+            currentChallengeQ++;
+            showChallengeQuestion();
+        }
+
+        function updateScore() {
+            document.getElementById('scoreValue').textContent = challengeScore;
+        }
+
+        function endChallenge() {
+            clearInterval(timerInterval);
+            document.getElementById('challenge_question').style.display = 'none';
+            document.getElementById('challenge_end').style.display = 'block';
+            document.getElementById('finalScore').textContent = challengeScore;
+        }
+
+        function resetChallenge() {
+            document.getElementById('challenge_end').style.display = 'none';
+            document.getElementById('challenge_start').style.display = 'block';
+            document.getElementById('challengeTimer').textContent = '60';
+        }
+
+        // 初始化
+        showSlide(1);
+    </script>
+</body>
+</html>
