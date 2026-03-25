@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第04课《有趣的排队》- 课后练习题</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        /* 头部 */
+        .header {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            font-size: 20px;
+            opacity: 0.95;
+        }
+        
+        .header .badge {
+            display: inline-block;
+            background: #FFD700;
+            color: #333;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        
+        /* 内容区域 */
+        .content {
+            padding: 40px;
+        }
+        
+        /* 学生信息 */
+        .student-info {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .info-item {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .info-item label {
+            display: block;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .info-item input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        
+        /* 题目样式 */
+        .question {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .question:hover {
+            border-color: #660099;
+            box-shadow: 0 5px 20px rgba(102, 0, 153, 0.1);
+        }
+        
+        .question-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .question-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .question-title {
+            flex: 1;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .difficulty-badge {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .difficulty-basic {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+        
+        .difficulty-medium {
+            background: #FFF3E0;
+            color: #E65100;
+        }
+        
+        .difficulty-hard {
+            background: #FCE4EC;
+            color: #C2185B;
+        }
+        
+        .difficulty-challenge {
+            background: #F3E5F5;
+            color: #7B1FA2;
+        }
+        
+        .question-content {
+            font-size: 17px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .question-content strong {
+            color: #94070A;
+        }
+        
+        /* 排队图示 */
+        .queue-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        
+        .person {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            background: #e3f2fd;
+            border: 2px solid #1976D2;
+        }
+        
+        .person.highlight {
+            background: #ffebee;
+            border-color: #e53935;
+        }
+        
+        /* 答题区域 */
+        .answer-area {
+            background: #f5f5f5;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+        
+        .answer-label {
+            font-weight: bold;
+            color: #660099;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .answer-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            resize: vertical;
+        }
+        
+        .answer-input:focus {
+            outline: none;
+            border-color: #660099;
+        }
+        
+        /* 提示框 */
+        .hint-box {
+            background: #E3F2FD;
+            border-left: 5px solid #2196F3;
+            border-radius: 0 10px 10px 0;
+            padding: 15px;
+            margin-top: 15px;
+        }
+        
+        .hint-title {
+            color: #1976D2;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .hint-content {
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* 页脚 */
+        .footer {
+            background: #f5f5f5;
+            padding: 30px;
+            text-align: center;
+            color: #666;
+        }
+        
+        /* 评分区 */
+        .score-section {
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+            border: 3px solid #FFD700;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .score-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #FF8F00;
+            margin-bottom: 15px;
+        }
+        
+        .score-input {
+            width: 100px;
+            padding: 10px;
+            font-size: 24px;
+            text-align: center;
+            border: 3px solid #FFD700;
+            border-radius: 10px;
+            margin: 0 10px;
+        }
+        
+        .teacher-comment {
+            margin-top: 20px;
+        }
+        
+        .teacher-comment textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            resize: vertical;
+            min-height: 80px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <div class="header">
+            <h1>🚶 第04课《有趣的排队》</h1>
+            <div class="subtitle">课后练习题</div>
+            <div class="badge">🏆 挑战自我 · 10题 + 附加题</div>
+        </div>
+        
+        <!-- 内容区域 -->
+        <div class="content">
+            <!-- 学生信息 -->
+            <div class="student-info">
+                <div class="info-item">
+                    <label>姓名</label>
+                    <input type="text" placeholder="请输入姓名">
+                </div>
+                <div class="info-item">
+                    <label>班级</label>
+                    <input type="text" placeholder="请输入班级">
+                </div>
+                <div class="info-item">
+                    <label>日期</label>
+                    <input type="text" placeholder="YYYY-MM-DD">
+                </div>
+            </div>
+
+            <!-- 第1题：基础巩固 -->
+            <div class="question">
+                <div class="question-header">
+                    <div class="question-number">1</div>
+                    <div class="question-title">小明排第几</div>
+                    <span class="difficulty-badge difficulty-basic">基础</span>
+                </div>
+                <div class="question-content">
+                    小朋友们排成一队，从前往后数，小明排在第4个。
+                    <br><strong>请问：小明前面有几人？</strong>
+                </div>
+                <div class="answer-area">
+                    <label class="answer-label">✏️ 答案：</label>
+                    <input type="text" class="answer-input" placeholder="小明前面有____人。列式：____">
+                </div>
+                <div class="hint-box">
+                    <div class="hint-title">💡 小提示</div>
+                    <div class="hint-content">"第4个"包含小明自己，算前面的人数时要减去1。</div>
+                </div>
+            </div>
+
+            <!-- 第2题：基础巩固 -->
+            <div class="question">
+                <div class="question-header">
+                    <div class="question-number">2</div>
+                    <div class="question-title">小红的位置</div>
+                    <span class="difficulty-badge difficulty-basic">基础</span>
+                </div>
+                <div class="question-content">
+                    小红在队伍里，她的前面有6人，后面有3人。
+                    <br><strong>请问：这一队一共有多少人？小红从前往后数排第几个？</strong>
+                </div>
+                <div class="answer-area">
+                    <label class="answer-label">✏️ 答案：</label>
+                    <input type="text" class="answer-input" placeholder="一共有____人，小红排第____个。列式：____">
+                </div>
+                <div class="hint-box">
+                    <div class="hint-title">💡 小提示</div>
+                    <div class="hint-content">总人数 = 前面的人 + 后面的人 + 小红自己。小红的位置 = 前面人数 + 1。</div>
+                </div>
+            </div>
+
+            <!-- 第3题：思维拓展 -->
+            <div class="question">
+                <div class="question-header">
+                    <div class="question-number">3</div>
+                    <div class="question-title">从前往后，从后往前</div>
+                    <span class="difficulty-badge difficulty-medium">进阶</span>
+                </div>
+                <div class="question-content">
+                    小华站在队伍里，从前往后数，他排第5；从后往前数，他排第3。
+                    <br><strong>请问：这一队一共有多少人？</strong>
+                </div>
+                <div class="answer-area">
+                    <label class="answer-label">✏️ 答案：</label>
+                    <input type="text" class="answer-input" placeholder="一共有____人。列式：____">
+                </div>
+                <div class="hint-box">
+                    <div class="hint-title">💡 解题关键</div>
+                    <div class="hint-content">小华被数了两次，所以要减去重复的一次。公式：总人数 = 从前数位置 + 从后数位置 - 1</div>
+                </div>
+            </div>
+
+            <!-- 第4题：思维拓展 -->
+            <div class="question">
+                <div class="question-header">
+                    <div class="question-number">4</div>
+                    <div class="question-title">他们之间有几人</div>
+                    <span class="difficulty-badge difficulty-medium">进阶</span>
+                </div>
+                <div class="question-content">
+                    同学们排成一队做操，小明排第3，小红排第9。
+                    <br><strong>请问：小明和小红之间有几人？</strong>
+                </div>
+                <div class="queue-display">
+                    <div class="person">3</div>
+                    <div class="person">?</div>
+                    <div class="person">?</div>
+                    <div class="person">?</div>
+                    <div class="person">?</div>
+                    <div class="person">9</div>
+                </div>
+                <div class="answer-area">
+                    <label class="answer-label">✏️ 答案：</label>
+                    <input type="text" class="answer-input" placeholder="小明和小红之间有____人。列式：____">
+                </div>
+                <div class="hint-box">
+                    <div class="hint-title">💡 小提示</div>
+                    <div class="hint-content">"之间"不包括小明和小红两个人。画图数一数：○○●○○○○○●（●是小明和小红）</div>
+                </div>
+            </div>
+
+            <!-- 第5题：挑战提升 -->
+            <div class="question">
+                <div class="question-header">
+                    <div class="question-number">5</div>
+                    <div class="question-title">从A到B</div>
+                    <span class="difficulty-badge difficulty-hard">挑战</span>
+                </div>
+                <div class="question-content">
+                    小朋友们排成一队，小李排第4，小王排第11。
+                    <br><strong>请问：从小李到小王一共有多少人？</strong>
+                    <br><span style="color: #94070A;">（注意：是"从...到..."，不是"之间"！）</span>
+                </div>
+                <div class="answer-area">
+                    <label class="answer-label">✏️ 答案：</label>
+                    <input type="text" class="answer-input" placeholder="从小李到小王一共有____人。列式：____">
+                </div>
+                <div class="hint-box">
+                    <div class="hint-title">💡 解题方法</div>
+                    <div class="hint-content">"从A到B"包含A和B两个人。公式：人数 = 后位置 - 前位置 + 1</div>
+                </div>
+            </div>
+
+            <!-- 第6题：挑战提升 -->
+            <div class="question">
+                <div class="question-header">
+                    <div class="question-number">6</div>
+                    <div class="question-title">复杂的排队</div>
+                    <span class="difficulty-badge difficulty-hard">挑战</span>
+                </div>
+                <div class="question-content">
+                    一排小朋友在做游戏，从左边数，小明排第7；从右边数，小红排第5。已知小明在小红的左边，他们之间有4人。
+                    <br><strong>请问：这一排一共有多少人？</strong>
+                </div>
+                <div class="answer-area">
+                    <label class="answer-label">✏️ 答案：</label>
+                    <input type="text" class="answer-input" placeholder="一共有____人。画图分析：____">
+                </div>
+                <div class="hint-box">
+                    <div class="hint-title">💡 解题思路</div>
+                    <div class="hint-content">画图分析：小明左边6人 + 小明 + 中间4人 + 小红 + 小红右边4人 = 总人数</div>
+                </div>
+            </div>
+
+            <!-- 第7题：烧脑挑战 -->
+            <div class="question">
+                <div class="question-header">
+                    <div class="question-number">7</div>
+                    <div class="question-title">双重计数</div>
+                    <span class="difficulty-badge difficulty-challenge">烧脑</span>
+                </div>
+                <div class="question-content">
+                    同学们排成一个长方形队伍做操，小明从前面数排第4，从后面数排第5，从左边数排第3，从右边数排第6。
+                    <br><strong>请问：这个长方形队伍一共有多少人？</strong>
+                </div>
+                <div class="answer-area">
+                    <label class="answer-label">✏️ 答案：</label>
+                    <input type="text" class="answer-input" placeholder="一共有____人。列式：____">
+                </div>
+                <div class="hint-box">
+                    <div class="hint-title">💡 解题步骤</div>
+                    <div class="hint-content">第一步：先算每列有多少人（前后方向）。第二步：再算每行有多少人（左右方向）。第三步：总人数 = 每列人数 × 每行人数。</div>
+                </div>
+            </div>
+
+            <!-- 第8题：烧脑挑战 -->
+            <div class="question">
+                <div class="question-header">
+                    <div class="question-number">8</div>
+                    <div class="question-title">找位置</div>
+                    <span class="difficulty-badge difficulty-challenge">烧脑</span>
+                </div>
+                <div class="question-content">
+                    20个小朋友排成一队去参观。从前往后数，小红排第12；从后往前数，小明排第8。
+                    <br><strong>请问：小红和小明之间有几人？</strong>
+                </div>
+                <div class="answer-area">
+                    <label class="answer-label">✏️ 答案：</label>
+                    <input type="text" class="answer-input" placeholder="小红和小明之间有____人。分析过程：____">
+                </div>
+                <div class="hint-box">
+                    <div class="hint-title">💡 思考方向</div>
+                    <div class="hint-content">先确定小明从前往后数排第几（20-8+1=13），再比较小红（12）和小明（13）的位置关系。</div>
+                </div>
+            </div>
+
+            <!-- 第9题：终极挑战 -->
+            <div class="question">
+                <div class="question-header">
+                    <div class="question-number">9</div>
+                    <div class="question-title">报数问题</div>
+                    <span class="difficulty-badge difficulty-challenge">拔高</span>
+                </div>
+                <div class="question-content">
+                    同学们排成一队报数，从前往后报数时，小明报"8"；从后往前报数时，小明报"6"；从前往后报数时，小红报"15"；从后往前报数时，小红报"3"。
+                    <br><strong>请问：小明和小红之间有几人？</strong>
+                </div>
+                <div class="answer-area">
+                    <label class="answer-label">✏️ 答案：</label>
+                    <input type="text" class="answer-input" placeholder="小明和小红之间有____人。解题过程：____">
+                </div>
+                <div class="hint-box">
+                    <div class="hint-title">💡 解题关键</div>
+                    <div class="hint-content">报的数字就是排的位置。先验证总人数是否一致（8+6-1=13，15+3-1=17...咦？），再确定两人的位置。</div>
+                </div>
+            </div>
+
+            <!-- 第10题：终极挑战 -->
+            <div class="question">
+                <div class="question-header">
+                    <div class="question-number">10</div>
+                    <div class="question-title">移动位置</div>
+                    <span class="difficulty-badge difficulty-challenge">拔高</span>
+                </div>
+                <div class="question-content">
+                    18个小朋友排成一队。小明从前往后数排第9。老师说："小明，请你向后移动3个位置。"
+                    <br><strong>请问：移动后，小明从后往前数排第几？</strong>
+                </div>
+                <div class="answer-area">
+                    <label class="answer-label">✏️ 答案：</label>
+                    <input type="text" class="answer-input" placeholder="移动后，小明从后往前数排第____。分析：____">
+                </div>
+                <div class="hint-box">
+                    <div class="hint-title">💡 解题步骤</div>
+                    <div class="hint-content">第一步：确定小明原来从后往前数排第几（18-9+1=10）。第二步：向后移动3个位置后，从前往后数排第几（9+3=12）。第三步：再算从后往前数排第几。</div>
+                </div>
+            </div>
+
+            <!-- 附加题：思维拓展 -->
+            <div class="question" style="border: 3px solid #94070A; background: linear-gradient(135deg, #fff5f5 0%, #ffe6e6 100%);">
+                <div class="question-header">
+                    <div class="question-number" style="background: #94070A;">★</div>
+                    <div class="question-title">思维拓展（附加题）</div>
+                    <span class="difficulty-badge difficulty-challenge">奥数</span>
+                </div>
+                <div class="question-content">
+                    小朋友们围成一个圆圈做游戏。从某个小朋友开始顺时针数，小明数到第8；从这个小朋友开始逆时针数，小明数到第6。
+                    <br><strong>请问：一共有多少个小朋友参加游戏？</strong>
+                    <br><span style="color: #666;">（提示：圆圈和直线排队有什么不同？）</span>
+                </div>
+                <div class="answer-area">
+                    <label class="answer-label">✏️ 答案：</label>
+                    <input type="text" class="answer-input" placeholder="一共有____个小朋友。思考过程：____">
+                </div>
+                <div class="hint-box">
+                    <div class="hint-title">💡 思考方向</div>
+                    <div class="hint-content">圆圈排队没有"前后"之分，顺时针数到小明的人数 + 逆时针数到小明的人数 - 1（小明被重复计算）= 总人数。</div>
+                </div>
+            </div>
+
+            <!-- 评分区 -->
+            <div class="score-section">
+                <div class="score-title">🏆 成绩评定</div>
+                <p style="margin-bottom: 20px;">满分：100分 + 20分（附加题）</p>
+                <div>
+                    <span style="font-size: 24px;">得分：</span>
+                    <input type="text" class="score-input" placeholder="0">
+                    <span style="font-size: 24px;">分</span>
+                </div>
+                <div class="teacher-comment">
+                    <textarea placeholder="教师评语..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <div class="footer">
+            <p>🌟 二年级思维训练课程 · 第04课《有趣的排队》</p>
+            <p style="margin-top: 10px;">📱 夏老师：19117803360</p>
+        </div>
+    </div>
+</body>
+</html>

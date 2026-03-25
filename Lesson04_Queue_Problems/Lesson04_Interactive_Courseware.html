@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第04课《有趣的排队》- 交互式课件</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* 幻灯片样式 */
+        .slide {
+            display: none;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        .slide-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            min-height: calc(100vh - 140px);
+        }
+        
+        /* 标题样式 */
+        .slide-title {
+            font-size: 36px;
+            color: #660099;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+        
+        .slide-subtitle {
+            font-size: 20px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        /* 卡片样式 */
+        .content-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 5px solid #660099;
+        }
+        
+        .content-card h3 {
+            color: #660099;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+        
+        .content-card p, .content-card li {
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        /* 进度条 */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: rgba(255,255,255,0.3);
+            z-index: 1000;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #660099, #94070A);
+            width: 5%;
+            transition: width 0.3s ease;
+        }
+        
+        /* 导航按钮 */
+        .nav-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 0, 153, 0.4);
+        }
+        
+        .nav-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* 页码指示器 */
+        .page-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(102, 0, 153, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            z-index: 1000;
+        }
+        
+        /* 封面页特殊样式 */
+        .cover-page {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 140px);
+        }
+        
+        .cover-icon {
+            font-size: 120px;
+            margin-bottom: 30px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .cover-title {
+            font-size: 48px;
+            color: #660099;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .cover-subtitle {
+            font-size: 24px;
+            color: #94070A;
+            margin-bottom: 40px;
+        }
+        
+        .start-btn {
+            padding: 15px 50px;
+            font-size: 20px;
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .start-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(102, 0, 153, 0.4);
+        }
+        
+        /* 排队人物样式 */
+        .queue-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .person {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            background: #e3f2fd;
+            border: 3px solid #1976D2;
+            transition: all 0.3s ease;
+        }
+        
+        .person.highlight {
+            background: #ffebee;
+            border-color: #e53935;
+            transform: scale(1.2);
+            box-shadow: 0 5px 15px rgba(229, 57, 53, 0.4);
+        }
+        
+        .person.target {
+            background: #fff8e1;
+            border-color: #ff8f00;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        /* 输入框样式 */
+        .answer-input {
+            width: 100px;
+            height: 50px;
+            font-size: 24px;
+            text-align: center;
+            border: 3px solid #660099;
+            border-radius: 10px;
+            margin: 0 10px;
+        }
+        
+        .answer-input.correct {
+            border-color: #4CAF50;
+            background: #E8F5E9;
+        }
+        
+        .answer-input.wrong {
+            border-color: #f44336;
+            background: #FFEBEE;
+        }
+        
+        /* 按钮样式 */
+        .check-btn {
+            padding: 10px 30px;
+            background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        
+        .check-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        /* 反馈信息 */
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            display: none;
+        }
+        
+        .feedback.success {
+            background: #E8F5E9;
+            color: #2E7D32;
+            display: block;
+        }
+        
+        .feedback.error {
+            background: #FFEBEE;
+            color: #C62828;
+            display: block;
+        }
+        
+        /* 公式框 */
+        .formula-box {
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            border: 3px solid #ff8f00;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #e65100;
+        }
+        
+        /* 提示框 */
+        .hint-box {
+            background: #E3F2FD;
+            border-left: 5px solid #2196F3;
+            border-radius: 0 10px 10px 0;
+            padding: 15px;
+            margin-top: 15px;
+        }
+        
+        .hint-title {
+            color: #1976D2;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        /* 游戏区域 */
+        .game-area {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        /* 计时器 */
+        .timer {
+            font-size: 36px;
+            color: #e53935;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        /* 得分板 */
+        .score-board {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 20px 0;
+        }
+        
+        .score-item {
+            text-align: center;
+        }
+        
+        .score-value {
+            font-size: 36px;
+            font-weight: bold;
+            color: #660099;
+        }
+        
+        .score-label {
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        /* 拖拽区域 */
+        .drag-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .draggable {
+            width: 60px;
+            height: 60px;
+            background: #e3f2fd;
+            border: 3px solid #1976D2;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: move;
+            transition: all 0.3s ease;
+        }
+        
+        .draggable:hover {
+            transform: scale(1.1);
+        }
+        
+        .drop-zone {
+            width: 70px;
+            height: 70px;
+            border: 3px dashed #999;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f5f5f5;
+        }
+        
+        .drop-zone.filled {
+            border-style: solid;
+            border-color: #4CAF50;
+            background: #E8F5E9;
+        }
+        
+        /* 列表样式 */
+        .check-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .check-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .check-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        /* 强调文字 */
+        .highlight {
+            color: #94070A;
+            font-weight: bold;
+            background: #ffebee;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        
+        /* 动画效果 */
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <div class="container">
+        <!-- 第1页：封面 -->
+        <div class="slide active" data-slide="1">
+            <div class="slide-content cover-page">
+                <div class="cover-icon">🚶‍♂️🚶‍♀️🚶‍♂️</div>
+                <h1 class="cover-title">有趣的排队</h1>
+                <p class="cover-subtitle">第04课 · 序数与位置关系</p>
+                <button class="start-btn" onclick="nextSlide()">开始学习 👉</button>
+            </div>
+        </div>
+        
+        <!-- 第2页：课程目标 -->
+        <div class="slide" data-slide="2">
+            <div class="slide-content">
+                <h2 class="slide-title">🎯 本课学习目标</h2>
+                <div class="content-card">
+                    <h3>📚 知识目标</h3>
+                    <ul class="check-list">
+                        <li>理解<strong>序数</strong>与<strong>基数</strong>的区别</li>
+                        <li>掌握排队问题中的位置关系分析</li>
+                        <li>学会解决"中间有几人"的间隔问题</li>
+                    </ul>
+                </div>
+                <div class="content-card">
+                    <h3>🧠 能力目标</h3>
+                    <ul class="check-list">
+                        <li>培养画图分析的解题习惯</li>
+                        <li>提高逻辑推理能力</li>
+                        <li>学会用数学语言表达位置关系</li>
+                    </ul>
+                </div>
+                <div class="content-card" style="background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);">
+                    <h3>💡 核心思维</h3>
+                    <p style="font-size: 20px; text-align: center; color: #e65100;">
+                        "第几个" ≠ "有几个"<br>
+                        画图分析 → 理清关系 → 列式计算
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 第3页：课前热身 -->
+        <div class="slide" data-slide="3">
+            <div class="slide-content">
+                <h2 class="slide-title">🔥 课前热身</h2>
+                <p class="slide-subtitle">快速反应游戏：听指令做动作</p>
+                
+                <div class="game-area">
+                    <h3 style="color: #660099; margin-bottom: 20px;">🎮 游戏规则</h3>
+                    <p style="font-size: 18px; margin-bottom: 20px;">老师说指令，同学们快速做出反应！</p>
+                    
+                    <div class="content-card">
+                        <p><strong>指令示例：</strong></p>
+                        <ul style="text-align: left; margin-top: 10px;">
+                            <li>"请第3排的同学站起来！"</li>
+                            <li>"请从左边数第4位同学举手！"</li>
+                            <li>"请小明前面一位同学站起来！"</li>
+                            <li>"请小红后面两位同学举手！"</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="hint-box">
+                        <div class="hint-title">💡 思考</div>
+                        <p>这些指令中，哪些说的是"第几个"？哪些说的是"有几个"？</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 第4页：情境导入 -->
+        <div class="slide" data-slide="4">
+            <div class="slide-content">
+                <h2 class="slide-title">📖 情境导入</h2>
+                <p class="slide-subtitle">小明的烦恼</p>
+                
+                <div class="content-card">
+                    <p style="font-size: 18px; line-height: 2;">
+                        今天体育课上，老师让同学们排成一队做游戏。<br><br>
+                        小明站在队伍里，听到老师说：<br>
+                        "从前往后数，小明排第5个！"<br><br>
+                        小明想知道：<br>
+                        <span class="highlight">"我前面有几个人呢？"</span>
+                    </p>
+                </div>
+                
+                <div class="queue-container">
+                    <div class="person">1</div>
+                    <div class="person">2</div>
+                    <div class="person">3</div>
+                    <div class="person">4</div>
+                    <div class="person highlight">5</div>
+                    <div class="person">6</div>
+                    <div class="person">7</div>
+                </div>
+                
+                <div class="formula-box">
+                    小明排第5个 → 前面有 5 - 1 = <strong>4</strong> 人
+                </div>
+                
+                <div class="hint-box">
+                    <div class="hint-title">🔑 关键发现</div>
+                    <p>"第几个"包含自己，"有几个"不包含自己！</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 第5页：概念讲解1 - 序数与基数 -->
+        <div class="slide" data-slide="5">
+            <div class="slide-content">
+                <h2 class="slide-title">📚 概念讲解（一）</h2>
+                <p class="slide-subtitle">序数 vs 基数</p>
+                
+                <div class="content-card" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);">
+                    <h3>🔢 序数（第几个）</h3>
+                    <p>表示<strong>顺序</strong>，回答"排在什么位置"</p>
+                    <p style="color: #1976D2; font-weight: bold;">例：第1个、第2个、第3个...</p>
+                </div>
+                
+                <div class="content-card" style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);">
+                    <h3>🔢 基数（有几个）</h3>
+                    <p>表示<strong>数量</strong>，回答"一共多少"</p>
+                    <p style="color: #7B1FA2; font-weight: bold;">例：1个、2个、3个...</p>
+                </div>
+                
+                <div class="queue-container">
+                    <div class="person">1</div>
+                    <div class="person">2</div>
+                    <div class="person highlight">3</div>
+                    <div class="person">4</div>
+                    <div class="person">5</div>
+                </div>
+                
+                <div class="formula-box">
+                    小红排第3个（序数）<br>
+                    她前面有2人（基数）<br>
+                    她后面有2人（基数）
+                </div>
+            </div>
+        </div>
+        
+        <!-- 第6页：互动练习1 -->
+        <div class="slide" data-slide="6">
+            <div class="slide-content">
+                <h2 class="slide-title">✏️ 互动练习（一）</h2>
+                <p class="slide-subtitle">观察下面的队伍，回答问题</p>
+                
+                <div class="queue-container">
+                    <div class="person">1</div>
+                    <div class="person">2</div>
+                    <div class="person">3</div>
+                    <div class="person highlight">4</div>
+                    <div class="person">5</div>
+                    <div class="person">6</div>
+                    <div class="person">7</div>
+                </div>
+                <p style="text-align: center; color: #666;">👆 小华排在第4个（红色标记）</p>
+                
+                <div class="content-card">
+                    <p style="font-size: 18px; margin-bottom: 15px;"><strong>问题1：</strong>小华前面有几人？</p>
+                    <input type="text" class="answer-input" id="q1_answer" placeholder="?">
+                    <button class="check-btn" onclick="checkQ1()">检查答案</button>
+                    <div class="feedback" id="q1_feedback"></div>
+                </div>
+                
+                <div class="content-card">
+                    <p style="font-size: 18px; margin-bottom: 15px;"><strong>问题2：</strong>小华后面有几人？</p>
+                    <input type="text" class="answer-input" id="q2_answer" placeholder="?">
+                    <button class="check-btn" onclick="checkQ2()">检查答案</button>
+                    <div class="feedback" id="q2_feedback"></div>
+                </div>
+                
+                <div class="hint-box">
+                    <div class="hint-title">💡 小提示</div>
+                    <p>记住："第4个"包含小华自己，算前面/后面的人数时要减去自己！</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 第7页：概念讲解2 - 排队问题类型 -->
+        <div class="slide" data-slide="7">
+            <div class="slide-content">
+                <h2 class="slide-title">📚 概念讲解（二）</h2>
+                <p class="slide-subtitle">排队问题的基本类型</p>
+                
+                <div class="content-card">
+                    <h3>🎯 类型一：已知位置求总数</h3>
+                    <p style="margin-bottom: 15px;"><strong>例题：</strong>小明从前往后数排第4，从后往前数排第3，一共有几人？</p>
+                    
+                    <div class="queue-container">
+                        <div class="person">1</div>
+                        <div class="person">2</div>
+                        <div class="person">3</div>
+                        <div class="person highlight">4</div>
+                        <div class="person">3</div>
+                        <div class="person">2</div>
+                    </div>
+                    <p style="text-align: center; color: #666; margin-bottom: 15px;">从前往后数第4个 = 从后往前数第3个</p>
+                    
+                    <div class="formula-box">
+                        总人数 = 从前往后数的位置 + 从后往前数的位置 - 1<br>
+                        总人数 = 4 + 3 - 1 = <strong>6</strong> 人
+                    </div>
+                    
+                    <div class="hint-box">
+                        <div class="hint-title">⚠️ 注意</div>
+                        <p>为什么要减1？因为小明被重复计算了两次！</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 第8页：互动练习2 -->
+        <div class="slide" data-slide="8">
+            <div class="slide-content">
+                <h2 class="slide-title">✏️ 互动练习（二）</h2>
+                <p class="slide-subtitle">已知位置求总数</p>
+                
+                <div class="content-card">
+                    <p style="font-size: 18px; line-height: 1.8;">
+                        <strong>题目：</strong>小红从前往后数排第5，从后往前数排第4，这一队一共有多少人？
+                    </p>
+                </div>
+                
+                <div class="game-area">
+                    <p style="font-size: 18px; margin-bottom: 15px;">请在下面输入你的答案：</p>
+                    <input type="text" class="answer-input" id="q3_answer" placeholder="?">
+                    <span style="font-size: 20px;">人</span>
+                    <br>
+                    <button class="check-btn" onclick="checkQ3()">检查答案</button>
+                    <div class="feedback" id="q3_feedback"></div>
+                </div>
+                
+                <div class="content-card" style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);">
+                    <h3>📝 解题步骤</h3>
+                    <ol style="line-height: 2;">
+                        <li>从前往后数：第5个（包含小红）</li>
+                        <li>从后往前数：第4个（包含小红）</li>
+                        <li>小红被算了2次，需要减去1次</li>
+                        <li>列式：5 + 4 - 1 = ?</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 第9页：概念讲解3 - 间隔问题 -->
+        <div class="slide" data-slide="9">
+            <div class="slide-content">
+                <h2 class="slide-title">📚 概念讲解（三）</h2>
+                <p class="slide-subtitle">间隔问题：中间有几人</p>
+                
+                <div class="content-card">
+                    <h3>🎯 类型二：求两人之间的人数</h3>
+                    <p style="margin-bottom: 15px;"><strong>例题：</strong>小明排第4，小红排第8，他们之间有几人？</p>
+                    
+                    <div class="queue-container">
+                        <div class="person">1</div>
+                        <div class="person">2</div>
+                        <div class="person">3</div>
+                        <div class="person highlight">4</div>
+                        <div class="person target">5</div>
+                        <div class="person target">6</div>
+                        <div class="person target">7</div>
+                        <div class="person highlight">8</div>
+                    </div>
+                    <p style="text-align: center; color: #666; margin-bottom: 15px;">👆 黄色标记的是小明（第4）和小红（第8）之间的人</p>
+                    
+                    <div class="formula-box">
+                        两人之间的人数 = 后一个位置 - 前一个位置 - 1<br>
+                        之间人数 = 8 - 4 - 1 = <strong>3</strong> 人
+                    </div>
+                    
+                    <div class="hint-box">
+                        <div class="hint-title">🔑 关键理解</div>
+                        <p>"之间"不包括两端的两个人！要减去小明和小红自己。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 第10页：互动练习3 -->
+        <div class="slide" data-slide="10">
+            <div class="slide-content">
+                <h2 class="slide-title">✏️ 互动练习（三）</h2>
+                <p class="slide-subtitle">求两人之间的人数</p>
+                
+                <div class="content-card">
+                    <p style="font-size: 18px; line-height: 1.8;">
+                        <strong>题目：</strong>小华排第3，小李排第9，他们之间有几人？
+                    </p>
+                </div>
+                
+                <div class="queue-container">
+                    <div class="person">1</div>
+                    <div class="person">2</div>
+                    <div class="person highlight">3</div>
+                    <div class="person">?</div>
+                    <div class="person">?</div>
+                    <div class="person">?</div>
+                    <div class="person">?</div>
+                    <div class="person">?</div>
+                    <div class="person highlight">9</div>
+                </div>
+                
+                <div class="game-area">
+                    <p style="font-size: 18px; margin-bottom: 15px;">小华和小李之间有几人？</p>
+                    <input type="text" class="answer-input" id="q4_answer" placeholder="?">
+                    <span style="font-size: 20px;">人</span>
+                    <br>
+                    <button class="check-btn" onclick="checkQ4()">检查答案</button>
+                    <div class="feedback" id="q4_feedback"></div>
+                </div>
+                
+                <div class="hint-box">
+                    <div class="hint-title">💡 解题思路</div>
+                    <p>用画图法：○ ○ ● ○ ○ ○ ○ ○ ●</p>
+                    <p>（●代表小华和小李，○代表中间的人）</p>
+                </div>
+            </div>
+        </div>
+        <!-- 第11页：模块一总结 -->
+        <div class="slide" data-slide="11">
+            <div class="slide-content">
+                <h2 class="slide-title">📋 模块总结（一）</h2>
+                <p class="slide-subtitle">排队问题基础概念回顾</p>
+                
+                <div class="content-card" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);">
+                    <h3>🎯 核心知识点</h3>
+                    <ul>
+                        <li><strong>序数</strong>：第几个（包含自己）</li>
+                        <li><strong>基数</strong>：有几个（不包含自己）</li>
+                        <li>前面/后面的人数 = 位置 - 1</li>
+                    </ul>
+                </div>
+                
+                <div class="content-card" style="background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);">
+                    <h3>💡 解题技巧</h3>
+                    <ul>
+                        <li>遇到排队问题先<strong>画图</strong></li>
+                        <li>用○代表人物，标上序号</li>
+                        <li>区分"第几个"和"有几个"</li>
+                    </ul>
+                </div>
+                
+                <div class="content-card" style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);">
+                    <h3>✅ 学生应掌握</h3>
+                    <p>1. 能区分序数和基数</p>
+                    <p>2. 会计算前面/后面的人数</p>
+                    <p>3. 养成画图分析的习惯</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 第12页：进阶挑战1 -->
+        <div class="slide" data-slide="12">
+            <div class="slide-content">
+                <h2 class="slide-title">🧩 进阶挑战（一）</h2>
+                <p class="slide-subtitle">综合应用：从A到B有几人</p>
+                
+                <div class="content-card">
+                    <p style="font-size: 18px; line-height: 1.8;">
+                        <strong>题目：</strong>一排小朋友在做操，小明从左边数排第6，小红从右边数排第4。已知小明在小红的左边，且他们之间有3人，这一排一共有多少人？
+                    </p>
+                </div>
+                
+                <div class="game-area">
+                    <p style="font-size: 18px; margin-bottom: 15px;">请画图分析后输入答案：</p>
+                    <input type="text" class="answer-input" id="q5_answer" placeholder="?">
+                    <span style="font-size: 20px;">人</span>
+                    <br>
+                    <button class="check-btn" onclick="checkQ5()">检查答案</button>
+                    <div class="feedback" id="q5_feedback"></div>
+                </div>
+                
+                <div class="hint-box">
+                    <div class="hint-title">💡 解题思路</div>
+                    <p>画图：○○○○○●○○○●○○○○</p>
+                    <p>（●代表小明和小红，○代表其他人）</p>
+                    <p>小明第6 → 左边5人，小红第4 → 右边3人</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 第13页：进阶挑战2 -->
+        <div class="slide" data-slide="13">
+            <div class="slide-content">
+                <h2 class="slide-title">🧩 进阶挑战（二）</h2>
+                <p class="slide-subtitle">变式训练：两人之间包含自己</p>
+                
+                <div class="content-card">
+                    <p style="font-size: 18px; line-height: 1.8;">
+                        <strong>题目：</strong>小华排第5，小李排第12，<strong>从华到小李</strong>一共有多少人？
+                    </p>
+                    <p style="color: #94070A; margin-top: 10px;">⚠️ 注意：是"从...到..."，不是"之间"！</p>
+                </div>
+                
+                <div class="queue-container">
+                    <div class="person">5</div>
+                    <div class="person">6</div>
+                    <div class="person">7</div>
+                    <div class="person">8</div>
+                    <div class="person">9</div>
+                    <div class="person">10</div>
+                    <div class="person">11</div>
+                    <div class="person">12</div>
+                </div>
+                
+                <div class="game-area">
+                    <p style="font-size: 18px; margin-bottom: 15px;">从第5个到第12个，一共有多少人？</p>
+                    <input type="text" class="answer-input" id="q6_answer" placeholder="?">
+                    <span style="font-size: 20px;">人</span>
+                    <br>
+                    <button class="check-btn" onclick="checkQ6()">检查答案</button>
+                    <div class="feedback" id="q6_feedback"></div>
+                </div>
+                
+                <div class="formula-box">
+                    "从A到B"的人数 = B的位置 - A的位置 + 1<br>
+                    （包含A和B两个人）
+                </div>
+            </div>
+        </div>
+        
+        <!-- 第14页：模块二总结 -->
+        <div class="slide" data-slide="14">
+            <div class="slide-content">
+                <h2 class="slide-title">📋 模块总结（二）</h2>
+                <p class="slide-subtitle">进阶题型回顾</p>
+                
+                <div class="content-card" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);">
+                    <h3>🎯 核心公式</h3>
+                    <div class="formula-box" style="margin: 10px 0;">
+                        两人之间 = 后位置 - 前位置 - 1（不含两端）
+                    </div>
+                    <div class="formula-box" style="margin: 10px 0;">
+                        从A到B = B位置 - A位置 + 1（含两端）
+                    </div>
+                    <div class="formula-box" style="margin: 10px 0;">
+                        总人数 = 从前数位置 + 从后数位置 - 1
+                    </div>
+                </div>
+                
+                <div class="content-card" style="background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);">
+                    <h3>⚠️ 易错提醒</h3>
+                    <ul>
+                        <li>"之间"≠"从...到..."</li>
+                        <li>注意题目问的是"第几个"还是"有几个"</li>
+                        <li>复杂问题一定要画图</li>
+                    </ul>
+                </div>
+                
+                <div class="content-card" style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);">
+                    <h3>✅ 学生应掌握</h3>
+                    <p>1. 能区分"之间"和"从...到..."</p>
+                    <p>2. 会解决综合型排队问题</p>
+                    <p>3. 能验证答案的合理性</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 第15页：速度挑战 -->
+        <div class="slide" data-slide="15">
+            <div class="slide-content">
+                <h2 class="slide-title">⚡ 速度挑战</h2>
+                <p class="slide-subtitle">60秒计时赛</p>
+                
+                <div class="game-area">
+                    <div class="timer" id="challengeTimer">60</div>
+                    <p style="font-size: 18px; margin-bottom: 20px;">看谁能最快答对3道题！</p>
+                    
+                    <div class="score-board">
+                        <div class="score-item">
+                            <div class="score-value" id="scoreValue">0</div>
+                            <div class="score-label">得分</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-value" id="timeValue">60</div>
+                            <div class="score-label">剩余时间</div>
+                        </div>
+                    </div>
+                    
+                    <button class="check-btn" onclick="startTimer()" id="startBtn">开始挑战</button>
+                </div>
+                
+                <div class="content-card" id="challengeQuestions" style="display: none;">
+                    <p style="margin-bottom: 10px;"><strong>题1：</strong>小明排第3，他前面有几人？</p>
+                    <input type="text" class="answer-input" id="speed1" style="width: 60px;">
+                    
+                    <p style="margin: 15px 0 10px;"><strong>题2：</strong>小红从前往后第5，从后往前第4，共几人？</p>
+                    <input type="text" class="answer-input" id="speed2" style="width: 60px;">
+                    
+                    <p style="margin: 15px 0 10px;"><strong>题3：</strong>小华第4，小李第9，他们之间有几人？</p>
+                    <input type="text" class="answer-input" id="speed3" style="width: 60px;">
+                    
+                    <br><br>
+                    <button class="check-btn" onclick="checkSpeedChallenge()">提交答案</button>
+                    <div class="feedback" id="speedFeedback"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 第16页：小组竞赛 -->
+        <div class="slide" data-slide="16">
+            <div class="slide-content">
+                <h2 class="slide-title">🏆 小组竞赛</h2>
+                <p class="slide-subtitle">排队问题接力赛</p>
+                
+                <div class="game-area">
+                    <h3 style="color: #660099; margin-bottom: 20px;">🎮 竞赛规则</h3>
+                    <div style="text-align: left; max-width: 600px; margin: 0 auto;">
+                        <p style="margin-bottom: 10px;">1. 全班分成4个小组</p>
+                        <p style="margin-bottom: 10px;">2. 每组轮流派代表上台解题</p>
+                        <p style="margin-bottom: 10px;">3. 答对得10分，答错不扣分</p>
+                        <p style="margin-bottom: 10px;">4. 限时2分钟，超时不得分</p>
+                        <p>5. 得分最高的小组获胜！</p>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <h3>📝 竞赛题目示例</h3>
+                    <p style="margin-bottom: 15px;"><strong>第1题：</strong>一排小朋友，从左边数小明排第7，他的右边有5人，这一排共有多少人？</p>
+                    <p style="margin-bottom: 15px;"><strong>第2题：</strong>小红排第6，小蓝排第14，他们中间有几人？</p>
+                    <p><strong>第3题：</strong>从前往后数，小华排第8；从后往前数，小华排第5，这一排有多少人？</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 第17页：模块三总结 -->
+        <div class="slide" data-slide="17">
+            <div class="slide-content">
+                <h2 class="slide-title">📋 模块总结（三）</h2>
+                <p class="slide-subtitle">应用与拓展</p>
+                
+                <div class="content-card" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);">
+                    <h3>🎯 本模块重点</h3>
+                    <ul>
+                        <li>速度挑战：快速准确解题</li>
+                        <li>小组竞赛：团队协作能力</li>
+                        <li>综合应用：多种题型混合</li>
+                    </ul>
+                </div>
+                
+                <div class="content-card" style="background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);">
+                    <h3>💡 成功秘诀</h3>
+                    <ul>
+                        <li>先画图，再计算</li>
+                        <li>仔细审题，区分关键词</li>
+                        <li>算完验证，确保正确</li>
+                    </ul>
+                </div>
+                
+                <div class="content-card" style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);">
+                    <h3>✅ 学生应掌握</h3>
+                    <p>1. 能在规定时间内完成基础题</p>
+                    <p>2. 能准确区分不同题型</p>
+                    <p>3. 能与同学合作解决问题</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 第18页：易错点总结 -->
+        <div class="slide" data-slide="18">
+            <div class="slide-content">
+                <h2 class="slide-title">⚠️ 易错点总结</h2>
+                <p class="slide-subtitle">避开这些陷阱</p>
+                
+                <div class="content-card" style="background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%); border-color: #e53935;">
+                    <h3 style="color: #c62828;">❌ 易错点1：忘记算自己</h3>
+                    <p>错误：小明排第5，前面有5人</p>
+                    <p style="color: #2E7D32;">✅ 正确：前面有5-1=4人</p>
+                </div>
+                
+                <div class="content-card" style="background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%); border-color: #e53935;">
+                    <h3 style="color: #c62828;">❌ 易错点2："之间"包含两端</h3>
+                    <p>错误：第4和第8之间有8-4=4人</p>
+                    <p style="color: #2E7D32;">✅ 正确：之间有8-4-1=3人</p>
+                </div>
+                
+                <div class="content-card" style="background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%); border-color: #e53935;">
+                    <h3 style="color: #c62828;">❌ 易错点3：混淆"第几个"和"有几个"</h3>
+                    <p>错误：排第3 = 有3人</p>
+                    <p style="color: #2E7D32;">✅ 正确：排第3是序数，有3人是基数</p>
+                </div>
+                
+                <div class="content-card" style="background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);">
+                    <h3>🎯 避坑指南</h3>
+                    <p>✓ 遇到题目先圈出关键词</p>
+                    <p>✓ 必须画图辅助理解</p>
+                    <p>✓ 算完后用图验证答案</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 第19页：知识总结 -->
+        <div class="slide" data-slide="19">
+            <div class="slide-content">
+                <h2 class="slide-title">🌟 知识总结</h2>
+                <p class="slide-subtitle">本课重点回顾</p>
+                
+                <div class="content-card" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);">
+                    <h3>📚 四大要点</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+                        <div style="background: white; padding: 15px; border-radius: 10px;">
+                            <h4 style="color: #1976D2;">1. 序数与基数</h4>
+                            <p style="font-size: 14px;">第几个 vs 有几个</p>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 10px;">
+                            <h4 style="color: #1976D2;">2. 位置关系</h4>
+                            <p style="font-size: 14px;">前面/后面人数计算</p>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 10px;">
+                            <h4 style="color: #1976D2;">3. 间隔问题</h4>
+                            <p style="font-size: 14px;">之间/从...到...</p>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 10px;">
+                            <h4 style="color: #1976D2;">4. 画图法</h4>
+                            <p style="font-size: 14px;">○代表人物</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="content-card" style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);">
+                    <h3>🔑 核心公式</h3>
+                    <div class="formula-box" style="font-size: 16px; margin: 10px 0;">
+                        前面/后面人数 = 位置 - 1
+                    </div>
+                    <div class="formula-box" style="font-size: 16px; margin: 10px 0;">
+                        总人数 = 从前数 + 从后数 - 1
+                    </div>
+                    <div class="formula-box" style="font-size: 16px; margin: 10px 0;">
+                        之间人数 = 后位置 - 前位置 - 1
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 第20页：作业与结束 -->
+        <div class="slide" data-slide="20">
+            <div class="slide-content">
+                <h2 class="slide-title">📝 作业布置</h2>
+                <p class="slide-subtitle">分层练习</p>
+                
+                <div class="content-card" style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);">
+                    <h3>🌱 基础作业（必做）</h3>
+                    <p>完成课后练习题第1-5题</p>
+                    <p>要求：画图 + 列式 + 写答</p>
+                </div>
+                
+                <div class="content-card" style="background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);">
+                    <h3>🌿 提高作业（选做）</h3>
+                    <p>完成课后练习题第6-8题</p>
+                    <p>挑战：给家长出一道排队问题</p>
+                </div>
+                
+                <div class="content-card" style="background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);">
+                    <h3>🌳 挑战作业（附加题）</h3>
+                    <p>完成课后练习题第9-10题及附加题</p>
+                    <p>思考：生活中还有哪些排队问题？</p>
+                </div>
+                
+                <div style="text-align: center; margin-top: 40px;">
+                    <h2 style="color: #660099; font-size: 32px;">👋 下节课见！</h2>
+                    <p style="font-size: 20px; color: #666; margin-top: 15px;">第05课《巧填数字》</p>
+                    <p style="color: #94070A; margin-top: 10px;">我们将学习竖式谜和数字推理</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-container">
+        <button class="nav-btn" id="prevBtn" onclick="prevSlide()">⬅️ 上一页</button>
+        <button class="nav-btn" id="nextBtn" onclick="nextSlide()">下一页 ➡️</button>
+    </div>
+    
+    <!-- 页码指示器 -->
+    <div class="page-indicator">
+        <span id="currentPage">1</span> / 20
+    </div>
+    
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 20;
+        let timerInterval = null;
+        let timeLeft = 60;
+        let score = 0;
+        
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => slide.classList.remove('active'));
+            document.querySelector(`[data-slide="${n}"]`).classList.add('active');
+            currentSlide = n;
+            updateProgressBar();
+            updateNavButtons();
+        }
+        
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                showSlide(currentSlide + 1);
+            }
+        }
+        
+        function prevSlide() {
+            if (currentSlide > 1) {
+                showSlide(currentSlide - 1);
+            }
+        }
+        
+        function updateProgressBar() {
+            const progress = (currentSlide / totalSlides) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('currentPage').textContent = currentSlide;
+        }
+        
+        function updateNavButtons() {
+            document.getElementById('prevBtn').disabled = currentSlide === 1;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides;
+        }
+        
+        // 键盘导航
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+        
+        // 检查答案函数
+        function checkQ1() {
+            const answer = document.getElementById('q1_answer').value.trim();
+            const feedback = document.getElementById('q1_feedback');
+            const input = document.getElementById('q1_answer');
+            
+            if (answer === '3') {
+                input.classList.add('correct');
+                input.classList.remove('wrong');
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 太棒了！小华前面有3人（第1、2、3位）。';
+            } else {
+                input.classList.add('wrong');
+                input.classList.remove('correct');
+                feedback.className = 'feedback error';
+                feedback.textContent = '❌ 再想想看，小华排第4，前面有4-1=3人。';
+            }
+        }
+        
+        function checkQ2() {
+            const answer = document.getElementById('q2_answer').value.trim();
+            const feedback = document.getElementById('q2_feedback');
+            const input = document.getElementById('q2_answer');
+            
+            if (answer === '3') {
+                input.classList.add('correct');
+                input.classList.remove('wrong');
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 正确！小华后面有3人（第5、6、7位）。';
+            } else {
+                input.classList.add('wrong');
+                input.classList.remove('correct');
+                feedback.className = 'feedback error';
+                feedback.textContent = '❌ 再想想看，小华排第4，后面有7-4=3人。';
+            }
+        }
+        
+        function checkQ3() {
+            const answer = document.getElementById('q3_answer').value.trim();
+            const feedback = document.getElementById('q3_feedback');
+            const input = document.getElementById('q3_answer');
+            
+            if (answer === '8') {
+                input.classList.add('correct');
+                input.classList.remove('wrong');
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 正确！5 + 4 - 1 = 8人。';
+            } else {
+                input.classList.add('wrong');
+                input.classList.remove('correct');
+                feedback.className = 'feedback error';
+                feedback.textContent = '❌ 提示：从前往后第5 + 从后往前第4 - 重复计算的1次 = ?';
+            }
+        }
+        
+        function checkQ4() {
+            const answer = document.getElementById('q4_answer').value.trim();
+            const feedback = document.getElementById('q4_feedback');
+            const input = document.getElementById('q4_answer');
+            
+            if (answer === '5') {
+                input.classList.add('correct');
+                input.classList.remove('wrong');
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 正确！9 - 3 - 1 = 5人。';
+            } else {
+                input.classList.add('wrong');
+                input.classList.remove('correct');
+                feedback.className = 'feedback error';
+                feedback.textContent = '❌ 提示：之间人数 = 9 - 3 - 1 = ?';
+            }
+        }
+        
+        function checkQ5() {
+            const answer = document.getElementById('q5_answer').value.trim();
+            const feedback = document.getElementById('q5_feedback');
+            const input = document.getElementById('q5_answer');
+            
+            if (answer === '13') {
+                input.classList.add('correct');
+                input.classList.remove('wrong');
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 正确！6 + 3 + 4 = 13人。';
+            } else {
+                input.classList.add('wrong');
+                input.classList.remove('correct');
+                feedback.className = 'feedback error';
+                feedback.textContent = '❌ 提示：小明左边5人 + 中间3人 + 小红右边3人 + 小明和小红 = ?';
+            }
+        }
+        
+        function checkQ6() {
+            const answer = document.getElementById('q6_answer').value.trim();
+            const feedback = document.getElementById('q6_feedback');
+            const input = document.getElementById('q6_answer');
+            
+            if (answer === '8') {
+                input.classList.add('correct');
+                input.classList.remove('wrong');
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 正确！12 - 5 + 1 = 8人。';
+            } else {
+                input.classList.add('wrong');
+                input.classList.remove('correct');
+                feedback.className = 'feedback error';
+                feedback.textContent = '❌ 提示：从第5到第12 = 12 - 5 + 1 = ?';
+            }
+        }
+        
+        // 计时挑战
+        function startTimer() {
+            document.getElementById('startBtn').style.display = 'none';
+            document.getElementById('challengeQuestions').style.display = 'block';
+            timeLeft = 60;
+            score = 0;
+            document.getElementById('scoreValue').textContent = score;
+            
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                document.getElementById('challengeTimer').textContent = timeLeft;
+                document.getElementById('timeValue').textContent = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    document.getElementById('speedFeedback').className = 'feedback error';
+                    document.getElementById('speedFeedback').textContent = '⏰ 时间到！';
+                }
+            }, 1000);
+        }
+        
+        function checkSpeedChallenge() {
+            const a1 = document.getElementById('speed1').value.trim();
+            const a2 = document.getElementById('speed2').value.trim();
+            const a3 = document.getElementById('speed3').value.trim();
+            
+            let correct = 0;
+            if (a1 === '2') correct++;
+            if (a2 === '8') correct++;
+            if (a3 === '4') correct++;
+            
+            score = correct * 20 + timeLeft;
+            document.getElementById('scoreValue').textContent = score;
+            
+            const feedback = document.getElementById('speedFeedback');
+            if (correct === 3) {
+                feedback.className = 'feedback success';
+                feedback.textContent = `🎉 全对！获得 ${score} 分！`;
+                clearInterval(timerInterval);
+            } else {
+                feedback.className = 'feedback error';
+                feedback.textContent = `❌ 答对 ${correct}/3 题，继续加油！`;
+            }
+        }
+    </script>
+</body>
+</html>

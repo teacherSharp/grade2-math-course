@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第04课《有趣的排队》- 家长协同方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        /* 头部 */
+        .header {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .header .badge {
+            display: inline-block;
+            background: #FFD700;
+            color: #333;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        
+        /* 内容区域 */
+        .content {
+            padding: 40px;
+        }
+        
+        /* 卡片样式 */
+        .card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 5px solid #660099;
+        }
+        
+        .card h2 {
+            color: #660099;
+            font-size: 22px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card h3 {
+            color: #94070A;
+            font-size: 18px;
+            margin: 15px 0 10px 0;
+        }
+        
+        .card p, .card li {
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .card ul {
+            margin-left: 20px;
+        }
+        
+        /* 重点提示 */
+        .highlight-box {
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            border: 2px solid #FFD700;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .highlight-box h3 {
+            color: #FF8F00;
+            margin-bottom: 10px;
+        }
+        
+        /* 步骤说明 */
+        .step {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            align-items: flex-start;
+        }
+        
+        .step-number {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            flex: 1;
+            padding-top: 5px;
+        }
+        
+        /* 游戏区域 */
+        .game-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .game-title {
+            font-size: 20px;
+            color: #1976D2;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        /* 二维码区域 */
+        .qr-section {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .qr-section h3 {
+            color: #660099;
+            margin-bottom: 15px;
+        }
+        
+        .contact-info {
+            background: white;
+            border: 3px solid #660099;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px auto;
+            max-width: 300px;
+        }
+        
+        .contact-info .phone {
+            font-size: 24px;
+            color: #660099;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .contact-info .hint {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .qr-placeholder {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+            background: white;
+            border: 2px solid #660099;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        
+        .qr-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 5px;
+            display: block;
+        }
+        
+        /* 页脚 */
+        .footer {
+            background: #f5f5f5;
+            padding: 30px;
+            text-align: center;
+            color: #666;
+        }
+        
+        .next-lesson {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border: 2px solid #4CAF50;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .next-lesson h3 {
+            color: #2E7D32;
+            margin-bottom: 10px;
+        }
+        
+        /* 排队示意图 */
+        .queue-demo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .person {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            background: #e3f2fd;
+            border: 2px solid #1976D2;
+        }
+        
+        .person.highlight {
+            background: #ffebee;
+            border-color: #e53935;
+            transform: scale(1.2);
+        }
+        
+        .arrow {
+            font-size: 24px;
+            color: #666;
+        }
+        
+        /* 公式框 */
+        .formula-box {
+            background: #fff3e0;
+            border: 2px dashed #ff9800;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #e65100;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <div class="header">
+            <h1>🚶 第04课《有趣的排队》</h1>
+            <div class="subtitle">家长协同方案 · 家校共育</div>
+            <div class="badge">🏆 二年级思维训练课程</div>
+        </div>
+        
+        <!-- 内容区域 -->
+        <div class="content">
+            <!-- 课程目标 -->
+            <div class="card">
+                <h2>🎯 本课学习目标</h2>
+                <p>通过本课学习，孩子将掌握以下能力：</p>
+                <ul>
+                    <li>理解<strong>序数</strong>与<strong>基数</strong>的区别（第几个 vs 有几个）</li>
+                    <li>掌握排队问题中的<strong>位置关系</strong>分析</li>
+                    <li>学会解决<strong>间隔问题</strong>（中间有几人）</li>
+                    <li>培养<strong>画图分析</strong>的解题习惯</li>
+                </ul>
+            </div>
+            
+            <!-- 核心知识点 -->
+            <div class="card">
+                <h2>📚 核心知识点解析</h2>
+                
+                <h3>🔢 知识点一：序数与基数</h3>
+                <div class="highlight-box">
+                    <p><strong>序数</strong>：表示顺序，回答"第几个"（如：第3个）</p>
+                    <p><strong>基数</strong>：表示数量，回答"有几个"（如：3个）</p>
+                </div>
+                <div class="queue-demo">
+                    <div class="person">1</div>
+                    <div class="person">2</div>
+                    <div class="person highlight">3</div>
+                    <div class="person">4</div>
+                    <div class="person">5</div>
+                </div>
+                <p style="text-align: center; color: #666;">👆 小红排在第3个，她前面有2人，后面有2人</p>
+                
+                <h3>🎯 知识点二：排队问题基本类型</h3>
+                <div class="formula-box">
+                    总人数 = 前面的人数 + 后面的人数 + 1（自己）
+                </div>
+                <p><strong>类型1：已知位置求总数</strong></p>
+                <p>小明从前往后数排第4，从后往前数排第3，一共有几人？</p>
+                <p style="color: #94070A;">💡 答案：4 + 3 - 1 = 6人（小明被重复计算了1次）</p>
+                
+                <p><strong>类型2：求中间间隔人数</strong></p>
+                <p>小明排第4，小红排第8，他们之间有几人？</p>
+                <p style="color: #94070A;">💡 答案：8 - 4 - 1 = 3人</p>
+                
+                <h3>📏 知识点三：间隔问题</h3>
+                <ul>
+                    <li><strong>两人之间</strong>：不包括这两个人</li>
+                    <li><strong>从A到B</strong>：包括A和B</li>
+                    <li><strong>画图法</strong>：用○代表人物，直观理解</li>
+                </ul>
+            </div>
+            
+            <!-- 课前准备 -->
+            <div class="card">
+                <h2>🎒 课前准备材料</h2>
+                <ul>
+                    <li>✅ 小积木或玩具（用于模拟排队）</li>
+                    <li>✅ 白纸和彩笔（用于画图分析）</li>
+                    <li>✅ 直尺（用于画间隔线）</li>
+                </ul>
+            </div>
+            
+            <!-- 家庭巩固练习 -->
+            <div class="card">
+                <h2>🏠 家庭巩固练习（3个活动）</h2>
+                
+                <h3>活动1：家庭排队游戏 👨‍👩‍👧</h3>
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <p>全家一起排队，让孩子说出：</p>
+                        <ul>
+                            <li>"我从左数排第几个？"</li>
+                            <li>"我左边有几人？右边有几人？"</li>
+                            <li>"爸爸和妈妈之间有几人？"</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3>活动2：画图解题 ✏️</h3>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <p>给孩子出3-5道排队问题，要求：</p>
+                        <ul>
+                            <li>先画图（用○代表人物）</li>
+                            <li>再列算式</li>
+                            <li>最后写答案</li>
+                        </ul>
+                        <p style="color: #666; margin-top: 10px;">示例：小华排第5，小明排第12，他们之间有几人？</p>
+                    </div>
+                </div>
+                
+                <h3>活动3：生活观察 🔍</h3>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <p>在日常生活中寻找排队场景：</p>
+                        <ul>
+                            <li>超市排队结账时数一数</li>
+                            <li>等公交车时观察排队顺序</li>
+                            <li>放学排队时确定自己的位置</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 辅导建议 -->
+            <div class="card">
+                <h2>💡 家长辅导建议</h2>
+                
+                <h3>🎯 重点强调</h3>
+                <ul>
+                    <li><strong>画图习惯</strong>：要求孩子遇到排队问题先画图，不要空想</li>
+                    <li><strong>区分"第几"和"有几"</strong>：这是最容易混淆的地方</li>
+                    <li><strong>验证答案</strong>：算出答案后，用画图法验证是否正确</li>
+                </ul>
+                
+                <h3>⚠️ 常见错误提醒</h3>
+                <div class="highlight-box">
+                    <p><strong>错误1：</strong>忘记算自己</p>
+                    <p>✅ 正确：总人数 = 前面的人 + 后面的人 + 自己</p>
+                    <br>
+                    <p><strong>错误2：</strong>"之间"包含两端</p>
+                    <p>✅ 正确：A和B之间的人数 = B的位置 - A的位置 - 1</p>
+                    <br>
+                    <p><strong>错误3：</strong>从前往后数和从后往前数重复计算</p>
+                    <p>✅ 正确：总人数 = 从前往后数的位置 + 从后往前数的位置 - 1</p>
+                </div>
+                
+                <h3>🌟 鼓励方式</h3>
+                <ul>
+                    <li>孩子画图正确时："你的图真清楚，一看就明白！"</li>
+                    <li>孩子答案正确时："不仅答案对，方法也很棒！"</li>
+                    <li>孩子出错时："我们一起画个图看看，问题出在哪里？"</li>
+                </ul>
+            </div>
+            
+            <!-- 常见问题 -->
+            <div class="card">
+                <h2>❓ 常见问题解答</h2>
+                
+                <h3>Q1：孩子总是忘记加1（自己）怎么办？</h3>
+                <p>A：让孩子用手指代表自己，数前面的人、后面的人，最后一定要指一下自己说"还有我呢！"</p>
+                
+                <h3>Q2：孩子不理解"之间"是什么意思？</h3>
+                <p>A：用实际演示，让爸爸站第3位，妈妈站第7位，让孩子数一数爸爸妈妈之间有几人（不包括爸爸妈妈）</p>
+                
+                <h3>Q3：画图时总是画错怎么办？</h3>
+                <p>A：先教孩子标数字，再画圆圈。例如：第5个位置先写"5"，再在下面画○</p>
+            </div>
+            
+            <!-- 下节课预告 -->
+            <div class="next-lesson">
+                <h3>📢 下节课预告</h3>
+                <p style="font-size: 18px; font-weight: bold; color: #333;">第05课《巧填数字》</p>
+                <p style="margin-top: 10px;">🎯 核心内容：竖式谜、数字推理、逻辑填数</p>
+                <p style="color: #666; margin-top: 5px;">💡 家长可以让孩子提前熟悉10以内的加减法组合</p>
+            </div>
+            
+            <!-- 二维码区域 -->
+            <div class="qr-section">
+                <h3>📱 联系夏老师</h3>
+                <div class="contact-info">
+                    <div class="phone">📞 19117803360</div>
+                    <div class="hint">欢迎随时咨询</div>
+                    <div class="qr-placeholder">
+                        <img src="../code.jpg" alt="夏老师微信二维码">
+                    </div>
+                </div>
+                <p style="margin-top: 15px; color: #666;">如有任何问题，欢迎随时联系<br>夏老师将为您提供专业指导</p>
+            </div>
+        </div>
+        
+        <!-- 页脚 -->
+        <div class="footer">
+            <p style="font-size: 18px; font-weight: bold; color: #660099; margin-bottom: 10px;">🌟 让我们共同努力，让数学成为孩子最喜欢的科目！</p>
+            <p>二年级思维训练课程 · 夏老师原创</p>
+        </div>
+    </div>
+</body>
+</html>
