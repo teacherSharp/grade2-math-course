@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第11课 简单应用题 - 家长协同方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 35px;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            color: #660099;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #660099;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            border-left: 5px solid #FF9800;
+            border-radius: 0 10px 10px 0;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .formula-box {
+            background: white;
+            border: 2px dashed #660099;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #660099;
+        }
+        
+        .activity-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 5px solid #4CAF50;
+        }
+        
+        .activity-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2E7D32;
+            margin-bottom: 10px;
+        }
+        
+        .emoji {
+            font-size: 24px;
+            margin-right: 5px;
+        }
+        
+        .qr-section {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .qr-text {
+            font-size: 16px;
+            color: #666;
+            margin-top: 15px;
+        }
+        
+        .next-lesson {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border: 2px solid #2196F3;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+        
+        .next-lesson h3 {
+            color: #1976D2;
+            margin-bottom: 15px;
+        }
+        
+        .tips-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .tips-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .tips-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        
+        .example-box {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        .example-title {
+            font-weight: bold;
+            color: #660099;
+            margin-bottom: 10px;
+        }
+        
+        .step-list {
+            counter-reset: step;
+            list-style: none;
+            padding: 0;
+        }
+        
+        .step-list li {
+            counter-increment: step;
+            padding: 10px 0 10px 40px;
+            position: relative;
+        }
+        
+        .step-list li:before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            background: #660099;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .method-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .method-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .method-card h4 {
+            color: #660099;
+            margin-bottom: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #f5f5f5;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 第11课 简单应用题</h1>
+            <p>家长协同方案 | 思维训练课程</p>
+        </div>
+        
+        <div class="content">
+            <!-- 课程目标 -->
+            <div class="section">
+                <h2 class="section-title"><span class="emoji">🎯</span>课程目标</h2>
+                <div class="section-content">
+                    <p>本节课将带领孩子进入应用题的世界，学习如何解决生活中的数学问题。通过本课学习，孩子将掌握：</p>
+                    <ul class="tips-list" style="margin-top: 15px;">
+                        <li>理解应用题的基本结构和解题步骤</li>
+                        <li>掌握和差问题的解题方法（线段图法）</li>
+                        <li>学会倍数问题的分析与解答</li>
+                        <li>培养读题、审题、分析问题的能力</li>
+                        <li>建立数学模型思维，将生活问题转化为数学问题</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 核心知识点 -->
+            <div class="section">
+                <h2 class="section-title"><span class="emoji">📚</span>核心知识点</h2>
+                <div class="section-content">
+                    <div class="highlight-box">
+                        <h3 style="color: #E65100; margin-bottom: 15px;">🔑 和差问题</h3>
+                        <p><strong>问题特征：</strong>已知两个数的和与差，求这两个数</p>
+                        <div class="formula-box">
+                            大数 = (和 + 差) ÷ 2<br>
+                            小数 = (和 - 差) ÷ 2
+                        </div>
+                        <p style="margin-top: 10px;"><strong>解题工具：</strong>线段图法 - 用线段直观表示数量关系</p>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <h3 style="color: #E65100; margin-bottom: 15px;">🔑 倍数问题</h3>
+                        <p><strong>问题特征：</strong>已知两个数的倍数关系，求这两个数</p>
+                        <div class="formula-box">
+                            一倍数 = 总数 ÷ (倍数 + 1)<br>
+                            几倍数 = 一倍数 × 倍数
+                        </div>
+                        <p style="margin-top: 10px;"><strong>解题工具：</strong>份数思想 - 将小数看作1份，大数就是几份</p>
+                    </div>
+                    
+                    <div class="method-grid">
+                        <div class="method-card">
+                            <h4>📐 线段图法</h4>
+                            <p>用线段长度表示数量大小，直观展示数量关系</p>
+                        </div>
+                        <div class="method-card">
+                            <h4>🔢 份数思想</h4>
+                            <p>将数量按倍数关系分成若干份，简化计算</p>
+                        </div>
+                        <div class="method-card">
+                            <h4>📝 四步解题</h4>
+                            <p>读题→画图→列式→检验，规范解题流程</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 课前准备 -->
+            <div class="section">
+                <h2 class="section-title"><span class="emoji">🎒</span>课前准备</h2>
+                <div class="section-content">
+                    <p>为了更好地参与课堂互动，请家长协助孩子准备以下物品：</p>
+                    <div class="activity-card">
+                        <div class="activity-title">📋 材料清单</div>
+                        <ul class="tips-list">
+                            <li>铅笔、橡皮、直尺（用于画线段图）</li>
+                            <li>彩色笔（建议准备3-4种颜色）</li>
+                            <li>草稿纸（用于演算和画图）</li>
+                            <li>练习本（记录课堂笔记）</li>
+                        </ul>
+                    </div>
+                    <div class="highlight-box">
+                        <strong>💡 预习建议：</strong>课前可以和孩子一起回顾加减法运算，特别是100以内的加减法，为课堂学习做好准备。
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 课堂重点 -->
+            <div class="section">
+                <h2 class="section-title"><span class="emoji">⭐</span>课堂重点回顾</h2>
+                <div class="section-content">
+                    <div class="example-box">
+                        <div class="example-title">📌 例题1：和差问题</div>
+                        <p><strong>题目：</strong>小明和小红共有邮票50张，小明比小红多10张。两人各有多少张邮票？</p>
+                        <p style="margin-top: 10px;"><strong>线段图：</strong></p>
+                        <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; margin: 10px 0; font-family: monospace;">
+                            小红: |━━━━━━━| (小数)<br>
+                            小明: |━━━━━━━|━━| (大数，多10张)<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─共50张─┘
+                        </div>
+                        <p><strong>解答：</strong></p>
+                        <ul class="step-list">
+                            <li>小明（大数）= (50 + 10) ÷ 2 = 30张</li>
+                            <li>小红（小数）= (50 - 10) ÷ 2 = 20张</li>
+                            <li>检验：30 + 20 = 50 ✓，30 - 20 = 10 ✓</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="example-box">
+                        <div class="example-title">📌 例题2：倍数问题</div>
+                        <p><strong>题目：</strong>果园里有苹果树和梨树共36棵，苹果树是梨树的3倍。两种树各有多少棵？</p>
+                        <p style="margin-top: 10px;"><strong>份数图：</strong></p>
+                        <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; margin: 10px 0; font-family: monospace;">
+                            梨树: |━━| (1份)<br>
+                            苹果树: |━━|━━|━━| (3份)<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─共4份=36棵─┘
+                        </div>
+                        <p><strong>解答：</strong></p>
+                        <ul class="step-list">
+                            <li>总份数 = 3 + 1 = 4份</li>
+                            <li>梨树（1份）= 36 ÷ 4 = 9棵</li>
+                            <li>苹果树（3份）= 9 × 3 = 27棵</li>
+                            <li>检验：9 + 27 = 36 ✓，27 ÷ 9 = 3 ✓</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 家庭巩固练习 -->
+            <div class="section">
+                <h2 class="section-title"><span class="emoji">🏠</span>家庭巩固练习</h2>
+                <div class="section-content">
+                    <p>请家长陪伴孩子完成以下3个活动，巩固课堂所学：</p>
+                    
+                    <div class="activity-card">
+                        <div class="activity-title">活动1：和差问题练习（10分钟）</div>
+                        <p><strong>题目：</strong>哥哥和弟弟共有零花钱80元，哥哥比弟弟多20元。两人各有多少元？</p>
+                        <p style="margin-top: 10px; color: #666;">💡 <strong>指导要点：</strong>引导孩子画线段图，先标出"和"与"差"，再套用公式。</p>
+                    </div>
+                    
+                    <div class="activity-card">
+                        <div class="activity-title">活动2：倍数问题练习（10分钟）</div>
+                        <p><strong>题目：</strong>书架上有故事书和科技书共48本，故事书是科技书的2倍。两种书各有多少本？</p>
+                        <p style="margin-top: 10px; color: #666;">💡 <strong>指导要点：</strong>让孩子用份数思想，把科技书看作1份，故事书就是2份。</p>
+                    </div>
+                    
+                    <div class="activity-card">
+                        <div class="activity-title">活动3：生活应用（15分钟）</div>
+                        <p>请孩子观察家里的物品，自编一道和差问题或倍数问题，并解答。</p>
+                        <p style="margin-top: 10px; color: #666;">💡 <strong>示例：</strong>"妈妈买了苹果和梨共12个，苹果比梨多4个，各买了几个？"</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 亲子互动建议 -->
+            <div class="section">
+                <h2 class="section-title"><span class="emoji">👨‍👩‍👧</span>亲子互动建议</h2>
+                <div class="section-content">
+                    <div class="highlight-box">
+                        <h3 style="color: #E65100; margin-bottom: 15px;">🎮 购物小管家游戏</h3>
+                        <p>给孩子一定金额的零花钱（如50元），让他规划购买学习用品。家长可以提出条件：</p>
+                        <ul style="margin-top: 10px; padding-left: 20px;">
+                            <li>"铅笔和橡皮共花费20元，铅笔比橡皮贵4元，各多少钱？"</li>
+                            <li>"笔记本是便签本的3倍，共花费24元，各多少钱？"</li>
+                        </ul>
+                        <p style="margin-top: 10px;">通过真实场景，让孩子体会数学在生活中的应用。</p>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <h3 style="color: #E65100; margin-bottom: 15px;">🎲 数学故事接龙</h3>
+                        <p>家长和孩子轮流编应用题：</p>
+                        <ul style="margin-top: 10px; padding-left: 20px;">
+                            <li>家长开头："小明家有鸡和兔共10只..."</li>
+                            <li>孩子补充："鸡比兔多2只，各有几只？"</li>
+                            <li>然后孩子出题，家长解答</li>
+                        </ul>
+                        <p style="margin-top: 10px;">这个游戏能锻炼孩子的数学表达能力和创造力。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 常见问题解答 -->
+            <div class="section">
+                <h2 class="section-title"><span class="emoji">❓</span>常见问题解答</h2>
+                <div class="section-content">
+                    <div class="example-box">
+                        <div class="example-title">Q1：孩子总是忘记检验答案，怎么办？</div>
+                        <p>A：可以制作一个"检验清单"卡片，让孩子每次做完题后对照检查：①和是否符合 ②差是否符合 ③倍数是否符合。养成习惯后，正确率会大大提高。</p>
+                    </div>
+                    
+                    <div class="example-box">
+                        <div class="example-title">Q2：孩子画线段图总是画不标准，影响解题吗？</div>
+                        <p>A：不需要画得特别标准，关键是体现数量关系。可以告诉孩子："线段长表示数量大，只要大概比例对就行，不用精确测量。"</p>
+                    </div>
+                    
+                    <div class="example-box">
+                        <div class="example-title">Q3：和差问题公式容易混淆，有什么记忆方法？</div>
+                        <p>A：可以用口诀记忆："和加差除二得大数，和减差除二得小数"。或者让孩子理解：大数比平均数多一半差，小数比平均数少一半差。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 下节课预告 -->
+            <div class="next-lesson">
+                <h3>📢 下节课预告</h3>
+                <p style="font-size: 18px; margin-bottom: 10px;"><strong>第12课：趣味速算</strong></p>
+                <p>我们将学习各种巧妙的速算方法，包括凑整法、带符号搬家、拆数法等，让计算变得又快又准！</p>
+                <p style="margin-top: 10px; color: #666;">💡 预习建议：复习20以内加减法，为速算技巧学习做准备。</p>
+            </div>
+            
+            <!-- 联系方式 -->
+            <div class="qr-section">
+                <h3 style="color: #660099; margin-bottom: 15px;">📱 联系夏老师</h3>
+                <div style="background: white; border: 3px solid #660099; border-radius: 10px; padding: 20px; margin: 15px auto; max-width: 300px;">
+                    <div style="font-size: 24px; color: #660099; font-weight: bold; margin-bottom: 10px;">
+                        📞 19117803360
+                    </div>
+                    <div style="font-size: 14px; color: #666; margin-bottom: 15px;">
+                        欢迎随时咨询
+                    </div>
+                    <div style="width: 150px; height: 150px; margin: 0 auto; background: white; border: 2px solid #660099; border-radius: 10px; padding: 10px;">
+                        <img src="../code.jpg" alt="夏老师微信二维码" style="width: 100%; height: 100%; object-fit: contain; border-radius: 5px; display: block;">
+                    </div>
+                </div>
+                <div class="qr-text">
+                    如有任何问题，欢迎随时联系<br>
+                    夏老师将为您提供专业指导
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>🌟 家校携手，让数学成为孩子最喜欢的科目！</p>
+            <p style="margin-top: 10px;">二年级思维训练课程 | 第11课</p>
+        </div>
+    </div>
+</body>
+</html>

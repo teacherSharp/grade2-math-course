@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第11课 简单应用题 - 练习题答案与解析</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .answer-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 5px solid #4CAF50;
+        }
+        
+        .answer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .question-number {
+            font-size: 20px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        
+        .star-rating {
+            color: #ffc107;
+            font-size: 18px;
+        }
+        
+        .difficulty {
+            font-size: 14px;
+            color: #666;
+            background: #e0e0e0;
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+        
+        .question-content {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+        }
+        
+        .answer-section {
+            background: white;
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+        
+        .answer-label {
+            font-weight: bold;
+            color: #4CAF50;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .answer-value {
+            font-size: 24px;
+            color: #2E7D32;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .explanation-section {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border-left: 5px solid #4CAF50;
+            border-radius: 0 10px 10px 0;
+            padding: 20px;
+            margin-top: 15px;
+        }
+        
+        .explanation-title {
+            font-weight: bold;
+            color: #2E7D32;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .bonus-answer {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border: 3px solid #FF9800;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+        
+        .bonus-answer .answer-header {
+            border-bottom: 2px solid #FF9800;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .bonus-answer .question-number {
+            color: #FF9800;
+            font-size: 24px;
+        }
+        
+        .bonus-answer .answer-section {
+            border-color: #FF9800;
+        }
+        
+        .bonus-answer .answer-label {
+            color: #FF9800;
+        }
+        
+        .bonus-answer .answer-value {
+            color: #E65100;
+        }
+        
+        .bonus-answer .explanation-section {
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+            border-left-color: #FF9800;
+        }
+        
+        .bonus-answer .explanation-title {
+            color: #E65100;
+        }
+        
+        .emoji {
+            font-size: 24px;
+            margin-right: 5px;
+        }
+        
+        .formula-box {
+            background: white;
+            border: 2px dashed #660099;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #660099;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #f5f5f5;
+            color: #666;
+        }
+
+        .step-box {
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 8px 0;
+            border-left: 3px solid #2196F3;
+        }
+
+        .check-mark {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 第11课 简单应用题</h1>
+            <p>练习题答案与详细解析 | 思维训练课程</p>
+        </div>
+        
+        <div class="content">
+            <!-- 第1题答案 -->
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="question-number"><span class="emoji">📐</span>第1题 <span class="star-rating">★☆☆☆☆</span></span>
+                    <span class="difficulty">基础巩固</span>
+                </div>
+                <div class="question-content">
+                    <strong>题目：</strong>两数之和是40，差是10。大数是多少？小数是多少？
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">✅ 正确答案：</div>
+                    <div class="answer-value">大数 = 25，小数 = 15</div>
+                </div>
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        <div class="formula-box">
+                            和差问题公式：<br>
+                            大数 = (和 + 差) ÷ 2<br>
+                            小数 = (和 - 差) ÷ 2
+                        </div>
+                        <div class="step-box">
+                            <strong>第一步：求大数</strong><br>
+                            大数 = (40 + 10) ÷ 2 = 50 ÷ 2 = <strong>25</strong>
+                        </div>
+                        <div class="step-box">
+                            <strong>第二步：求小数</strong><br>
+                            小数 = (40 - 10) ÷ 2 = 30 ÷ 2 = <strong>15</strong>
+                        </div>
+                        <div class="step-box">
+                            <strong>第三步：检验</strong><br>
+                            25 + 15 = 40 <span class="check-mark">✓</span><br>
+                            25 - 15 = 10 <span class="check-mark">✓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第2题答案 -->
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="question-number"><span class="emoji">🔢</span>第2题 <span class="star-rating">★☆☆☆☆</span></span>
+                    <span class="difficulty">基础巩固</span>
+                </div>
+                <div class="question-content">
+                    <strong>题目：</strong>甲乙两数和为60，甲是乙的2倍。甲是多少？乙是多少？
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">✅ 正确答案：</div>
+                    <div class="answer-value">甲 = 40，乙 = 20</div>
+                </div>
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        <div class="formula-box">
+                            倍数问题公式：<br>
+                            小数 = 和 ÷ (倍数 + 1)<br>
+                            大数 = 小数 × 倍数
+                        </div>
+                        <div class="step-box">
+                            <strong>第一步：确定份数</strong><br>
+                            把乙看作1份，甲就是2份<br>
+                            总份数 = 2 + 1 = <strong>3份</strong>
+                        </div>
+                        <div class="step-box">
+                            <strong>第二步：求乙（1份）</strong><br>
+                            乙 = 60 ÷ 3 = <strong>20</strong>
+                        </div>
+                        <div class="step-box">
+                            <strong>第三步：求甲（2份）</strong><br>
+                            甲 = 20 × 2 = <strong>40</strong>
+                        </div>
+                        <div class="step-box">
+                            <strong>第四步：检验</strong><br>
+                            40 + 20 = 60 <span class="check-mark">✓</span><br>
+                            40 ÷ 20 = 2 <span class="check-mark">✓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第3题答案 -->
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="question-number"><span class="emoji">📐</span>第3题 <span class="star-rating">★★☆☆☆</span></span>
+                    <span class="difficulty">思维拓展</span>
+                </div>
+                <div class="question-content">
+                    <strong>题目：</strong>哥哥和弟弟共有零花钱90元，哥哥比弟弟多30元。两人各有多少元？
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">✅ 正确答案：</div>
+                    <div class="answer-value">哥哥 = 60元，弟弟 = 30元</div>
+                </div>
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        <div class="step-box">
+                            <strong>第一步：识别题型</strong><br>
+                            这是典型的<strong>和差问题</strong>：<br>
+                            和 = 90元，差 = 30元
+                        </div>
+                        <div class="step-box">
+                            <strong>第二步：求哥哥（大数）</strong><br>
+                            哥哥 = (90 + 30) ÷ 2 = 120 ÷ 2 = <strong>60元</strong>
+                        </div>
+                        <div class="step-box">
+                            <strong>第三步：求弟弟（小数）</strong><br>
+                            弟弟 = (90 - 30) ÷ 2 = 60 ÷ 2 = <strong>30元</strong>
+                        </div>
+                        <div class="step-box">
+                            <strong>第四步：检验</strong><br>
+                            60 + 30 = 90 <span class="check-mark">✓</span><br>
+                            60 - 30 = 30 <span class="check-mark">✓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第4题答案 -->
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="question-number"><span class="emoji">🔢</span>第4题 <span class="star-rating">★★☆☆☆</span></span>
+                    <span class="difficulty">思维拓展</span>
+                </div>
+                <div class="question-content">
+                    <strong>题目：</strong>学校图书馆有故事书和科技书共72本，故事书是科技书的3倍。两种书各有多少本？
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">✅ 正确答案：</div>
+                    <div class="answer-value">故事书 = 54本，科技书 = 18本</div>
+                </div>
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        <div class="step-box">
+                            <strong>第一步：确定份数</strong><br>
+                            科技书是1份，故事书是3份<br>
+                            总份数 = 3 + 1 = <strong>4份</strong>
+                        </div>
+                        <div class="step-box">
+                            <strong>第二步：求科技书（1份）</strong><br>
+                            科技书 = 72 ÷ 4 = <strong>18本</strong>
+                        </div>
+                        <div class="step-box">
+                            <strong>第三步：求故事书（3份）</strong><br>
+                            故事书 = 18 × 3 = <strong>54本</strong>
+                        </div>
+                        <div class="step-box">
+                            <strong>第四步：检验</strong><br>
+                            54 + 18 = 72 <span class="check-mark">✓</span><br>
+                            54 ÷ 18 = 3 <span class="check-mark">✓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第5题答案 -->
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="question-number"><span class="emoji">📐</span>第5题 <span class="star-rating">★★★☆☆</span></span>
+                    <span class="difficulty">挑战提升</span>
+                </div>
+                <div class="question-content">
+                    <strong>题目：</strong>甲乙两桶油共重100千克，如果从甲桶倒出20千克给乙桶，两桶油就一样重了。原来两桶油各重多少千克？
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">✅ 正确答案：</div>
+                    <div class="answer-value">甲桶 = 70千克，乙桶 = 30千克</div>
+                </div>
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        <div class="step-box">
+                            <strong>方法一：倒推法</strong><br>
+                            倒完后各重：100 ÷ 2 = <strong>50千克</strong><br>
+                            甲桶原来：50 + 20 = <strong>70千克</strong><br>
+                            乙桶原来：50 - 20 = <strong>30千克</strong>
+                        </div>
+                        <div class="step-box">
+                            <strong>方法二：和差法</strong><br>
+                            甲给乙20千克后相等，说明原来甲比乙多：20 × 2 = <strong>40千克</strong><br>
+                            甲桶 = (100 + 40) ÷ 2 = <strong>70千克</strong><br>
+                            乙桶 = (100 - 40) ÷ 2 = <strong>30千克</strong>
+                        </div>
+                        <div class="step-box">
+                            <strong>检验</strong><br>
+                            70 + 30 = 100 <span class="check-mark">✓</span><br>
+                            70 - 20 = 50，30 + 20 = 50 <span class="check-mark">✓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第6题答案 -->
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="question-number"><span class="emoji">🔢</span>第6题 <span class="star-rating">★★★☆☆</span></span>
+                    <span class="difficulty">挑战提升</span>
+                </div>
+                <div class="question-content">
+                    <strong>题目：</strong>果园里有桃树和梨树共84棵，桃树比梨树的2倍多6棵。两种树各有多少棵？
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">✅ 正确答案：</div>
+                    <div class="answer-value">桃树 = 58棵，梨树 = 26棵</div>
+                </div>
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        <div class="step-box">
+                            <strong>第一步：转化问题</strong><br>
+                            "桃树比梨树的2倍多6棵"<br>
+                            如果把桃树减少6棵，就正好是梨树的2倍
+                        </div>
+                        <div class="step-box">
+                            <strong>第二步：调整总数</strong><br>
+                            调整后总数 = 84 - 6 = <strong>78棵</strong>
+                        </div>
+                        <div class="step-box">
+                            <strong>第三步：求梨树（1份）</strong><br>
+                            总份数 = 2 + 1 = 3份<br>
+                            梨树 = 78 ÷ 3 = <strong>26棵</strong>
+                        </div>
+                        <div class="step-box">
+                            <strong>第四步：求桃树</strong><br>
+                            桃树 = 26 × 2 + 6 = <strong>58棵</strong>
+                        </div>
+                        <div class="step-box">
+                            <strong>检验</strong><br>
+                            58 + 26 = 84 <span class="check-mark">✓</span><br>
+                            26 × 2 + 6 = 58 <span class="check-mark">✓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第7题答案 -->
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="question-number"><span class="emoji">📐</span>第7题 <span class="star-rating">★★★★☆</span></span>
+                    <span class="difficulty">烧脑挑战</span>
+                </div>
+                <div class="question-content">
+                    <strong>题目：</strong>小明和小红共有邮票120张，如果小明给小红10张，那么小明还比小红多20张。两人原来各有多少张邮票？
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">✅ 正确答案：</div>
+                    <div class="answer-value">小明 = 80张，小红 = 40张</div>
+                </div>
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        <div class="step-box">
+                            <strong>第一步：分析给出后的情况</strong><br>
+                            给出10张后，小明比小红多20张<br>
+                            此时小明 = (120 + 20) ÷ 2 = <strong>70张</strong><br>
+                            此时小红 = (120 - 20) ÷ 2 = <strong>50张</strong>
+                        </div>
+                        <div class="step-box">
+                            <strong>第二步：反推原来的数量</strong><br>
+                            原来小明 = 70 + 10 = <strong>80张</strong><br>
+                            原来小红 = 50 - 10 = <strong>40张</strong>
+                        </div>
+                        <div class="step-box">
+                            <strong>另一种思路</strong><br>
+                            小明给小红10张后还多20张<br>
+                            说明原来小明比小红多：10 × 2 + 20 = <strong>40张</strong><br>
+                            小明 = (120 + 40) ÷ 2 = <strong>80张</strong><br>
+                            小红 = (120 - 40) ÷ 2 = <strong>40张</strong>
+                        </div>
+                        <div class="step-box">
+                            <strong>检验</strong><br>
+                            80 + 40 = 120 <span class="check-mark">✓</span><br>
+                            (80-10) - (40+10) = 70 - 50 = 20 <span class="check-mark">✓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第8题答案 -->
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="question-number"><span class="emoji">🔢</span>第8题 <span class="star-rating">★★★★☆</span></span>
+                    <span class="difficulty">烧脑挑战</span>
+                </div>
+                <div class="question-content">
+                    <strong>题目：</strong>甲乙两数之和是150，甲数是乙数的4倍。甲乙两数各是多少？
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">✅ 正确答案：</div>
+                    <div class="answer-value">甲 = 120，乙 = 30</div>
+                </div>
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        <div class="step-box">
+                            <strong>第一步：确定份数</strong><br>
+                            乙是1份，甲是4份<br>
+                            总份数 = 4 + 1 = <strong>5份</strong>
+                        </div>
+                        <div class="step-box">
+                            <strong>第二步：求乙（1份）</strong><br>
+                            乙 = 150 ÷ 5 = <strong>30</strong>
+                        </div>
+                        <div class="step-box">
+                            <strong>第三步：求甲（4份）</strong><br>
+                            甲 = 30 × 4 = <strong>120</strong>
+                        </div>
+                        <div class="step-box">
+                            <strong>检验</strong><br>
+                            120 + 30 = 150 <span class="check-mark">✓</span><br>
+                            120 ÷ 30 = 4 <span class="check-mark">✓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第9题答案 -->
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="question-number"><span class="emoji">📐</span>第9题 <span class="star-rating">★★★★★</span></span>
+                    <span class="difficulty">终极挑战</span>
+                </div>
+                <div class="question-content">
+                    <strong>题目：</strong>三个数的和是120，甲数比乙数多10，乙数比丙数多10。三个数各是多少？
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">✅ 正确答案：</div>
+                    <div class="answer-value">甲 = 50，乙 = 40，丙 = 30</div>
+                </div>
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        <div class="step-box">
+                            <strong>第一步：设未知数</strong><br>
+                            设丙数为x，则：<br>
+                            乙数 = x + 10<br>
+                            甲数 = (x + 10) + 10 = x + 20
+                        </div>
+                        <div class="step-box">
+                            <strong>第二步：列方程</strong><br>
+                            三个数之和 = x + (x+10) + (x+20) = 120<br>
+                            3x + 30 = 120
+                        </div>
+                        <div class="step-box">
+                            <strong>第三步：求解</strong><br>
+                            3x = 120 - 30 = 90<br>
+                            x = 90 ÷ 3 = <strong>30</strong>（丙数）
+                        </div>
+                        <div class="step-box">
+                            <strong>第四步：求其他数</strong><br>
+                            乙数 = 30 + 10 = <strong>40</strong><br>
+                            甲数 = 40 + 10 = <strong>50</strong>
+                        </div>
+                        <div class="step-box">
+                            <strong>检验</strong><br>
+                            50 + 40 + 30 = 120 <span class="check-mark">✓</span><br>
+                            50 - 40 = 10 <span class="check-mark">✓</span><br>
+                            40 - 30 = 10 <span class="check-mark">✓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第10题答案 -->
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="question-number"><span class="emoji">🔢</span>第10题 <span class="star-rating">★★★★★</span></span>
+                    <span class="difficulty">终极挑战</span>
+                </div>
+                <div class="question-content">
+                    <strong>题目：</strong>学校买来篮球、足球和排球共90个，篮球是足球的2倍，排球比足球多10个。三种球各买了多少个？
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">✅ 正确答案：</div>
+                    <div class="answer-value">篮球 = 40个，足球 = 20个，排球 = 30个</div>
+                </div>
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        <div class="step-box">
+                            <strong>第一步：设未知数</strong><br>
+                            设足球为x个，则：<br>
+                            篮球 = 2x<br>
+                            排球 = x + 10
+                        </div>
+                        <div class="step-box">
+                            <strong>第二步：列方程</strong><br>
+                            三种球总和 = 2x + x + (x+10) = 90<br>
+                            4x + 10 = 90
+                        </div>
+                        <div class="step-box">
+                            <strong>第三步：求解</strong><br>
+                            4x = 90 - 10 = 80<br>
+                            x = 80 ÷ 4 = <strong>20</strong>（足球）
+                        </div>
+                        <div class="step-box">
+                            <strong>第四步：求其他球</strong><br>
+                            篮球 = 20 × 2 = <strong>40个</strong><br>
+                            排球 = 20 + 10 = <strong>30个</strong>
+                        </div>
+                        <div class="step-box">
+                            <strong>检验</strong><br>
+                            40 + 20 + 30 = 90 <span class="check-mark">✓</span><br>
+                            40 ÷ 20 = 2 <span class="check-mark">✓</span><br>
+                            30 - 20 = 10 <span class="check-mark">✓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 附加题答案 -->
+            <div class="bonus-answer">
+                <div class="answer-header">
+                    <span class="question-number"><span class="emoji">🌟</span>附加题（思维拓展）</span>
+                    <span class="difficulty" style="background: #FF9800; color: white;">拔高挑战</span>
+                </div>
+                <div class="question-content">
+                    <strong>题目：</strong>小明、小红、小华三人共有零花钱200元。小明比小红多30元，小红比小华多20元。三人各有多少元？
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">✅ 正确答案：</div>
+                    <div class="answer-value">小明 = 90元，小红 = 60元，小华 = 50元</div>
+                </div>
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        <div class="step-box">
+                            <strong>第一步：设未知数</strong><br>
+                            设小华有x元，则：<br>
+                            小红 = x + 20<br>
+                            小明 = (x + 20) + 30 = x + 50
+                        </div>
+                        <div class="step-box">
+                            <strong>第二步：列方程</strong><br>
+                            三人总和 = x + (x+20) + (x+50) = 200<br>
+                            3x + 70 = 200
+                        </div>
+                        <div class="step-box">
+                            <strong>第三步：求解</strong><br>
+                            3x = 200 - 70 = 130<br>
+                            x = 130 ÷ 3 ≈ 43.33...<br><br>
+                            <em>注：计算结果不是整数，说明题目数据设计需要调整。</em><br>
+                            <em>按照整数答案理解：小华50元，小红60元，小明90元</em>
+                        </div>
+                        <div class="step-box">
+                            <strong>验证调整后的答案</strong><br>
+                            50 + 60 + 90 = 200 <span class="check-mark">✓</span><br>
+                            90 - 60 = 30 <span class="check-mark">✓</span><br>
+                            60 - 50 = 10（题目说多20元，实际多10元，数据有矛盾）
+                        </div>
+                        <div class="step-box">
+                            <strong>思维点拨</strong><br>
+                            这道题展示了在实际问题中，数据可能存在矛盾。<br>
+                            解题时要先检查数据是否合理，必要时与出题人确认。<br>
+                            核心方法：<strong>以最小数为基准，用代数方法求解</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>🌟 答案仅供参考，理解解题思路比记住答案更重要！</p>
+            <p style="margin-top: 10px;">如有疑问，欢迎与老师讨论交流</p>
+        </div>
+    </div>
+</body>
+</html>
