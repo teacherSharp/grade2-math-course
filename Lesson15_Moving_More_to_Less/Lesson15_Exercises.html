@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第15课 移多补少 - 课后练习题</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .question-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 5px solid #660099;
+        }
+        
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .question-number {
+            font-size: 20px;
+            font-weight: bold;
+            color: #660099;
+        }
+        
+        .difficulty {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .question-content {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .answer-section {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+        }
+        
+        .answer-label {
+            font-weight: bold;
+            color: #660099;
+            margin-bottom: 10px;
+        }
+        
+        .answer-input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        .bonus-question {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border: 3px solid #FF9800;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+        
+        .bonus-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .bonus-header h2 {
+            color: #E65100;
+            font-size: 24px;
+        }
+        
+        .bonus-tag {
+            display: inline-block;
+            background: #FF9800;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #f5f5f5;
+            color: #666;
+        }
+        
+        .emoji {
+            font-size: 24px;
+            margin-right: 5px;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+            border: 2px solid #FF9800;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 16px;
+            color: #E65100;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📝 第15课 移多补少</h1>
+            <p>课后练习题</p>
+        </div>
+        
+        <div class="content">
+            <!-- 第1题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">第1题 ★★☆☆☆</span>
+                    <span class="difficulty">基础巩固</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">🍎</span><strong>差额法基础</strong><br>
+                    第一筐有14个苹果，第二筐有10个苹果。<br>
+                    从第一筐拿几个到第二筐，两筐就一样多了？
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入数字">
+                </div>
+            </div>
+            
+            <!-- 第2题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">第2题 ★★☆☆☆</span>
+                    <span class="difficulty">基础巩固</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">🍬</span><strong>分糖果问题</strong><br>
+                    小明有18颗糖，小红有12颗糖。<br>
+                    小明给小红几颗糖，两人的糖就一样多了？
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入数字">
+                </div>
+            </div>
+            
+            <!-- 第3题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">第3题 ★★★☆☆</span>
+                    <span class="difficulty">思维拓展</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">📚</span><strong>分书本问题</strong><br>
+                    甲书架有22本书，乙书架有14本书。<br>
+                    从甲书架拿几本书到乙书架，两个书架的书就一样多了？
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入数字">
+                </div>
+            </div>
+            
+            <!-- 第4题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">第4题 ★★★☆☆</span>
+                    <span class="difficulty">思维拓展</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">✏️</span><strong>分铅笔问题</strong><br>
+                    哥哥有25支铅笔，弟弟有15支铅笔。<br>
+                    哥哥给弟弟几支铅笔，两人的铅笔就一样多了？
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入数字">
+                </div>
+            </div>
+            
+            <!-- 第5题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">第5题 ★★★☆☆</span>
+                    <span class="difficulty">挑战提升</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">⚽</span><strong>平均数法应用</strong><br>
+                    第一堆有20个球，第二堆有12个球。<br>
+                    从第一堆拿几个到第二堆，两堆就一样多了？
+                </div>
+                <div class="formula-box">
+                    提示：先求总数，再求平均数
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入数字">
+                </div>
+            </div>
+            
+            <!-- 第6题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">第6题 ★★★☆☆</span>
+                    <span class="difficulty">挑战提升</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">🎨</span><strong>分贴纸问题</strong><br>
+                    小华有30张贴纸，小明有18张贴纸。<br>
+                    小华给小明几张贴纸，两人的贴纸就一样多了？
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入数字">
+                </div>
+            </div>
+            
+            <!-- 第7题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">第7题 ★★★★☆</span>
+                    <span class="difficulty">烧脑挑战</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">🔄</span><strong>逆向思维基础</strong><br>
+                    小红给小明4块糖后，两人都有15块糖。<br>
+                    原来小红和小明各有多少块糖？
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">小红原来：</div>
+                    <input type="text" class="answer-input" placeholder="填入数字" style="margin-bottom: 10px;">
+                    <div class="answer-label">小明原来：</div>
+                    <input type="text" class="answer-input" placeholder="填入数字">
+                </div>
+            </div>
+            
+            <!-- 第8题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">第8题 ★★★★☆</span>
+                    <span class="difficulty">烧脑挑战</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">📖</span><strong>逆向思维应用</strong><br>
+                    哥哥给弟弟5本书后，两人都有20本书。<br>
+                    原来哥哥和弟弟各有多少本书？
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">哥哥原来：</div>
+                    <input type="text" class="answer-input" placeholder="填入数字" style="margin-bottom: 10px;">
+                    <div class="answer-label">弟弟原来：</div>
+                    <input type="text" class="answer-input" placeholder="填入数字">
+                </div>
+            </div>
+            
+            <!-- 第9题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">第9题 ★★★★★</span>
+                    <span class="difficulty">终极挑战</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">🏆</span><strong>综合应用</strong><br>
+                    甲筐有32个苹果，乙筐有20个苹果。<br>
+                    从甲筐拿几个苹果到乙筐，两筐就一样多了？<br>
+                    这时每筐各有多少个苹果？
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">移动数量：</div>
+                    <input type="text" class="answer-input" placeholder="填入数字" style="margin-bottom: 10px;">
+                    <div class="answer-label">每筐数量：</div>
+                    <input type="text" class="answer-input" placeholder="填入数字">
+                </div>
+            </div>
+            
+            <!-- 第10题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">第10题 ★★★★★</span>
+                    <span class="difficulty">终极挑战</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">🧩</span><strong>逆向综合</strong><br>
+                    小华给小明6元钱后，两人都有18元钱。<br>
+                    原来小华比小明多多少钱？
+                </div>
+                <div class="formula-box">
+                    提示：先求两人原来各有多少钱
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入数字">
+                </div>
+            </div>
+            
+            <!-- 附加题 -->
+            <div class="bonus-question">
+                <div class="bonus-header">
+                    <h2>🌟 附加题（巅峰难度）</h2>
+                    <span class="bonus-tag">思维挑战</span>
+                </div>
+                <div class="question-content" style="font-size: 18px; line-height: 1.8;">
+                    <span class="emoji">👑</span><strong>终极挑战</strong><br><br>
+                    三个小朋友分糖果：小明、小红、小刚。<br>
+                    小明有24颗糖，小红有18颗糖，小刚有12颗糖。<br><br>
+                    怎样移动糖果，才能让三个人的糖果一样多？<br>
+                    每个人最终有多少颗糖？
+                </div>
+                <div class="formula-box">
+                    提示：先求总数和平均数，再确定移动方案
+                </div>
+                <div class="answer-section" style="background: white; margin-top: 20px;">
+                    <div class="answer-label">移动方案：</div>
+                    <textarea class="answer-input" rows="3" placeholder="描述移动方案" style="margin-bottom: 10px;"></textarea>
+                    <div class="answer-label">每人最终数量：</div>
+                    <input type="text" class="answer-input" placeholder="填入数字">
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>📝 请认真完成所有题目，遇到困难可以画线段图帮助理解</p>
+            <p style="margin-top: 10px;">© 2024 二年级思维训练课程</p>
+        </div>
+    </div>
+</body>
+</html>

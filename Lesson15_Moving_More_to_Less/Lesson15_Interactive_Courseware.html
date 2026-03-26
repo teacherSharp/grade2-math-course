@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第15课 移多补少 - 交互式课件</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .slide {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 20px auto;
+            max-width: 1000px;
+            min-height: 600px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: slideIn 0.5s ease;
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide-title {
+            color: #660099;
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #94070A;
+            padding-bottom: 15px;
+        }
+        
+        .content-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 5px solid #660099;
+        }
+        
+        .nav-container {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(102, 0, 153, 0.3);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 0, 153, 0.4);
+        }
+        
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .progress-container {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 600px;
+            height: 10px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #660099, #94070A);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .page-indicator {
+            position: fixed;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .interactive-btn {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: all 0.3s;
+        }
+        
+        .interactive-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .answer-input {
+            padding: 10px 15px;
+            font-size: 18px;
+            border: 2px solid #660099;
+            border-radius: 10px;
+            margin: 10px;
+            width: 200px;
+        }
+        
+        .answer-input.correct {
+            border-color: #4CAF50;
+            background: #E8F5E9;
+        }
+        
+        .answer-input.wrong {
+            border-color: #f44336;
+            background: #FFEBEE;
+        }
+        
+        .feedback {
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-size: 16px;
+            display: none;
+        }
+        
+        .feedback.success {
+            background: #E8F5E9;
+            border-left: 5px solid #4CAF50;
+            color: #2E7D32;
+            display: block;
+        }
+        
+        .feedback.error {
+            background: #FFEBEE;
+            border-left: 5px solid #f44336;
+            color: #C62828;
+            display: block;
+        }
+        
+        .emoji-display {
+            font-size: 64px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .cover-animation {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .start-btn {
+            display: block;
+            margin: 40px auto;
+            padding: 20px 50px;
+            font-size: 24px;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+        }
+        
+        .start-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(76, 175, 80, 0.4);
+        }
+        
+        .formula-box {
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+            border: 3px solid #FF9800;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 24px;
+            color: #E65100;
+        }
+        
+        .example-box {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border-left: 5px solid #4CAF50;
+            border-radius: 0 15px 15px 0;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        .tip-box {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            border-left: 5px solid #2196F3;
+            border-radius: 0 15px 15px 0;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .visual-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .item-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .item-row {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .item {
+            font-size: 36px;
+            transition: all 0.3s;
+        }
+        
+        .arrow {
+            font-size: 48px;
+            color: #660099;
+        }
+        
+        .balance-scale {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .scale-side {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            border: 3px solid #660099;
+            border-radius: 15px;
+            padding: 20px;
+            min-width: 150px;
+            text-align: center;
+        }
+        
+        .game-area {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .candy {
+            font-size: 40px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+            margin: 5px;
+        }
+        
+        .candy:hover {
+            transform: scale(1.2);
+        }
+        
+        .candy.moving {
+            animation: moveCandy 1s ease;
+        }
+        
+        @keyframes moveCandy {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(100px) scale(1.3); }
+            100% { transform: translateX(0); }
+        }
+        
+        .person-card {
+            background: white;
+            border: 3px solid #660099;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            min-width: 120px;
+        }
+        
+        .person-emoji {
+            font-size: 48px;
+        }
+        
+        .count-display {
+            font-size: 24px;
+            color: #660099;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .summary-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+        
+        .summary-card:hover {
+            border-color: #660099;
+            box-shadow: 0 5px 20px rgba(102, 0, 153, 0.1);
+        }
+        
+        .summary-card h3 {
+            color: #660099;
+            margin-bottom: 10px;
+        }
+        
+        .challenge-timer {
+            font-size: 48px;
+            color: #f44336;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .score-board {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 20px 0;
+        }
+        
+        .score-item {
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+            border: 3px solid #FF9800;
+            border-radius: 15px;
+            padding: 15px 30px;
+            text-align: center;
+        }
+        
+        .score-label {
+            font-size: 16px;
+            color: #666;
+        }
+        
+        .score-value {
+            font-size: 36px;
+            color: #E65100;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="page-indicator" id="pageIndicator">第 1 / 20 页</div>
+    
+    <!-- Slide 1: Cover -->
+    <div class="slide active" id="slide1">
+        <div class="emoji-display cover-animation">⚖️</div>
+        <h1 class="slide-title">第15课：移多补少</h1>
+        <div class="content-card" style="text-align: center;">
+            <p style="font-size: 24px; margin-bottom: 20px;">🌟 思维训练版 🌟</p>
+            <p style="font-size: 18px; color: #666; margin-bottom: 30px;">
+                探索平均分配的数学奥秘<br>
+                掌握"移多补少"的黄金法则
+            </p>
+        </div>
+        <button class="start-btn" onclick="nextSlide()">开始探索之旅 🚀</button>
+    </div>
+    
+    <!-- Slide 2: Learning Objectives -->
+    <div class="slide" id="slide2">
+        <h1 class="slide-title">🎯 本课学习目标</h1>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">📚 知识目标</h3>
+            <ul style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li>理解"移多补少"的核心原理</li>
+                <li>掌握差额与移动数量的关系</li>
+                <li>学会用画图法解决平均数问题</li>
+            </ul>
+        </div>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">💡 能力目标</h3>
+            <ul style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li>培养差额分析的思维能力</li>
+                <li>提升解决实际问题的能力</li>
+                <li>锻炼逻辑推理和计算能力</li>
+            </ul>
+        </div>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">🎮 课堂活动</h3>
+            <ul style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li>糖果分配大作战</li>
+                <li>移多补少挑战赛</li>
+                <li>生活应用大闯关</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Slide 3: Warm-up -->
+    <div class="slide" id="slide3">
+        <h1 class="slide-title">🔥 课前热身</h1>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">🍬 分糖果游戏</h3>
+            <p style="font-size: 18px; line-height: 1.8; margin-bottom: 20px;">
+                小明有8颗糖，小红有4颗糖。<br>
+                怎样让两人的糖一样多呢？
+            </p>
+        </div>
+        <div class="visual-container">
+            <div class="item-group">
+                <div style="font-size: 20px; color: #660099; margin-bottom: 10px;">小明</div>
+                <div class="item-row">
+                    <span class="item">🍬</span>
+                    <span class="item">🍬</span>
+                    <span class="item">🍬</span>
+                    <span class="item">🍬</span>
+                </div>
+                <div class="item-row">
+                    <span class="item">🍬</span>
+                    <span class="item">🍬</span>
+                    <span class="item">🍬</span>
+                    <span class="item">🍬</span>
+                </div>
+                <div class="count-display">8颗</div>
+            </div>
+            <div class="arrow">→</div>
+            <div class="item-group">
+                <div style="font-size: 20px; color: #660099; margin-bottom: 10px;">小红</div>
+                <div class="item-row">
+                    <span class="item">🍬</span>
+                    <span class="item">🍬</span>
+                    <span class="item">🍬</span>
+                    <span class="item">🍬</span>
+                </div>
+                <div class="count-display">4颗</div>
+            </div>
+        </div>
+        <div class="tip-box">
+            <strong>💡 思考：</strong>小明比小红多几颗？要给几颗两人才能一样多？
+        </div>
+    </div>
+    
+    <!-- Slide 4: Story Introduction -->
+    <div class="slide" id="slide4">
+        <h1 class="slide-title">📖 情境导入</h1>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">🏰 公平王国的故事</h3>
+            <p style="font-size: 18px; line-height: 1.8;">
+                在遥远的公平王国里，有一位聪明的宰相。他总是能把不均匀的东西变得平均，让每个人都满意。<br><br>
+                一天，国王赏给宰相12个金苹果，给侍卫6个金苹果。宰相看了看，笑着说：<br><br>
+                <strong>"让我来移多补少，让大家一样多吧！"</strong>
+            </p>
+        </div>
+        <div class="visual-container">
+            <div class="person-card">
+                <div class="person-emoji">👑</div>
+                <div style="font-size: 16px; margin-top: 10px;">国王</div>
+            </div>
+            <div class="person-card">
+                <div class="person-emoji">🍎🍎🍎🍎🍎🍎</div>
+                <div class="count-display">宰相：12个</div>
+            </div>
+            <div class="person-card">
+                <div class="person-emoji">🍎🍎🍎🍎🍎🍎</div>
+                <div class="count-display">侍卫：6个</div>
+            </div>
+        </div>
+        <div class="tip-box">
+            <strong>🤔 问题：</strong>宰相应该给侍卫几个金苹果，两人就一样多了？
+        </div>
+    </div>
+    
+    <!-- Slide 5: Core Concept 1 -->
+    <div class="slide" id="slide5">
+        <h1 class="slide-title">📚 核心概念一：差额与移动量</h1>
+        <div class="formula-box">
+            <strong>⚖️ 黄金法则</strong><br>
+            移动数量 = 差额 ÷ 2
+        </div>
+        <div class="example-box">
+            <h3 style="color: #2E7D32; margin-bottom: 10px;">🌰 例题解析</h3>
+            <p style="font-size: 18px; line-height: 1.8;">
+                小明有10支铅笔，小红有6支铅笔。<br>
+                <strong>差额：</strong>10 - 6 = 4（支）<br>
+                <strong>移动量：</strong>4 ÷ 2 = 2（支）<br><br>
+                答：小明给小红2支，两人就一样多（各8支）。
+            </p>
+        </div>
+        <div class="visual-container">
+            <div class="item-group">
+                <div style="font-size: 18px; color: #660099;">小明：10支</div>
+                <div style="font-size: 14px; color: #999;">给出去2支 → 8支</div>
+            </div>
+            <div class="arrow">⇄</div>
+            <div class="item-group">
+                <div style="font-size: 18px; color: #660099;">小红：6支</div>
+                <div style="font-size: 14px; color: #999;">收到2支 → 8支</div>
+            </div>
+        </div>
+        <div class="tip-box">
+            <strong>💡 记忆口诀：</strong>多多少，给一半；两人一样多，大家都开心！
+        </div>
+    </div>
+    
+    <!-- Slide 6: Practice 1 -->
+    <div class="slide" id="slide6">
+        <h1 class="slide-title">✏️ 练习一：基础巩固</h1>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">📝 题目 1</h3>
+            <p style="font-size: 18px; line-height: 1.8; margin-bottom: 20px;">
+                哥哥有15张贴纸，弟弟有9张贴纸。<br>
+                哥哥给弟弟几张，两人的贴纸就一样多了？
+            </p>
+            <div style="margin: 20px 0;">
+                <span style="font-size: 18px;">差额 = </span>
+                <input type="text" class="answer-input" id="p1_diff" placeholder="?">
+                <button class="interactive-btn" onclick="checkP1Diff()">验证</button>
+            </div>
+            <div id="feedback_p1_diff" class="feedback"></div>
+            <div style="margin: 20px 0;">
+                <span style="font-size: 18px;">移动量 = </span>
+                <input type="text" class="answer-input" id="p1_move" placeholder="?">
+                <button class="interactive-btn" onclick="checkP1Move()">验证</button>
+            </div>
+            <div id="feedback_p1_move" class="feedback"></div>
+        </div>
+        <div class="tip-box">
+            <strong>💡 提示：</strong>先算差额，再除以2就是移动量。
+        </div>
+    </div>
+    
+    <!-- Slide 7: Practice 2 -->
+    <div class="slide" id="slide7">
+        <h1 class="slide-title">✏️ 练习二：思维拓展</h1>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">📝 题目 2</h3>
+            <p style="font-size: 18px; line-height: 1.8; margin-bottom: 20px;">
+                第一筐有20个苹果，第二筐有12个苹果。<br>
+                从第一筐拿几个到第二筐，两筐就一样多了？
+            </p>
+            <div style="margin: 20px 0;">
+                <span style="font-size: 18px;">答案：</span>
+                <input type="text" class="answer-input" id="p2_answer" placeholder="填入数字">
+                <span style="font-size: 18px;">个</span>
+                <button class="interactive-btn" onclick="checkP2()">验证答案</button>
+            </div>
+            <div id="feedback_p2" class="feedback"></div>
+        </div>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">📝 题目 3</h3>
+            <p style="font-size: 18px; line-height: 1.8; margin-bottom: 20px;">
+                小华有18元，小明有10元。<br>
+                小华给小明几元，两人的钱就一样多了？
+            </p>
+            <div style="margin: 20px 0;">
+                <span style="font-size: 18px;">答案：</span>
+                <input type="text" class="answer-input" id="p3_answer" placeholder="填入数字">
+                <span style="font-size: 18px;">元</span>
+                <button class="interactive-btn" onclick="checkP3()">验证答案</button>
+            </div>
+            <div id="feedback_p3" class="feedback"></div>
+        </div>
+    </div>
+    
+    <!-- Slide 8: Module 1 Summary -->
+    <div class="slide" id="slide8">
+        <h1 class="slide-title">📋 模块一总结：差额与移动量</h1>
+        <div class="content-card" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);">
+            <h3 style="color: #1976D2; margin-bottom: 15px;">🎯 核心知识点</h3>
+            <ul style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li><strong>差额</strong> = 大数 - 小数</li>
+                <li><strong>移动量</strong> = 差额 ÷ 2</li>
+                <li>移动后，两人的数量相等</li>
+            </ul>
+        </div>
+        <div class="content-card" style="background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);">
+            <h3 style="color: #E65100; margin-bottom: 15px;">💡 解题步骤</h3>
+            <ol style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li>找出谁多谁少，确定大数和小数</li>
+                <li>计算差额：大数 - 小数</li>
+                <li>计算移动量：差额 ÷ 2</li>
+                <li>验证：移动后两人是否相等</li>
+            </ol>
+        </div>
+        <div class="content-card" style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);">
+            <h3 style="color: #2E7D32; margin-bottom: 15px;">✅ 学生应掌握</h3>
+            <p style="font-size: 18px; line-height: 1.8;">
+                1. 理解"移多补少"的基本原理<br>
+                2. 能正确计算差额和移动量<br>
+                3. 能解决简单的移多补少问题
+            </p>
+        </div>
+    </div>
+    
+    <!-- Slide 9: Core Concept 2 -->
+    <div class="slide" id="slide9">
+        <h1 class="slide-title">📚 核心概念二：求平均数</h1>
+        <div class="formula-box">
+            <strong>📊 平均数公式</strong><br>
+            平均数 = 总数 ÷ 份数
+        </div>
+        <div class="example-box">
+            <h3 style="color: #2E7D32; margin-bottom: 10px;">🌰 例题解析</h3>
+            <p style="font-size: 18px; line-height: 1.8;">
+                小红有14颗糖，小明有10颗糖。<br>
+                <strong>总数：</strong>14 + 10 = 24（颗）<br>
+                <strong>平均数：</strong>24 ÷ 2 = 12（颗）<br><br>
+                <strong>移动量：</strong>14 - 12 = 2（颗）<br>
+                答：小红给小明2颗，两人都有12颗。
+            </p>
+        </div>
+        <div class="tip-box">
+            <strong>💡 思路点拨：</strong>先求平均数，再用大数减去平均数就是移动量。
+        </div>
+    </div>
+    
+    <!-- Slide 10: Practice 3 -->
+    <div class="slide" id="slide10">
+        <h1 class="slide-title">✏️ 练习三：平均数应用</h1>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">📝 题目 4</h3>
+            <p style="font-size: 18px; line-height: 1.8; margin-bottom: 20px;">
+                第一堆有16个球，第二堆有8个球。<br>
+                从第一堆拿几个到第二堆，两堆就一样多了？
+            </p>
+            <div style="margin: 20px 0;">
+                <span style="font-size: 18px;">总数 = </span>
+                <input type="text" class="answer-input" id="p4_total" placeholder="?">
+                <button class="interactive-btn" onclick="checkP4Total()">验证</button>
+            </div>
+            <div id="feedback_p4_total" class="feedback"></div>
+            <div style="margin: 20px 0;">
+                <span style="font-size: 18px;">平均数 = </span>
+                <input type="text" class="answer-input" id="p4_avg" placeholder="?">
+                <button class="interactive-btn" onclick="checkP4Avg()">验证</button>
+            </div>
+            <div id="feedback_p4_avg" class="feedback"></div>
+            <div style="margin: 20px 0;">
+                <span style="font-size: 18px;">移动量 = </span>
+                <input type="text" class="answer-input" id="p4_move" placeholder="?">
+                <button class="interactive-btn" onclick="checkP4Move()">验证</button>
+            </div>
+            <div id="feedback_p4_move" class="feedback"></div>
+        </div>
+    </div>
+    
+    <!-- Slide 11: Module 2 Summary -->
+    <div class="slide" id="slide11">
+        <h1 class="slide-title">📋 模块二总结：平均数问题</h1>
+        <div class="content-card" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);">
+            <h3 style="color: #1976D2; margin-bottom: 15px;">🎯 核心知识点</h3>
+            <ul style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li><strong>平均数</strong> = 总数 ÷ 份数</li>
+                <li><strong>移动量</strong> = 大数 - 平均数</li>
+                <li>移多补少的本质就是达到平均</li>
+            </ul>
+        </div>
+        <div class="content-card" style="background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);">
+            <h3 style="color: #E65100; margin-bottom: 15px;">💡 两种方法对比</h3>
+            <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                <tr style="background: #f0f0f0;">
+                    <th style="border: 1px solid #ddd; padding: 10px;">方法</th>
+                    <th style="border: 1px solid #ddd; padding: 10px;">公式</th>
+                    <th style="border: 1px solid #ddd; padding: 10px;">适用场景</th>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 10px;">差额法</td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">移动量 = 差额 ÷ 2</td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">已知两数，求移动量</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 10px;">平均数法</td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">移动量 = 大数 - 平均数</td>
+                    <td style="border: 1px solid #ddd; padding: 10px;">已知总数，求移动量</td>
+                </tr>
+            </table>
+        </div>
+        <div class="content-card" style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);">
+            <h3 style="color: #2E7D32; margin-bottom: 15px;">✅ 学生应掌握</h3>
+            <p style="font-size: 18px; line-height: 1.8;">
+                1. 理解平均数的概念<br>
+                2. 能用平均数法解决移多补少问题<br>
+                3. 能灵活选择合适的方法解题
+            </p>
+        </div>
+    </div>
+    
+    <!-- Slide 12: Core Concept 3 -->
+    <div class="slide" id="slide12">
+        <h1 class="slide-title">📚 核心概念三：逆向思维</h1>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">🔄 逆向问题</h3>
+            <p style="font-size: 18px; line-height: 1.8; margin-bottom: 20px;">
+                <strong>正向问题：</strong>已知原来各有多少，求移动多少能相等。<br><br>
+                <strong>逆向问题：</strong>已知移动后相等，求原来各有多少。
+            </p>
+        </div>
+        <div class="example-box">
+            <h3 style="color: #2E7D32; margin-bottom: 10px;">🌰 例题解析</h3>
+            <p style="font-size: 18px; line-height: 1.8;">
+                小明给小红5支铅笔后，两人都有12支。<br>
+                原来两人各有多少支？<br><br>
+                <strong>小明原来：</strong>12 + 5 = 17（支）<br>
+                <strong>小红原来：</strong>12 - 5 = 7（支）<br><br>
+                验证：17 - 7 = 10，差额10，移动量 = 10 ÷ 2 = 5 ✓
+            </p>
+        </div>
+        <div class="tip-box">
+            <strong>💡 逆向公式：</strong>给出去的要"加回来"，收到的要"还回去"。
+        </div>
+    </div>
+    
+    <!-- Slide 13: Practice 4 -->
+    <div class="slide" id="slide13">
+        <h1 class="slide-title">✏️ 练习四：逆向思维</h1>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">📝 题目 5</h3>
+            <p style="font-size: 18px; line-height: 1.8; margin-bottom: 20px;">
+                哥哥给弟弟3块糖后，两人都有10块。<br>
+                原来哥哥和弟弟各有多少块糖？
+            </p>
+            <div style="margin: 20px 0;">
+                <span style="font-size: 18px;">哥哥原来：</span>
+                <input type="text" class="answer-input" id="p5_brother" placeholder="?">
+                <span style="font-size: 18px;">块</span>
+                <button class="interactive-btn" onclick="checkP5Brother()">验证</button>
+            </div>
+            <div id="feedback_p5_brother" class="feedback"></div>
+            <div style="margin: 20px 0;">
+                <span style="font-size: 18px;">弟弟原来：</span>
+                <input type="text" class="answer-input" id="p5_younger" placeholder="?">
+                <span style="font-size: 18px;">块</span>
+                <button class="interactive-btn" onclick="checkP5Younger()">验证</button>
+            </div>
+            <div id="feedback_p5_younger" class="feedback"></div>
+        </div>
+        <div class="tip-box">
+            <strong>💡 提示：</strong>哥哥给出去3块后是10块，那原来就是10+3=13块。
+        </div>
+    </div>
+    
+    <!-- Slide 14: Module 3 Summary -->
+    <div class="slide" id="slide14">
+        <h1 class="slide-title">📋 模块三总结：逆向思维</h1>
+        <div class="content-card" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);">
+            <h3 style="color: #1976D2; margin-bottom: 15px;">🎯 核心知识点</h3>
+            <ul style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li><strong>逆向思维</strong>：从结果倒推原来的状态</li>
+                <li>给出去的要<strong>"加回来"</strong></li>
+                <li>收到的要<strong>"还回去"</strong></li>
+            </ul>
+        </div>
+        <div class="content-card" style="background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);">
+            <h3 style="color: #E65100; margin-bottom: 15px;">💡 解题步骤</h3>
+            <ol style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li>确定移动后的相等数量</li>
+                <li>给出去的人：相等数量 + 移动量 = 原来数量</li>
+                <li>收到的人：相等数量 - 移动量 = 原来数量</li>
+                <li>验证：计算差额，检查移动量是否正确</li>
+            </ol>
+        </div>
+        <div class="content-card" style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);">
+            <h3 style="color: #2E7D32; margin-bottom: 15px;">✅ 学生应掌握</h3>
+            <p style="font-size: 18px; line-height: 1.8;">
+                1. 理解逆向思维的解题思路<br>
+                2. 能根据移动后的状态求原来的数量<br>
+                3. 能进行正确的验证
+            </p>
+        </div>
+    </div>
+    
+    <!-- Slide 15: Speed Challenge -->
+    <div class="slide" id="slide15">
+        <h1 class="slide-title">⚡ 速度挑战</h1>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px; text-align: center;">⏱️ 60秒限时挑战</h3>
+            <div class="challenge-timer" id="challengeTimer">60</div>
+            <div class="score-board">
+                <div class="score-item">
+                    <div class="score-label">得分</div>
+                    <div class="score-value" id="scoreValue">0</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-label">剩余时间</div>
+                    <div class="score-value" id="timeValue">60</div>
+                </div>
+            </div>
+        </div>
+        <div class="game-area">
+            <p style="font-size: 20px; margin-bottom: 20px;">
+                <strong>题目：</strong>甲有20个苹果，乙有12个苹果。<br>
+                甲给乙几个，两人就一样多了？
+            </p>
+            <input type="text" class="answer-input" id="speed1" placeholder="填入数字" style="font-size: 24px; width: 150px;">
+            <button class="interactive-btn" onclick="checkSpeed1()" style="font-size: 20px; padding: 15px 30px;">提交答案</button>
+            <div id="feedback_speed1" class="feedback"></div>
+        </div>
+        <button class="interactive-btn" onclick="startTimer()" style="display: block; margin: 20px auto;">🚀 开始挑战</button>
+    </div>
+    
+    <!-- Slide 16: Life Applications -->
+    <div class="slide" id="slide16">
+        <h1 class="slide-title">🌍 生活中的移多补少</h1>
+        <div class="summary-grid">
+            <div class="summary-card">
+                <h3>🍎 分水果</h3>
+                <p style="font-size: 16px; line-height: 1.6;">
+                    两筐水果数量不同，怎样让它们一样多？
+                </p>
+            </div>
+            <div class="summary-card">
+                <h3>📚 分书本</h3>
+                <p style="font-size: 16px; line-height: 1.6;">
+                    两个同学的书不一样多，怎样公平分配？
+                </p>
+            </div>
+            <div class="summary-card">
+                <h3>⚽ 分队员</h3>
+                <p style="font-size: 16px; line-height: 1.6;">
+                    两队人数不同，怎样调整让比赛公平？
+                </p>
+            </div>
+            <div class="summary-card">
+                <h3>🎨 分材料</h3>
+                <p style="font-size: 16px; line-height: 1.6;">
+                    美术课材料分配，怎样让每组一样多？
+                </p>
+            </div>
+        </div>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">🤔 思考题</h3>
+            <p style="font-size: 18px; line-height: 1.8;">
+                班级有男生24人，女生16人。<br>
+                如果要把男生调一些到女生组，让两组人数相等，<br>
+                应该调多少人？
+            </p>
+            <div style="margin-top: 20px;">
+                <span style="font-size: 18px;">答案：</span>
+                <input type="text" class="answer-input" id="life_answer" placeholder="填入数字">
+                <span style="font-size: 18px;">人</span>
+                <button class="interactive-btn" onclick="checkLifeAnswer()">验证</button>
+            </div>
+            <div id="feedback_life" class="feedback"></div>
+        </div>
+    </div>
+    
+    <!-- Slide 17: Module 4 Summary -->
+    <div class="slide" id="slide17">
+        <h1 class="slide-title">📋 模块四总结：综合应用</h1>
+        <div class="content-card" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);">
+            <h3 style="color: #1976D2; margin-bottom: 15px;">🎯 核心知识点</h3>
+            <ul style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li>移多补少在生活中的广泛应用</li>
+                <li>平均分配是解决公平问题的好方法</li>
+                <li>数学来源于生活，服务于生活</li>
+            </ul>
+        </div>
+        <div class="content-card" style="background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);">
+            <h3 style="color: #E65100; margin-bottom: 15px;">💡 解题技巧</h3>
+            <ol style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li>认真读题，找出关键信息</li>
+                <li>确定谁多谁少，或移动后的状态</li>
+                <li>选择合适的解题方法</li>
+                <li>计算后一定要验证答案</li>
+            </ol>
+        </div>
+        <div class="content-card" style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);">
+            <h3 style="color: #2E7D32; margin-bottom: 15px;">✅ 学生应掌握</h3>
+            <p style="font-size: 18px; line-height: 1.8;">
+                1. 能将数学知识应用到生活中<br>
+                2. 能分析生活中的公平分配问题<br>
+                3. 培养数学思维和解决问题的能力
+            </p>
+        </div>
+    </div>
+    
+    <!-- Slide 18: Common Mistakes -->
+    <div class="slide" id="slide18">
+        <h1 class="slide-title">⚠️ 易错点总结</h1>
+        <div class="content-card" style="background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%); border-left-color: #f44336;">
+            <h3 style="color: #C62828; margin-bottom: 15px;">❌ 常见错误</h3>
+            <ul style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li><strong>错误1：</strong>把差额直接当作移动量<br>
+                    <em>正确：移动量 = 差额 ÷ 2</em>
+                </li>
+                <li><strong>错误2：</strong>逆向问题时，该加的减了，该减的加了<br>
+                    <em>正确：给出去的要加回来，收到的要还回去</em>
+                </li>
+                <li><strong>错误3：</strong>计算后不验证<br>
+                    <em>正确：养成验证的好习惯</em>
+                </li>
+            </ul>
+        </div>
+        <div class="content-card" style="background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);">
+            <h3 style="color: #2E7D32; margin-bottom: 15px;">✅ 成功秘诀</h3>
+            <ol style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li>牢记公式：移动量 = 差额 ÷ 2</li>
+                <li>逆向问题画线段图帮助理解</li>
+                <li>计算后一定要验证</li>
+                <li>多做练习，熟能生巧</li>
+            </ol>
+        </div>
+    </div>
+    
+    <!-- Slide 19: Knowledge Summary -->
+    <div class="slide" id="slide19">
+        <h1 class="slide-title">🌟 知识总结</h1>
+        <div class="summary-grid">
+            <div class="summary-card">
+                <h3>📐 差额法</h3>
+                <p style="font-size: 16px; line-height: 1.6;">
+                    移动量 = 差额 ÷ 2<br>
+                    适用于已知两数求移动量
+                </p>
+            </div>
+            <div class="summary-card">
+                <h3>📊 平均数法</h3>
+                <p style="font-size: 16px; line-height: 1.6;">
+                    移动量 = 大数 - 平均数<br>
+                    适用于已知总数求移动量
+                </p>
+            </div>
+            <div class="summary-card">
+                <h3>🔄 逆向思维</h3>
+                <p style="font-size: 16px; line-height: 1.6;">
+                    给出去的加回来<br>
+                    收到的还回去
+                </p>
+            </div>
+            <div class="summary-card">
+                <h3>✅ 验证方法</h3>
+                <p style="font-size: 16px; line-height: 1.6;">
+                    移动后检查是否相等<br>
+                    差额是否等于移动量×2
+                </p>
+            </div>
+        </div>
+        <div class="formula-box" style="margin-top: 30px;">
+            <strong>🎯 核心口诀</strong><br>
+            多多少，给一半；<br>
+            求平均，总数除；<br>
+            逆问题，倒着算；<br>
+            算完一定要验证！
+        </div>
+    </div>
+    
+    <!-- Slide 20: Homework -->
+    <div class="slide" id="slide20">
+        <h1 class="slide-title">📝 作业布置</h1>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">📚 必做题（基础巩固）</h3>
+            <ol style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li>完成课后练习题第1-6题（差额与移动量）</li>
+                <li>完成课后练习题第7-8题（平均数应用）</li>
+            </ol>
+        </div>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">🎯 选做题（能力提升）</h3>
+            <ol style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li>完成课后练习题第9-10题（逆向思维）</li>
+                <li>挑战附加题（巅峰难度）</li>
+            </ol>
+        </div>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">🏠 亲子任务</h3>
+            <ol style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li>和家长一起玩"分糖果"游戏</li>
+                <li>在生活中找出3个移多补少的例子</li>
+                <li>用今天学的方法解决生活中的公平分配问题</li>
+            </ol>
+        </div>
+        <div class="tip-box">
+            <strong>💡 温馨提示：</strong>建议用时20-30分钟，遇到困难可以画线段图帮助理解。
+        </div>
+    </div>
+    
+    <!-- Navigation -->
+    <div class="nav-container">
+        <button class="nav-btn" onclick="prevSlide()">⬅️ 上一页</button>
+        <button class="nav-btn" onclick="nextSlide()">下一页 ➡️</button>
+    </div>
+    
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 20;
+        let timerInterval = null;
+        let timeLeft = 60;
+        let score = 0;
+        
+        function updateProgressBar() {
+            const progress = (currentSlide / totalSlides) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('pageIndicator').textContent = `第 ${currentSlide} / ${totalSlides} 页`;
+        }
+        
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => slide.classList.remove('active'));
+            document.getElementById('slide' + n).classList.add('active');
+            currentSlide = n;
+            updateProgressBar();
+        }
+        
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                showSlide(currentSlide + 1);
+            }
+        }
+        
+        function prevSlide() {
+            if (currentSlide > 1) {
+                showSlide(currentSlide - 1);
+            }
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+        
+        // Practice 1 checks
+        function checkP1Diff() {
+            const input = document.getElementById('p1_diff');
+            const feedback = document.getElementById('feedback_p1_diff');
+            if (input.value.trim() === '6') {
+                input.classList.add('correct');
+                input.classList.remove('wrong');
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 正确！差额 = 15 - 9 = 6';
+            } else {
+                input.classList.add('wrong');
+                input.classList.remove('correct');
+                feedback.className = 'feedback error';
+                feedback.textContent = '❌ 再想想，15 - 9 = ?';
+            }
+        }
+        
+        function checkP1Move() {
+            const input = document.getElementById('p1_move');
+            const feedback = document.getElementById('feedback_p1_move');
+            if (input.value.trim() === '3') {
+                input.classList.add('correct');
+                input.classList.remove('wrong');
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 正确！移动量 = 6 ÷ 2 = 3';
+            } else {
+                input.classList.add('wrong');
+                input.classList.remove('correct');
+                feedback.className = 'feedback error';
+                feedback.textContent = '❌ 再想想，差额÷2 = ?';
+            }
+        }
+        
+        // Practice 2 checks
+        function checkP2() {
+            const input = document.getElementById('p2_answer');
+            const feedback = document.getElementById('feedback_p2');
+            if (input.value.trim() === '4') {
+                input.classList.add('correct');
+                input.classList.remove('wrong');
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 正确！差额 = 20 - 12 = 8，移动量 = 8 ÷ 2 = 4';
+            } else {
+                input.classList.add('wrong');
+                input.classList.remove('correct');
+                feedback.className = 'feedback error';
+                feedback.textContent = '❌ 提示：先算差额，再除以2';
+                setTimeout(() => { input.classList.remove('wrong'); }, 1000);
+            }
+        }
+        
+        function checkP3() {
+            const input = document.getElementById('p3_answer');
+            const feedback = document.getElementById('feedback_p3');
+            if (input.value.trim() === '4') {
+                input.classList.add('correct');
+                input.classList.remove('wrong');
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 正确！差额 = 18 - 10 = 8，移动量 = 8 ÷ 2 = 4';
+            } else {
+                input.classList.add('wrong');
+                input.classList.remove('correct');
+                feedback.className = 'feedback error';
+                feedback.textContent = '❌ 提示：先算差额，再除以2';
+                setTimeout(() => { input.classList.remove('wrong'); }, 1000);
+            }
+        }
+        
+        // Practice 4 checks
+        function checkP4Total() {
+            const input = document.getElementById('p4_total');
+            const feedback = document.getElementById('feedback_p4_total');
+            if (input.value.trim() === '24') {
+                input.classList.add('correct');
+                input.classList.remove('wrong');
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 正确！总数 = 16 + 8 = 24';
+            } else {
+                input.classList.add('wrong');
+                input.classList.remove('correct');
+                feedback.className = 'feedback error';
+                feedback.textContent = '❌ 再想想，两堆相加是多少？';
+            }
+        }
+        
+        function checkP4Avg() {
+            const input = document.getElementById('p4_avg');
+            const feedback = document.getElementById('feedback_p4_avg');
+            if (input.value.trim() === '12') {
+                input.classList.add('correct');
+                input.classList.remove('wrong');
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 正确！平均数 = 24 ÷ 2 = 12';
+            } else {
+                input.classList.add('wrong');
+                input.classList.remove('correct');
+                feedback.className = 'feedback error';
+                feedback.textContent = '❌ 再想想，总数÷2 = ?';
+            }
+        }
+        
+        function checkP4Move() {
+            const input = document.getElementById('p4_move');
+            const feedback = document.getElementById('feedback_p4_move');
+            if (input.value.trim() === '4') {
+                input.classList.add('correct');
+                input.classList.remove('wrong');
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 正确！移动量 = 16 - 12 = 4';
+            } else {
+                input.classList.add('wrong');
+                input.classList.remove('correct');
+                feedback.className = 'feedback error';
+                feedback.textContent = '❌ 再想想，大数 - 平均数 = ?';
+            }
+        }
+        
+        // Practice 5 checks
+        function checkP5Brother() {
+            const input = document.getElementById('p5_brother');
+            const feedback = document.getElementById('feedback_p5_brother');
+            if (input.value.trim() === '13') {
+                input.classList.add('correct');
+                input.classList.remove('wrong');
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 正确！哥哥原来 = 10 + 3 = 13';
+            } else {
+                input.classList.add('wrong');
+                input.classList.remove('correct');
+                feedback.className = 'feedback error';
+                feedback.textContent = '❌ 提示：给出去的要加回来';
+            }
+        }
+        
+        function checkP5Younger() {
+            const input = document.getElementById('p5_younger');
+            const feedback = document.getElementById('feedback_p5_younger');
+            if (input.value.trim() === '7') {
+                input.classList.add('correct');
+                input.classList.remove('wrong');
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 正确！弟弟原来 = 10 - 3 = 7';
+            } else {
+                input.classList.add('wrong');
+                input.classList.remove('correct');
+                feedback.className = 'feedback error';
+                feedback.textContent = '❌ 提示：收到的要还回去';
+            }
+        }
+        
+        // Speed challenge
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timeLeft = 60;
+            score = 0;
+            document.getElementById('challengeTimer').textContent = timeLeft;
+            document.getElementById('timeValue').textContent = timeLeft;
+            document.getElementById('scoreValue').textContent = score;
+            document.getElementById('speed1').value = '';
+            document.getElementById('speed1').classList.remove('correct', 'wrong');
+            document.getElementById('feedback_speed1').style.display = 'none';
+            
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                document.getElementById('challengeTimer').textContent = timeLeft;
+                document.getElementById('timeValue').textContent = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    document.getElementById('feedback_speed1').className = 'feedback error';
+                    document.getElementById('feedback_speed1').textContent = '⏰ 时间到！答案是4';
+                    document.getElementById('feedback_speed1').style.display = 'block';
+                }
+            }, 1000);
+        }
+        
+        function checkSpeed1() {
+            const input = document.getElementById('speed1');
+            const feedback = document.getElementById('feedback_speed1');
+            if (input.value.trim() === '4') {
+                input.classList.add('correct');
+                input.classList.remove('wrong');
+                score += timeLeft * 10;
+                document.getElementById('scoreValue').textContent = score;
+                feedback.className = 'feedback success';
+                feedback.textContent = `🎉 正确！获得 ${timeLeft * 10} 分！`;
+                clearInterval(timerInterval);
+            } else {
+                input.classList.add('wrong');
+                input.classList.remove('correct');
+                feedback.className = 'feedback error';
+                feedback.textContent = '❌ 再想想，差额÷2 = ?';
+                setTimeout(() => { input.classList.remove('wrong'); }, 1000);
+            }
+            feedback.style.display = 'block';
+        }
+        
+        // Life application check
+        function checkLifeAnswer() {
+            const input = document.getElementById('life_answer');
+            const feedback = document.getElementById('feedback_life');
+            if (input.value.trim() === '4') {
+                input.classList.add('correct');
+                input.classList.remove('wrong');
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 正确！差额 = 24 - 16 = 8，移动量 = 8 ÷ 2 = 4';
+            } else {
+                input.classList.add('wrong');
+                input.classList.remove('correct');
+                feedback.className = 'feedback error';
+                feedback.textContent = '❌ 提示：先算差额，再除以2';
+                setTimeout(() => { input.classList.remove('wrong'); }, 1000);
+            }
+        }
+        
+        // Initialize
+        updateProgressBar();
+    </script>
+</body>
+</html>
