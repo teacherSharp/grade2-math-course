@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第09课 找规律填数 - 课后练习题答案（教师版）</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .answer-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .answer-section-box {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border-left: 5px solid #4CAF50;
+            border-radius: 0 10px 10px 0;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .answer-title {
+            color: #2E7D32;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .explanation-section {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            border-left: 5px solid #2196F3;
+            border-radius: 0 10px 10px 0;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .explanation-title {
+            color: #1976D2;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .tips-box {
+            background: #fff3e0;
+            border-left: 5px solid #FF9800;
+            border-radius: 0 10px 10px 0;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .tips-title {
+            color: #E65100;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .extension-box {
+            background: #f3e5f5;
+            border-left: 5px solid #9C27B0;
+            border-radius: 0 10px 10px 0;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .extension-title {
+            color: #7B1FA2;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .question-title {
+            font-size: 20px;
+            color: #660099;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .emoji {
+            font-size: 24px;
+            margin-right: 5px;
+        }
+        
+        .bonus-answer {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border: 3px solid #FF9800;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #f5f5f5;
+            color: #666;
+        }
+
+        .sequence-display {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .sequence-item {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        .star-rating {
+            color: #ffc107;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📖 第09课 找规律填数</h1>
+            <p>课后练习题答案与解析（教师版）</p>
+        </div>
+        
+        <div class="content">
+            <!-- 第1题答案 -->
+            <div class="answer-card">
+                <div class="question-title"><span class="emoji">🔢</span>第1题 ★★☆☆☆</div>
+                
+                <div class="answer-section-box">
+                    <div class="answer-title">✅ 标准答案</div>
+                    <div style="font-size: 18px;"><strong>15</strong></div>
+                </div>
+                
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        观察数列：1, 3, 6, 10, ?<br><br>
+                        <strong>第一步：计算相邻两数的差</strong><br>
+                        3-1=2, 6-3=3, 10-6=4<br>
+                        差分别是：2, 3, 4<br><br>
+                        <strong>第二步：找差的规律</strong><br>
+                        差每次增加1（2→3→4）<br>
+                        所以下一个差应该是5<br><br>
+                        <strong>第三步：计算答案</strong><br>
+                        10 + 5 = <strong>15</strong>
+                    </div>
+                </div>
+                
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        这是<strong>二级等差数列</strong>的典型例子。<br>
+                        教孩子用"算差-找规律-推算"三步法。<br>
+                        常见错误：孩子可能直接猜答案，要引导先算差。<br>
+                        这个数列也叫"三角形数"，有特殊的数学意义。
+                    </div>
+                </div>
+                
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        1, 3, 6, 10, 15, 21, ? 下一个数是多少？<br>
+                        （提示：继续用二级等差的方法，答案是28）
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 第2题答案 -->
+            <div class="answer-card">
+                <div class="question-title"><span class="emoji">🔢</span>第2题 ★★★☆☆</div>
+                
+                <div class="answer-section-box">
+                    <div class="answer-title">✅ 标准答案</div>
+                    <div style="font-size: 18px;"><strong>26, 37</strong></div>
+                </div>
+                
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        观察数列：2, 5, 10, 17, ?, ?<br><br>
+                        <strong>第一步：计算相邻两数的差</strong><br>
+                        5-2=3, 10-5=5, 17-10=7<br>
+                        差分别是：3, 5, 7<br><br>
+                        <strong>第二步：找差的规律</strong><n>
+                        差是连续的奇数：3, 5, 7, 9, 11...<br>
+                        （每次增加2）<br><br>
+                        <strong>第三步：计算答案</strong><br>
+                        17 + 9 = <strong>26</strong><br>
+                        26 + 11 = <strong>37</strong>
+                    </div>
+                </div>
+                
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        二级等差数列的进阶版，差是奇数数列。<br>
+                        可以引导孩子发现：这个数列的每个数都等于n²+1<br>
+                        1²+1=2, 2²+1=5, 3²+1=10, 4²+1=17, 5²+1=26...<br>
+                        多角度看规律，培养孩子的数学思维。
+                    </div>
+                </div>
+                
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        0, 3, 8, 15, 24, ? 下一个数是多少？<br>
+                        （提示：每个数等于n²-1，答案是35）
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 第3题答案 -->
+            <div class="answer-card">
+                <div class="question-title"><span class="emoji">✖️</span>第3题 ★★☆☆☆</div>
+                
+                <div class="answer-section-box">
+                    <div class="answer-title">✅ 标准答案</div>
+                    <div style="font-size: 18px;"><strong>32, 64</strong></div>
+                </div>
+                
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        观察数列：2, 4, 8, 16, ?, ?<br><br>
+                        <strong>找规律：</strong><br>
+                        4÷2=2, 8÷4=2, 16÷8=2<br>
+                        后一个数是前一个数的<strong>2倍</strong><br><br>
+                        <strong>计算答案：</strong><br>
+                        16 × 2 = <strong>32</strong><br>
+                        32 × 2 = <strong>64</strong>
+                    </div>
+                </div>
+                
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        这是<strong>等比数列</strong>，公比为2。<br>
+                        教孩子识别等比数列的特征：数字增长很快。<br>
+                        可以用"翻倍"来理解：每次乘2就是翻一倍。<br>
+                        这也是2的幂次数列：2¹, 2², 2³, 2⁴, 2⁵, 2⁶...
+                    </div>
+                </div>
+                
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        5, 10, 20, 40, ? 下一个数是多少？<br>
+                        （提示：也是等比数列，公比为2，答案是80）
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 第4题答案 -->
+            <div class="answer-card">
+                <div class="question-title"><span class="emoji">✖️</span>第4题 ★★★☆☆</div>
+                
+                <div class="answer-section-box">
+                    <div class="answer-title">✅ 标准答案</div>
+                    <div style="font-size: 18px;"><strong>48, 96</strong></div>
+                </div>
+                
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        观察数列：3, 6, 12, 24, ?, ?<br><br>
+                        <strong>找规律：</strong><br>
+                        6÷3=2, 12÷6=2, 24÷12=2<br>
+                        后一个数是前一个数的<strong>2倍</strong><br><br>
+                        <strong>计算答案：</strong><br>
+                        24 × 2 = <strong>48</strong><br>
+                        48 × 2 = <strong>96</strong>
+                    </div>
+                </div>
+                
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        等比数列的另一种形式，起始数不同。<br>
+                        可以让孩子对比第3题和第4题，发现规律相同但起始不同。<br>
+                        强调：找规律时既要看相邻数的关系，也要看整体趋势。<n>
+                        等比数列在生活中的例子：细胞分裂、复利计算等。
+                    </div>
+                </div>
+                
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        4, 12, 36, 108, ? 下一个数是多少？<br>
+                        （提示：等比数列，公比为3，答案是324）
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 第5题答案 -->
+            <div class="answer-card">
+                <div class="question-title"><span class="emoji">🐰</span>第5题 ★★★☆☆</div>
+                
+                <div class="answer-section-box">
+                    <div class="answer-title">✅ 标准答案</div>
+                    <div style="font-size: 18px;"><strong>13, 21</strong></div>
+                </div>
+                
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        观察数列：1, 1, 2, 3, 5, 8, ?, ?<br><br>
+                        <strong>兔子数列（斐波那契数列）规律：</strong><br>
+                        从第三个数开始，每个数等于前两个数之和<br><br>
+                        验证：<br>
+                        1 + 1 = 2 ✓<br>
+                        1 + 2 = 3 ✓<br>
+                        2 + 3 = 5 ✓<br>
+                        3 + 5 = 8 ✓<br><br>
+                        <strong>计算答案：</strong><br>
+                        5 + 8 = <strong>13</strong><br>
+                        8 + 13 = <strong>21</strong>
+                    </div>
+                </div>
+                
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        斐波那契数列是数学中最著名的数列之一。<br>
+                        教孩子理解"递推"的概念：用前面的数推出后面的数。<br>
+                        兔子数列在自然界中广泛存在：花瓣数量、树枝分叉等。<br>
+                        让孩子记住前几个数：1, 1, 2, 3, 5, 8, 13, 21, 34...
+                    </div>
+                </div>
+                
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        2, 2, 4, 6, 10, 16, ? 下一个数是多少？<br>
+                        （提示：也是类斐波那契数列，答案是26）
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 第6题答案 -->
+            <div class="answer-card">
+                <div class="question-title"><span class="emoji">🔄</span>第6题 ★★☆☆☆</div>
+                
+                <div class="answer-section-box">
+                    <div class="answer-title">✅ 标准答案</div>
+                    <div style="font-size: 18px;"><strong>1, 2</strong></div>
+                </div>
+                
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        观察数列：1, 2, 3, 1, 2, 3, ?, ?<br><br>
+                        <strong>找规律：</strong><br>
+                        数字1, 2, 3在循环出现<br><br>
+                        <strong>周期分析：</strong><br>
+                        第1个数：1<br>
+                        第2个数：2<br>
+                        第3个数：3<br>
+                        第4个数：1（周期重复）<br>
+                        第5个数：2<br>
+                        第6个数：3<br>
+                        第7个数：<strong>1</strong>（新一轮周期开始）<br>
+                        第8个数：<strong>2</strong>
+                    </div>
+                </div>
+                
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        周期数列的关键是找到<strong>周期长度</strong>。<br>
+                        教孩子用"圈一圈"的方法，把重复的单元圈出来。<br>
+                        可以用除法验证：位置÷周期长度，看余数。<br>
+                        例如第7个数：7÷3=2余1，所以是周期的第1个数=1。
+                    </div>
+                </div>
+                
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        A, B, C, D, A, B, C, D... 第20个字母是什么？<br>
+                        （提示：周期为4，20÷4=5余0，所以是D）
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 第7题答案 -->
+            <div class="answer-card">
+                <div class="question-title"><span class="emoji">👯</span>第7题 ★★★☆☆</div>
+                
+                <div class="answer-section-box">
+                    <div class="answer-title">✅ 标准答案</div>
+                    <div style="font-size: 18px;"><strong>7, 4</strong></div>
+                </div>
+                
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        观察数列：1, 10, 3, 8, 5, 6, ?, ?<br><br>
+                        <strong>双重数列分析：</strong><br><br>
+                        <strong>奇数位（第1、3、5、7位）：</strong>1, 3, 5, ?<br>
+                        规律：每次+2<br>
+                        所以第7位 = 5 + 2 = <strong>7</strong><br><br>
+                        <strong>偶数位（第2、4、6、8位）：</strong>10, 8, 6, ?<br>
+                        规律：每次-2<br>
+                        所以第8位 = 6 - 2 = <strong>4</strong>
+                    </div>
+                </div>
+                
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        双重数列的解题关键是<strong>"跳着看"</strong>。<br>
+                        教孩子用不同颜色的笔标出奇数位和偶数位。<br>
+                        两个子数列可能有完全不同的规律。<br>
+                        常见错误：孩子可能试图找一个统一的规律，需要引导分开看。
+                    </div>
+                </div>
+                
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        2, 5, 4, 10, 8, 20, ?, ? 下两个数是多少？<br>
+                        （提示：奇数位×2，偶数位×2，答案是16, 40）
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 第8题答案 -->
+            <div class="answer-card">
+                <div class="question-title"><span class="emoji">🔥</span>第8题 ★★★★☆</div>
+                
+                <div class="answer-section-box">
+                    <div class="answer-title">✅ 标准答案</div>
+                    <div style="font-size: 18px;"><strong>25, 36</strong></div>
+                </div>
+                
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        观察数列：1, 4, 9, 16, ?, ?<br><br>
+                        <strong>找规律：</strong><br>
+                        1 = 1×1 = 1²<br>
+                        4 = 2×2 = 2²<br>
+                        9 = 3×3 = 3²<br>
+                        16 = 4×4 = 4²<br><br>
+                        这是<strong>平方数列</strong>！<br><br>
+                        <strong>计算答案：</strong><br>
+                        5² = 5×5 = <strong>25</strong><br>
+                        6² = 6×6 = <strong>36</strong>
+                    </div>
+                </div>
+                
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        平方数列是奥数常见考点。<br>
+                        教孩子熟记1-20的平方数。<br>
+                        也可以用二级等差来验证：<br>
+                        相邻差是3, 5, 7, 9, 11（奇数数列）<br>
+                        多角度验证，培养孩子的数学严谨性。
+                    </div>
+                </div>
+                
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        1, 8, 27, 64, ? 下一个数是多少？<br>
+                        （提示：这是立方数列，1³, 2³, 3³...答案是125）
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 第9题答案 -->
+            <div class="answer-card">
+                <div class="question-title"><span class="emoji">👯</span>第9题 ★★★★☆</div>
+                
+                <div class="answer-section-box">
+                    <div class="answer-title">✅ 标准答案</div>
+                    <div style="font-size: 18px;"><strong>8, 6</strong></div>
+                </div>
+                
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        观察数列：2, 12, 4, 10, 6, 8, ?, ?<br><br>
+                        <strong>双重数列分析：</strong><br><br>
+                        <strong>奇数位（第1、3、5、7位）：</strong>2, 4, 6, ?<br>
+                        规律：每次+2（等差数列）<br>
+                        所以第7位 = 6 + 2 = <strong>8</strong><br><br>
+                        <strong>偶数位（第2、4、6、8位）：</strong>12, 10, 8, ?<br>
+                        规律：每次-2（等差数列）<br>
+                        所以第8位 = 8 - 2 = <strong>6</strong>
+                    </div>
+                </div>
+                
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        双重数列的进阶版，两个子数列都是等差数列。<br>
+                        一个递增，一个递减，形成有趣的对比。<br>
+                        教孩子用表格法整理：<br>
+                        位置1,3,5,7：2→4→6→8<br>
+                        位置2,4,6,8：12→10→8→6<br>
+                        可视化帮助理解。
+                    </div>
+                </div>
+                
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        1, 20, 3, 16, 5, 12, ?, ? 下两个数是多少？<br>
+                        （提示：奇数位+2，偶数位-4，答案是7, 8）
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 第10题答案 -->
+            <div class="answer-card">
+                <div class="question-title"><span class="emoji">🧩</span>第10题 ★★★★☆</div>
+                
+                <div class="answer-section-box">
+                    <div class="answer-title">✅ 标准答案</div>
+                    <div style="font-size: 18px;"><strong>16, 22</strong></div>
+                </div>
+                
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        观察数列：1, 2, 4, 7, 11, ?, ?<br><br>
+                        <strong>第一步：计算相邻两数的差</strong><br>
+                        2-1=1, 4-2=2, 7-4=3, 11-7=4<br>
+                        差分别是：1, 2, 3, 4<br><br>
+                        <strong>第二步：找差的规律</strong><br>
+                        差是自然数列，每次+1<br>
+                        所以下一个差是5，再下一个是6<br><br>
+                        <strong>第三步：计算答案</strong><br>
+                        11 + 5 = <strong>16</strong><br>
+                        16 + 6 = <strong>22</strong>
+                    </div>
+                </div>
+                
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        这是二级等差数列的另一种形式，差是自然数列。<br>
+                        可以引导孩子发现：这个数列的每个数都等于前一个数加上位置号<br>
+                        即：a(n) = a(n-1) + (n-1)<br>
+                        也可以用公式：a(n) = n(n-1)/2 + 1<br>
+                        培养孩子的代数思维。
+                    </div>
+                </div>
+                
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        2, 4, 7, 11, 16, ? 下一个数是多少？<br>
+                        （提示：差是2, 3, 4, 5...答案是22）
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 附加题答案 -->
+            <div class="bonus-answer">
+                <div class="question-title" style="border-bottom: none; text-align: center;">
+                    <span class="emoji">🌟</span>附加题（思维拓展）
+                </div>
+                
+                <div class="answer-section-box">
+                    <div class="answer-title">✅ 标准答案</div>
+                    <div style="font-size: 18px;"><strong>33, 65</strong></div>
+                </div>
+                
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        观察数列：2, 3, 5, 9, 17, ?, ?<br><br>
+                        <strong>第一步：计算相邻两数的差</strong><br>
+                        3-2=1, 5-3=2, 9-5=4, 17-9=8<br>
+                        差分别是：1, 2, 4, 8<br><br>
+                        <strong>第二步：找差的规律</strong><br>
+                        差是等比数列，每次×2<br>
+                        1×2=2, 2×2=4, 4×2=8, 8×2=16, 16×2=32<br><br>
+                        <strong>第三步：计算答案</strong><br>
+                        17 + 16 = <strong>33</strong><br>
+                        33 + 32 = <strong>65</strong>
+                    </div>
+                </div>
+                
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        这是<strong>三级等差数列</strong>的入门形式。<br>
+                        差本身是等比数列，需要两层分析。<br>
+                        培养孩子的耐心和细心，不要急于下结论。<br>
+                        这种数列在竞赛中较为常见，需要熟练掌握。
+                    </div>
+                </div>
+                
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        3, 5, 9, 17, 33, ? 下一个数是多少？<br>
+                        （提示：差是2, 4, 8, 16...答案是65）
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>📚 本答案仅供教师参考使用</p>
+            <p style="margin-top: 10px;">建议根据学生实际情况调整讲解深度</p>
+        </div>
+    </div>
+</body>
+</html>

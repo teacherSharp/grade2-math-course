@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第09课 找规律填数 - 家长协同方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 35px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #660099;
+        }
+        
+        .section h2 {
+            color: #660099;
+            font-size: 24px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section p, .section li {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+        }
+        
+        .section ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .section li {
+            margin-bottom: 8px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #2196F3;
+        }
+        
+        .tip-box {
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #FF9800;
+        }
+        
+        .activity-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            transition: all 0.3s;
+        }
+        
+        .activity-card:hover {
+            border-color: #660099;
+            box-shadow: 0 5px 15px rgba(102, 0, 153, 0.1);
+        }
+        
+        .activity-card h3 {
+            color: #660099;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .qr-section {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .qr-section h3 {
+            color: #660099;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info {
+            background: white;
+            border: 3px solid #660099;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px auto;
+            max-width: 300px;
+        }
+        
+        .phone-number {
+            font-size: 24px;
+            color: #660099;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            margin: 15px auto;
+            background: white;
+            border: 2px solid #660099;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        
+        .qr-code img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 5px;
+        }
+        
+        .next-lesson {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border: 2px solid #4CAF50;
+        }
+        
+        .next-lesson h3 {
+            color: #2E7D32;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #f5f5f5;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .difficulty-tag {
+            display: inline-block;
+            background: #FFEBEE;
+            color: #C62828;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 第09课 找规律填数</h1>
+            <p>奥数思维训练 · 家长协同方案</p>
+        </div>
+        
+        <div class="content">
+            <!-- 课程主题与目标 -->
+            <div class="section">
+                <h2>🎯 课程主题与目标</h2>
+                <p>本课是第二阶段的第一课，重点学习<strong>找规律填数</strong>的奥数方法，培养观察力和逻辑推理能力。</p>
+                <div class="highlight-box">
+                    <strong>核心知识点：</strong>
+                    <ul style="margin-top: 10px;">
+                        <li><strong>等差数列</strong>：相邻数差相等，如 2, 5, 8, 11...（公差为3）</li>
+                        <li><strong>二级等差数列</strong>：相邻数差的差相等，如 1, 3, 6, 10...（差为2,3,4...）</li>
+                        <li><strong>递推数列</strong>：后项由前项计算得出，如斐波那契数列</li>
+                        <li><strong>斐波那契数列</strong>：1, 1, 2, 3, 5, 8...（前两项之和等于后项）</li>
+                        <li><strong>双重数列</strong>：奇数位和偶数位分别有不同规律</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 课前准备 -->
+            <div class="section">
+                <h2>📋 课前准备</h2>
+                <p>请家长协助孩子做好以下准备：</p>
+                <ul>
+                    <li>提醒孩子带齐学习用品（铅笔、橡皮、草稿纸）</li>
+                    <li>复习第一阶段的数列知识（等差数列基础）</li>
+                    <li>确保孩子充足睡眠，以饱满精神参与课堂</li>
+                    <li>鼓励孩子积极思考，勇于尝试</li>
+                </ul>
+            </div>
+            
+            <!-- 课堂重点回顾 -->
+            <div class="section">
+                <h2>📝 课堂重点回顾</h2>
+                <p>本课主要学习以下奥数内容：</p>
+                
+                <div class="activity-card">
+                    <h3>📐 等差数列进阶 <span class="difficulty-tag">★★★☆☆</span></h3>
+                    <p>掌握等差数列的通项公式：第n项 = 首项 + (n-1) × 公差。学会快速计算任意位置的数值。</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>🔢 二级等差数列 <span class="difficulty-tag">★★★★☆</span></h3>
+                    <p>观察相邻数的差，发现差的规律。如：1, 3, 6, 10, 15...（相邻差为2,3,4,5...）</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>🌀 斐波那契数列 <span class="difficulty-tag">★★★☆☆</span></h3>
+                    <p>理解兔子数列的规律：1, 1, 2, 3, 5, 8, 13, 21...（每个数等于前两个数之和）</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>🎭 双重数列 <span class="difficulty-tag">★★★★☆</span></h3>
+                    <p>将数列拆分为奇数位和偶数位，分别找规律。如：1, 2, 3, 4, 5, 6...（奇数位+2，偶数位+2）</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>⚡ 递推数列 <span class="difficulty-tag">★★★★★</span></h3>
+                    <p>根据递推关系填数，如：aₙ = aₙ₋₁ + aₙ₋₂ 或 aₙ = 2×aₙ₋₁ + 1 等复杂递推公式</p>
+                </div>
+            </div>
+            
+            <!-- 家庭巩固练习 -->
+            <div class="section">
+                <h2>🏠 家庭巩固练习</h2>
+                <p>为了帮助孩子巩固找规律填数的方法，建议在家进行以下活动：</p>
+                
+                <div class="activity-card">
+                    <h3>活动1：家庭数列挑战 🎯</h3>
+                    <p>家长和孩子轮流出题，互相挑战。可以设计等差数列、斐波那契数列、双重数列等，看谁找规律更快！</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>活动2：生活中的数列 🔍</h3>
+                    <p>引导孩子发现生活中的数列规律：楼梯台阶数、日历日期、公交车路线号等，培养观察力。</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>活动3：数列接龙游戏 🎮</h3>
+                    <p>全家一起玩数列接龙：第一个人说1，第二个人说2，第三个人要说前两个数之和（3），以此类推。</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>活动4：错题分析 📊</h3>
+                    <p>和孩子一起分析课后练习中的错题，找出错误原因，总结解题技巧。</p>
+                </div>
+            </div>
+            
+            <!-- 亲子互动建议 -->
+            <div class="section">
+                <h2>👨‍👩‍👧 亲子互动建议</h2>
+                <div class="tip-box">
+                    <strong>💡 给家长的建议：</strong>
+                    <ul style="margin-top: 10px;">
+                        <li><strong>耐心引导：</strong>找规律需要观察力，不要急于告诉孩子答案，引导他们自己发现</li>
+                        <li><strong>多举例子：</strong>用生活中的例子帮助孩子理解数列规律</li>
+                        <li><strong>鼓励尝试：</strong>即使猜错了也要鼓励，试错是学习的重要过程</li>
+                        <li><strong>循序渐进：</strong>从简单等差数列开始，逐步挑战更复杂的规律</li>
+                        <li><strong>及时复习：</strong>数列规律容易遗忘，建议每天花5分钟复习</li>
+                        <li><strong>建立错题本：</strong>记录易错题型，定期回顾</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 常见问题解答 -->
+            <div class="section">
+                <h2>❓ 常见问题解答</h2>
+                <div class="highlight-box">
+                    <p><strong>Q：孩子找规律总是很慢怎么办？</strong></p>
+                    <p>A：这是正常的，找规律需要培养观察力。建议从简单题目开始，多练习，逐步提高速度。</p>
+                </div>
+                <div class="highlight-box">
+                    <p><strong>Q：孩子能找出规律但计算错误怎么办？</strong></p>
+                    <p>A：这是计算能力的问题，建议加强基础计算练习，同时养成验算的好习惯。</p>
+                </div>
+                <div class="highlight-box">
+                    <p><strong>Q：斐波那契数列有什么实际意义？</strong></p>
+                    <p>A：斐波那契数列在自然界广泛存在，如花瓣数量、松果螺旋等，可以带孩子观察自然中的数学。</p>
+                </div>
+                <div class="highlight-box">
+                    <p><strong>Q：如何帮助孩子理解二级等差数列？</strong></p>
+                    <p>A：建议用"差分数列"的方法，先写出相邻数的差，再找差的规律，分步思考。</p>
+                </div>
+                <div class="highlight-box">
+                    <p><strong>Q：下一阶段学习什么内容？</strong></p>
+                    <p>A：第10课将学习图形计数进阶，包括复杂图形计数和容斥原理启蒙。</p>
+                </div>
+            </div>
+            
+            <!-- 下节课预告 -->
+            <div class="next-lesson">
+                <h3>📢 下节课预告</h3>
+                <p><strong>第10课：图形计数进阶</strong></p>
+                <p>我们将学习复杂图形计数方法和容斥原理启蒙，继续提升奥数思维能力！</p>
+            </div>
+            
+            <!-- 联系老师 -->
+            <div class="qr-section">
+                <h3>📱 联系夏老师</h3>
+                <div class="contact-info">
+                    <div class="phone-number">📞 19117803360</div>
+                    <div style="font-size: 14px; color: #666; margin-bottom: 15px;">
+                        欢迎随时咨询奥数学习问题
+                    </div>
+                    <div class="qr-code">
+                        <img src="../code.jpg" alt="夏老师微信二维码" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'font-size: 12px; color: #999;\'>二维码加载失败</div>';">
+                    </div>
+                </div>
+                <div style="font-size: 14px; color: #666; margin-top: 15px;">
+                    如有任何问题，欢迎随时联系<br>
+                    夏老师将为您提供专业奥数指导
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>🌟 让我们共同努力，让奥数成为孩子思维成长的阶梯！</p>
+            <p style="margin-top: 10px;">—— 夏老师</p>
+        </div>
+    </div>
+</body>
+</html>
