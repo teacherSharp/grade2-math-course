@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第12课 趣味速算 - 家长协同方案（奥数巅峰版）</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 35px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #660099;
+        }
+        
+        .section h2 {
+            color: #660099;
+            font-size: 24px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section p, .section li {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+        }
+        
+        .section ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .section li {
+            margin-bottom: 8px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #2196F3;
+        }
+        
+        .tip-box {
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #FF9800;
+        }
+        
+        .activity-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            transition: all 0.3s;
+        }
+        
+        .activity-card:hover {
+            border-color: #660099;
+            box-shadow: 0 5px 15px rgba(102, 0, 153, 0.1);
+        }
+        
+        .activity-card h3 {
+            color: #660099;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .olympiad-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #fff;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .qr-section {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .qr-section h3 {
+            color: #660099;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info {
+            background: white;
+            border: 3px solid #660099;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px auto;
+            max-width: 300px;
+        }
+        
+        .phone-number {
+            font-size: 24px;
+            color: #660099;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            margin: 15px auto;
+            background: white;
+            border: 2px solid #660099;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        
+        .qr-code img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 5px;
+        }
+        
+        .next-lesson {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border: 2px solid #4CAF50;
+        }
+        
+        .next-lesson h3 {
+            color: #2E7D32;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #f5f5f5;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .difficulty-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        
+        .formula-box {
+            background: white;
+            border: 2px dashed #660099;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #660099;
+        }
+        
+        .example-box {
+            background: #f0f8ff;
+            border-left: 4px solid #4169E1;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .method-card {
+            background: linear-gradient(135deg, #FFF9C4 0%, #FFF59D 100%);
+            border: 2px solid #FBC02D;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        .method-card h4 {
+            color: #F57F17;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ 第12课 趣味速算</h1>
+            <p>家长协同方案 · 奥数巅峰版（华罗庚金杯难度）</p>
+        </div>
+        
+        <div class="content">
+            <div class="olympiad-badge">🏆 奥数思维训练</div>
+            
+            <!-- 课程目标 -->
+            <div class="section">
+                <h2>🎯 本课学习目标</h2>
+                <p>通过本课学习，孩子将掌握：</p>
+                <ul>
+                    <li><strong>凑整法</strong>：利用加法交换律和结合律，将能凑成整十、整百的数先相加</li>
+                    <li><strong>带符号搬家</strong>：在加减混合运算中，带着符号移动数字的位置简化计算</li>
+                    <li><strong>基准数法</strong>：当多个数都接近某个整十/整百数时，以此数为基准进行巧算</li>
+                    <li><strong>等差数列求和</strong>：掌握等差数列求和公式，快速计算连续数之和</li>
+                    <li><strong>分组计算</strong>：根据数字特征进行合理分组，化繁为简</li>
+                </ul>
+            </div>
+            
+            <!-- 核心知识点 -->
+            <div class="section">
+                <h2>📚 核心知识点详解</h2>
+                
+                <div class="method-card">
+                    <h4>🔢 方法一：凑整法（好朋友数）</h4>
+                    <p>利用加法交换律和结合律，把能凑成整十、整百的数先相加。</p>
+                    <div class="example-box">
+                        <strong>例题：</strong>27 + 58 + 73<br>
+                        <strong>巧算：</strong>27 + 73 + 58 = 100 + 58 = <strong>158</strong><br>
+                        <em>思路：27和73是"好朋友"，凑成100</em>
+                    </div>
+                    <div class="highlight-box">
+                        <strong>常见好朋友数对：</strong><br>
+                        1+9=10, 2+8=10, 3+7=10, 4+6=10, 5+5=10<br>
+                        11+89=100, 12+88=100, 25+75=100, 36+64=100
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <h4>🚚 方法二：带符号搬家</h4>
+                    <p>在加减混合运算中，数字前面的符号是它的"行李"，搬家时要一起带走。</p>
+                    <div class="example-box">
+                        <strong>例题：</strong>127 - 48 + 73<br>
+                        <strong>巧算：</strong>127 + 73 - 48 = 200 - 48 = <strong>152</strong><br>
+                        <em>思路：把+73搬到127后面，先算整百</em>
+                    </div>
+                    <div class="tip-box">
+                        <strong>⚠️ 注意：</strong>每个数前面的符号是它的"专属行李"，搬家时必须带着符号一起走！
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <h4>🎯 方法三：基准数法</h4>
+                    <p>当几个数都接近某个整十、整百数时，可以把这个数当作"基准数"。</p>
+                    <div class="example-box">
+                        <strong>例题：</strong>98 + 99 + 100 + 101 + 102<br>
+                        <strong>巧算：</strong>以100为基准数<br>
+                        = 100×5 + (-2-1+0+1+2) = 500 + 0 = <strong>500</strong>
+                    </div>
+                    <div class="highlight-box">
+                        <strong>基准数法公式：</strong><br>
+                        总和 = 基准数 × 个数 + 各数与基准数的差之和
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <h4>📊 方法四：等差数列求和</h4>
+                    <p>连续的自然数或等差数列，可以用公式快速求和。</p>
+                    <div class="formula-box">
+                        等差数列求和公式：<br>
+                        和 = (首项 + 末项) × 项数 ÷ 2
+                    </div>
+                    <div class="example-box">
+                        <strong>例题：</strong>1 + 2 + 3 + ... + 100<br>
+                        <strong>巧算：</strong>(1 + 100) × 100 ÷ 2 = 101 × 50 = <strong>5050</strong><br>
+                        <em>高斯算法：首尾配对，每对和都是101，共50对</em>
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <h4>🎲 方法五：分组计算</h4>
+                    <p>根据数字特征，把算式中的数进行合理分组。</p>
+                    <div class="example-box">
+                        <strong>例题：</strong>20 - 19 + 18 - 17 + ... + 2 - 1<br>
+                        <strong>巧算：</strong>每两个数一组：(20-19) + (18-17) + ... + (2-1)<br>
+                        = 1 + 1 + ... + 1 (共10个1) = <strong>10</strong>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 课堂重点回顾 -->
+            <div class="section">
+                <h2>📝 课堂重点回顾</h2>
+                <p>本节课孩子们学习了以下内容：</p>
+                <ul>
+                    <li>认识了<strong>5种速算巧算方法</strong>：凑整法、带符号搬家、基准数法、等差数列求和、分组计算</li>
+                    <li>掌握了<strong>好朋友数</strong>的概念，能快速识别能凑成整十整百的数对</li>
+                    <li>学会了<strong>带符号搬家</strong>的技巧，理解符号是数的"专属行李"</li>
+                    <li>理解了<strong>基准数法</strong>的适用场景，能选择合适的基准数</li>
+                    <li>记住了<strong>等差数列求和公式</strong>，能快速计算连续数之和</li>
+                    <li>学会了根据数字特征进行<strong>合理分组</strong></li>
+                </ul>
+                <div class="tip-box">
+                    <strong>💡 教学提示：</strong><br>
+                    速算的核心是<strong>观察数字特征</strong>，选择合适的方法。不要死记硬背，要理解每种方法的原理和适用场景。
+                </div>
+            </div>
+            
+            <!-- 家庭巩固练习 -->
+            <div class="section">
+                <h2>🏠 家庭巩固练习</h2>
+                <p>请家长陪同孩子完成以下活动：</p>
+                
+                <div class="activity-card">
+                    <h3>🎮 活动一：好朋友数配对游戏</h3>
+                    <p><strong>材料：</strong>数字卡片（1-100）</p>
+                    <p><strong>玩法：</strong></p>
+                    <ul>
+                        <li>随机抽取两张卡片，快速判断是否能凑成整十或整百</li>
+                        <li>如：抽到27和73，孩子要快速说出"好朋友！凑成100！"</li>
+                        <li>限时1分钟，看能找出多少对好朋友数</li>
+                    </ul>
+                    <p><strong>目标：</strong>训练孩子对数字的敏感度，快速识别能凑整的数对</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>✏️ 活动二：速算小达人挑战</h3>
+                    <p><strong>题目：</strong>家长出题，孩子用巧算方法解答</p>
+                    <p><strong>示例题目：</strong></p>
+                    <ul>
+                        <li>36 + 87 + 64 = ? （凑整法）</li>
+                        <li>156 - 78 + 44 = ? （带符号搬家）</li>
+                        <li>97 + 98 + 99 + 100 + 101 = ? （基准数法）</li>
+                        <li>2 + 4 + 6 + ... + 20 = ? （等差数列）</li>
+                        <li>100 - 99 + 98 - 97 + ... + 2 - 1 = ? （分组法）</li>
+                    </ul>
+                    <p><strong>目标：</strong>巩固课堂所学方法，提高计算速度和准确率</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>🔍 活动三：方法识别训练</h3>
+                    <p><strong>玩法：</strong></p>
+                    <ul>
+                        <li>家长写出一个算式，让孩子判断应该用哪种巧算方法</li>
+                        <li>孩子说出方法名称和理由</li>
+                        <li>再用该方法进行计算</li>
+                    </ul>
+                    <p><strong>示例：</strong></p>
+                    <ul>
+                        <li>45 + 78 + 55 → 凑整法（45+55=100）</li>
+                        <li>134 - 67 + 66 → 带符号搬家（134+66=200）</li>
+                        <li>95 + 96 + 97 + 98 + 99 → 基准数法（都接近100）</li>
+                    </ul>
+                    <p><strong>目标：</strong>培养孩子观察数字特征的能力，学会选择合适的方法</p>
+                </div>
+            </div>
+            
+            <!-- 常见错误提醒 -->
+            <div class="section">
+                <h2>⚠️ 常见错误提醒</h2>
+                <ul>
+                    <li><strong>符号搬家不带符号：</strong>记住每个数前面的符号是它的"专属行李"，搬家时必须带着走</li>
+                    <li><strong>凑整后忘记调整：</strong>基准数法中，最后一定要加上或减去各数与基准数的差</li>
+                    <li><strong>等差数列项数算错：</strong>从a到b的连续整数，项数是(b-a+1)，不要忘记加1</li>
+                    <li><strong>分组时漏数：</strong>分组计算时，要数清楚有多少组，避免漏算</li>
+                    <li><strong>方法选择不当：</strong>不是所有题目都适合巧算，有时直接计算更简单</li>
+                </ul>
+            </div>
+            
+            <!-- 亲子互动建议 -->
+            <div class="section">
+                <h2>👨‍👩‍👧 亲子互动建议</h2>
+                <ul>
+                    <li><strong>生活中的速算：</strong>购物时让孩子计算总价，练习凑整法</li>
+                    <li><strong>速算比赛：</strong>家长和孩子比赛，看谁算得又快又准</li>
+                    <li><strong>错题分析：</strong>孩子做错时，引导他分析错误原因，而不是直接告诉答案</li>
+                    <li><strong>方法总结：</strong>鼓励孩子总结每种方法的适用场景，制作"速算方法卡"</li>
+                    <li><strong>循序渐进：</strong>从简单题目开始，逐步增加难度，建立孩子信心</li>
+                </ul>
+            </div>
+            
+            <!-- 下节课预告 -->
+            <div class="next-lesson">
+                <h3>📖 下节课预告</h3>
+                <p><strong>第13课：间隔问题</strong></p>
+                <p>我们将学习：</p>
+                <ul>
+                    <li>植树问题：两端都种、一端种、两端不种的情况</li>
+                    <li>锯木头问题：段数与次数的关系</li>
+                    <li>爬楼梯问题：楼层与台阶的关系</li>
+                    <li>时钟敲响问题：间隔与时间的计算</li>
+                </ul>
+                <p><strong>课前准备：</strong>请家长准备一把尺子和一些牙签，用于课堂实践活动。</p>
+            </div>
+            
+            <!-- 联系方式 -->
+            <div class="qr-section">
+                <h3>📱 联系夏老师</h3>
+                <div class="contact-info">
+                    <div class="phone-number">📞 19117803360</div>
+                    <div style="font-size: 14px; color: #666; margin-bottom: 15px;">
+                        欢迎随时咨询
+                    </div>
+                    <div class="qr-code">
+                        <img src="../code.jpg" alt="夏老师微信二维码">
+                    </div>
+                </div>
+                <div style="font-size: 16px; color: #660099; margin-top: 15px;">
+                    如有任何问题，欢迎随时联系<br>
+                    夏老师将为您提供专业指导
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>🌟 让我们共同努力，让数学成为孩子最喜欢的科目！</p>
+            <p style="margin-top: 10px;">—— 夏老师</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第12课 趣味速算 - 交互式课件</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .slide-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .slide {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            display: none;
+            min-height: 600px;
+        }
+        
+        .slide.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide-title {
+            font-size: 36px;
+            color: #660099;
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #660099;
+        }
+        
+        .content-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 5px solid #660099;
+        }
+        
+        .method-card {
+            background: linear-gradient(135deg, #FFF9C4 0%, #FFF59D 100%);
+            border: 3px solid #FBC02D;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        
+        .method-title {
+            color: #F57F17;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .example-box {
+            background: white;
+            border: 2px dashed #660099;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            font-size: 20px;
+        }
+        
+        .formula-box {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            border: 3px solid #2196F3;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1976D2;
+        }
+        
+        .nav-container {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(102, 0, 153, 0.3);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 0, 153, 0.4);
+        }
+        
+        .page-indicator {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #660099;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #660099 0%, #94070A 100%);
+            transition: width 0.3s;
+        }
+        
+        .answer-input {
+            width: 100px;
+            height: 50px;
+            font-size: 24px;
+            text-align: center;
+            border: 3px solid #660099;
+            border-radius: 10px;
+            margin: 0 10px;
+        }
+        
+        .answer-input.correct {
+            border-color: #4CAF50;
+            background: #E8F5E9;
+        }
+        
+        .answer-input.wrong {
+            border-color: #f44336;
+            background: #FFEBEE;
+        }
+        
+        .check-btn {
+            background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        
+        .hint-btn {
+            background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        
+        .feedback {
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-size: 18px;
+            display: none;
+        }
+        
+        .feedback.success {
+            background: #E8F5E9;
+            color: #2E7D32;
+            border: 2px solid #4CAF50;
+            display: block;
+        }
+        
+        .feedback.error {
+            background: #FFEBEE;
+            color: #C62828;
+            border: 2px solid #f44336;
+            display: block;
+        }
+        
+        .emoji {
+            font-size: 32px;
+            margin-right: 10px;
+        }
+        
+        .cover-title {
+            font-size: 48px;
+            text-align: center;
+            color: #660099;
+            margin: 50px 0;
+        }
+        
+        .cover-subtitle {
+            font-size: 24px;
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+        }
+        
+        .start-btn {
+            display: block;
+            margin: 50px auto;
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            border: none;
+            padding: 20px 60px;
+            border-radius: 40px;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .start-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(102, 0, 153, 0.4);
+        }
+        
+        .number-pair {
+            display: inline-block;
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .timer {
+            font-size: 36px;
+            color: #f44336;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .score {
+            font-size: 24px;
+            color: #4CAF50;
+            text-align: center;
+            margin: 10px 0;
+        }
+        
+        .challenge-box {
+            background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%);
+            border: 3px solid #f44336;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        
+        .summary-card {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border: 3px solid #4CAF50;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        .summary-title {
+            color: #2E7D32;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .step-box {
+            background: white;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .highlight {
+            background: #FFF59D;
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .game-cell {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            border: 3px solid #2196F3;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .game-cell:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+        }
+        
+        .game-cell.selected {
+            background: linear-gradient(135deg, #C8E6C9 0%, #A5D6A7 100%);
+            border-color: #4CAF50;
+        }
+        
+        .game-cell.matched {
+            background: linear-gradient(135deg, #FFF9C4 0%, #FFF59D 100%);
+            border-color: #FBC02D;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <div class="page-indicator">
+        <span id="currentPage">1</span> / 22
+    </div>
+    
+    <div class="slide-container">
+        <!-- 第1页：封面 -->
+        <div class="slide active" data-slide="1">
+            <div class="cover-title">⚡ 第12课 趣味速算</div>
+            <div class="cover-subtitle">掌握巧算方法，成为计算小达人</div>
+            <div style="text-align: center; margin: 40px 0;">
+                <span class="emoji">🔢</span>
+                <span class="emoji">⚡</span>
+                <span class="emoji">🎯</span>
+                <span class="emoji">🏆</span>
+            </div>
+            <div class="content-card" style="text-align: center;">
+                <p style="font-size: 20px; line-height: 2;">
+                    凑整法 · 带符号搬家 · 基准数法<br>
+                    等差数列求和 · 分组计算
+                </p>
+            </div>
+            <button class="start-btn" onclick="nextSlide()">开始学习 ➡️</button>
+        </div>
+        
+        <!-- 第2页：课程目标 -->
+        <div class="slide" data-slide="2">
+            <h2 class="slide-title">🎯 本课学习目标</h2>
+            <div class="content-card">
+                <h3 style="color: #660099; margin-bottom: 15px;">通过本课学习，你将掌握：</h3>
+                <div style="font-size: 18px; line-height: 2;">
+                    <p><span class="emoji">✅</span> <strong>凑整法</strong>：利用加法交换律和结合律，将能凑成整十、整百的数先相加</p>
+                    <p><span class="emoji">✅</span> <strong>带符号搬家</strong>：在加减混合运算中，带着符号移动数字的位置简化计算</p>
+                    <p><span class="emoji">✅</span> <strong>基准数法</strong>：当多个数都接近某个整十/整百数时，以此数为基准进行巧算</p>
+                    <p><span class="emoji">✅</span> <strong>等差数列求和</strong>：掌握等差数列求和公式，快速计算连续数之和</p>
+                    <p><span class="emoji">✅</span> <strong>分组计算</strong>：根据数字特征进行合理分组，化繁为简</p>
+                </div>
+            </div>
+            <div class="tip-box" style="background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%); padding: 20px; border-radius: 10px; border-left: 4px solid #FF9800;">
+                <strong>💡 学习提示：</strong>速算的核心是观察数字特征，选择合适的方法。不要死记硬背，要理解每种方法的原理！
+            </div>
+        </div>
+        
+        <!-- 第3页：课前热身 -->
+        <div class="slide" data-slide="3">
+            <h2 class="slide-title">🎮 课前热身：好朋友数</h2>
+            <div class="content-card">
+                <h3 style="color: #660099; margin-bottom: 15px;">什么是"好朋友数"？</h3>
+                <p style="font-size: 18px; line-height: 1.8; margin-bottom: 20px;">
+                    能凑成整十、整百的数对，我们叫它们"好朋友数"。<br>
+                    比如：27和73是好朋友，因为27+73=100
+                </p>
+                <div style="text-align: center; margin: 30px 0;">
+                    <div class="number-pair">1 + 9 = 10</div>
+                    <div class="number-pair">2 + 8 = 10</div>
+                    <div class="number-pair">3 + 7 = 10</div>
+                    <div class="number-pair">4 + 6 = 10</div>
+                    <div class="number-pair">5 + 5 = 10</div>
+                </div>
+                <div style="text-align: center; margin: 20px 0;">
+                    <div class="number-pair">11 + 89 = 100</div>
+                    <div class="number-pair">25 + 75 = 100</div>
+                    <div class="number-pair">36 + 64 = 100</div>
+                </div>
+            </div>
+            <div class="formula-box">
+                记住这些好朋友数，计算速度提升一倍！
+            </div>
+        </div>
+        
+        <!-- 第4页：情境导入 -->
+        <div class="slide" data-slide="4">
+            <h2 class="slide-title">🏰 情境导入：计算王国历险记</h2>
+            <div class="content-card">
+                <div style="font-size: 18px; line-height: 2;">
+                    <p>小明来到了神奇的<strong>计算王国</strong>，这里有一位智慧老人。</p>
+                    <p>智慧老人说："孩子，计算不是硬算，而是<strong>巧算</strong>！"</p>
+                    <p>"让我教你几招<strong>速算秘籍</strong>，让你成为计算小达人！"</p>
+                </div>
+            </div>
+            <div class="method-card">
+                <div class="method-title">🎭 第一关：凑整法</div>
+                <p style="font-size: 18px;">找到好朋友数，凑成整十整百！</p>
+            </div>
+            <div class="method-card">
+                <div class="method-title">🎭 第二关：带符号搬家</div>
+                <p style="font-size: 18px;">带着符号搬家，让计算更简单！</p>
+            </div>
+            <div class="method-card">
+                <div class="method-title">🎭 第三关：基准数法</div>
+                <p style="font-size: 18px;">找一个基准数，化繁为简！</p>
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <span class="emoji">🌟</span> 准备好了吗？让我们开始冒险吧！ <span class="emoji">🌟</span>
+            </div>
+        </div>
+        
+        <!-- 第5页：凑整法概念 -->
+        <div class="slide" data-slide="5">
+            <h2 class="slide-title">📚 方法一：凑整法</h2>
+            <div class="method-card">
+                <div class="method-title">🔢 什么是凑整法？</div>
+                <p style="font-size: 18px; line-height: 1.8;">
+                    利用加法交换律和结合律，把能凑成整十、整百的数先相加。<br>
+                    <strong>核心思想：</strong>改变运算顺序，让计算更简单！
+                </p>
+            </div>
+            <div class="example-box">
+                <strong>🌰 例题：</strong>27 + 58 + 73<br><br>
+                <strong>常规算法：</strong>27 + 58 = 85，85 + 73 = 158<br><br>
+                <strong>凑整法：</strong><br>
+                <span class="highlight">27 + 73</span> + 58 = <span class="highlight">100</span> + 58 = <strong>158</strong><br><br>
+                <em>💡 思路：27和73是"好朋友"，凑成100，再加58</em>
+            </div>
+            <div class="formula-box">
+                加法交换律：a + b = b + a<br>
+                加法结合律：(a + b) + c = a + (b + c)
+            </div>
+        </div>
+        
+        <!-- 第6页：凑整法练习 -->
+        <div class="slide" data-slide="6">
+            <h2 class="slide-title">✏️ 练习1：凑整法</h2>
+            <div class="content-card">
+                <h3 style="color: #660099; margin-bottom: 20px;">用凑整法计算：</h3>
+                <div style="font-size: 22px; margin: 30px 0;">
+                    <p style="margin: 20px 0;">
+                        36 + 87 + 64 = 
+                        <input type="text" class="answer-input" id="q1" placeholder="?">
+                    </p>
+                    <p style="margin: 20px 0;">
+                        125 + 48 + 75 = 
+                        <input type="text" class="answer-input" id="q2" placeholder="?">
+                    </p>
+                </div>
+                <div style="text-align: center;">
+                    <button class="check-btn" onclick="checkPractice1()">检查答案</button>
+                    <button class="hint-btn" onclick="showHint1()">提示</button>
+                </div>
+                <div class="feedback" id="feedback1"></div>
+            </div>
+            <div class="step-box">
+                <strong>💡 解题思路：</strong><br>
+                第一题：36和64是好朋友，凑成100<br>
+                第二题：125和75是好朋友，凑成200
+            </div>
+        </div>
+        
+        <!-- 第7页：带符号搬家概念 -->
+        <div class="slide" data-slide="7">
+            <h2 class="slide-title">📚 方法二：带符号搬家</h2>
+            <div class="method-card">
+                <div class="method-title">🚚 什么是带符号搬家？</div>
+                <p style="font-size: 18px; line-height: 1.8;">
+                    在加减混合运算中，数字前面的符号是它的"行李"，搬家时要一起带走。<br>
+                    <strong>核心思想：</strong>带着符号移动数字位置，凑成整十整百！
+                </p>
+            </div>
+            <div class="example-box">
+                <strong>🌰 例题：</strong>127 - 48 + 73<br><br>
+                <strong>常规算法：</strong>127 - 48 = 79，79 + 73 = 152<br><br>
+                <strong>带符号搬家：</strong><br>
+                <span class="highlight">127 + 73</span> - 48 = <span class="highlight">200</span> - 48 = <strong>152</strong><br><br>
+                <em>💡 思路：把+73搬到127后面，先算200-48</em>
+            </div>
+            <div class="tip-box" style="background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%); padding: 20px; border-radius: 10px; border-left: 4px solid #f44336;">
+                <strong>⚠️ 重要提醒：</strong><br>
+                每个数前面的符号是它的"专属行李"，搬家时必须带着符号一起走！<br>
+                127<span class="highlight">+</span>73 中的"+"是73的符号，搬家时要带着！
+            </div>
+        </div>
+        
+        <!-- 第8页：带符号搬家练习 -->
+        <div class="slide" data-slide="8">
+            <h2 class="slide-title">✏️ 练习2：带符号搬家</h2>
+            <div class="content-card">
+                <h3 style="color: #660099; margin-bottom: 20px;">用带符号搬家计算：</h3>
+                <div style="font-size: 22px; margin: 30px 0;">
+                    <p style="margin: 20px 0;">
+                        156 - 78 + 44 = 
+                        <input type="text" class="answer-input" id="q3" placeholder="?">
+                    </p>
+                    <p style="margin: 20px 0;">
+                        234 + 67 - 134 = 
+                        <input type="text" class="answer-input" id="q4" placeholder="?">
+                    </p>
+                </div>
+                <div style="text-align: center;">
+                    <button class="check-btn" onclick="checkPractice2()">检查答案</button>
+                    <button class="hint-btn" onclick="showHint2()">提示</button>
+                </div>
+                <div class="feedback" id="feedback2"></div>
+            </div>
+            <div class="step-box">
+                <strong>💡 解题思路：</strong><br>
+                第一题：把+44搬到156后面，156+44=200，再减78<br>
+                第二题：把-134搬到234后面，234-134=100，再加67
+            </div>
+        </div>
+        
+        <!-- 第9页：基准数法概念 -->
+        <div class="slide" data-slide="9">
+            <h2 class="slide-title">📚 方法三：基准数法</h2>
+            <div class="method-card">
+                <div class="method-title">🎯 什么是基准数法？</div>
+                <p style="font-size: 18px; line-height: 1.8;">
+                    当几个数都接近某个整十、整百数时，可以把这个数当作"基准数"，<br>
+                    先算基准数的倍数，再调整差值。<br>
+                    <strong>核心思想：</strong>化繁为简，先算整再调零！
+                </p>
+            </div>
+            <div class="example-box">
+                <strong>🌰 例题：</strong>98 + 99 + 100 + 101 + 102<br><br>
+                <strong>观察：</strong>这些数都接近100<br><br>
+                <strong>基准数法：</strong>以100为基准数<br>
+                = 100×5 + (-2-1+0+1+2) = 500 + 0 = <strong>500</strong><br><br>
+                <em>💡 思路：5个100是500，差值相互抵消</em>
+            </div>
+            <div class="formula-box">
+                基准数法公式：<br>
+                总和 = 基准数 × 个数 + 各数与基准数的差之和
+            </div>
+        </div>
+        
+        <!-- 第10页：基准数法练习 -->
+        <div class="slide" data-slide="10">
+            <h2 class="slide-title">✏️ 练习3：基准数法</h2>
+            <div class="content-card">
+                <h3 style="color: #660099; margin-bottom: 20px;">用基准数法计算：</h3>
+                <div style="font-size: 22px; margin: 30px 0;">
+                    <p style="margin: 20px 0;">
+                        97 + 98 + 99 + 100 + 101 = 
+                        <input type="text" class="answer-input" id="q5" placeholder="?">
+                    </p>
+                    <p style="margin: 20px 0;">
+                        195 + 196 + 197 + 198 = 
+                        <input type="text" class="answer-input" id="q6" placeholder="?">
+                    </p>
+                </div>
+                <div style="text-align: center;">
+                    <button class="check-btn" onclick="checkPractice3()">检查答案</button>
+                    <button class="hint-btn" onclick="showHint3()">提示</button>
+                </div>
+                <div class="feedback" id="feedback3"></div>
+            </div>
+            <div class="step-box">
+                <strong>💡 解题思路：</strong><br>
+                第一题：以100为基准，5个数，差值(-3-2-1+0+1)=-5，500-5=495<br>
+                第二题：以200为基准，4个数，差值(-5-4-3-2)=-14，800-14=786
+            </div>
+        </div>
+        
+        <!-- 第11页：模块一总结 -->
+        <div class="slide" data-slide="11">
+            <h2 class="slide-title">📋 模块一总结：基本巧算方法</h2>
+            <div class="summary-card">
+                <div class="summary-title">🎯 核心知识点</div>
+                <div style="font-size: 18px; line-height: 2;">
+                    <p><strong>1. 凑整法：</strong>利用加法交换律和结合律，把能凑成整十整百的数先相加</p>
+                    <p><strong>2. 带符号搬家：</strong>在加减混合运算中，带着符号移动数字位置</p>
+                    <p><strong>3. 基准数法：</strong>当多个数都接近某个整十整百数时，以此数为基准计算</p>
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-title">💡 教学要点</div>
+                <div style="font-size: 18px; line-height: 2;">
+                    <p>• 观察数字特征，选择合适的方法</p>
+                    <p>• 记住常见的好朋友数对（凑10、凑100）</p>
+                    <p>• 符号是数的"专属行李"，搬家时必须带着</p>
+                    <p>• 基准数法中，最后一定要调整差值</p>
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-title">✅ 学生应掌握</div>
+                <div style="font-size: 18px; line-height: 2;">
+                    <p>1. 能快速识别好朋友数</p>
+                    <p>2. 能运用凑整法和带符号搬家简化计算</p>
+                    <p>3. 能选择合适的基准数进行巧算</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 第12页：等差数列概念 -->
+        <div class="slide" data-slide="12">
+            <h2 class="slide-title">📚 方法四：等差数列求和</h2>
+            <div class="method-card">
+                <div class="method-title">📊 什么是等差数列？</div>
+                <p style="font-size: 18px; line-height: 1.8;">
+                    相邻两个数的差都相等的数列叫做等差数列。<br>
+                    例如：1, 2, 3, 4, 5...（公差为1）<br>
+                    例如：2, 4, 6, 8, 10...（公差为2）
+                </p>
+            </div>
+            <div class="formula-box">
+                等差数列求和公式：<br>
+                和 = (首项 + 末项) × 项数 ÷ 2
+            </div>
+            <div class="example-box">
+                <strong>🌰 例题：高斯算法</strong><br><br>
+                计算：1 + 2 + 3 + ... + 100<br><br>
+                <strong>思路：</strong>首尾配对，每对和都是101<br>
+                (1+100) = 101, (2+99) = 101, (3+98) = 101...<br>
+                共50对，所以：101 × 50 = <strong>5050</strong>
+            </div>
+            <div class="content-card" style="background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);">
+                <strong>🧮 公式推导：</strong><br>
+                和 = (首项 + 末项) × 项数 ÷ 2<br>
+                <em>因为：首项+末项 = 第二项+倒数第二项 = ...</em>
+            </div>
+        </div>
+        
+        <!-- 第13页：等差数列练习 -->
+        <div class="slide" data-slide="13">
+            <h2 class="slide-title">✏️ 练习4：等差数列求和</h2>
+            <div class="content-card">
+                <h3 style="color: #660099; margin-bottom: 20px;">用等差数列求和公式计算：</h3>
+                <div style="font-size: 22px; margin: 30px 0;">
+                    <p style="margin: 20px 0;">
+                        2 + 4 + 6 + ... + 20 = 
+                        <input type="text" class="answer-input" id="q7" placeholder="?">
+                    </p>
+                    <p style="margin: 20px 0;">
+                        5 + 10 + 15 + ... + 50 = 
+                        <input type="text" class="answer-input" id="q8" placeholder="?">
+                    </p>
+                </div>
+                <div style="text-align: center;">
+                    <button class="check-btn" onclick="checkPractice4()">检查答案</button>
+                    <button class="hint-btn" onclick="showHint4()">提示</button>
+                </div>
+                <div class="feedback" id="feedback4"></div>
+            </div>
+            <div class="step-box">
+                <strong>💡 解题思路：</strong><br>
+                第一题：首项2，末项20，项数10，和=(2+20)×10÷2=110<br>
+                第二题：首项5，末项50，项数10，和=(5+50)×10÷2=275
+            </div>
+        </div>
+        
+        <!-- 第14页：分组计算概念 -->
+        <div class="slide" data-slide="14">
+            <h2 class="slide-title">📚 方法五：分组计算</h2>
+            <div class="method-card">
+                <div class="method-title">🎲 什么是分组计算？</div>
+                <p style="font-size: 18px; line-height: 1.8;">
+                    根据数字特征，把算式中的数进行合理分组，<br>
+                    让每组的计算结果相同或简化计算。<br>
+                    <strong>核心思想：</strong>化繁为简，分组击破！
+                </p>
+            </div>
+            <div class="example-box">
+                <strong>🌰 例题：</strong>20 - 19 + 18 - 17 + ... + 2 - 1<br><br>
+                <strong>观察：</strong>每两个数一组，结果都是1<br><br>
+                <strong>分组计算：</strong><br>
+                (20-19) + (18-17) + (16-15) + ... + (2-1)<br>
+                = 1 + 1 + 1 + ... + 1 (共10个1) = <strong>10</strong>
+            </div>
+            <div class="example-box">
+                <strong>🌰 例题2：</strong>1 - 2 + 3 - 4 + 5 - 6 + ... + 99 - 100<br><br>
+                <strong>分组：</strong>(1-2) + (3-4) + (5-6) + ... + (99-100)<br>
+                = (-1) + (-1) + (-1) + ... + (-1) (共50个-1) = <strong>-50</strong>
+            </div>
+        </div>
+        
+        <!-- 第15页：分组计算练习 -->
+        <div class="slide" data-slide="15">
+            <h2 class="slide-title">✏️ 练习5：分组计算</h2>
+            <div class="content-card">
+                <h3 style="color: #660099; margin-bottom: 20px;">用分组法计算：</h3>
+                <div style="font-size: 22px; margin: 30px 0;">
+                    <p style="margin: 20px 0;">
+                        100 - 99 + 98 - 97 + ... + 2 - 1 = 
+                        <input type="text" class="answer-input" id="q9" placeholder="?">
+                    </p>
+                    <p style="margin: 20px 0;">
+                        2 - 4 + 6 - 8 + ... + 98 - 100 = 
+                        <input type="text" class="answer-input" id="q10" placeholder="?">
+                    </p>
+                </div>
+                <div style="text-align: center;">
+                    <button class="check-btn" onclick="checkPractice5()">检查答案</button>
+                    <button class="hint-btn" onclick="showHint5()">提示</button>
+                </div>
+                <div class="feedback" id="feedback5"></div>
+            </div>
+            <div class="step-box">
+                <strong>💡 解题思路：</strong><br>
+                第一题：每两个数一组，每组差为1，共50组，50×1=50<br>
+                第二题：每两个数一组，每组差为-2，共25组，25×(-2)=-50
+            </div>
+        </div>
+        
+        <!-- 第16页：模块二总结 -->
+        <div class="slide" data-slide="16">
+            <h2 class="slide-title">📋 模块二总结：进阶巧算方法</h2>
+            <div class="summary-card">
+                <div class="summary-title">🎯 核心知识点</div>
+                <div style="font-size: 18px; line-height: 2;">
+                    <p><strong>1. 等差数列求和：</strong>和 = (首项 + 末项) × 项数 ÷ 2</p>
+                    <p><strong>2. 分组计算：</strong>根据数字特征合理分组，化繁为简</p>
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-title">💡 教学要点</div>
+                <div style="font-size: 18px; line-height: 2;">
+                    <p>• 等差数列求和公式是高斯算法的推广</p>
+                    <p>• 项数 = (末项 - 首项) ÷ 公差 + 1，不要忘记加1</p>
+                    <p>• 分组时要观察数字规律，找到合适的分组方式</p>
+                    <p>• 分组后每组的结果通常相同，便于计算</p>
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-title">✅ 学生应掌握</div>
+                <div style="font-size: 18px; line-height: 2;">
+                    <p>1. 能识别等差数列并运用求和公式</p>
+                    <p>2. 能正确计算等差数列的项数</p>
+                    <p>3. 能根据数字特征进行合理分组</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 第17页：速度挑战 -->
+        <div class="slide" data-slide="17">
+            <h2 class="slide-title">⚡ 速度挑战：速算小达人</h2>
+            <div class="challenge-box">
+                <div class="timer" id="challengeTimer">30</div>
+                <div class="score" id="scoreDisplay">得分：0</div>
+                <p style="text-align: center; font-size: 18px; margin: 20px 0;">
+                    在30秒内完成以下计算，每题10分！
+                </p>
+            </div>
+            <div class="content-card">
+                <div style="font-size: 24px; margin: 20px 0;">
+                    <p style="margin: 15px 0;">
+                        ① 45 + 78 + 55 = <input type="text" class="answer-input" id="speed1" placeholder="?">
+                    </p>
+                    <p style="margin: 15px 0;">
+                        ② 134 - 67 + 66 = <input type="text" class="answer-input" id="speed2" placeholder="?">
+                    </p>
+                    <p style="margin: 15px 0;">
+                        ③ 96 + 97 + 98 + 99 + 100 = <input type="text" class="answer-input" id="speed3" placeholder="?">
+                    </p>
+                </div>
+                <div style="text-align: center;">
+                    <button class="check-btn" onclick="startChallenge()">开始挑战</button>
+                    <button class="check-btn" onclick="checkChallenge()" style="background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);">提交答案</button>
+                </div>
+                <div class="feedback" id="challengeFeedback"></div>
+            </div>
+        </div>
+        
+        <!-- 第18页：综合练习 -->
+        <div class="slide" data-slide="18">
+            <h2 class="slide-title">📝 综合练习：方法选择</h2>
+            <div class="content-card">
+                <h3 style="color: #660099; margin-bottom: 20px;">观察下列算式，选择合适的方法计算：</h3>
+                <div style="font-size: 20px; margin: 30px 0;">
+                    <div class="step-box" style="margin: 20px 0;">
+                        <strong>题目1：</strong>48 + 52 + 36 + 64<br>
+                        方法：<select id="method1" style="font-size: 16px; padding: 5px;">
+                            <option value="">选择方法</option>
+                            <option value="凑整法">凑整法</option>
+                            <option value="带符号搬家">带符号搬家</option>
+                            <option value="基准数法">基准数法</option>
+                            <option value="等差数列">等差数列</option>
+                        </select>
+                        答案：<input type="text" class="answer-input" id="ans1" placeholder="?">
+                    </div>
+                    <div class="step-box" style="margin: 20px 0;">
+                        <strong>题目2：</strong>95 + 96 + 97 + 98 + 99<br>
+                        方法：<select id="method2" style="font-size: 16px; padding: 5px;">
+                            <option value="">选择方法</option>
+                            <option value="凑整法">凑整法</option>
+                            <option value="带符号搬家">带符号搬家</option>
+                            <option value="基准数法">基准数法</option>
+                            <option value="等差数列">等差数列</option>
+                        </select>
+                        答案：<input type="text" class="answer-input" id="ans2" placeholder="?">
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <button class="check-btn" onclick="checkComprehensive()">检查答案</button>
+                </div>
+                <div class="feedback" id="comprehensiveFeedback"></div>
+            </div>
+        </div>
+        
+        <!-- 第19页：易错点总结 -->
+        <div class="slide" data-slide="19">
+            <h2 class="slide-title">⚠️ 易错点总结</h2>
+            <div class="content-card" style="background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%); border-left: 5px solid #f44336;">
+                <h3 style="color: #C62828; margin-bottom: 20px;">常见错误提醒：</h3>
+                <div style="font-size: 18px; line-height: 2;">
+                    <div class="step-box" style="background: white;">
+                        <strong>❌ 错误1：符号搬家不带符号</strong><br>
+                        正确：127<span class="highlight">+</span>73-48（+是73的符号）<br>
+                        <em>每个数前面的符号是它的"专属行李"，搬家时必须带着走！</em>
+                    </div>
+                    <div class="step-box" style="background: white;">
+                        <strong>❌ 错误2：基准数法忘记调整差值</strong><br>
+                        正确：总和 = 基准数×个数 + 各数与基准数的差之和<br>
+                        <em>最后一定要加上或减去各数与基准数的差！</em>
+                    </div>
+                    <div class="step-box" style="background: white;">
+                        <strong>❌ 错误3：等差数列项数算错</strong><br>
+                        正确：项数 = (末项-首项)÷公差 + 1<br>
+                        <em>从a到b的连续整数，项数是(b-a+1)，不要忘记加1！</em>
+                    </div>
+                    <div class="step-box" style="background: white;">
+                        <strong>❌ 错误4：分组时数错组数</strong><br>
+                        正确：要数清楚有多少组，避免漏算<br>
+                        <em>建议边分组边标记，确保不遗漏！</em>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 第20页：知识总结 -->
+        <div class="slide" data-slide="20">
+            <h2 class="slide-title">🌟 知识总结</h2>
+            <div class="content-card">
+                <h3 style="color: #660099; margin-bottom: 20px; text-align: center;">五大速算方法回顾</h3>
+                <div class="game-grid">
+                    <div class="game-cell" style="background: linear-gradient(135deg, #C8E6C9 0%, #A5D6A7 100%);">
+                        <div style="font-size: 16px; color: #2E7D32;">凑整法</div>
+                        <div style="font-size: 14px; margin-top: 10px;">找好朋友数</div>
+                    </div>
+                    <div class="game-cell" style="background: linear-gradient(135deg, #BBDEFB 0%, #90CAF9 100%);">
+                        <div style="font-size: 16px; color: #1565C0;">带符号搬家</div>
+                        <div style="font-size: 14px; margin-top: 10px;">带着符号走</div>
+                    </div>
+                    <div class="game-cell" style="background: linear-gradient(135deg, #FFF9C4 0%, #FFF59D 100%);">
+                        <div style="font-size: 16px; color: #F57F17;">基准数法</div>
+                        <div style="font-size: 14px; margin-top: 10px;">先算整再调零</div>
+                    </div>
+                    <div class="game-cell" style="background: linear-gradient(135deg, #E1BEE7 0%, #CE93D8 100%);">
+                        <div style="font-size: 16px; color: #7B1FA2;">等差数列</div>
+                        <div style="font-size: 14px; margin-top: 10px;">(首+末)×项÷2</div>
+                    </div>
+                </div>
+            </div>
+            <div class="formula-box" style="margin-top: 30px;">
+                速算核心：<strong>观察数字特征 → 选择合适方法 → 简化计算</strong>
+            </div>
+            <div class="tip-box" style="background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); padding: 20px; border-radius: 10px; border-left: 4px solid #4CAF50;">
+                <strong>🎯 成功秘诀：</strong><br>
+                1. 多观察数字特征<br>
+                2. 熟记好朋友数<br>
+                3. 理解方法原理，不要死记硬背<br>
+                4. 多做练习，熟能生巧
+            </div>
+        </div>
+        
+        <!-- 第21页：作业布置 -->
+        <div class="slide" data-slide="21">
+            <h2 class="slide-title">📝 课后作业</h2>
+            <div class="content-card">
+                <h3 style="color: #660099; margin-bottom: 20px;">分层作业（根据能力选择）</h3>
+                <div class="method-card" style="background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); border-color: #4CAF50;">
+                    <div class="method-title" style="color: #2E7D32;">🌱 基础巩固</div>
+                    <p>完成课后练习题第1-4题</p>
+                    <p>重点练习：凑整法和带符号搬家</p>
+                </div>
+                <div class="method-card" style="background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%); border-color: #FF9800;">
+                    <div class="method-title" style="color: #E65100;">🌿 能力提升</div>
+                    <p>完成课后练习题第5-8题</p>
+                    <p>重点练习：基准数法和等差数列求和</p>
+                </div>
+                <div class="method-card" style="background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%); border-color: #f44336;">
+                    <div class="method-title" style="color: #C62828;">🌳 思维拓展</div>
+                    <p>完成课后练习题第9-10题和附加题</p>
+                    <p>重点练习：综合应用和分组计算</p>
+                </div>
+            </div>
+            <div class="content-card" style="text-align: center;">
+                <p style="font-size: 20px; color: #660099;">
+                    <strong>建议用时：30-40分钟</strong><br>
+                    完成后请家长检查并签字
+                </p>
+            </div>
+        </div>
+        
+        <!-- 第22页：结束页 -->
+        <div class="slide" data-slide="22">
+            <h2 class="slide-title">👋 课程结束</h2>
+            <div style="text-align: center; margin: 50px 0;">
+                <span class="emoji">🎉</span>
+                <span class="emoji">⚡</span>
+                <span class="emoji">🏆</span>
+                <span class="emoji">🎉</span>
+            </div>
+            <div class="content-card" style="text-align: center;">
+                <p style="font-size: 24px; color: #660099; margin-bottom: 20px;">
+                    <strong>恭喜你完成了趣味速算课程！</strong>
+                </p>
+                <p style="font-size: 18px; line-height: 2;">
+                    你已经掌握了五大速算方法<br>
+                    继续练习，成为计算小达人！
+                </p>
+            </div>
+            <div class="next-lesson" style="margin-top: 40px;">
+                <h3>📖 下节课预告</h3>
+                <p style="font-size: 20px; color: #2E7D32;"><strong>第13课：间隔问题</strong></p>
+                <p style="margin-top: 10px;">我们将学习植树问题、锯木头问题、爬楼梯问题...</p>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <button class="start-btn" onclick="location.reload()">重新学习 ↺</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="nav-container">
+        <button class="nav-btn" onclick="prevSlide()">⬅️ 上一页</button>
+        <button class="nav-btn" onclick="nextSlide()">下一页 ➡️</button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 22;
+        let timerInterval = null;
+        let timeLeft = 30;
+        let score = 0;
+        
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => slide.classList.remove('active'));
+            document.querySelector(`[data-slide="${n}"]`).classList.add('active');
+            currentSlide = n;
+            updateProgressBar();
+            document.getElementById('currentPage').textContent = n;
+        }
+        
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                showSlide(currentSlide + 1);
+            }
+        }
+        
+        function prevSlide() {
+            if (currentSlide > 1) {
+                showSlide(currentSlide - 1);
+            }
+        }
+        
+        function updateProgressBar() {
+            const progress = (currentSlide / totalSlides) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+        
+        // 键盘导航
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+        
+        // 练习1检查
+        function checkPractice1() {
+            const q1 = document.getElementById('q1').value.trim();
+            const q2 = document.getElementById('q2').value.trim();
+            const feedback = document.getElementById('feedback1');
+            
+            if (q1 === '187' && q2 === '248') {
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 太棒了！全部正确！';
+                document.getElementById('q1').classList.add('correct');
+                document.getElementById('q2').classList.add('correct');
+            } else {
+                feedback.className = 'feedback error';
+                let msg = '❌ ';
+                if (q1 !== '187') msg += '第一题错误（正确：187） ';
+                if (q2 !== '248') msg += '第二题错误（正确：248）';
+                feedback.textContent = msg;
+                if (q1 !== '187') document.getElementById('q1').classList.add('wrong');
+                if (q2 !== '248') document.getElementById('q2').classList.add('wrong');
+            }
+        }
+        
+        function showHint1() {
+            const feedback = document.getElementById('feedback1');
+            feedback.className = 'feedback';
+            feedback.style.display = 'block';
+            feedback.style.background = '#FFF8E1';
+            feedback.style.border = '2px solid #FF9800';
+            feedback.style.color = '#E65100';
+            feedback.textContent = '💡 提示：第一题36+64=100，第二题125+75=200';
+        }
+        
+        // 练习2检查
+        function checkPractice2() {
+            const q3 = document.getElementById('q3').value.trim();
+            const q4 = document.getElementById('q4').value.trim();
+            const feedback = document.getElementById('feedback2');
+            
+            if (q3 === '122' && q4 === '167') {
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 太棒了！全部正确！';
+                document.getElementById('q3').classList.add('correct');
+                document.getElementById('q4').classList.add('correct');
+            } else {
+                feedback.className = 'feedback error';
+                let msg = '❌ ';
+                if (q3 !== '122') msg += '第一题错误（正确：122） ';
+                if (q4 !== '167') msg += '第二题错误（正确：167）';
+                feedback.textContent = msg;
+            }
+        }
+        
+        function showHint2() {
+            const feedback = document.getElementById('feedback2');
+            feedback.className = 'feedback';
+            feedback.style.display = 'block';
+            feedback.style.background = '#FFF8E1';
+            feedback.style.border = '2px solid #FF9800';
+            feedback.style.color = '#E65100';
+            feedback.textContent = '💡 提示：第一题156+44=200，第二题234-134=100';
+        }
+        
+        // 练习3检查
+        function checkPractice3() {
+            const q5 = document.getElementById('q5').value.trim();
+            const q6 = document.getElementById('q6').value.trim();
+            const feedback = document.getElementById('feedback3');
+            
+            if (q5 === '495' && q6 === '786') {
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 太棒了！全部正确！';
+                document.getElementById('q5').classList.add('correct');
+                document.getElementById('q6').classList.add('correct');
+            } else {
+                feedback.className = 'feedback error';
+                let msg = '❌ ';
+                if (q5 !== '495') msg += '第一题错误（正确：495） ';
+                if (q6 !== '786') msg += '第二题错误（正确：786）';
+                feedback.textContent = msg;
+            }
+        }
+        
+        function showHint3() {
+            const feedback = document.getElementById('feedback3');
+            feedback.className = 'feedback';
+            feedback.style.display = 'block';
+            feedback.style.background = '#FFF8E1';
+            feedback.style.border = '2px solid #FF9800';
+            feedback.style.color = '#E65100';
+            feedback.textContent = '💡 提示：第一题以100为基准，第二题以200为基准';
+        }
+        
+        // 练习4检查
+        function checkPractice4() {
+            const q7 = document.getElementById('q7').value.trim();
+            const q8 = document.getElementById('q8').value.trim();
+            const feedback = document.getElementById('feedback4');
+            
+            if (q7 === '110' && q8 === '275') {
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 太棒了！全部正确！';
+                document.getElementById('q7').classList.add('correct');
+                document.getElementById('q8').classList.add('correct');
+            } else {
+                feedback.className = 'feedback error';
+                let msg = '❌ ';
+                if (q7 !== '110') msg += '第一题错误（正确：110） ';
+                if (q8 !== '275') msg += '第二题错误（正确：275）';
+                feedback.textContent = msg;
+            }
+        }
+        
+        function showHint4() {
+            const feedback = document.getElementById('feedback4');
+            feedback.className = 'feedback';
+            feedback.style.display = 'block';
+            feedback.style.background = '#FFF8E1';
+            feedback.style.border = '2px solid #FF9800';
+            feedback.style.color = '#E65100';
+            feedback.textContent = '💡 提示：第一题(2+20)×10÷2，第二题(5+50)×10÷2';
+        }
+        
+        // 练习5检查
+        function checkPractice5() {
+            const q9 = document.getElementById('q9').value.trim();
+            const q10 = document.getElementById('q10').value.trim();
+            const feedback = document.getElementById('feedback5');
+            
+            if (q9 === '50' && q10 === '-50') {
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 太棒了！全部正确！';
+                document.getElementById('q9').classList.add('correct');
+                document.getElementById('q10').classList.add('correct');
+            } else {
+                feedback.className = 'feedback error';
+                let msg = '❌ ';
+                if (q9 !== '50') msg += '第一题错误（正确：50） ';
+                if (q10 !== '-50') msg += '第二题错误（正确：-50）';
+                feedback.textContent = msg;
+            }
+        }
+        
+        function showHint5() {
+            const feedback = document.getElementById('feedback5');
+            feedback.className = 'feedback';
+            feedback.style.display = 'block';
+            feedback.style.background = '#FFF8E1';
+            feedback.style.border = '2px solid #FF9800';
+            feedback.style.color = '#E65100';
+            feedback.textContent = '💡 提示：第一题50组，每组差1；第二题25组，每组差-2';
+        }
+        
+        // 速度挑战
+        function startChallenge() {
+            if (timerInterval) clearInterval(timerInterval);
+            timeLeft = 30;
+            score = 0;
+            document.getElementById('challengeTimer').textContent = timeLeft;
+            document.getElementById('scoreDisplay').textContent = '得分：0';
+            document.getElementById('challengeFeedback').style.display = 'none';
+            
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                document.getElementById('challengeTimer').textContent = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    document.getElementById('challengeFeedback').className = 'feedback error';
+                    document.getElementById('challengeFeedback').textContent = '⏰ 时间到！挑战结束！';
+                    document.getElementById('challengeFeedback').style.display = 'block';
+                }
+            }, 1000);
+        }
+        
+        function checkChallenge() {
+            const speed1 = document.getElementById('speed1').value.trim();
+            const speed2 = document.getElementById('speed2').value.trim();
+            const speed3 = document.getElementById('speed3').value.trim();
+            
+            let correct = 0;
+            if (speed1 === '178') correct++;
+            if (speed2 === '133') correct++;
+            if (speed3 === '490') correct++;
+            
+            score = correct * 10;
+            document.getElementById('scoreDisplay').textContent = '得分：' + score;
+            
+            const feedback = document.getElementById('challengeFeedback');
+            if (correct === 3) {
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 完美！全部正确！得分：' + score;
+                clearInterval(timerInterval);
+            } else {
+                feedback.className = 'feedback error';
+                feedback.textContent = '❌ 还有错误，继续加油！当前得分：' + score;
+            }
+            feedback.style.display = 'block';
+        }
+        
+        // 综合练习检查
+        function checkComprehensive() {
+            const method1 = document.getElementById('method1').value;
+            const ans1 = document.getElementById('ans1').value.trim();
+            const method2 = document.getElementById('method2').value;
+            const ans2 = document.getElementById('ans2').value.trim();
+            
+            const feedback = document.getElementById('comprehensiveFeedback');
+            let msg = '';
+            let allCorrect = true;
+            
+            if (method1 !== '凑整法' || ans1 !== '200') {
+                msg += '❌ 题目1：方法应为"凑整法"，答案应为200\n';
+                allCorrect = false;
+            }
+            if (method2 !== '基准数法' || ans2 !== '485') {
+                msg += '❌ 题目2：方法应为"基准数法"，答案应为485\n';
+                allCorrect = false;
+            }
+            
+            if (allCorrect) {
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 太棒了！方法和答案都正确！';
+            } else {
+                feedback.className = 'feedback error';
+                feedback.textContent = msg;
+            }
+            feedback.style.display = 'block';
+        }
+        
+        // 初始化
+        updateProgressBar();
+    </script>
+</body>
+</html>

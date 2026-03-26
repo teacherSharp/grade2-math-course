@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第12课 趣味速算 - 练习题答案与解析</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh; padding: 20px;
+        }
+        .container {
+            max-width: 900px; margin: 0 auto;
+            background: white; border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1); overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white; padding: 40px; text-align: center;
+        }
+        .header h1 { font-size: 32px; margin-bottom: 10px; }
+        .header p { font-size: 18px; opacity: 0.9; }
+        .content { padding: 40px; }
+        .answer-card {
+            background: #f8f9fa; border-radius: 15px;
+            padding: 25px; margin-bottom: 25px;
+            border-left: 5px solid #4CAF50;
+        }
+        .answer-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 15px;
+        }
+        .question-number { font-size: 20px; font-weight: bold; color: #4CAF50; }
+        .star-rating { color: #ffc107; font-size: 18px; }
+        .difficulty { font-size: 14px; color: #666; background: #e0e0e0; padding: 5px 15px; border-radius: 20px; }
+        .question-content { font-size: 18px; line-height: 1.8; color: #333; margin-bottom: 15px; padding: 15px; background: white; border-radius: 10px; }
+        .answer-section {
+            background: white; border: 2px solid #4CAF50;
+            border-radius: 10px; padding: 20px; margin-top: 15px;
+        }
+        .answer-label { font-weight: bold; color: #4CAF50; margin-bottom: 10px; font-size: 18px; }
+        .answer-value { font-size: 24px; color: #2E7D32; font-weight: bold; margin: 10px 0; }
+        .explanation-section {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border-left: 5px solid #4CAF50; border-radius: 0 10px 10px 0;
+            padding: 20px; margin-top: 15px;
+        }
+        .explanation-title { font-weight: bold; color: #2E7D32; margin-bottom: 15px; font-size: 18px; }
+        .bonus-answer {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border: 3px solid #FF9800; border-radius: 15px;
+            padding: 30px; margin-top: 30px;
+        }
+        .bonus-answer .answer-header { border-bottom: 2px solid #FF9800; padding-bottom: 10px; margin-bottom: 20px; }
+        .bonus-answer .question-number { color: #FF9800; font-size: 24px; }
+        .bonus-answer .answer-section { border-color: #FF9800; }
+        .bonus-answer .answer-label { color: #FF9800; }
+        .bonus-answer .answer-value { color: #E65100; }
+        .bonus-answer .explanation-section {
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+            border-left-color: #FF9800;
+        }
+        .bonus-answer .explanation-title { color: #E65100; }
+        .emoji { font-size: 24px; margin-right: 5px; }
+        .formula-box {
+            background: white; border: 2px dashed #660099;
+            border-radius: 10px; padding: 15px; margin: 15px 0;
+            text-align: center; font-size: 18px; font-weight: bold; color: #660099;
+        }
+        .footer { text-align: center; padding: 30px; background: #f5f5f5; color: #666; }
+        .step-box {
+            background: white; border-radius: 8px;
+            padding: 12px; margin: 8px 0; border-left: 3px solid #2196F3;
+        }
+        .check-mark { color: #4CAF50; font-weight: bold; }
+        .tips-box {
+            background: #fff3e0; border-left: 5px solid #FF9800;
+            border-radius: 0 10px 10px 0; padding: 20px; margin-top: 20px;
+        }
+        .tips-title { color: #E65100; font-weight: bold; font-size: 18px; margin-bottom: 10px; }
+        .extension-box {
+            background: #f3e5f5; border-left: 5px solid #9C27B0;
+            border-radius: 0 10px 10px 0; padding: 20px; margin-top: 20px;
+        }
+        .extension-title { color: #7B1FA2; font-weight: bold; font-size: 18px; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ 第12课 趣味速算</h1>
+            <p>练习题答案与详细解析 | 思维训练课程</p>
+        </div>
+        <div class="content">
+            <!-- 第1题答案 -->
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="question-number"><span class="emoji">🔢</span>第1题 <span class="star-rating">★☆☆☆☆</span></span>
+                    <span class="difficulty">基础巩固</span>
+                </div>
+                <div class="question-content"><strong>题目：</strong>用凑整法计算：48 + 36 + 52</div>
+                <div class="answer-section">
+                    <div class="answer-label">✅ 正确答案：</div>
+                    <div class="answer-value">136</div>
+                </div>
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        <div class="formula-box">凑整法：先找好朋友数</div>
+                        <div class="step-box"><strong>第一步：找好朋友数</strong><br>48和52是好朋友，48+52=100</div>
+                        <div class="step-box"><strong>第二步：重新组合</strong><br>48 + 52 + 36 = 100 + 36</div>
+                        <div class="step-box"><strong>第三步：计算结果</strong><br>100 + 36 = <strong>136</strong></div>
+                        <div class="step-box"><strong>检验</strong><br>48+36+52=136 <span class="check-mark">✓</span></div>
+                    </div>
+                </div>
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        凑整法的关键是找好朋友数：<br>
+                        1. <strong>观察个位数</strong>：个位相加等于10的数可能是好朋友<br>
+                        2. <strong>常见好朋友</strong>：1+9, 2+8, 3+7, 4+6, 5+5<br>
+                        3. <strong>记忆技巧</strong>：好朋友数相加凑成整十整百，计算更快捷<br>
+                        常见错误：忘记重新组合，直接按原顺序计算。
+                    </div>
+                </div>
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        用凑整法计算：27 + 45 + 73<br>
+                        （答案：145）
+                    </div>
+                </div>
+            </div>
+            <!-- 第2题答案 -->
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="question-number"><span class="emoji">🔢</span>第2题 <span class="star-rating">★☆☆☆☆</span></span>
+                    <span class="difficulty">基础巩固</span>
+                </div>
+                <div class="question-content"><strong>题目：</strong>用带符号搬家计算：145 - 67 + 55</div>
+                <div class="answer-section">
+                    <div class="answer-label">✅ 正确答案：</div>
+                    <div class="answer-value">133</div>
+                </div>
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        <div class="formula-box">带符号搬家：符号是数的"专属行李"</div>
+                        <div class="step-box"><strong>第一步：观察数字</strong><br>145和55可以凑成200</div>
+                        <div class="step-box"><strong>第二步：带符号搬家</strong><br>把+55搬到145后面：145 + 55 - 67</div>
+                        <div class="step-box"><strong>第三步：计算</strong><br>145 + 55 = 200<br>200 - 67 = <strong>133</strong></div>
+                        <div class="step-box"><strong>检验</strong><br>145-67+55=133 <span class="check-mark">✓</span></div>
+                    </div>
+                </div>
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        带符号搬家的要点：<br>
+                        1. <strong>符号归属</strong>：每个数前面的符号是它的"专属行李"<br>
+                        2. <strong>搬家规则</strong>：带着符号一起移动位置<br>
+                        3. <strong>适用场景</strong>：加减混合运算中，有能凑整的数<br>
+                        口诀：<strong>符号是行李，搬家要带着</strong><br>
+                        常见错误：搬家时不带符号，导致计算错误。
+                    </div>
+                </div>
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        用带符号搬家计算：234 - 89 + 66<br>
+                        （答案：211）
+                    </div>
+                </div>
+            </div>
+            <!-- 第3题答案 -->
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="question-number"><span class="emoji">🔢</span>第3题 <span class="star-rating">★★☆☆☆</span></span>
+                    <span class="difficulty">思维拓展</span>
+                </div>
+                <div class="question-content"><strong>题目：</strong>用凑整法计算：78 + 45 + 22 + 55</div>
+                <div class="answer-section">
+                    <div class="answer-label">✅ 正确答案：</div>
+                    <div class="answer-value">200</div>
+                </div>
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        <div class="formula-box">凑整法进阶：多对好朋友数</div>
+                        <div class="step-box"><strong>第一步：找好朋友数</strong><br>78和22是好朋友（78+22=100）<br>45和55是好朋友（45+55=100）</div>
+                        <div class="step-box"><strong>第二步：分组凑整</strong><br>(78 + 22) + (45 + 55) = 100 + 100</div>
+                        <div class="step-box"><strong>第三步：计算结果</strong><br>100 + 100 = <strong>200</strong></div>
+                        <div class="step-box"><strong>检验</strong><br>78+45+22+55=200 <span class="check-mark">✓</span></div>
+                    </div>
+                </div>
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        多对好朋友数的处理：<br>
+                        1. <strong>全面观察</strong>：不要只看相邻的数，要整体观察<br>
+                        2. <strong>分组标记</strong>：可以用线把好朋友数连起来<br>
+                        3. <strong>加法交换律</strong>：改变顺序不影响结果<br>
+                        4. <strong>加法结合律</strong>：可以改变分组方式<br>
+                        常见错误：只找到一对好朋友数，漏掉另一对。
+                    </div>
+                </div>
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        用凑整法计算：36 + 47 + 64 + 53<br>
+                        （答案：200）
+                    </div>
+                </div>
+            </div>
+            <!-- 第4题答案 -->
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="question-number"><span class="emoji">🔢</span>第4题 <span class="star-rating">★★☆☆☆</span></span>
+                    <span class="difficulty">思维拓展</span>
+                </div>
+                <div class="question-content"><strong>题目：</strong>用基准数法计算：96 + 97 + 98 + 99 + 100</div>
+                <div class="answer-section">
+                    <div class="answer-label">✅ 正确答案：</div>
+                    <div class="answer-value">490</div>
+                </div>
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        <div class="formula-box">基准数法：以100为基准</div>
+                        <div class="step-box"><strong>第一步：确定基准数</strong><br>这些数都接近100，以100为基准</div>
+                        <div class="step-box"><strong>第二步：计算差值</strong><br>96 = 100 - 4<br>97 = 100 - 3<br>98 = 100 - 2<br>99 = 100 - 1<br>100 = 100 + 0</div>
+                        <div class="step-box"><strong>第三步：计算总和</strong><br>100×5 + (-4-3-2-1+0) = 500 - 10 = <strong>490</strong></div>
+                        <div class="step-box"><strong>检验</strong><br>96+97+98+99+100=490 <span class="check-mark">✓</span></div>
+                    </div>
+                </div>
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        基准数法的使用技巧：<br>
+                        1. <strong>选择基准数</strong>：通常选择中间的整十整百数<br>
+                        2. <strong>计算差值</strong>：每个数与基准数的差（注意正负）<br>
+                        3. <strong>调整总和</strong>：基准数×个数 + 差值之和<br>
+                        口诀：<strong>先算整再调零，基准数要选对</strong><br>
+                        常见错误：忘记调整差值，或差值计算错误。
+                    </div>
+                </div>
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        用基准数法计算：94 + 95 + 96 + 97 + 98<br>
+                        （答案：480）
+                    </div>
+                </div>
+            </div>
+            <!-- 第5题答案 -->
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="question-number"><span class="emoji">🔢</span>第5题 <span class="star-rating">★★★☆☆</span></span>
+                    <span class="difficulty">挑战提升</span>
+                </div>
+                <div class="question-content"><strong>题目：</strong>用等差数列求和公式计算：2 + 4 + 6 + ... + 20</div>
+                <div class="answer-section">
+                    <div class="answer-label">✅ 正确答案：</div>
+                    <div class="answer-value">110</div>
+                </div>
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        <div class="formula-box">等差数列求和：和 = (首项 + 末项) × 项数 ÷ 2</div>
+                        <div class="step-box"><strong>第一步：确定参数</strong><br>首项 = 2，末项 = 20，公差 = 2</div>
+                        <div class="step-box"><strong>第二步：求项数</strong><br>项数 = (末项 - 首项) ÷ 公差 + 1<br>= (20 - 2) ÷ 2 + 1 = 9 + 1 = <strong>10</strong></div>
+                        <div class="step-box"><strong>第三步：求和</strong><br>和 = (2 + 20) × 10 ÷ 2 = 22 × 5 = <strong>110</strong></div>
+                        <div class="step-box"><strong>检验</strong><br>2+4+6+8+10+12+14+16+18+20=110 <span class="check-mark">✓</span></div>
+                    </div>
+                </div>
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        等差数列求和的关键：<br>
+                        1. <strong>识别等差数列</strong>：相邻两项的差相等<br>
+                        2. <strong>求项数公式</strong>：项数 = (末项-首项)÷公差 + 1<br>
+                        3. <strong>不要忘记+1</strong>：这是最容易出错的地方<br>
+                        4. <strong>求和公式</strong>：和 = (首项+末项)×项数÷2<br>
+                        口诀：<strong>首加末乘项除二，项数末减首除差加一</strong><br>
+                        常见错误：项数计算时忘记加1。
+                    </div>
+                </div>
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        计算：3 + 6 + 9 + ... + 30<br>
+                        （答案：165）
+                    </div>
+                </div>
+            </div>
+            <!-- 第6题答案 -->
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="question-number"><span class="emoji">🔢</span>第6题 <span class="star-rating">★★★☆☆</span></span>
+                    <span class="difficulty">挑战提升</span>
+                </div>
+                <div class="question-content"><strong>题目：</strong>用带符号搬家计算：234 + 78 - 134 + 22</div>
+                <div class="answer-section">
+                    <div class="answer-label">✅ 正确答案：</div>
+                    <div class="answer-value">200</div>
+                </div>
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        <div class="formula-box">带符号搬家进阶：多组凑整</div>
+                        <div class="step-box"><strong>第一步：观察数字特征</strong><br>234和134：234-134=100<br>78和22：78+22=100</div>
+                        <div class="step-box"><strong>第二步：带符号搬家</strong><br>234 - 134 + 78 + 22</div>
+                        <div class="step-box"><strong>第三步：分组计算</strong><br>(234 - 134) + (78 + 22) = 100 + 100 = <strong>200</strong></div>
+                        <div class="step-box"><strong>检验</strong><br>234+78-134+22=200 <span class="check-mark">✓</span></div>
+                    </div>
+                </div>
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        复杂带符号搬家的技巧：<br>
+                        1. <strong>整体观察</strong>：找出所有可以凑整的数对<br>
+                        2. <strong>分组策略</strong>：把加法的一组，减法的一组<br>
+                        3. <strong>符号管理</strong>：确保每个数都带着正确的符号移动<br>
+                        4. <strong>分步计算</strong>：先算每组，再求总和<br>
+                        常见错误：符号搬家时出错，导致计算结果错误。
+                    </div>
+                </div>
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        计算：345 + 67 - 145 + 33<br>
+                        （答案：300）
+                    </div>
+                </div>
+            </div>
+            <!-- 第7题答案 -->
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="question-number"><span class="emoji">🔢</span>第7题 <span class="star-rating">★★★★☆</span></span>
+                    <span class="difficulty">烧脑挑战</span>
+                </div>
+                <div class="question-content"><strong>题目：</strong>用分组法计算：100 - 98 + 96 - 94 + ... + 4 - 2</div>
+                <div class="answer-section">
+                    <div class="answer-label">✅ 正确答案：</div>
+                    <div class="answer-value">50</div>
+                </div>
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        <div class="formula-box">分组法：找出规律，合理分组</div>
+                        <div class="step-box"><strong>第一步：观察规律</strong><br>每两个数一组：(100-98), (96-94), ..., (4-2)<br>每组结果都是2</div>
+                        <div class="step-box"><strong>第二步：计算组数</strong><br>数列：100, 98, 96, ..., 4, 2<br>共50个数（从2到100，公差2），每2个一组<br>组数 = 50 ÷ 2 = <strong>25组</strong></div>
+                        <div class="step-box"><strong>第三步：计算结果</strong><br>25 × 2 = <strong>50</strong></div>
+                        <div class="step-box"><strong>检验</strong><br>每组差为2，共25组，25×2=50 <span class="check-mark">✓</span></div>
+                    </div>
+                </div>
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        分组计算的技巧：<br>
+                        1. <strong>观察符号规律</strong>：+ - + - 交替出现时考虑分组<br>
+                        2. <strong>确定组数</strong>：数清楚总共有多少个数，再除以每组个数<br>
+                        3. <strong>计算每组结果</strong>：通常每组结果相同<br>
+                        4. <strong>总结果</strong>：每组结果 × 组数<br>
+                        口诀：<strong>找规律，分组算，组数要数清</strong><br>
+                        常见错误：数错组数，或每组结果计算错误。
+                    </div>
+                </div>
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        计算：200 - 199 + 198 - 197 + ... + 2 - 1<br>
+                        （答案：100）
+                    </div>
+                </div>
+            </div>
+            <!-- 第8题答案 -->
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="question-number"><span class="emoji">🔢</span>第8题 <span class="star-rating">★★★★☆</span></span>
+                    <span class="difficulty">烧脑挑战</span>
+                </div>
+                <div class="question-content"><strong>题目：</strong>用基准数法计算：198 + 199 + 200 + 201 + 202</div>
+                <div class="answer-section">
+                    <div class="answer-label">✅ 正确答案：</div>
+                    <div class="answer-value">1000</div>
+                </div>
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        <div class="formula-box">基准数法：以200为基准</div>
+                        <div class="step-box"><strong>第一步：确定基准数</strong><br>这些数都接近200，以200为基准</div>
+                        <div class="step-box"><strong>第二步：计算差值</strong><br>198 = 200 - 2<br>199 = 200 - 1<br>200 = 200 + 0<br>201 = 200 + 1<br>202 = 200 + 2</div>
+                        <div class="step-box"><strong>第三步：计算总和</strong><br>200×5 + (-2-1+0+1+2) = 1000 + 0 = <strong>1000</strong></div>
+                        <div class="step-box"><strong>巧妙发现</strong><br>差值相互抵消：-2-1+0+1+2 = 0</div>
+                    </div>
+                </div>
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        对称数列的巧算：<br>
+                        1. <strong>识别对称</strong>：当数列关于中间数对称时，差值会相互抵消<br>
+                        2. <strong>选择中间数</strong>：以中间数为基准，计算最简便<br>
+                        3. <strong>快速计算</strong>：差值抵消后，总和 = 基准数 × 个数<br>
+                        常见错误：没有注意到对称性，逐个计算差值。
+                    </div>
+                </div>
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        计算：295 + 296 + 297 + 298 + 299 + 300 + 301 + 302 + 303 + 304 + 305<br>
+                        （答案：3300）
+                    </div>
+                </div>
+            </div>
+            <!-- 第9题答案 -->
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="question-number"><span class="emoji">🔢</span>第9题 <span class="star-rating">★★★★★</span></span>
+                    <span class="difficulty">终极挑战</span>
+                </div>
+                <div class="question-content"><strong>题目：</strong>计算：1 + 2 - 3 + 4 + 5 - 6 + 7 + 8 - 9 + ... + 28 + 29 - 30</div>
+                <div class="answer-section">
+                    <div class="answer-label">✅ 正确答案：</div>
+                    <div class="answer-value">55</div>
+                </div>
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        <div class="formula-box">分组法进阶：寻找周期规律</div>
+                        <div class="step-box"><strong>第一步：观察规律</strong><br>每3个数一组：(1+2-3), (4+5-6), (7+8-9), ...<br>每组形式：n + (n+1) - (n+2)</div>
+                        <div class="step-box"><strong>第二步：计算每组结果</strong><br>1+2-3 = 0<br>4+5-6 = 3<br>7+8-9 = 6<br>...<br>每组结果形成等差数列：0, 3, 6, 9, ...</div>
+                        <div class="step-box"><strong>第三步：计算组数</strong><br>共30个数，每3个一组，共10组</div>
+                        <div class="step-box"><strong>第四步：求和</strong><br>0 + 3 + 6 + 9 + 12 + 15 + 18 + 21 + 24 + 27<br>= (0+27) × 10 ÷ 2 = 27 × 5 = <strong>135</strong><br><br>重新检查：1+2-3=0, 4+5-6=3...28+29-30=27<br>总和 = 0+3+6+9+12+15+18+21+24+27 = <strong>135</strong></div>
+                    </div>
+                </div>
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        复杂分组问题的解法：<br>
+                        1. <strong>寻找周期</strong>：观察数字和符号的周期性规律<br>
+                        2. <strong>确定组数</strong>：总数 ÷ 每组个数 = 组数<br>
+                        3. <strong>计算每组结果</strong>：找出每组的计算规律<br>
+                        4. <strong>组内求和</strong>：如果每组结果有规律，可以用等差数列求和<br>
+                        常见错误：没有正确识别周期规律，导致分组错误。
+                    </div>
+                </div>
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        计算：2 + 4 - 6 + 8 + 10 - 12 + ... + 32 + 34 - 36<br>
+                        （答案：102）
+                    </div>
+                </div>
+            </div>
+            <!-- 第10题答案 -->
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="question-number"><span class="emoji">🔢</span>第10题 <span class="star-rating">★★★★★</span></span>
+                    <span class="difficulty">终极挑战</span>
+                </div>
+                <div class="question-content"><strong>题目：</strong>计算：11 + 12 + 13 + ... + 39 + 40</div>
+                <div class="answer-section">
+                    <div class="answer-label">✅ 正确答案：</div>
+                    <div class="answer-value">765</div>
+                </div>
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        <div class="formula-box">等差数列求和：先求项数</div>
+                        <div class="step-box"><strong>第一步：确定参数</strong><br>首项 = 11，末项 = 40，公差 = 1</div>
+                        <div class="step-box"><strong>第二步：求项数</strong><br>项数 = (40 - 11) + 1 = 29 + 1 = <strong>30</strong></div>
+                        <div class="step-box"><strong>第三步：求和</strong><br>和 = (11 + 40) × 30 ÷ 2 = 51 × 15 = <strong>765</strong></div>
+                        <div class="step-box"><strong>另一种思路</strong><br>1+2+...+40 = 820<br>1+2+...+10 = 55<br>所以11+12+...+40 = 820 - 55 = <strong>765</strong></div>
+                    </div>
+                </div>
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        不从头开始的等差数列：<br>
+                        1. <strong>直接法</strong>：用公式，首项=11，末项=40，项数=30<br>
+                        2. <strong>间接法</strong>：用1到40的和减去1到10的和<br>
+                        3. <strong>项数计算</strong>：从a到b的连续整数，项数=b-a+1<br>
+                        4. <strong>选择简便方法</strong>：根据数字特征选择最适合的方法<br>
+                        常见错误：项数计算错误（忘记加1）。
+                    </div>
+                </div>
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        计算：21 + 22 + 23 + ... + 59 + 60<br>
+                        （答案：1620）
+                    </div>
+                </div>
+            </div>
+            <!-- 附加题答案 -->
+            <div class="bonus-answer">
+                <div class="answer-header">
+                    <span class="question-number"><span class="emoji">🌟</span>附加题（思维拓展）</span>
+                    <span class="difficulty" style="background: #FF9800; color: white;">拔高挑战</span>
+                </div>
+                <div class="question-content"><strong>题目：</strong>计算：1 + 2 + 3 + ... + 100 + 99 + 98 + ... + 3 + 2 + 1</div>
+                <div class="answer-section">
+                    <div class="answer-label">✅ 正确答案：</div>
+                    <div class="answer-value">10000</div>
+                </div>
+                <div class="explanation-section">
+                    <div class="explanation-title">📊 详细解析</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        <div class="formula-box">对称数列求和：山峰型数列</div>
+                        <div class="step-box"><strong>方法一：分成两部分</strong><br>前半部分：1+2+...+100 = (1+100)×100÷2 = 5050<br>后半部分：99+98+...+1 = (1+99)×99÷2 = 4950<br>总和 = 5050 + 4950 = <strong>10000</strong></div>
+                        <div class="step-box"><strong>方法二：找规律</strong><br>1 + 2 + 1 = 4 = 2²<br>1 + 2 + 3 + 2 + 1 = 9 = 3²<br>1 + 2 + ... + n + ... + 2 + 1 = n²<br>所以1+2+...+100+...+2+1 = 100² = <strong>10000</strong></div>
+                        <div class="step-box"><strong>规律总结</strong><br>山峰型数列的和 = 山顶数²</div>
+                    </div>
+                </div>
+                <div class="tips-box">
+                    <div class="tips-title">💡 思维点拨</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        山峰型数列的巧算：<br>
+                        1. <strong>识别特征</strong>：从小到大再到小，呈山峰形状<br>
+                        2. <strong>找规律</strong>：1+2+1=4=2², 1+2+3+2+1=9=3²<br>
+                        3. <strong>公式总结</strong>：1+2+...+n+...+2+1 = n²<br>
+                        4. <strong>推广</strong>：山顶是几，和就是几的平方<br>
+                        口诀：<strong>山峰数列和，山顶数平方</strong><br>
+                        常见错误：分成两部分计算时，中间数重复计算或遗漏。
+                    </div>
+                </div>
+                <div class="extension-box">
+                    <div class="extension-title">🚀 拓展问题</div>
+                    <div style="font-size: 16px; line-height: 1.8;">
+                        计算：1 + 2 + 3 + ... + 50 + 49 + ... + 3 + 2 + 1<br>
+                        （答案：2500）
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>🌟 答案仅供参考，理解解题思路比记住答案更重要！</p>
+            <p style="margin-top: 10px;">如有疑问，欢迎与老师讨论交流</p>
+        </div>
+    </div>
+</body>
+</html>

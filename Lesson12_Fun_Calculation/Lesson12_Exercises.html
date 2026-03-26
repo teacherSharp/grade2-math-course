@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第12课 趣味速算 - 课后练习题</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh; padding: 20px;
+        }
+        .container {
+            max-width: 900px; margin: 0 auto;
+            background: white; border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1); overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white; padding: 40px; text-align: center;
+        }
+        .header h1 { font-size: 32px; margin-bottom: 10px; }
+        .header p { font-size: 18px; opacity: 0.9; }
+        .content { padding: 40px; }
+        .question-card {
+            background: #f8f9fa; border-radius: 15px;
+            padding: 25px; margin-bottom: 25px;
+            border-left: 5px solid #660099;
+        }
+        .question-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 15px;
+        }
+        .question-number { font-size: 20px; font-weight: bold; color: #660099; }
+        .difficulty { font-size: 14px; color: #666; background: #e0e0e0; padding: 5px 15px; border-radius: 20px; }
+        .question-content { font-size: 18px; line-height: 1.8; color: #333; margin-bottom: 15px; }
+        .answer-section {
+            background: white; border: 2px solid #e0e0e0;
+            border-radius: 10px; padding: 15px;
+        }
+        .answer-label { font-weight: bold; color: #660099; margin-bottom: 10px; }
+        .answer-input {
+            width: 100%; padding: 12px; font-size: 16px;
+            border: 2px solid #ddd; border-radius: 8px;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        .bonus-question {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border: 3px solid #FF9800; border-radius: 15px;
+            padding: 30px; margin-top: 30px;
+        }
+        .bonus-header { text-align: center; margin-bottom: 20px; }
+        .bonus-header h2 { color: #E65100; font-size: 24px; }
+        .bonus-tag {
+            display: inline-block; background: #FF9800;
+            color: white; padding: 5px 15px; border-radius: 20px;
+            font-size: 14px; margin-top: 10px;
+        }
+        .footer { text-align: center; padding: 30px; background: #f5f5f5; color: #666; }
+        .emoji { font-size: 24px; margin-right: 5px; }
+        .hint-text { color: #666; font-size: 14px; margin-top: 10px; font-style: italic; }
+        .star-rating { color: #ffc107; font-size: 18px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📝 第12课 趣味速算</h1>
+            <p>课后练习题 · 掌握巧算方法，成为计算小达人</p>
+        </div>
+        <div class="content">
+            <!-- 第1题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">🔢</span>第1题 <span class="star-rating">★☆☆☆☆</span></span>
+                    <span class="difficulty">基础巩固</span>
+                </div>
+                <div class="question-content">
+                    用凑整法计算：<strong>48 + 36 + 52</strong>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入答案">
+                    <p class="hint-text">💡 提示：48和52是好朋友数</p>
+                </div>
+            </div>
+            <!-- 第2题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">🔢</span>第2题 <span class="star-rating">★☆☆☆☆</span></span>
+                    <span class="difficulty">基础巩固</span>
+                </div>
+                <div class="question-content">
+                    用带符号搬家计算：<strong>145 - 67 + 55</strong>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入答案">
+                    <p class="hint-text">💡 提示：把+55搬到145后面</p>
+                </div>
+            </div>
+            <!-- 第3题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">🔢</span>第3题 <span class="star-rating">★★☆☆☆</span></span>
+                    <span class="difficulty">思维拓展</span>
+                </div>
+                <div class="question-content">
+                    用凑整法计算：<strong>78 + 45 + 22 + 55</strong>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入答案">
+                    <p class="hint-text">💡 提示：有两对好朋友数</p>
+                </div>
+            </div>
+            <!-- 第4题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">🔢</span>第4题 <span class="star-rating">★★☆☆☆</span></span>
+                    <span class="difficulty">思维拓展</span>
+                </div>
+                <div class="question-content">
+                    用基准数法计算：<strong>96 + 97 + 98 + 99 + 100</strong>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入答案">
+                    <p class="hint-text">💡 提示：以100为基准数</p>
+                </div>
+            </div>
+            <!-- 第5题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">🔢</span>第5题 <span class="star-rating">★★★☆☆</span></span>
+                    <span class="difficulty">挑战提升</span>
+                </div>
+                <div class="question-content">
+                    用等差数列求和公式计算：<strong>2 + 4 + 6 + ... + 20</strong>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入答案">
+                    <p class="hint-text">💡 提示：首项2，末项20，公差2，先求项数</p>
+                </div>
+            </div>
+            <!-- 第6题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">🔢</span>第6题 <span class="star-rating">★★★☆☆</span></span>
+                    <span class="difficulty">挑战提升</span>
+                </div>
+                <div class="question-content">
+                    用带符号搬家计算：<strong>234 + 78 - 134 + 22</strong>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入答案">
+                    <p class="hint-text">💡 提示：234-134=100，78+22=100</p>
+                </div>
+            </div>
+            <!-- 第7题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">🔢</span>第7题 <span class="star-rating">★★★★☆</span></span>
+                    <span class="difficulty">烧脑挑战</span>
+                </div>
+                <div class="question-content">
+                    用分组法计算：<strong>100 - 98 + 96 - 94 + ... + 4 - 2</strong>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入答案">
+                    <p class="hint-text">💡 提示：每两个数一组，每组差为2</p>
+                </div>
+            </div>
+            <!-- 第8题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">🔢</span>第8题 <span class="star-rating">★★★★☆</span></span>
+                    <span class="difficulty">烧脑挑战</span>
+                </div>
+                <div class="question-content">
+                    用基准数法计算：<strong>198 + 199 + 200 + 201 + 202</strong>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入答案">
+                    <p class="hint-text">💡 提示：以200为基准数，注意正负差值</p>
+                </div>
+            </div>
+            <!-- 第9题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">🔢</span>第9题 <span class="star-rating">★★★★★</span></span>
+                    <span class="difficulty">终极挑战</span>
+                </div>
+                <div class="question-content">
+                    计算：<strong>1 + 2 - 3 + 4 + 5 - 6 + 7 + 8 - 9 + ... + 28 + 29 - 30</strong>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入答案">
+                    <p class="hint-text">💡 提示：每3个数一组，找出规律</p>
+                </div>
+            </div>
+            <!-- 第10题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">🔢</span>第10题 <span class="star-rating">★★★★★</span></span>
+                    <span class="difficulty">终极挑战</span>
+                </div>
+                <div class="question-content">
+                    计算：<strong>11 + 12 + 13 + ... + 39 + 40</strong>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入答案">
+                    <p class="hint-text">💡 提示：等差数列求和，先求项数</p>
+                </div>
+            </div>
+            <!-- 附加题 -->
+            <div class="bonus-question">
+                <div class="bonus-header">
+                    <span class="question-number"><span class="emoji">🌟</span>附加题（思维拓展）</span>
+                    <span class="bonus-tag">拔高挑战</span>
+                </div>
+                <div class="question-content">
+                    <strong>计算：</strong>1 + 2 + 3 + ... + 100 + 99 + 98 + ... + 3 + 2 + 1<br><br>
+                    <p class="hint-text">💡 提示：可以分成两部分看，或者找规律</p>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入答案">
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>🌟 答案仅供参考，理解解题思路比记住答案更重要！</p>
+            <p style="margin-top: 10px;">如有疑问，欢迎与老师讨论交流</p>
+        </div>
+    </div>
+</body>
+</html>
