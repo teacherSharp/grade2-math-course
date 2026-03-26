@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第16课 阶段测评 - 家长协同方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 35px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #660099;
+        }
+        
+        .section h2 {
+            color: #660099;
+            font-size: 24px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section p, .section li {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+        }
+        
+        .section ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .section li {
+            margin-bottom: 8px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #2196F3;
+        }
+        
+        .tip-box {
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #FF9800;
+        }
+        
+        .formula-box {
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+            border: 3px solid #FF9800;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 20px;
+            color: #E65100;
+        }
+        
+        .activity-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            transition: all 0.3s;
+        }
+        
+        .activity-card:hover {
+            border-color: #660099;
+            box-shadow: 0 5px 15px rgba(102, 0, 153, 0.1);
+        }
+        
+        .activity-card h3 {
+            color: #660099;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .qr-section {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .qr-section h3 {
+            color: #660099;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info {
+            background: white;
+            border: 3px solid #660099;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px auto;
+            max-width: 300px;
+        }
+        
+        .phone-number {
+            font-size: 24px;
+            color: #660099;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            margin: 15px auto;
+            background: white;
+            border: 2px solid #660099;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        
+        .qr-code img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 5px;
+        }
+        
+        .next-lesson {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border: 2px solid #4CAF50;
+        }
+        
+        .next-lesson h3 {
+            color: #2E7D32;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #f5f5f5;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .difficulty-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #333;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .example-box {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border-left: 5px solid #4CAF50;
+            border-radius: 0 10px 10px 0;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%);
+            border-left: 5px solid #f44336;
+            border-radius: 0 10px 10px 0;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .review-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .review-table th, .review-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .review-table th {
+            background: #660099;
+            color: white;
+        }
+        
+        .review-table tr:nth-child(even) {
+            background: #f5f5f5;
+        }
+        
+        .score-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .score-excellent {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .score-good {
+            background: #FF9800;
+            color: white;
+        }
+        
+        .score-pass {
+            background: #2196F3;
+            color: white;
+        }
+        
+        .score-fail {
+            background: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>第16课 阶段测评</h1>
+            <p>家长协同方案</p>
+        </div>
+        
+        <div class="content">
+            <!-- 课程概述 -->
+            <div class="section">
+                <h2>📚 课程概述</h2>
+                <p>
+                    第16课是第二阶段（第9-15课）的综合测评课。本节课通过系统性的测试，帮助孩子巩固和检验前7节课的学习成果，同时让家长了解孩子的知识掌握情况。
+                </p>
+                <div class="highlight-box">
+                    <strong>🎯 测评范围：</strong><br>
+                    1. 找规律填数（等差数列、递推数列）<br>
+                    2. 图形计数进阶（正方形、长方形计数）<br>
+                    3. 简单应用题（和差问题、倍数问题）<br>
+                    4. 趣味速算（凑整法、巧算技巧）<br>
+                    5. 间隔问题（植树、锯木头、爬楼梯）<br>
+                    6. 年龄问题（年龄差不变原理）<br>
+                    7. 移多补少（平均数、差额分析）
+                </div>
+            </div>
+            
+            <!-- 测评说明 -->
+            <div class="section">
+                <h2>📝 测评说明</h2>
+                <div class="highlight-box">
+                    <strong>📊 测评形式：</strong><br>
+                    • 选择题：8道（每题10分）<br>
+                    • 填空题：2道（每题10分）<br>
+                    • 速度挑战：1道（限时60秒，按剩余时间计分）<br>
+                    • 满分：120分
+                </div>
+                <div class="tip-box">
+                    <strong>⏱️ 建议用时：</strong><br>
+                    课堂测评：40-45分钟<br>
+                    课后练习：30-40分钟
+                </div>
+            </div>
+            
+            <!-- 成绩评定标准 -->
+            <div class="section">
+                <h2>🏆 成绩评定标准</h2>
+                <table class="review-table">
+                    <tr>
+                        <th>等级</th>
+                        <th>分数</th>
+                        <th>评价</th>
+                    </tr>
+                    <tr>
+                        <td><span class="score-badge score-excellent">优秀</span></td>
+                        <td>100-120分</td>
+                        <td>知识掌握扎实，继续保持！</td>
+                    </tr>
+                    <tr>
+                        <td><span class="score-badge score-good">良好</span></td>
+                        <td>80-99分</td>
+                        <td>掌握较好，还有进步空间</td>
+                    </tr>
+                    <tr>
+                        <td><span class="score-badge score-pass">及格</span></td>
+                        <td>60-79分</td>
+                        <td>基本掌握，需要加强练习</td>
+                    </tr>
+                    <tr>
+                        <td><span class="score-badge score-fail">待提高</span></td>
+                        <td>60分以下</td>
+                        <td>需要重新学习相关知识点</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <!-- 核心知识点回顾 -->
+            <div class="section">
+                <h2>📐 核心知识点回顾</h2>
+                
+                <h3 style="color: #660099; margin: 20px 0 10px 0;">一、找规律填数</h3>
+                <div class="example-box">
+                    <p style="font-size: 16px; line-height: 1.8;">
+                        <strong>等差数列：</strong>相邻数差相等<br>
+                        例：2, 5, 8, 11, 14...（公差为3）<br><br>
+                        <strong>斐波那契数列：</strong>前两项之和等于后一项<br>
+                        例：1, 1, 2, 3, 5, 8, 13...
+                    </p>
+                </div>
+                
+                <h3 style="color: #660099; margin: 20px 0 10px 0;">二、图形计数</h3>
+                <div class="formula-box">
+                    <strong>正方形计数：</strong>1² + 2² + 3² + ... + n²<br>
+                    <strong>长方形计数：</strong>C(n+1,2) × C(m+1,2)
+                </div>
+                
+                <h3 style="color: #660099; margin: 20px 0 10px 0;">三、和差问题</h3>
+                <div class="formula-box">
+                    大数 = (和 + 差) ÷ 2<br>
+                    小数 = (和 - 差) ÷ 2
+                </div>
+                
+                <h3 style="color: #660099; margin: 20px 0 10px 0;">四、趣味速算</h3>
+                <div class="example-box">
+                    <p style="font-size: 16px; line-height: 1.8;">
+                        <strong>凑整法：</strong>把接近整十整百的数看作整十整百<br>
+                        例：98 + 47 = 100 + 47 - 2 = 145<br><br>
+                        <strong>带符号搬家：</strong>带着符号交换位置<br>
+                        例：25 + 37 + 75 = 25 + 75 + 37 = 137
+                    </p>
+                </div>
+                
+                <h3 style="color: #660099; margin: 20px 0 10px 0;">五、间隔问题</h3>
+                <div class="formula-box">
+                    <strong>植树问题：</strong>棵数 = 段数 + 1（两端都种）<br>
+                    <strong>锯木头：</strong>次数 = 段数 - 1<br>
+                    <strong>爬楼梯：</strong>层数 = 终点 - 起点
+                </div>
+                
+                <h3 style="color: #660099; margin: 20px 0 10px 0;">六、年龄问题</h3>
+                <div class="formula-box">
+                    <strong>核心原理：</strong>年龄差永远不变！<br>
+                    无论过多少年，两人的年龄差始终相同
+                </div>
+                
+                <h3 style="color: #660099; margin: 20px 0 10px 0;">七、移多补少</h3>
+                <div class="formula-box">
+                    <strong>黄金法则：</strong>移动量 = 差额 ÷ 2<br><br>
+                    多多少，给一半；<br>
+                    求平均，总数除；<br>
+                    逆问题，倒着算；<br>
+                    算完一定要验证！
+                </div>
+            </div>
+            
+            <!-- 易错点提醒 -->
+            <div class="section">
+                <h2>⚠️ 易错点提醒</h2>
+                <div class="warning-box">
+                    <p style="font-size: 16px; line-height: 1.8;">
+                        <strong>❌ 常见错误1：</strong>找规律时只算一次差<br>
+                        <em>正确：二级等差数列需要算两次差</em><br><br>
+                        <strong>❌ 常见错误2：</strong>图形计数漏数或重复<br>
+                        <em>正确：按大小分类，有序计数</em><br><br>
+                        <strong>❌ 常见错误3：</strong>和差问题公式记混<br>
+                        <em>正确：大数=(和+差)÷2，小数=(和-差)÷2</em><br><br>
+                        <strong>❌ 常见错误4：</strong>间隔问题混淆"点"和"段"<br>
+                        <em>正确：锯木头次数=段数-1，植树棵数=段数+1</em><br><br>
+                        <strong>❌ 常见错误5：</strong>年龄问题认为年龄差会变<br>
+                        <em>正确：年龄差永远不变！</em><br><br>
+                        <strong>❌ 常见错误6：</strong>移多补少把差额直接当移动量<br>
+                        <em>正确：移动量=差额÷2</em>
+                    </p>
+                </div>
+            </div>
+            
+            <!-- 家庭巩固练习 -->
+            <div class="section">
+                <h2>🏠 家庭巩固练习</h2>
+                
+                <div class="activity-card">
+                    <h3>📝 活动一：错题复习</h3>
+                    <p>让孩子整理测评中的错题，分析错误原因，重新做一遍。</p>
+                    <div class="tip-box">
+                        <strong>建议：</strong>建立错题本，定期复习，避免重复犯错
+                    </div>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>🎯 活动二：薄弱专项练习</h3>
+                    <p>针对测评中掌握不好的知识点，进行专项练习：</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>找规律不好 → 每天练习5道找规律题</li>
+                        <li>图形计数不好 → 用实物摆放，直观理解</li>
+                        <li>应用题不好 → 多画线段图，理清关系</li>
+                        <li>速算不好 → 每天做10道口算题</li>
+                        <li>间隔问题不好 → 用实物演示（如积木）</li>
+                        <li>年龄问题不好 → 画时间轴帮助理解</li>
+                        <li>移多补少不好 → 用糖果、积木实际操作</li>
+                    </ul>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>⏱️ 活动三：限时挑战</h3>
+                    <p>给孩子设定时间限制，进行限时练习，提高解题速度。</p>
+                    <div class="example-box">
+                        <strong>建议：</strong>每道题限时2-3分钟，培养时间观念
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 辅导建议 -->
+            <div class="section">
+                <h2>💡 辅导建议</h2>
+                <ul>
+                    <li><strong>正确看待成绩：</strong>成绩只是检验学习效果的工具，不要过分强调分数</li>
+                    <li><strong>关注进步：</strong>对比之前的成绩，看是否有进步，而不是只看绝对分数</li>
+                    <li><strong>分析原因：</strong>成绩不理想时，分析是知识点没掌握还是粗心大意</li>
+                    <li><strong>针对性练习：</strong>针对薄弱环节进行专项练习，不要盲目刷题</li>
+                    <li><strong>保持兴趣：</strong>多鼓励孩子，保持对数学学习的兴趣</li>
+                    <li><strong>及时沟通：</strong>遇到问题及时与老师沟通，寻求帮助</li>
+                </ul>
+            </div>
+            
+            <!-- 常见问题解答 -->
+            <div class="section">
+                <h2>❓ 常见问题解答</h2>
+                
+                <div class="highlight-box">
+                    <strong>Q1：孩子测评成绩不理想，怎么办？</strong><br>
+                    A：首先不要责备孩子，和孩子一起分析错题，找出薄弱环节。如果是知识点没掌握，建议重新学习相关内容；如果是粗心，建议培养检查的习惯。
+                </div>
+                
+                <div class="highlight-box">
+                    <strong>Q2：孩子做题速度慢，怎么办？</strong><br>
+                    A：速度需要慢慢培养。建议每天进行限时练习，从简单题开始，逐步提高难度。同时，熟练掌握速算技巧也能提高速度。
+                </div>
+                
+                <div class="highlight-box">
+                    <strong>Q3：孩子总是粗心犯错，怎么办？</strong><br>
+                    A：建议培养以下习惯：1）读题时圈出关键词；2）做完后检查一遍；3）建立错题本，总结常犯的错误类型。
+                </div>
+                
+                <div class="highlight-box">
+                    <strong>Q4：如何帮助孩子复习？</strong><br>
+                    A：建议采用"三步复习法"：1）回顾知识点，看课本和笔记；2）做练习题，检验掌握情况；3）整理错题，总结方法。
+                </div>
+            </div>
+            
+            <!-- 下节课预告 -->
+            <div class="next-lesson">
+                <h3>🚀 第三阶段预告</h3>
+                <p style="font-size: 16px; line-height: 1.8;">
+                    <strong>第17课：数阵图入门</strong><br><br>
+                    第三阶段将进入更高阶的内容：<br>
+                    • 学习数阵图的基本概念<br>
+                    • 掌握填数的方法和技巧<br>
+                    • 培养逻辑推理能力<br><br>
+                    <strong>第18课：巧填算符</strong><br><br>
+                    • 学习在数字间填入运算符号<br>
+                    • 掌握尝试法和倒推法<br>
+                    • 提升综合解题能力<br><br>
+                    建议家长鼓励孩子继续学习，挑战更高难度的题目！
+                </p>
+            </div>
+            
+            <!-- 联系方式 -->
+            <div class="qr-section">
+                <h3>📱 联系夏老师</h3>
+                <div class="contact-info">
+                    <div class="phone-number">📞 19117803360</div>
+                    <div style="font-size: 14px; color: #666; margin-bottom: 15px;">
+                        欢迎随时咨询
+                    </div>
+                    <div class="qr-code">
+                        <img src="../code.jpg" alt="夏老师微信二维码" style="width: 100%; height: 100%; object-fit: contain; border-radius: 5px; display: block;">
+                    </div>
+                </div>
+                <div style="font-size: 14px; color: #666; margin-top: 15px;">
+                    如有任何问题，欢迎随时联系<br>
+                    夏老师将为您提供专业指导
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>二年级思维训练课程 · 让孩子爱上数学</p>
+            <p style="margin-top: 10px;">© 2026 夏老师数学课堂</p>
+        </div>
+    </div>
+</body>
+</html>

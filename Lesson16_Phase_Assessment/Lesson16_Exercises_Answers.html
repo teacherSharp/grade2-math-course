@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第16课 阶段测评 - 练习题答案与解析（教师版）</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section-title {
+            color: #660099;
+            font-size: 24px;
+            margin: 30px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #660099;
+        }
+        
+        .answer-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 5px solid #4CAF50;
+        }
+        
+        .answer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .answer-number {
+            font-size: 20px;
+            font-weight: bold;
+            color: #660099;
+        }
+        
+        .difficulty {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .question-content {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+        }
+        
+        .answer-box {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .answer-label {
+            font-weight: bold;
+            color: #2E7D32;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .solution-box {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            border-left: 4px solid #2196F3;
+            border-radius: 0 10px 10px 0;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .solution-label {
+            font-weight: bold;
+            color: #1976D2;
+            margin-bottom: 10px;
+        }
+        
+        .thinking-box {
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+            border-left: 4px solid #FF9800;
+            border-radius: 0 10px 10px 0;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .thinking-label {
+            font-weight: bold;
+            color: #E65100;
+            margin-bottom: 10px;
+        }
+        
+        .extension-box {
+            background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+            border-left: 4px solid #9C27B0;
+            border-radius: 0 10px 10px 0;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .extension-label {
+            font-weight: bold;
+            color: #7B1FA2;
+            margin-bottom: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #f5f5f5;
+            color: #666;
+        }
+        
+        .emoji {
+            font-size: 24px;
+            margin-right: 5px;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+            border: 2px solid #FF9800;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 16px;
+            color: #E65100;
+        }
+
+        .topic-tag {
+            display: inline-block;
+            background: #660099;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            margin-right: 10px;
+        }
+
+        .bonus-answer {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border: 3px solid #FF9800;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .bonus-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .bonus-header h2 {
+            color: #E65100;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📖 第16课 阶段测评</h1>
+            <p>练习题答案与解析（教师版）</p>
+        </div>
+        
+        <div class="content">
+            <!-- 找规律填数 -->
+            <h2 class="section-title">🔢 一、找规律填数</h2>
+            
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="answer-number"><span class="topic-tag">找规律</span>第1题 ★★☆☆☆</span>
+                    <span class="difficulty">基础巩固</span>
+                </div>
+                <div class="question-content">
+                    3, 6, 9, 12, 15, ( )
+                </div>
+                <div class="answer-box">
+                    <div class="answer-label">📝 标准答案：18</div>
+                </div>
+                <div class="solution-box">
+                    <div class="solution-label">💡 详细解析：</div>
+                    <p>这是一个等差数列，相邻两个数的差都是3。</p>
+                    <p>6 - 3 = 3，9 - 6 = 3，12 - 9 = 3，15 - 12 = 3</p>
+                    <p>所以下一个数是：15 + 3 = <strong>18</strong></p>
+                </div>
+                <div class="thinking-box">
+                    <div class="thinking-label">🎯 思路点评：</div>
+                    <p>找规律填数的基本方法是计算相邻数的差。如果差相等，就是等差数列。</p>
+                </div>
+                <div class="extension-box">
+                    <div class="extension-label">🚀 拓展问题：</div>
+                    <p>如果是递减数列：20, 17, 14, 11, ( )，括号里应该填几？</p>
+                    <p><em>答案：8（公差为-3的等差数列）</em></p>
+                </div>
+            </div>
+            
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="answer-number"><span class="topic-tag">找规律</span>第2题 ★★★☆☆</span>
+                    <span class="difficulty">思维拓展</span>
+                </div>
+                <div class="question-content">
+                    2, 3, 5, 8, 12, ( )
+                </div>
+                <div class="answer-box">
+                    <div class="answer-label">📝 标准答案：17</div>
+                </div>
+                <div class="solution-box">
+                    <div class="solution-label">💡 详细解析：</div>
+                    <p>这是二级等差数列，先算相邻数的差：</p>
+                    <p>3 - 2 = 1，5 - 3 = 2，8 - 5 = 3，12 - 8 = 4</p>
+                    <p>差分别是：1, 2, 3, 4... 下一个差应该是5</p>
+                    <p>所以下一个数是：12 + 5 = <strong>17</strong></p>
+                </div>
+                <div class="thinking-box">
+                    <div class="thinking-label">🎯 思路点评：</div>
+                    <p>二级等差数列需要算两次差。第一次算相邻数的差，第二次看这些差是否有规律。</p>
+                </div>
+                <div class="extension-box">
+                    <div class="extension-label">🚀 拓展问题：</div>
+                    <p>找规律：1, 4, 9, 16, 25, ( )，这是什么数列？</p>
+                    <p><em>答案：36（平方数列：1², 2², 3², 4², 5², 6²）</em></p>
+                </div>
+            </div>
+            
+            <!-- 图形计数 -->
+            <h2 class="section-title">📐 二、图形计数</h2>
+            
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="answer-number"><span class="topic-tag">图形计数</span>第3题 ★★★☆☆</span>
+                    <span class="difficulty">思维拓展</span>
+                </div>
+                <div class="question-content">
+                    一个2×2的方格中，一共有多少个正方形？
+                </div>
+                <div class="answer-box">
+                    <div class="answer-label">📝 标准答案：5个</div>
+                </div>
+                <div class="solution-box">
+                    <div class="solution-label">💡 详细解析：</div>
+                    <p>按正方形大小分类计数：</p>
+                    <p>• 1×1的小正方形：4个</p>
+                    <p>• 2×2的大正方形：1个</p>
+                    <p>总数：4 + 1 = <strong>5个</strong></p>
+                </div>
+                <div class="thinking-box">
+                    <div class="thinking-label">🎯 思路点评：</div>
+                    <p>图形计数要注意分类，按大小分别计数，最后相加。避免漏数或重复。</p>
+                </div>
+                <div class="extension-box">
+                    <div class="extension-label">🚀 拓展问题：</div>
+                    <p>一个3×3的方格中，一共有多少个正方形？</p>
+                    <p><em>答案：14个（9+4+1=14，用公式1²+2²+3²=14）</em></p>
+                </div>
+            </div>
+            
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="answer-number"><span class="topic-tag">图形计数</span>第4题 ★★★★☆</span>
+                    <span class="difficulty">挑战提升</span>
+                </div>
+                <div class="question-content">
+                    数一数，一个2×1的方格中有几个长方形？
+                </div>
+                <div class="answer-box">
+                    <div class="answer-label">📝 标准答案：3个</div>
+                </div>
+                <div class="solution-box">
+                    <div class="solution-label">💡 详细解析：</div>
+                    <p>一个2×1的方格（即横向2格，纵向1格）：</p>
+                    <p>• 1×1的小长方形：2个</p>
+                    <p>• 2×1的大长方形：1个</p>
+                    <p>总数：2 + 1 = <strong>3个</strong></p>
+                    <p>或者用公式：C(3,2) × C(2,2) = 3 × 1 = 3</p>
+                </div>
+                <div class="thinking-box">
+                    <div class="thinking-label">🎯 思路点评：</div>
+                    <p>长方形计数可以用组合公式：横向选2条线，纵向选2条线，组成一个长方形。</p>
+                </div>
+                <div class="extension-box">
+                    <div class="extension-label">🚀 拓展问题：</div>
+                    <p>一个2×2的方格中，一共有多少个长方形？</p>
+                    <p><em>答案：9个（用公式C(3,2)×C(3,2)=3×3=9）</em></p>
+                </div>
+            </div>
+            
+            <!-- 简单应用题 -->
+            <h2 class="section-title">📚 三、简单应用题</h2>
+            
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="answer-number"><span class="topic-tag">应用题</span>第5题 ★★★☆☆</span>
+                    <span class="difficulty">思维拓展</span>
+                </div>
+                <div class="question-content">
+                    小明和小红一共有42颗糖，小明比小红多8颗。小明有多少颗糖？
+                </div>
+                <div class="answer-box">
+                    <div class="answer-label">📝 标准答案：25颗</div>
+                </div>
+                <div class="solution-box">
+                    <div class="solution-label">💡 详细解析：</div>
+                    <p>这是和差问题，用公式：</p>
+                    <p>大数 = (和 + 差) ÷ 2</p>
+                    <p>小明 = (42 + 8) ÷ 2 = 50 ÷ 2 = <strong>25颗</strong></p>
+                    <p>验证：小红 = 42 - 25 = 17颗，25 - 17 = 8颗 ✓</p>
+                </div>
+                <div class="thinking-box">
+                    <div class="thinking-label">🎯 思路点评：</div>
+                    <p>和差问题的关键是记住公式。也可以画线段图帮助理解：先画两条线段，一条比另一条长8，总长度是42。</p>
+                </div>
+                <div class="extension-box">
+                    <div class="extension-label">🚀 拓展问题：</div>
+                    <p>两数之和是60，两数之差是12，这两个数分别是多少？</p>
+                    <p><em>答案：大数36，小数24</em></p>
+                </div>
+            </div>
+            
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="answer-number"><span class="topic-tag">应用题</span>第6题 ★★★★☆</span>
+                    <span class="difficulty">挑战提升</span>
+                </div>
+                <div class="question-content">
+                    哥哥和弟弟一共有50元钱，哥哥的钱是弟弟的4倍。弟弟有多少钱？
+                </div>
+                <div class="answer-box">
+                    <div class="answer-label">📝 标准答案：10元</div>
+                </div>
+                <div class="solution-box">
+                    <div class="solution-label">💡 详细解析：</div>
+                    <p>这是和倍问题，把弟弟的钱看作1份，哥哥就是4份。</p>
+                    <p>总份数：1 + 4 = 5份</p>
+                    <p>每份：50 ÷ 5 = 10元</p>
+                    <p>弟弟 = 1份 = <strong>10元</strong></p>
+                    <p>哥哥 = 4份 = 40元</p>
+                    <p>验证：10 + 40 = 50元，40 ÷ 10 = 4倍 ✓</p>
+                </div>
+                <div class="thinking-box">
+                    <div class="thinking-label">🎯 思路点评：</div>
+                    <p>和倍问题的关键是确定"1份"是多少。画线段图时，先画1份，再画多份。</p>
+                </div>
+                <div class="extension-box">
+                    <div class="extension-label">🚀 拓展问题：</div>
+                    <p>甲乙两数之和是72，甲数是乙数的3倍。甲乙各是多少？</p>
+                    <p><em>答案：甲54，乙18</em></p>
+                </div>
+            </div>
+            
+            <!-- 趣味速算 -->
+            <h2 class="section-title">⚡ 四、趣味速算</h2>
+            
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="answer-number"><span class="topic-tag">速算</span>第7题 ★★☆☆☆</span>
+                    <span class="difficulty">基础巩固</span>
+                </div>
+                <div class="question-content">
+                    巧算：99 + 36 = ?
+                </div>
+                <div class="answer-box">
+                    <div class="answer-label">📝 标准答案：135</div>
+                </div>
+                <div class="solution-box">
+                    <div class="solution-label">💡 详细解析：</div>
+                    <p>用凑整法，把99看作100：</p>
+                    <p>99 + 36 = 100 + 36 - 1 = 136 - 1 = <strong>135</strong></p>
+                </div>
+                <div class="thinking-box">
+                    <div class="thinking-label">🎯 思路点评：</div>
+                    <p>凑整法是速算的基本技巧。看到接近整十整百的数，先按整十整百算，再调整。</p>
+                </div>
+            </div>
+            
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="answer-number"><span class="topic-tag">速算</span>第8题 ★★★☆☆</span>
+                    <span class="difficulty">思维拓展</span>
+                </div>
+                <div class="question-content">
+                    巧算：48 + 55 + 52 = ?
+                </div>
+                <div class="answer-box">
+                    <div class="answer-label">📝 标准答案：155</div>
+                </div>
+                <div class="solution-box">
+                    <div class="solution-label">💡 详细解析：</div>
+                    <p>用带符号搬家，先算48 + 52：</p>
+                    <p>48 + 55 + 52 = 48 + 52 + 55 = 100 + 55 = <strong>155</strong></p>
+                </div>
+                <div class="thinking-box">
+                    <div class="thinking-label">🎯 思路点评：</div>
+                    <p>加法可以交换位置（带符号搬家）。观察哪些数相加能得到整十整百，优先计算。</p>
+                </div>
+            </div>
+            
+            <!-- 间隔问题 -->
+            <h2 class="section-title">🌳 五、间隔问题</h2>
+            
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="answer-number"><span class="topic-tag">间隔</span>第9题 ★★★☆☆</span>
+                    <span class="difficulty">思维拓展</span>
+                </div>
+                <div class="question-content">
+                    在一条长30米的小路一边种树，每隔5米种一棵，两端都种，一共要种几棵树？
+                </div>
+                <div class="answer-box">
+                    <div class="answer-label">📝 标准答案：7棵</div>
+                </div>
+                <div class="solution-box">
+                    <div class="solution-label">💡 详细解析：</div>
+                    <p>先算段数：30 ÷ 5 = 6段</p>
+                    <p>两端都种，棵数 = 段数 + 1</p>
+                    <p>棵数 = 6 + 1 = <strong>7棵</strong></p>
+                </div>
+                <div class="thinking-box">
+                    <div class="thinking-label">🎯 思路点评：</div>
+                    <p>植树问题的关键是区分"两端都种"、"两端都不种"、"只种一端"三种情况。两端都种时，棵数 = 段数 + 1。</p>
+                </div>
+            </div>
+            
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="answer-number"><span class="topic-tag">间隔</span>第10题 ★★★★☆</span>
+                    <span class="difficulty">挑战提升</span>
+                </div>
+                <div class="question-content">
+                    时钟敲6下用了10秒，敲11下要用几秒？
+                </div>
+                <div class="answer-box">
+                    <div class="answer-label">📝 标准答案：20秒</div>
+                </div>
+                <div class="solution-box">
+                    <div class="solution-label">💡 详细解析：</div>
+                    <p>敲6下有5个间隔（6-1=5）</p>
+                    <p>每个间隔时间：10 ÷ 5 = 2秒</p>
+                    <p>敲11下有10个间隔（11-1=10）</p>
+                    <p>总时间：10 × 2 = <strong>20秒</strong></p>
+                </div>
+                <div class="thinking-box">
+                    <div class="thinking-label">🎯 思路点评：</div>
+                    <p>敲钟问题属于间隔问题。敲n下有(n-1)个间隔。先求每个间隔的时间，再算总时间。</p>
+                </div>
+            </div>
+            
+            <!-- 年龄问题 -->
+            <h2 class="section-title">👨‍👩‍👧 六、年龄问题</h2>
+            
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="answer-number"><span class="topic-tag">年龄</span>第11题 ★★★☆☆</span>
+                    <span class="difficulty">思维拓展</span>
+                </div>
+                <div class="question-content">
+                    妈妈今年32岁，女儿今年6岁。5年前，妈妈比女儿大几岁？
+                </div>
+                <div class="answer-box">
+                    <div class="answer-label">📝 标准答案：26岁</div>
+                </div>
+                <div class="solution-box">
+                    <div class="solution-label">💡 详细解析：</div>
+                    <p>年龄差永远不变！</p>
+                    <p>现在年龄差：32 - 6 = 26岁</p>
+                    <p>5年前年龄差：<strong>26岁</strong>（不变）</p>
+                    <p>验证：5年前妈妈27岁，女儿1岁，27-1=26岁 ✓</p>
+                </div>
+                <div class="thinking-box">
+                    <div class="thinking-label">🎯 思路点评：</div>
+                    <p>年龄问题的核心原理：年龄差永远不变！无论过多少年，两人的年龄差始终相同。</p>
+                </div>
+            </div>
+            
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="answer-number"><span class="topic-tag">年龄</span>第12题 ★★★★☆</span>
+                    <span class="difficulty">挑战提升</span>
+                </div>
+                <div class="question-content">
+                    爸爸今年38岁，儿子今年10岁。几年前，爸爸的年龄是儿子的5倍？
+                </div>
+                <div class="answer-box">
+                    <div class="answer-label">📝 标准答案：3年前</div>
+                </div>
+                <div class="solution-box">
+                    <div class="solution-label">💡 详细解析：</div>
+                    <p>年龄差：38 - 10 = 28岁（永远不变）</p>
+                    <p>当爸爸年龄是儿子5倍时：</p>
+                    <p>年龄差 = 5份 - 1份 = 4份</p>
+                    <p>1份 = 28 ÷ 4 = 7岁（儿子那时的年龄）</p>
+                    <p>那是几年前：10 - 7 = <strong>3年前</strong></p>
+                    <p>验证：3年前爸爸35岁，儿子7岁，35÷7=5倍 ✓</p>
+                </div>
+                <div class="thinking-box">
+                    <div class="thinking-label">🎯 思路点评：</div>
+                    <p>年龄问题中，倍数关系会变化，但年龄差永远不变。利用这个不变量可以解决问题。</p>
+                </div>
+            </div>
+            
+            <!-- 移多补少 -->
+            <h2 class="section-title">⚖️ 七、移多补少</h2>
+            
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="answer-number"><span class="topic-tag">移多补少</span>第13题 ★★★☆☆</span>
+                    <span class="difficulty">思维拓展</span>
+                </div>
+                <div class="question-content">
+                    第一堆有20个苹果，第二堆有12个苹果。从第一堆拿几个到第二堆，两堆就一样多了？
+                </div>
+                <div class="answer-box">
+                    <div class="answer-label">📝 标准答案：4个</div>
+                </div>
+                <div class="solution-box">
+                    <div class="solution-label">💡 详细解析：</div>
+                    <p>差额：20 - 12 = 8个</p>
+                    <p>移动量 = 差额 ÷ 2 = 8 ÷ 2 = <strong>4个</strong></p>
+                    <p>验证：第一堆20-4=16个，第二堆12+4=16个 ✓</p>
+                </div>
+                <div class="thinking-box">
+                    <div class="thinking-label">🎯 思路点评：</div>
+                    <p>移多补少的黄金法则：多多少，给一半。移动量 = 差额 ÷ 2。</p>
+                </div>
+            </div>
+            
+            <div class="answer-card">
+                <div class="answer-header">
+                    <span class="answer-number"><span class="topic-tag">移多补少</span>第14题 ★★★★☆</span>
+                    <span class="difficulty">挑战提升</span>
+                </div>
+                <div class="question-content">
+                    小明给小红6本书后，两人都有18本书。原来小明比小红多几本书？
+                </div>
+                <div class="answer-box">
+                    <div class="answer-label">📝 标准答案：12本</div>
+                </div>
+                <div class="solution-box">
+                    <div class="solution-label">💡 详细解析：</div>
+                    <p>逆向思维：给出去的要加回来，收到的要还回去</p>
+                    <p>小明原来：18 + 6 = 24本</p>
+                    <p>小红原来：18 - 6 = 12本</p>
+                    <p>原来相差：24 - 12 = <strong>12本</strong></p>
+                    <p>或者用公式：差额 = 移动量 × 2 = 6 × 2 = 12本</p>
+                </div>
+                <div class="thinking-box">
+                    <div class="thinking-label">🎯 思路点评：</div>
+                    <p>逆向思维问题，从现在倒推原来。记住：给出去的加回来，收到的还回去。</p>
+                </div>
+            </div>
+            
+            <!-- 附加题 -->
+            <div class="bonus-answer">
+                <div class="bonus-header">
+                    <h2>🌟 附加题（巅峰难度）</h2>
+                </div>
+                <div class="question-content" style="font-size: 18px; line-height: 1.8;">
+                    一个正方形花坛，每边种5棵树，四个角都种。一共种了多少棵树？<br>
+                    如果每两棵树之间相距2米，这个花坛的周长是多少米？
+                </div>
+                <div class="answer-box">
+                    <div class="answer-label">📝 标准答案：树16棵，周长32米</div>
+                </div>
+                <div class="solution-box">
+                    <div class="solution-label">💡 详细解析：</div>
+                    <p><strong>第一问：树的总数</strong></p>
+                    <p>方法一：每边5棵，4边共5×4=20棵，但四个角的树被重复计算了（每个角算了2次），所以减去4棵。</p>
+                    <p>总数 = 20 - 4 = <strong>16棵</strong></p>
+                    <p>方法二：每边除去两个角，中间有3棵。4个角4棵，中间4×3=12棵。总数=4+12=<strong>16棵</strong></p>
+                    <br>
+                    <p><strong>第二问：周长</strong></p>
+                    <p>每边有5棵树，有4个间隔（5-1=4）</p>
+                    <p>每边长度：4 × 2 = 8米</p>
+                    <p>周长：8 × 4 = <strong>32米</strong></p>
+                </div>
+                <div class="thinking-box">
+                    <div class="thinking-label">🎯 思路点评：</div>
+                    <p>封闭图形（正方形）的植树问题：棵数 = 每边棵数 × 边数 - 角上重复计算的棵数。或者理解为：每边的间隔数 × 边数 = 总棵数。</p>
+                </div>
+                <div class="extension-box">
+                    <div class="extension-label">🚀 拓展问题：</div>
+                    <p>一个正方形花坛，每边种6棵树，四个角都种。一共种了多少棵树？周长是多少？（假设每两棵树相距3米）</p>
+                    <p><em>答案：树20棵，周长60米</em></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>📖 本答案仅供教师参考使用</p>
+            <p style="margin-top: 10px;">© 2026 二年级思维训练课程 · 教师版</p>
+        </div>
+    </div>
+</body>
+</html>
