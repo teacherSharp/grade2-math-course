@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第10课 图形计数进阶 - 课后练习题</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .question-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 5px solid #660099;
+        }
+        
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .question-number {
+            font-size: 20px;
+            font-weight: bold;
+            color: #660099;
+        }
+        
+        .star-rating {
+            color: #ffc107;
+            font-size: 18px;
+        }
+        
+        .difficulty {
+            font-size: 14px;
+            color: #666;
+            background: #e0e0e0;
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+        
+        .question-content {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .grid-display {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .grid-svg {
+            border: 2px solid #333;
+        }
+        
+        .answer-section {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+        
+        .answer-label {
+            font-weight: bold;
+            color: #660099;
+            margin-bottom: 10px;
+        }
+        
+        .answer-input {
+            width: 120px;
+            padding: 12px;
+            font-size: 18px;
+            border: 3px solid #660099;
+            border-radius: 8px;
+            text-align: center;
+            margin-right: 10px;
+        }
+        
+        .answer-input.correct {
+            border-color: #4CAF50;
+            background: #E8F5E9;
+        }
+        
+        .answer-input.wrong {
+            border-color: #f44336;
+            background: #FFEBEE;
+        }
+        
+        .check-btn {
+            padding: 12px 25px;
+            font-size: 16px;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .check-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .analysis-btn {
+            padding: 8px 20px;
+            font-size: 14px;
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+        
+        .analysis-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .feedback {
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .feedback.correct {
+            background: #E8F5E9;
+            color: #2E7D32;
+            border: 2px solid #4CAF50;
+            display: block;
+        }
+        
+        .feedback.wrong {
+            background: #FFEBEE;
+            color: #C62828;
+            border: 2px solid #f44336;
+            display: block;
+        }
+        
+        .analysis {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            border-left: 5px solid #2196F3;
+            border-radius: 0 10px 10px 0;
+            padding: 20px;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .analysis.show {
+            display: block;
+        }
+        
+        .analysis h4 {
+            color: #1976D2;
+            margin-bottom: 10px;
+        }
+        
+        .bonus-question {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border: 3px solid #FF9800;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+        
+        .bonus-question .question-header {
+            border-bottom: 2px solid #FF9800;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .bonus-question .question-number {
+            color: #FF9800;
+            font-size: 24px;
+        }
+        
+        .emoji {
+            font-size: 24px;
+            margin-right: 5px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #f5f5f5;
+            color: #666;
+        }
+
+        .hint-text {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📐 第10课 图形计数进阶</h1>
+            <p>课后练习题 | 思维训练课程</p>
+        </div>
+        
+        <div class="content">
+            <!-- 第1题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">🔷</span>第1题 <span class="star-rating">★☆☆☆☆</span></span>
+                    <span class="difficulty">基础巩固</span>
+                </div>
+                <div class="question-content">
+                    数一数，下面的图形中有多少个正方形？<br>
+                    <div class="grid-display">
+                        <svg class="grid-svg" width="102" height="102">
+                            <line x1="0" y1="0" x2="100" y2="0" stroke="#333" stroke-width="2"/>
+                            <line x1="0" y1="100" x2="100" y2="100" stroke="#333" stroke-width="2"/>
+                            <line x1="0" y1="0" x2="0" y2="100" stroke="#333" stroke-width="2"/>
+                            <line x1="100" y1="0" x2="100" y2="100" stroke="#333" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <p class="hint-text">💡 提示：这是1×1的方格</p>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" id="q1_answer" placeholder="填入数字">
+                    <button class="check-btn" onclick="checkAnswer('q1', '1', 'feedback1')">检查答案</button>
+                    <button class="analysis-btn" onclick="toggleAnalysis('analysis1')">查看解析</button>
+                    <div class="feedback" id="feedback1"></div>
+                    <div class="analysis" id="analysis1">
+                        <h4>📊 解析</h4>
+                        <p>这是一个1×1的方格，只有1个正方形。</p>
+                        <p>使用公式：1² = 1</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第2题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">🔷</span>第2题 <span class="star-rating">★☆☆☆☆</span></span>
+                    <span class="difficulty">基础巩固</span>
+                </div>
+                <div class="question-content">
+                    数一数，下面的图形中有多少个正方形？<br>
+                    <div class="grid-display">
+                        <svg class="grid-svg" width="102" height="102">
+                            <line x1="0" y1="0" x2="100" y2="0" stroke="#333" stroke-width="2"/>
+                            <line x1="0" y1="50" x2="100" y2="50" stroke="#333" stroke-width="1"/>
+                            <line x1="0" y1="100" x2="100" y2="100" stroke="#333" stroke-width="2"/>
+                            <line x1="0" y1="0" x2="0" y2="100" stroke="#333" stroke-width="2"/>
+                            <line x1="50" y1="0" x2="50" y2="100" stroke="#333" stroke-width="1"/>
+                            <line x1="100" y1="0" x2="100" y2="100" stroke="#333" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <p class="hint-text">💡 提示：按大小分类计数</p>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" id="q2_answer" placeholder="填入数字">
+                    <button class="check-btn" onclick="checkAnswer('q2', '5', 'feedback2')">检查答案</button>
+                    <button class="analysis-btn" onclick="toggleAnalysis('analysis2')">查看解析</button>
+                    <div class="feedback" id="feedback2"></div>
+                    <div class="analysis" id="analysis2">
+                        <h4>📊 解析</h4>
+                        <p>这是一个2×2的方格：</p>
+                        <p>• 1×1的小正方形：4个</p>
+                        <p>• 2×2的大正方形：1个</p>
+                        <p>总计：4 + 1 = 5个</p>
+                        <p>使用公式：1² + 2² = 1 + 4 = 5</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第3题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">🔷</span>第3题 <span class="star-rating">★★☆☆☆</span></span>
+                    <span class="difficulty">思维拓展</span>
+                </div>
+                <div class="question-content">
+                    数一数，下面的图形中有多少个正方形？<br>
+                    <div class="grid-display">
+                        <svg class="grid-svg" width="152" height="152">
+                            <line x1="0" y1="0" x2="150" y2="0" stroke="#333" stroke-width="2"/>
+                            <line x1="0" y1="50" x2="150" y2="50" stroke="#333" stroke-width="1"/>
+                            <line x1="0" y1="100" x2="150" y2="100" stroke="#333" stroke-width="1"/>
+                            <line x1="0" y1="150" x2="150" y2="150" stroke="#333" stroke-width="2"/>
+                            <line x1="0" y1="0" x2="0" y2="150" stroke="#333" stroke-width="2"/>
+                            <line x1="50" y1="0" x2="50" y2="150" stroke="#333" stroke-width="1"/>
+                            <line x1="100" y1="0" x2="100" y2="150" stroke="#333" stroke-width="1"/>
+                            <line x1="150" y1="0" x2="150" y2="150" stroke="#333" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <p class="hint-text">💡 提示：按1×1、2×2、3×3分类</p>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" id="q3_answer" placeholder="填入数字">
+                    <button class="check-btn" onclick="checkAnswer('q3', '14', 'feedback3')">检查答案</button>
+                    <button class="analysis-btn" onclick="toggleAnalysis('analysis3')">查看解析</button>
+                    <div class="feedback" id="feedback3"></div>
+                    <div class="analysis" id="analysis3">
+                        <h4>📊 解析</h4>
+                        <p>这是一个3×3的方格：</p>
+                        <p>• 1×1的小正方形：9个</p>
+                        <p>• 2×2的正方形：4个</p>
+                        <p>• 3×3的大正方形：1个</p>
+                        <p>总计：9 + 4 + 1 = 14个</p>
+                        <p>使用公式：1² + 2² + 3² = 1 + 4 + 9 = 14</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第4题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">📐</span>第4题 <span class="star-rating">★★☆☆☆</span></span>
+                    <span class="difficulty">思维拓展</span>
+                </div>
+                <div class="question-content">
+                    数一数，下面的长方形网格中有多少个长方形？<br>
+                    <div class="grid-display">
+                        <svg class="grid-svg" width="152" height="52">
+                            <line x1="0" y1="0" x2="150" y2="0" stroke="#333" stroke-width="2"/>
+                            <line x1="0" y1="50" x2="150" y2="50" stroke="#333" stroke-width="2"/>
+                            <line x1="0" y1="0" x2="0" y2="50" stroke="#333" stroke-width="2"/>
+                            <line x1="75" y1="0" x2="75" y2="50" stroke="#333" stroke-width="1"/>
+                            <line x1="150" y1="0" x2="150" y2="50" stroke="#333" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <p class="hint-text">💡 提示：横向3条线，纵向2条线</p>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" id="q4_answer" placeholder="填入数字">
+                    <button class="check-btn" onclick="checkAnswer('q4', '3', 'feedback4')">检查答案</button>
+                    <button class="analysis-btn" onclick="toggleAnalysis('analysis4')">查看解析</button>
+                    <div class="feedback" id="feedback4"></div>
+                    <div class="analysis" id="analysis4">
+                        <h4>📊 解析</h4>
+                        <p>横向有3条线，选2条的组合数：3×2÷2 = 3</p>
+                        <p>纵向有2条线，选2条的组合数：2×1÷2 = 1</p>
+                        <p>长方形总数：3 × 1 = 3个</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第5题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">📐</span>第5题 <span class="star-rating">★★★☆☆</span></span>
+                    <span class="difficulty">挑战提升</span>
+                </div>
+                <div class="question-content">
+                    数一数，下面的长方形网格中有多少个长方形？<br>
+                    <div class="grid-display">
+                        <svg class="grid-svg" width="152" height="102">
+                            <line x1="0" y1="0" x2="150" y2="0" stroke="#333" stroke-width="2"/>
+                            <line x1="0" y1="50" x2="150" y2="50" stroke="#333" stroke-width="1"/>
+                            <line x1="0" y1="100" x2="150" y2="100" stroke="#333" stroke-width="2"/>
+                            <line x1="0" y1="0" x2="0" y2="100" stroke="#333" stroke-width="2"/>
+                            <line x1="75" y1="0" x2="75" y2="100" stroke="#333" stroke-width="1"/>
+                            <line x1="150" y1="0" x2="150" y2="100" stroke="#333" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <p class="hint-text">💡 提示：横向3条线，纵向3条线</p>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" id="q5_answer" placeholder="填入数字">
+                    <button class="check-btn" onclick="checkAnswer('q5', '9', 'feedback5')">检查答案</button>
+                    <button class="analysis-btn" onclick="toggleAnalysis('analysis5')">查看解析</button>
+                    <div class="feedback" id="feedback5"></div>
+                    <div class="analysis" id="analysis5">
+                        <h4>📊 解析</h4>
+                        <p>横向有3条线，选2条的组合数：3×2÷2 = 3</p>
+                        <p>纵向有3条线，选2条的组合数：3×2÷2 = 3</p>
+                        <p>长方形总数：3 × 3 = 9个</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第6题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">📐</span>第6题 <span class="star-rating">★★★☆☆</span></span>
+                    <span class="difficulty">挑战提升</span>
+                </div>
+                <div class="question-content">
+                    数一数，下面的正方形网格中有多少个长方形？（包括正方形）<br>
+                    <div class="grid-display">
+                        <svg class="grid-svg" width="102" height="102">
+                            <line x1="0" y1="0" x2="100" y2="0" stroke="#333" stroke-width="2"/>
+                            <line x1="0" y1="50" x2="100" y2="50" stroke="#333" stroke-width="1"/>
+                            <line x1="0" y1="100" x2="100" y2="100" stroke="#333" stroke-width="2"/>
+                            <line x1="0" y1="0" x2="0" y2="100" stroke="#333" stroke-width="2"/>
+                            <line x1="50" y1="0" x2="50" y2="100" stroke="#333" stroke-width="1"/>
+                            <line x1="100" y1="0" x2="100" y2="100" stroke="#333" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <p class="hint-text">💡 提示：正方形也是特殊的长方形</p>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" id="q6_answer" placeholder="填入数字">
+                    <button class="check-btn" onclick="checkAnswer('q6', '9', 'feedback6')">检查答案</button>
+                    <button class="analysis-btn" onclick="toggleAnalysis('analysis6')">查看解析</button>
+                    <div class="feedback" id="feedback6"></div>
+                    <div class="analysis" id="analysis6">
+                        <h4>📊 解析</h4>
+                        <p>横向有3条线，选2条的组合数：3×2÷2 = 3</p>
+                        <p>纵向有3条线，选2条的组合数：3×2÷2 = 3</p>
+                        <p>长方形总数：3 × 3 = 9个</p>
+                        <p>（包括4个1×1小正方形、1个2×2大正方形、4个长方形）</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第7题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">🔷</span>第7题 <span class="star-rating">★★★★☆</span></span>
+                    <span class="difficulty">烧脑挑战</span>
+                </div>
+                <div class="question-content">
+                    数一数，下面的图形中有多少个正方形？<br>
+                    <div class="grid-display">
+                        <svg class="grid-svg" width="202" height="202">
+                            <line x1="0" y1="0" x2="200" y2="0" stroke="#333" stroke-width="2"/>
+                            <line x1="0" y1="50" x2="200" y2="50" stroke="#333" stroke-width="1"/>
+                            <line x1="0" y1="100" x2="200" y2="100" stroke="#333" stroke-width="1"/>
+                            <line x1="0" y1="150" x2="200" y2="150" stroke="#333" stroke-width="1"/>
+                            <line x1="0" y1="200" x2="200" y2="200" stroke="#333" stroke-width="2"/>
+                            <line x1="0" y1="0" x2="0" y2="200" stroke="#333" stroke-width="2"/>
+                            <line x1="50" y1="0" x2="50" y2="200" stroke="#333" stroke-width="1"/>
+                            <line x1="100" y1="0" x2="100" y2="200" stroke="#333" stroke-width="1"/>
+                            <line x1="150" y1="0" x2="150" y2="200" stroke="#333" stroke-width="1"/>
+                            <line x1="200" y1="0" x2="200" y2="200" stroke="#333" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <p class="hint-text">💡 提示：使用公式1²+2²+3²+4²</p>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" id="q7_answer" placeholder="填入数字">
+                    <button class="check-btn" onclick="checkAnswer('q7', '30', 'feedback7')">检查答案</button>
+                    <button class="analysis-btn" onclick="toggleAnalysis('analysis7')">查看解析</button>
+                    <div class="feedback" id="feedback7"></div>
+                    <div class="analysis" id="analysis7">
+                        <h4>📊 解析</h4>
+                        <p>这是一个4×4的方格：</p>
+                        <p>• 1×1的小正方形：16个</p>
+                        <p>• 2×2的正方形：9个</p>
+                        <p>• 3×3的正方形：4个</p>
+                        <p>• 4×4的大正方形：1个</p>
+                        <p>总计：16 + 9 + 4 + 1 = 30个</p>
+                        <p>使用公式：1² + 2² + 3² + 4² = 1 + 4 + 9 + 16 = 30</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第8题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">📐</span>第8题 <span class="star-rating">★★★★☆</span></span>
+                    <span class="difficulty">烧脑挑战</span>
+                </div>
+                <div class="question-content">
+                    数一数，下面的长方形网格中有多少个长方形？<br>
+                    <div class="grid-display">
+                        <svg class="grid-svg" width="152" height="152">
+                            <line x1="0" y1="0" x2="150" y2="0" stroke="#333" stroke-width="2"/>
+                            <line x1="0" y1="50" x2="150" y2="50" stroke="#333" stroke-width="1"/>
+                            <line x1="0" y1="100" x2="150" y2="100" stroke="#333" stroke-width="1"/>
+                            <line x1="0" y1="150" x2="150" y2="150" stroke="#333" stroke-width="2"/>
+                            <line x1="0" y1="0" x2="0" y2="150" stroke="#333" stroke-width="2"/>
+                            <line x1="50" y1="0" x2="50" y2="150" stroke="#333" stroke-width="1"/>
+                            <line x1="100" y1="0" x2="100" y2="150" stroke="#333" stroke-width="1"/>
+                            <line x1="150" y1="0" x2="150" y2="150" stroke="#333" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <p class="hint-text">💡 提示：横向4条线，纵向4条线</p>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" id="q8_answer" placeholder="填入数字">
+                    <button class="check-btn" onclick="checkAnswer('q8', '36', 'feedback8')">检查答案</button>
+                    <button class="analysis-btn" onclick="toggleAnalysis('analysis8')">查看解析</button>
+                    <div class="feedback" id="feedback8"></div>
+                    <div class="analysis" id="analysis8">
+                        <h4>📊 解析</h4>
+                        <p>横向有4条线，选2条的组合数：4×3÷2 = 6</p>
+                        <p>纵向有4条线，选2条的组合数：4×3÷2 = 6</p>
+                        <p>长方形总数：6 × 6 = 36个</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第9题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">🔷</span>第9题 <span class="star-rating">★★★★★</span></span>
+                    <span class="difficulty">终极挑战</span>
+                </div>
+                <div class="question-content">
+                    下面的图形由两个2×2的正方形重叠组成，重叠部分是1×1的正方形。这个图形中一共有多少个正方形？<br>
+                    <div class="grid-display">
+                        <svg class="grid-svg" width="152" height="102">
+                            <!-- 第一个正方形 -->
+                            <rect x="0" y="0" width="100" height="100" fill="rgba(255,0,0,0.1)" stroke="red" stroke-width="2"/>
+                            <line x1="50" y1="0" x2="50" y2="100" stroke="#333" stroke-width="1"/>
+                            <line x1="0" y1="50" x2="100" y2="50" stroke="#333" stroke-width="1"/>
+                            
+                            <!-- 第二个正方形 -->
+                            <rect x="50" y="0" width="100" height="100" fill="rgba(0,0,255,0.1)" stroke="blue" stroke-width="2"/>
+                            <line x1="100" y1="0" x2="100" y2="100" stroke="#333" stroke-width="1"/>
+                            <line x1="50" y1="50" x2="150" y2="50" stroke="#333" stroke-width="1"/>
+                            
+                            <!-- 重叠部分 -->
+                            <rect x="50" y="0" width="50" height="100" fill="rgba(128,0,128,0.2)" stroke="purple" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <p class="hint-text">💡 提示：使用容斥原理，注意重叠部分</p>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" id="q9_answer" placeholder="填入数字">
+                    <button class="check-btn" onclick="checkAnswer('q9', '8', 'feedback9')">检查答案</button>
+                    <button class="analysis-btn" onclick="toggleAnalysis('analysis9')">查看解析</button>
+                    <div class="feedback" id="feedback9"></div>
+                    <div class="analysis" id="analysis9">
+                        <h4>📊 解析</h4>
+                        <p>使用容斥原理：</p>
+                        <p>• 左边正方形（红色）：5个正方形（4小+1大）</p>
+                        <p>• 右边正方形（蓝色）：5个正方形（4小+1大）</p>
+                        <p>• 重叠部分（紫色）：2个正方形（2小，没有大正方形）</p>
+                        <p>总计：5 + 5 - 2 = 8个</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第10题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">📐</span>第10题 <span class="star-rating">★★★★★</span></span>
+                    <span class="difficulty">终极挑战</span>
+                </div>
+                <div class="question-content">
+                    数一数，下面的"田"字形图形中有多少个长方形？<br>
+                    <div class="grid-display">
+                        <svg class="grid-svg" width="102" height="102">
+                            <line x1="0" y1="0" x2="100" y2="0" stroke="#333" stroke-width="2"/>
+                            <line x1="0" y1="50" x2="100" y2="50" stroke="#333" stroke-width="2"/>
+                            <line x1="0" y1="100" x2="100" y2="100" stroke="#333" stroke-width="2"/>
+                            <line x1="0" y1="0" x2="0" y2="100" stroke="#333" stroke-width="2"/>
+                            <line x1="50" y1="0" x2="50" y2="100" stroke="#333" stroke-width="2"/>
+                            <line x1="100" y1="0" x2="100" y2="100" stroke="#333" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <p class="hint-text">💡 提示：横向3条线，纵向3条线，但要注意中间的线比较粗</p>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" id="q10_answer" placeholder="填入数字">
+                    <button class="check-btn" onclick="checkAnswer('q10', '9', 'feedback10')">检查答案</button>
+                    <button class="analysis-btn" onclick="toggleAnalysis('analysis10')">查看解析</button>
+                    <div class="feedback" id="feedback10"></div>
+                    <div class="analysis" id="analysis10">
+                        <h4>📊 解析</h4>
+                        <p>这是一个2×2的方格（"田"字形）：</p>
+                        <p>横向有3条线，选2条的组合数：3×2÷2 = 3</p>
+                        <p>纵向有3条线，选2条的组合数：3×2÷2 = 3</p>
+                        <p>长方形总数：3 × 3 = 9个</p>
+                        <p>包括：4个1×1小正方形、1个2×2大正方形、4个长方形（2横2竖）</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 附加题 -->
+            <div class="bonus-question">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">🌟</span>附加题（思维拓展）</span>
+                    <span class="difficulty" style="background: #FF9800; color: white;">拔高挑战</span>
+                </div>
+                <div class="question-content">
+                    数一数，下面的5×5方格中有多少个正方形？<br>
+                    <div class="grid-display">
+                        <svg class="grid-svg" width="252" height="252">
+                            <!-- 横线 -->
+                            <line x1="0" y1="0" x2="250" y2="0" stroke="#333" stroke-width="2"/>
+                            <line x1="0" y1="50" x2="250" y2="50" stroke="#333" stroke-width="1"/>
+                            <line x1="0" y1="100" x2="250" y2="100" stroke="#333" stroke-width="1"/>
+                            <line x1="0" y1="150" x2="250" y2="150" stroke="#333" stroke-width="1"/>
+                            <line x1="0" y1="200" x2="250" y2="200" stroke="#333" stroke-width="1"/>
+                            <line x1="0" y1="250" x2="250" y2="250" stroke="#333" stroke-width="2"/>
+                            <!-- 竖线 -->
+                            <line x1="0" y1="0" x2="0" y2="250" stroke="#333" stroke-width="2"/>
+                            <line x1="50" y1="0" x2="50" y2="250" stroke="#333" stroke-width="1"/>
+                            <line x1="100" y1="0" x2="100" y2="250" stroke="#333" stroke-width="1"/>
+                            <line x1="150" y1="0" x2="150" y2="250" stroke="#333" stroke-width="1"/>
+                            <line x1="200" y1="0" x2="200" y2="250" stroke="#333" stroke-width="1"/>
+                            <line x1="250" y1="0" x2="250" y2="250" stroke="#333" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <p class="hint-text">💡 提示：使用公式1²+2²+3²+4²+5²，或者n(n+1)(2n+1)÷6</p>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" id="bonus_answer" placeholder="填入数字">
+                    <button class="check-btn" onclick="checkAnswer('bonus', '55', 'feedback_bonus')">检查答案</button>
+                    <button class="analysis-btn" onclick="toggleAnalysis('analysis_bonus')">查看解析</button>
+                    <div class="feedback" id="feedback_bonus"></div>
+                    <div class="analysis" id="analysis_bonus">
+                        <h4>📊 解析</h4>
+                        <p>这是一个5×5的方格：</p>
+                        <p>• 1×1的小正方形：25个</p>
+                        <p>• 2×2的正方形：16个</p>
+                        <p>• 3×3的正方形：9个</p>
+                        <p>• 4×4的正方形：4个</p>
+                        <p>• 5×5的大正方形：1个</p>
+                        <p>总计：25 + 16 + 9 + 4 + 1 = 55个</p>
+                        <p>使用公式：1² + 2² + 3² + 4² + 5² = 55</p>
+                        <p>或使用公式：n(n+1)(2n+1)÷6 = 5×6×11÷6 = 55</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>🌟 完成练习后，可以对照答案检查，不懂的地方可以问老师哦！</p>
+            <p style="margin-top: 10px;">建议用时：30-45分钟</p>
+        </div>
+    </div>
+
+    <script>
+        function checkAnswer(questionId, correctAnswer, feedbackId) {
+            const input = document.getElementById(questionId + '_answer');
+            const feedback = document.getElementById(feedbackId);
+            const userAnswer = input.value.trim();
+            
+            if (userAnswer === correctAnswer) {
+                input.classList.add('correct');
+                input.classList.remove('wrong');
+                feedback.className = 'feedback correct';
+                feedback.innerHTML = '🎉 太棒了！答案正确！';
+            } else {
+                input.classList.add('wrong');
+                input.classList.remove('correct');
+                feedback.className = 'feedback wrong';
+                feedback.innerHTML = '❌ 答案不正确，再仔细思考一下。可以点击"查看解析"获得提示。';
+                
+                setTimeout(() => {
+                    input.classList.remove('wrong');
+                }, 2000);
+            }
+        }
+        
+        function toggleAnalysis(analysisId) {
+            const analysis = document.getElementById(analysisId);
+            analysis.classList.toggle('show');
+        }
+    </script>
+</body>
+</html>

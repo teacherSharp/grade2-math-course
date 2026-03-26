@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第10课 图形计数进阶 - 家长协同方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 35px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #660099;
+        }
+        
+        .section h2 {
+            color: #660099;
+            font-size: 24px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section p, .section li {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+        }
+        
+        .section ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .section li {
+            margin-bottom: 8px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #2196F3;
+        }
+        
+        .tip-box {
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #FF9800;
+        }
+        
+        .activity-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        .activity-card h3 {
+            color: #660099;
+            margin-bottom: 10px;
+        }
+        
+        .qr-section {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .qr-section h3 {
+            color: #660099;
+            margin-bottom: 15px;
+        }
+        
+        .qr-text {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+        }
+        
+        .next-lesson {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid #4CAF50;
+        }
+        
+        .next-lesson h3 {
+            color: #2E7D32;
+            margin-bottom: 10px;
+        }
+        
+        .emoji {
+            font-size: 24px;
+        }
+
+        .formula-box {
+            background: white;
+            border: 2px dashed #660099;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #660099;
+        }
+
+        .counting-demo {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .demo-item {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            border: 2px solid #e0e0e0;
+        }
+
+        .demo-item .number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #660099;
+        }
+
+        .demo-item .label {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📐 第10课 图形计数进阶</h1>
+            <p>家长协同方案 | 思维训练课程</p>
+        </div>
+        
+        <div class="content">
+            <!-- 课程目标 -->
+            <div class="section">
+                <h2><span class="emoji">🎯</span>课程目标</h2>
+                <p>本节课将带领孩子探索复杂图形中的计数方法，培养系统思维和空间想象力：</p>
+                <ul>
+                    <li>掌握复杂图形中正方形、长方形的计数技巧</li>
+                    <li>学习分类计数和容斥原理的启蒙应用</li>
+                    <li>培养有序思考和全面分析的能力</li>
+                    <li>提升空间思维和逻辑推理能力</li>
+                </ul>
+            </div>
+            
+            <!-- 课前准备 -->
+            <div class="section">
+                <h2><span class="emoji">📋</span>课前准备</h2>
+                <p>请家长协助孩子准备以下材料：</p>
+                <ul>
+                    <li><strong>方格纸</strong> - 用于画图和标记</li>
+                    <li><strong>彩色笔</strong> - 用于分类标记不同大小的图形</li>
+                    <li><strong>直尺</strong> - 用于画线和测量</li>
+                    <li><strong>草稿本</strong> - 用于记录计数过程</li>
+                </ul>
+                <div class="tip-box">
+                    <strong>💡 温馨提示：</strong>建议提前打印一些方格纸，让孩子在课前熟悉方格结构，有助于课堂理解。
+                </div>
+            </div>
+            
+            <!-- 核心知识点 -->
+            <div class="section">
+                <h2><span class="emoji">📚</span>核心知识点</h2>
+                
+                <div class="highlight-box">
+                    <h3>🔷 正方形计数公式</h3>
+                    <p>在n×n的方格中，正方形总数 = 1² + 2² + 3² + ... + n²</p>
+                    <div class="formula-box">
+                        总数 = n(n+1)(2n+1) ÷ 6
+                    </div>
+                    <p><strong>示例：</strong>在3×3方格中</p>
+                    <div class="counting-demo">
+                        <div class="demo-item">
+                            <div class="number">9</div>
+                            <div class="label">1×1小正方形</div>
+                        </div>
+                        <div class="demo-item">
+                            <div class="number">4</div>
+                            <div class="label">2×2正方形</div>
+                        </div>
+                        <div class="demo-item">
+                            <div class="number">1</div>
+                            <div class="label">3×3大正方形</div>
+                        </div>
+                        <div class="demo-item">
+                            <div class="number">14</div>
+                            <div class="label">总计</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>📐 长方形计数方法</h3>
+                    <p>长方形由两条横线和两条竖线确定</p>
+                    <div class="formula-box">
+                        长方形个数 = 横向线段组合数 × 纵向线段组合数
+                    </div>
+                    <p><strong>关键步骤：</strong></p>
+                    <ol style="margin-left: 20px; margin-top: 10px;">
+                        <li>数出横向有多少条线段</li>
+                        <li>数出纵向有多少条线段</li>
+                        <li>从横向线段中选2条，从纵向线段中选2条</li>
+                        <li>相乘得到长方形总数</li>
+                    </ol>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>🎯 容斥原理启蒙</h3>
+                    <p>当图形有重叠时，使用容斥原理避免重复计数</p>
+                    <div class="formula-box">
+                        总数 = A类数量 + B类数量 - 重复部分
+                    </div>
+                    <p><strong>核心思想：</strong>先分别计数，再减去重复计算的部分</p>
+                </div>
+            </div>
+            
+            <!-- 课堂重点回顾 -->
+            <div class="section">
+                <h2><span class="emoji">📝</span>课堂重点回顾</h2>
+                
+                <div class="activity-card">
+                    <h3>📊 分类计数法</h3>
+                    <p>按照图形的大小或形状分类，逐一计数，最后汇总。</p>
+                    <p><strong>口诀：</strong>分类要清晰，计数要有序，汇总不遗漏</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>🔍 标记法</h3>
+                    <p>用不同颜色的笔标记已经数过的图形，避免重复或遗漏。</p>
+                    <p><strong>技巧：</strong>从左到右、从上到下有序标记</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>📐 公式法</h3>
+                    <p>对于规则的方格图形，直接使用公式计算，快速准确。</p>
+                    <p><strong>适用：</strong>正方形网格、长方形网格</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>🧩 组合思想</h3>
+                    <p>理解长方形由两条横线和两条竖线组合而成。</p>
+                    <p><strong>拓展：</strong>这是组合数学的入门思想</p>
+                </div>
+            </div>
+            
+            <!-- 家庭巩固练习 -->
+            <div class="section">
+                <h2><span class="emoji">🏠</span>家庭巩固练习</h2>
+                
+                <div class="activity-card">
+                    <h3>活动一：家庭图形计数挑战赛</h3>
+                    <p><strong>材料：</strong>方格纸、彩色笔</p>
+                    <p><strong>步骤：</strong></p>
+                    <ol style="margin-left: 20px;">
+                        <li>家长在方格纸上画出3×3、4×4的方格</li>
+                        <li>和孩子比赛，看谁先数出所有正方形</li>
+                        <li>用不同颜色标记不同大小的正方形</li>
+                        <li>验证答案，讨论计数方法</li>
+                    </ol>
+                    <p><strong>目标：</strong>巩固正方形计数公式，提升计数速度</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>活动二：生活中的图形探索</h3>
+                    <p><strong>任务：</strong>在家里寻找方格状的图案</p>
+                    <p><strong>例如：</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li>地砖的方格图案</li>
+                        <li>窗户的玻璃分割</li>
+                        <li>书架的格子</li>
+                        <li>瓷砖墙面</li>
+                    </ul>
+                    <p><strong>讨论：</strong>这些图案中有多少个正方形或长方形？</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>活动三：创意图形设计</h3>
+                    <p><strong>任务：</strong>设计一个有趣的图形计数题</p>
+                    <p><strong>步骤：</strong></p>
+                    <ol style="margin-left: 20px;">
+                        <li>在方格纸上设计一个组合图形</li>
+                        <li>包含正方形、长方形、三角形</li>
+                        <li>写出题目，让家人来解答</li>
+                        <li>互相检查答案，讨论解题思路</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <!-- 亲子互动建议 -->
+            <div class="section">
+                <h2><span class="emoji">👨‍👩‍👧</span>亲子互动建议</h2>
+                
+                <div class="tip-box">
+                    <h3>🎯 如何引导孩子学习图形计数</h3>
+                    <ul style="margin-left: 20px;">
+                        <li><strong>耐心引导：</strong>不要急于告诉孩子答案，引导他自己发现规律</li>
+                        <li><strong>可视化：</strong>用实物或画图帮助孩子理解抽象概念</li>
+                        <li><strong>分步骤：</strong>把复杂问题分解成简单的小步骤</li>
+                        <li><strong>及时鼓励：</strong>肯定孩子的每一个进步，建立信心</li>
+                        <li><strong>联系生活：</strong>在生活中寻找图形计数的例子</li>
+                    </ul>
+                </div>
+                
+                <div class="tip-box">
+                    <h3>⚠️ 常见误区提醒</h3>
+                    <ul style="margin-left: 20px;">
+                        <li>容易遗漏大号的正方形或长方形</li>
+                        <li>重复计数同一个图形</li>
+                        <li>忽略斜向的正方形（如果有）</li>
+                        <li>混淆正方形和长方形（正方形是特殊的长方形）</li>
+                        <li>计数时顺序混乱，导致遗漏</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 常见问题解答 -->
+            <div class="section">
+                <h2><span class="emoji">❓</span>常见问题解答</h2>
+                
+                <div class="activity-card">
+                    <h3>Q1：孩子总是数漏图形怎么办？</h3>
+                    <p><strong>A：</strong>教孩子使用"标记法"，数一个做一个记号。同时强调"有序思考"，按照一定顺序（如从左到右、从小到大）计数，可以有效避免遗漏。</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>Q2：孩子不理解公式怎么办？</h3>
+                    <p><strong>A：</strong>不要强求记忆公式，先通过具体例子理解规律。比如在3×3方格中，分别数出1×1、2×2、3×3的正方形，然后找规律。理解后再引入公式。</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>Q3：如何判断孩子是否掌握了？</h3>
+                    <p><strong>A：</strong>可以让孩子讲解计数过程，如果能清晰地说出分类方法和计数步骤，说明已经掌握。也可以让孩子出题考家长，这能检验他的理解深度。</p>
+                </div>
+            </div>
+            
+            <!-- 下节课预告 -->
+            <div class="next-lesson">
+                <h3><span class="emoji">🚀</span>下节课预告</h3>
+                <p><strong>第11课：简单应用题</strong></p>
+                <p>我们将学习：</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>和差问题的解题方法</li>
+                    <li>倍数问题的分析技巧</li>
+                    <li>画线段图辅助解题</li>
+                    <li>应用题中的数量关系分析</li>
+                </ul>
+                <p style="margin-top: 10px;"><strong>预习建议：</strong>复习加减乘除的基本运算，为应用题学习打好基础。</p>
+            </div>
+            
+            <!-- 联系方式 -->
+            <div class="qr-section">
+                <h3>📱 联系夏老师</h3>
+                <div class="contact-info" style="background: white; border: 3px solid #660099; border-radius: 10px; padding: 20px; margin: 15px auto; max-width: 300px;">
+                    <div style="font-size: 24px; color: #660099; font-weight: bold; margin-bottom: 10px;">
+                        📞 19117803360
+                    </div>
+                    <div style="font-size: 14px; color: #666; margin-bottom: 15px;">
+                        欢迎随时咨询
+                    </div>
+                    <div style="width: 150px; height: 150px; margin: 0 auto; background: white; border: 2px solid #660099; border-radius: 10px; padding: 10px;">
+                        <img src="../code.jpg" alt="夏老师微信二维码" style="width: 100%; height: 100%; object-fit: contain; border-radius: 5px; display: block;">
+                    </div>
+                </div>
+                <div class="qr-text">
+                    如有任何问题，欢迎随时联系<br>
+                    夏老师将为您提供专业指导
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
