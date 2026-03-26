@@ -538,7 +538,7 @@
                     <span class="difficulty" style="background: #FF9800; color: white;">拔高挑战</span>
                 </div>
                 <div class="question-content">
-                    小明、小红、小华三人共有零花钱200元。小明比小红多30元，小红比小华多20元。三人各有多少元？
+                    小明、小红、小华三人共有零花钱220元。小明比小红多30元，小红比小华多20元。三人各有多少元？
                     <p class="hint-text">💡 提示：以小华为基准，设小华有x元，用x表示其他人的钱数</p>
                 </div>
                 <div class="answer-section">
@@ -546,20 +546,19 @@
                     <p>小明：<input type="text" class="answer-input" id="bonus_1" placeholder="填入数字"> 元</p>
                     <p style="margin-top: 10px;">小红：<input type="text" class="answer-input" id="bonus_2" placeholder="填入数字"> 元</p>
                     <p style="margin-top: 10px;">小华：<input type="text" class="answer-input" id="bonus_3" placeholder="填入数字"> 元</p>
-                    <button class="check-btn" onclick="checkAnswer('bonus', ['90', '60', '50'], 'bonus_feedback')">检查答案</button>
+                    <button class="check-btn" onclick="checkAnswer('bonus', ['100', '70', '50'], 'bonus_feedback')">检查答案</button>
                     <button class="analysis-btn" onclick="toggleAnalysis('bonus_analysis')">查看解析</button>
                     <div class="feedback" id="bonus_feedback"></div>
                     <div class="analysis" id="bonus_analysis">
                         <h4>📊 解析</h4>
                         <p>设小华有x元，则小红 = x + 20，小明 = (x+20) + 30 = x + 50</p>
-                        <p>总和：x + (x+20) + (x+50) = 3x + 70 = 200</p>
-                        <p>3x = 130，x = 50（这里计算有误，应该是3x=130不对）</p>
-                        <p>重新计算：3x = 200 - 70 = 130... 不对</p>
-                        <p>正确：3x = 130，x = 130÷3 不是整数，说明题目数据需要调整</p>
-                        <p>修正答案：设小华50元，小红70元，小明80元，总和200元</p>
-                        <p>但80-70=10≠30，题目数据有矛盾</p>
-                        <p>正确答案应为：小华50元，小红60元，小明90元（总和200，90-60=30，60-50=10≠20）</p>
-                        <p>最终答案：小明90元，小红60元，小华50元（调整题目条件理解）</p>
+                        <p>总和：x + (x+20) + (x+50) = 3x + 70 = 220</p>
+                        <p>3x = 220 - 70 = 150</p>
+                        <p>x = 150 ÷ 3 = 50</p>
+                        <p>小华 = 50元</p>
+                        <p>小红 = 50 + 20 = 70元</p>
+                        <p>小明 = 70 + 30 = 100元</p>
+                        <p>检验：50 + 70 + 100 = 220 ✓，100-70=30 ✓，70-50=20 ✓</p>
                     </div>
                 </div>
             </div>
