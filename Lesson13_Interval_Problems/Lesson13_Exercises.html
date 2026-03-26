@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第13课 间隔问题 - 课后练习题</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh; padding: 20px;
+        }
+        .container {
+            max-width: 900px; margin: 0 auto;
+            background: white; border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1); overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white; padding: 40px; text-align: center;
+        }
+        .header h1 { font-size: 32px; margin-bottom: 10px; }
+        .header p { font-size: 18px; opacity: 0.9; }
+        .content { padding: 40px; }
+        .question-card {
+            background: #f8f9fa; border-radius: 15px;
+            padding: 25px; margin-bottom: 25px;
+            border-left: 5px solid #660099;
+        }
+        .question-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 15px;
+        }
+        .question-number { font-size: 20px; font-weight: bold; color: #660099; }
+        .difficulty { font-size: 14px; color: #666; background: #e0e0e0; padding: 5px 15px; border-radius: 20px; }
+        .question-content { font-size: 18px; line-height: 1.8; color: #333; margin-bottom: 15px; }
+        .answer-section {
+            background: white; border: 2px solid #e0e0e0;
+            border-radius: 10px; padding: 15px;
+        }
+        .answer-label { font-weight: bold; color: #660099; margin-bottom: 10px; }
+        .answer-input {
+            width: 100%; padding: 12px; font-size: 16px;
+            border: 2px solid #ddd; border-radius: 8px;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        .bonus-question {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border: 3px solid #FF9800; border-radius: 15px;
+            padding: 30px; margin-top: 30px;
+        }
+        .bonus-header { text-align: center; margin-bottom: 20px; }
+        .bonus-header h2 { color: #E65100; font-size: 24px; }
+        .bonus-tag {
+            display: inline-block; background: #FF9800;
+            color: white; padding: 5px 15px; border-radius: 20px;
+            font-size: 14px; margin-top: 10px;
+        }
+        .footer { text-align: center; padding: 30px; background: #f5f5f5; color: #666; }
+        .emoji { font-size: 24px; margin-right: 5px; }
+        .hint-text { color: #666; font-size: 14px; margin-top: 10px; font-style: italic; }
+        .star-rating { color: #ffc107; font-size: 18px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📝 第13课 间隔问题</h1>
+            <p>课后练习题 · 掌握间隔规律，解决实际问题</p>
+        </div>
+        <div class="content">
+            <!-- 第1题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">🌲</span>第1题 <span class="star-rating">★☆☆☆☆</span></span>
+                    <span class="difficulty">基础巩固</span>
+                </div>
+                <div class="question-content">
+                    一条路长40米，每隔5米种一棵树，<strong>两端都种</strong>，一共种多少棵？
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入答案（只填数字）">
+                    <p class="hint-text">💡 提示：两端都种，棵数 = 间隔数 + 1</p>
+                </div>
+            </div>
+            <!-- 第2题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">🌲</span>第2题 <span class="star-rating">★☆☆☆☆</span></span>
+                    <span class="difficulty">基础巩固</span>
+                </div>
+                <div class="question-content">
+                    在一条长60米的马路一旁安装路灯，每隔10米安装一盏，<strong>两端都安装</strong>，一共需要多少盏路灯？
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入答案（只填数字）">
+                    <p class="hint-text">💡 提示：先算间隔数，再加1</p>
+                </div>
+            </div>
+            <!-- 第3题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">🌿</span>第3题 <span class="star-rating">★★☆☆☆</span></span>
+                    <span class="difficulty">思维拓展</span>
+                </div>
+                <div class="question-content">
+                    一个圆形花坛周长是72米，每隔8米摆一盆花，一共需要多少盆花？
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入答案（只填数字）">
+                    <p class="hint-text">💡 提示：环形属于"一端种"类型，棵数 = 间隔数</p>
+                </div>
+            </div>
+            <!-- 第4题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">🌿</span>第4题 <span class="star-rating">★★☆☆☆</span></span>
+                    <span class="difficulty">思维拓展</span>
+                </div>
+                <div class="question-content">
+                    在一条长48米的小路一侧种花，每隔6米种一盆，<strong>从起点开始种，到终点不种</strong>，一共需要多少盆花？
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入答案（只填数字）">
+                    <p class="hint-text">💡 提示：只在一端种，棵数 = 间隔数</p>
+                </div>
+            </div>
+            <!-- 第5题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">🪵</span>第5题 <span class="star-rating">★★★☆☆</span></span>
+                    <span class="difficulty">挑战提升</span>
+                </div>
+                <div class="question-content">
+                    两栋楼之间相距54米，每隔6米种一棵树，<strong>两端都不种</strong>，一共种多少棵？
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入答案（只填数字）">
+                    <p class="hint-text">💡 提示：两端都不种，棵数 = 间隔数 - 1</p>
+                </div>
+            </div>
+            <!-- 第6题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">🪵</span>第6题 <span class="star-rating">★★★☆☆</span></span>
+                    <span class="difficulty">挑战提升</span>
+                </div>
+                <div class="question-content">
+                    两栋楼之间相距42米，每隔7米种一棵树，<strong>两端都不种</strong>，一共种多少棵？
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入答案（只填数字）">
+                    <p class="hint-text">💡 提示：先算间隔数，再减1</p>
+                </div>
+            </div>
+            <!-- 第7题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">🪚</span>第7题 <span class="star-rating">★★★★☆</span></span>
+                    <span class="difficulty">烧脑挑战</span>
+                </div>
+                <div class="question-content">
+                    把一根木头锯成6段，需要锯几次？
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入答案（只填数字）">
+                    <p class="hint-text">💡 提示：锯木头问题，次数 = 段数 - 1</p>
+                </div>
+            </div>
+            <!-- 第8题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">🪚</span>第8题 <span class="star-rating">★★★★☆</span></span>
+                    <span class="difficulty">烧脑挑战</span>
+                </div>
+                <div class="question-content">
+                    把一根木头锯成4段，每次锯需要3分钟，一共需要多少分钟？
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入答案（只填数字）">
+                    <p class="hint-text">💡 提示：先算锯的次数，再乘每次时间</p>
+                </div>
+            </div>
+            <!-- 第9题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">🏃</span>第9题 <span class="star-rating">★★★★★</span></span>
+                    <span class="difficulty">终极挑战</span>
+                </div>
+                <div class="question-content">
+                    小明从1楼爬到7楼，一共爬了几层？
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入答案（只填数字）">
+                    <p class="hint-text">💡 提示：爬的层数 = 到达楼层 - 起始楼层</p>
+                </div>
+            </div>
+            <!-- 第10题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number"><span class="emoji">🏃</span>第10题 <span class="star-rating">★★★★★</span></span>
+                    <span class="difficulty">终极挑战</span>
+                </div>
+                <div class="question-content">
+                    从1楼到4楼需要爬3分钟，每层用的时间相同，从1楼到10楼需要多少分钟？
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入答案（只填数字）">
+                    <p class="hint-text">💡 提示：先算每层用时，再算到10楼要爬几层</p>
+                </div>
+            </div>
+            <!-- 附加题 -->
+            <div class="bonus-question">
+                <div class="bonus-header">
+                    <span class="question-number"><span class="emoji">🌟</span>附加题（思维拓展）</span>
+                    <span class="bonus-tag">拔高挑战</span>
+                </div>
+                <div class="question-content">
+                    <strong>时钟问题：</strong>时钟敲4下用9秒，敲8下用多少秒？<br><br>
+                    <p class="hint-text">💡 提示：敲4下有3个间隔，先算每个间隔的时间</p>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="填入答案（只填数字）">
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>🌟 答案仅供参考，理解解题思路比记住答案更重要！</p>
+            <p style="margin-top: 10px;">如有疑问，欢迎与老师讨论交流</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第13课 间隔问题 - 家长协同方案（奥数巅峰版）</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 35px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #660099;
+        }
+        
+        .section h2 {
+            color: #660099;
+            font-size: 24px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section p, .section li {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+        }
+        
+        .section ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .section li {
+            margin-bottom: 8px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #2196F3;
+        }
+        
+        .tip-box {
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #FF9800;
+        }
+        
+        .activity-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            transition: all 0.3s;
+        }
+        
+        .activity-card:hover {
+            border-color: #660099;
+            box-shadow: 0 5px 15px rgba(102, 0, 153, 0.1);
+        }
+        
+        .activity-card h3 {
+            color: #660099;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .olympiad-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #fff;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .qr-section {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .qr-section h3 {
+            color: #660099;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info {
+            background: white;
+            border: 3px solid #660099;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px auto;
+            max-width: 300px;
+        }
+        
+        .phone-number {
+            font-size: 24px;
+            color: #660099;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            margin: 15px auto;
+            background: white;
+            border: 2px solid #660099;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        
+        .qr-code img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 5px;
+        }
+        
+        .next-lesson {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border: 2px solid #4CAF50;
+        }
+        
+        .next-lesson h3 {
+            color: #2E7D32;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #f5f5f5;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .difficulty-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        
+        .formula-box {
+            background: white;
+            border: 2px dashed #660099;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #660099;
+        }
+        
+        .example-box {
+            background: #f0f8ff;
+            border-left: 4px solid #4169E1;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .method-card {
+            background: linear-gradient(135deg, #FFF9C4 0%, #FFF59D 100%);
+            border: 2px solid #FBC02D;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        .method-card h4 {
+            color: #F57F17;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌳 第13课 间隔问题</h1>
+            <p>家长协同方案 · 奥数巅峰版（华罗庚金杯难度）</p>
+        </div>
+        
+        <div class="content">
+            <div class="olympiad-badge">🏆 奥数思维训练</div>
+            
+            <!-- 课程目标 -->
+            <div class="section">
+                <h2>🎯 本课学习目标</h2>
+                <p>通过本课学习，孩子将掌握：</p>
+                <ul>
+                    <li><strong>间隔问题的基本概念</strong>：理解总长、间隔长、间隔数、棵数之间的关系</li>
+                    <li><strong>三种基本类型</strong>：两端都种、一端种、两端都不种的解题方法</li>
+                    <li><strong>画图法</strong>：用线段图帮助理解间隔与物体的关系</li>
+                    <li><strong>公式法</strong>：根据不同类型选择正确的公式进行计算</li>
+                    <li><strong>拓展应用</strong>：锯木头问题、爬楼梯问题、时钟敲响问题</li>
+                </ul>
+            </div>
+            
+            <!-- 核心知识点 -->
+            <div class="section">
+                <h2>📚 核心知识点详解</h2>
+                
+                <div class="method-card">
+                    <h4>🌲 类型一：两端都种</h4>
+                    <p>在一条路上，两端都种树时：</p>
+                    <div class="formula-box">
+                        棵数 = 间隔数 + 1 = 总长 ÷ 间隔长 + 1
+                    </div>
+                    <div class="example-box">
+                        <strong>例题：</strong>一条路长100米，每隔5米种一棵树，两端都种，一共种多少棵？<br>
+                        <strong>解答：</strong><br>
+                        间隔数 = 100 ÷ 5 = 20（个）<br>
+                        棵数 = 20 + 1 = <strong>21（棵）</strong>
+                    </div>
+                    <div class="highlight-box">
+                        <strong>生活实例：</strong>马路两旁植树、电线杆、路灯安装
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <h4>🌿 类型二：一端种一端不种</h4>
+                    <p>在一条路上，只在一端种树时：</p>
+                    <div class="formula-box">
+                        棵数 = 间隔数 = 总长 ÷ 间隔长
+                    </div>
+                    <div class="example-box">
+                        <strong>例题：</strong>一条路长80米，每隔4米种一棵树，只在一端种，一共种多少棵？<br>
+                        <strong>解答：</strong><br>
+                        棵数 = 80 ÷ 4 = <strong>20（棵）</strong>
+                    </div>
+                    <div class="highlight-box">
+                        <strong>生活实例：</strong>圆形花坛摆花、环形跑道插旗
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <h4>🪵 类型三：两端都不种</h4>
+                    <p>在一条路上，两端都不种树时：</p>
+                    <div class="formula-box">
+                        棵数 = 间隔数 - 1 = 总长 ÷ 间隔长 - 1
+                    </div>
+                    <div class="example-box">
+                        <strong>例题：</strong>两栋楼之间相距60米，每隔3米种一棵树，两端都不种，一共种多少棵？<br>
+                        <strong>解答：</strong><br>
+                        间隔数 = 60 ÷ 3 = 20（个）<br>
+                        棵数 = 20 - 1 = <strong>19（棵）</strong>
+                    </div>
+                    <div class="highlight-box">
+                        <strong>生活实例：</strong>两栋楼之间植树、绳子剪段、锯木头
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <h4>🪚 拓展一：锯木头问题</h4>
+                    <p>锯木头问题属于"两端都不种"的变形：</p>
+                    <div class="formula-box">
+                        段数 = 锯的次数 + 1<br>
+                        锯的次数 = 段数 - 1
+                    </div>
+                    <div class="example-box">
+                        <strong>例题：</strong>把一根木头锯成5段，需要锯几次？<br>
+                        <strong>解答：</strong><br>
+                        锯的次数 = 5 - 1 = <strong>4（次）</strong>
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <h4>🏃 拓展二：爬楼梯问题</h4>
+                    <p>爬楼梯问题属于"两端都种"的变形：</p>
+                    <div class="formula-box">
+                        爬的层数 = 到达楼层 - 起始楼层
+                    </div>
+                    <div class="example-box">
+                        <strong>例题：</strong>小明从1楼爬到5楼，一共爬了几层？<br>
+                        <strong>解答：</strong><br>
+                        爬的层数 = 5 - 1 = <strong>4（层）</strong>
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <h4>🔔 拓展三：时钟敲响问题</h4>
+                    <p>时钟敲响问题属于间隔问题的特殊应用：</p>
+                    <div class="formula-box">
+                        间隔数 = 敲响次数 - 1<br>
+                        总时间 = 间隔数 × 每个间隔的时间
+                    </div>
+                    <div class="example-box">
+                        <strong>例题：</strong>时钟敲3下用6秒，敲6下用几秒？<br>
+                        <strong>解答：</strong><br>
+                        敲3下有2个间隔，每个间隔6÷2=3秒<br>
+                        敲6下有5个间隔，需要5×3=<strong>15（秒）</strong>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 课堂重点回顾 -->
+            <div class="section">
+                <h2>📝 课堂重点回顾</h2>
+                <p>本节课孩子们学习了以下内容：</p>
+                <ul>
+                    <li>认识了<strong>间隔问题的三种基本类型</strong>：两端都种、一端种、两端都不种</li>
+                    <li>掌握了<strong>棵数与间隔数的关系</strong>，能够根据类型选择正确的公式</li>
+                    <li>学会了用<strong>画图法</strong>分析间隔问题，建立数形结合思维</li>
+                    <li>理解了<strong>锯木头问题</strong>：段数 = 次数 + 1</li>
+                    <li>掌握了<strong>爬楼梯问题</strong>：层数 = 到达楼层 - 起始楼层</li>
+                    <li>了解了<strong>时钟敲响问题</strong>：间隔数 = 敲响次数 - 1</li>
+                </ul>
+                <div class="tip-box">
+                    <strong>💡 教学提示：</strong><br>
+                    解决间隔问题的关键是<strong>先判断类型</strong>，再选择正确的公式。画图能帮助孩子直观理解间隔与物体的关系。
+                </div>
+            </div>
+            
+            <!-- 家庭巩固练习 -->
+            <div class="section">
+                <h2>🏠 家庭巩固练习</h2>
+                <p>请家长陪同孩子完成以下活动：</p>
+                
+                <div class="activity-card">
+                    <h3>🌳 活动一：阳台植树游戏</h3>
+                    <p><strong>材料：</strong>积木或小玩具</p>
+                    <p><strong>玩法：</strong></p>
+                    <ul>
+                        <li>在地板上用胶带贴出一条"马路"</li>
+                        <li>用积木代表树，模拟三种不同类型的间隔问题</li>
+                        <li>让孩子说出每种情况的棵数与间隔数关系</li>
+                    </ul>
+                    <p><strong>目标：</strong>通过动手操作，加深对三种类型的理解</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>✂️ 活动二：纸条剪切实验</h3>
+                    <p><strong>材料：</strong>纸条、剪刀</p>
+                    <p><strong>玩法：</strong></p>
+                    <ul>
+                        <li>拿一张长纸条，让孩子剪成不同段数</li>
+                        <li>记录剪的次数，发现"段数 = 次数 + 1"的规律</li>
+                        <li>讨论：为什么剪的次数比段数少1？</li>
+                    </ul>
+                    <p><strong>目标：</strong>理解锯木头问题的本质</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>🪜 活动三：爬楼梯计数</h3>
+                    <p><strong>玩法：</strong></p>
+                    <ul>
+                        <li>和孩子一起爬楼梯，从1楼到3楼</li>
+                        <li>数清楚实际爬了几层楼梯</li>
+                        <li>讨论：为什么从1楼到3楼只爬了2层？</li>
+                    </ul>
+                    <p><strong>目标：</strong>理解楼层与层数的关系</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>🚶 活动四：马路观察员</h3>
+                    <p><strong>玩法：</strong></p>
+                    <ul>
+                        <li>散步时观察路灯、电线杆的间隔</li>
+                        <li>估算间隔距离，计算大约有多少个间隔</li>
+                        <li>讨论：这是哪种类型的问题？</li>
+                    </ul>
+                    <p><strong>目标：</strong>将数学知识应用到生活中</p>
+                </div>
+            </div>
+            
+            <!-- 常见错误提醒 -->
+            <div class="section">
+                <h2>⚠️ 常见错误提醒</h2>
+                <ul>
+                    <li><strong>混淆类型：</strong>没有分清是"两端都种"还是"两端都不种"，导致该加1时减1，该减1时加1</li>
+                    <li><strong>忘记±1：</strong>两端都种要+1，两端都不种要-1，一端种不变</li>
+                    <li><strong>锯木头问题：</strong>把段数当成次数，或把时间算错（应该用次数×每次时间）</li>
+                    <li><strong>爬楼梯问题：</strong>把楼层数当成爬的层数（实际层数 = 到达楼层 - 起始楼层）</li>
+                    <li><strong>环形问题：</strong>环形属于"一端种"类型，棵数 = 间隔数</li>
+                    <li><strong>时钟问题：</strong>敲响次数与间隔数不同（间隔数 = 敲响次数 - 1）</li>
+                </ul>
+            </div>
+            
+            <!-- 亲子互动建议 -->
+            <div class="section">
+                <h2>👨‍👩‍👧 亲子互动建议</h2>
+                <ul>
+                    <li><strong>画图习惯：</strong>鼓励孩子每道题都画图分析，画图是最好的理解方式</li>
+                    <li><strong>生活应用：</strong>在日常生活中寻找间隔问题，如排队、摆餐具等</li>
+                    <li><strong>错题分析：</strong>孩子做错时，引导他分析是哪个类型判断错了</li>
+                    <li><strong>口诀记忆：</strong>和孩子一起背诵"两端都种要加一，一端不种就不变，两端不种要减一"</li>
+                    <li><strong>循序渐进：</strong>从简单题目开始，逐步增加难度，建立孩子信心</li>
+                </ul>
+            </div>
+            
+            <!-- 下节课预告 -->
+            <div class="next-lesson">
+                <h3>📖 下节课预告</h3>
+                <p><strong>第14课：年龄问题</strong></p>
+                <p>我们将学习：</p>
+                <ul>
+                    <li>年龄问题的特点和基本类型</li>
+                    <li>"年龄差不变"的重要规律</li>
+                    <li>和倍、差倍在年龄问题中的应用</li>
+                    <li>复杂年龄问题的解题技巧</li>
+                </ul>
+                <p><strong>课前准备：</strong>请家长准备孩子的全家福照片，用于课堂实践活动。</p>
+            </div>
+            
+            <!-- 联系方式 -->
+            <div class="qr-section">
+                <h3>📱 联系夏老师</h3>
+                <div class="contact-info">
+                    <div class="phone-number">📞 19117803360</div>
+                    <div style="font-size: 14px; color: #666; margin-bottom: 15px;">
+                        欢迎随时咨询
+                    </div>
+                    <div class="qr-code">
+                        <img src="../code.jpg" alt="夏老师微信二维码">
+                    </div>
+                </div>
+                <div style="font-size: 16px; color: #660099; margin-top: 15px;">
+                    如有任何问题，欢迎随时联系<br>
+                    夏老师将为您提供专业指导
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>🌟 让我们共同努力，让数学成为孩子最喜欢的科目！</p>
+            <p style="margin-top: 10px;">—— 夏老师</p>
+        </div>
+    </div>
+</body>
+</html>
