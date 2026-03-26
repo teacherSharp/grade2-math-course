@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第17课 数阵图入门 - 家长协同方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 35px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #660099;
+        }
+        
+        .section h2 {
+            color: #660099;
+            font-size: 24px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section p, .section li {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+        }
+        
+        .section ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .section li {
+            margin-bottom: 8px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #2196F3;
+        }
+        
+        .tip-box {
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #FF9800;
+        }
+        
+        .activity-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            transition: all 0.3s;
+        }
+        
+        .activity-card:hover {
+            border-color: #660099;
+            box-shadow: 0 5px 15px rgba(102, 0, 153, 0.1);
+        }
+        
+        .activity-card h3 {
+            color: #660099;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .math-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #9C27B0 0%, #E91E63 100%);
+            color: #fff;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .qr-section {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .qr-section h3 {
+            color: #660099;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info {
+            background: white;
+            border: 3px solid #660099;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px auto;
+            max-width: 300px;
+        }
+        
+        .phone-number {
+            font-size: 24px;
+            color: #660099;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            margin: 15px auto;
+            background: white;
+            border: 2px solid #660099;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        
+        .qr-code img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 5px;
+        }
+        
+        .next-lesson {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border: 2px solid #4CAF50;
+        }
+        
+        .next-lesson h3 {
+            color: #2E7D32;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #f5f5f5;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .difficulty-tag {
+            display: inline-block;
+            background: #FFEBEE;
+            color: #C62828;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        
+        .magic-square {
+            display: grid;
+            grid-template-columns: repeat(3, 60px);
+            grid-template-rows: repeat(3, 60px);
+            gap: 5px;
+            margin: 20px auto;
+            width: fit-content;
+        }
+        
+        .magic-cell {
+            width: 60px;
+            height: 60px;
+            border: 3px solid #660099;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            background: white;
+            border-radius: 10px;
+        }
+        
+        .formula-box {
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+            border: 3px solid #FF9800;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 20px;
+            color: #E65100;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 第17课 数阵图入门</h1>
+            <p>思维训练版 · 家长协同方案</p>
+        </div>
+        
+        <div class="content">
+            <!-- 课程主题与目标 -->
+            <div class="section">
+                <h2>🎯 课程主题与目标</h2>
+                <div class="math-badge">🔢 数阵图专题</div>
+                <p>本节课带领孩子们进入数阵图的奇妙世界，探索数字排列的规律和奥秘。通过幻方、辐射型数阵图等内容，培养逻辑推理能力和数字敏感度。</p>
+                <div class="highlight-box">
+                    <strong>本课重点内容：</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>数阵图的基本概念和类型</li>
+                        <li>三阶幻方的特点和填法</li>
+                        <li>辐射型数阵图的解题方法</li>
+                        <li>封闭型数阵图（三角形、正方形）</li>
+                        <li>解题三步法：找位置→算总和→列方程</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 课前准备 -->
+            <div class="section">
+                <h2>📋 课前准备</h2>
+                <p>建议家长协助孩子做好以下准备：</p>
+                <ul>
+                    <li>准备草稿纸和铅笔，方便画图和计算</li>
+                    <li>可以准备一些小积木或糖果，用于实物演示</li>
+                    <li>预习1-9的数字，熟悉加法运算</li>
+                    <li>保持好奇心，准备探索数字的奥秘</li>
+                </ul>
+            </div>
+            
+            <!-- 课堂重点回顾 -->
+            <div class="section">
+                <h2>📝 课堂重点回顾</h2>
+                <p>本课主要学习以下内容：</p>
+                
+                <div class="activity-card">
+                    <h3>🔢 什么是数阵图 <span class="difficulty-tag">基础</span></h3>
+                    <p>把一些数字按照一定的规则排列成图形，使图形中某些线上的数字之和相等。常见类型有幻方、辐射型、封闭型。</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>✨ 三阶幻方 <span class="difficulty-tag">重点</span></h3>
+                    <p>用1-9填入3×3方格，使每行、每列、每条对角线之和都等于15。中间的数一定是5。</p>
+                    <div class="magic-square">
+                        <div class="magic-cell">4</div>
+                        <div class="magic-cell">9</div>
+                        <div class="magic-cell">2</div>
+                        <div class="magic-cell">3</div>
+                        <div class="magic-cell">5</div>
+                        <div class="magic-cell">7</div>
+                        <div class="magic-cell">8</div>
+                        <div class="magic-cell">1</div>
+                        <div class="magic-cell">6</div>
+                    </div>
+                    <p style="text-align: center; color: #666; margin-top: 10px;">洛书幻方</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>☀️ 辐射型数阵图 <span class="difficulty-tag">进阶</span></h3>
+                    <p>中间一个数，向四周辐射出几条线，每条线上的数字之和相等。关键是找出中间数。</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>🔑 解题三步法 <span class="difficulty-tag">方法</span></h3>
+                    <p><strong>第一步：</strong>找公共位置（重叠数）<br>
+                    <strong>第二步：</strong>计算所有数字的总和<br>
+                    <strong>第三步：</strong>根据公式列方程求解</p>
+                </div>
+                
+                <div class="formula-box">
+                    <strong>核心公式</strong><br>
+                    所有数字之和 + 重叠数×(重复次数-1) = 线和×线数
+                </div>
+            </div>
+            
+            <!-- 家庭巩固练习 -->
+            <div class="section">
+                <h2>🏠 家庭巩固练习</h2>
+                <p>为了帮助孩子巩固数阵图知识，建议在家进行以下活动：</p>
+                
+                <div class="activity-card">
+                    <h3>活动1：幻方接龙游戏 🎮</h3>
+                    <p>家长和孩子轮流填数，看谁先完成幻方。可以比赛谁填得又快又准。</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>活动2：实物演示法 🧱</h3>
+                    <p>用积木或糖果代表数字，实际摆放数阵图，帮助孩子理解"重叠数"的概念。</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>活动3：设计自己的数阵图 ✏️</h3>
+                    <p>让孩子尝试用不同的数字设计数阵图，给家长做。培养创造力和逆向思维。</p>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>活动4：生活中的数阵图 🔍</h3>
+                    <p>寻找生活中的对称图形，如窗户、地砖等，讨论其中的数学规律。</p>
+                </div>
+            </div>
+            
+            <!-- 亲子互动建议 -->
+            <div class="section">
+                <h2>👨‍👩‍👧 亲子互动建议</h2>
+                <div class="tip-box">
+                    <strong>💡 给家长的建议：</strong>
+                    <ul style="margin-top: 10px;">
+                        <li><strong>耐心引导：</strong>不要直接告诉孩子答案，用提问的方式引导思考</li>
+                        <li><strong>画图辅助：</strong>鼓励孩子画出数阵图，标出已知条件</li>
+                        <li><strong>实物演示：</strong>用积木、糖果等实物帮助理解重叠概念</li>
+                        <li><strong>及时鼓励：</strong>每完成一题都给予肯定，建立信心</li>
+                        <li><strong>养成验证习惯：</strong>填完数后一定要逐条验证</li>
+                        <li><strong>循序渐进：</strong>从简单题目开始，逐步提升难度</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 常见问题解答 -->
+            <div class="section">
+                <h2>❓ 常见问题解答</h2>
+                <div class="highlight-box">
+                    <p><strong>Q：孩子总是忘记考虑重叠数怎么办？</strong></p>
+                    <p>A：建议用实物演示，比如用积木代表数字。让孩子实际摆放，看看哪些位置的积木被用了多次。通过动手操作加深理解。</p>
+                </div>
+                <div class="highlight-box">
+                    <p><strong>Q：孩子填完数后不知道对不对怎么办？</strong></p>
+                    <p>A：强调验证的重要性。每填完一个数阵图，都要逐条线计算，看是否相等。养成检查的好习惯。</p>
+                </div>
+                <div class="highlight-box">
+                    <p><strong>Q：孩子觉得数阵图太难，没有信心怎么办？</strong></p>
+                    <p>A：从最简单的开始，比如用1、2、3三个数填三角形。循序渐进，每完成一题都给予鼓励。让孩子体验成功的喜悦。</p>
+                </div>
+                <div class="highlight-box">
+                    <p><strong>Q：如何记忆三阶幻方的填法？</strong></p>
+                    <p>A：可以使用口诀"二四为肩，六八为足，左三右七，戴九履一，五居中央"，帮助孩子记忆。</p>
+                </div>
+                <div class="highlight-box">
+                    <p><strong>Q：下节课学习什么内容？</strong></p>
+                    <p>A：第18课将学习"巧填算符"，在数字之间填入"+"、"-"、"×"、"÷"，使等式成立。例如：1 2 3 4 = 10，怎么填？</p>
+                </div>
+            </div>
+            
+            <!-- 下节课预告 -->
+            <div class="next-lesson">
+                <h3>📢 下节课预告</h3>
+                <p><strong>第18课：巧填算符</strong></p>
+                <p>在数字之间填入"+"、"-"、"×"、"÷"，使等式成立！例如：1 2 3 4 = 10，怎么填？更难的挑战等着孩子们！</p>
+            </div>
+            
+            <!-- 联系老师 -->
+            <div class="qr-section">
+                <h3>📱 联系夏老师</h3>
+                <div class="contact-info">
+                    <div class="phone-number">📞 19117803360</div>
+                    <div style="font-size: 14px; color: #666; margin-bottom: 15px;">
+                        欢迎随时咨询数学学习问题
+                    </div>
+                    <div class="qr-code">
+                        <img src="../code.jpg" alt="夏老师微信二维码" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'font-size: 12px; color: #999;\'>二维码加载失败</div>';">
+                    </div>
+                </div>
+                <div style="font-size: 14px; color: #666; margin-top: 15px;">
+                    如有任何问题，欢迎随时联系<br>
+                    夏老师将为您提供专业指导
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>🌟 让我们共同努力，让数学成为孩子思维成长的阶梯！</p>
+            <p style="margin-top: 10px;">—— 夏老师</p>
+        </div>
+    </div>
+</body>
+</html>

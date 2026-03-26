@@ -66,8 +66,8 @@
 
 🔗 学习资源
 
-家长协同方案：https://teachersharp.github.io/lesson12_parent
-课后练习题：https://teachersharp.github.io/lesson12_exercises
+家长协同方案：https://teachersharp.github.io/grade2-math-course/Lesson12_Fun_Calculation/Lesson12_Parent_Guide.html
+课后练习题：https://teachersharp.github.io/grade2-math-course/Lesson12_Fun_Calculation/Lesson12_Exercises.html
 
 如有任何问题，欢迎随时与我联系！
 

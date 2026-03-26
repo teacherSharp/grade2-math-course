@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第17课 数阵图入门 - 交互式课件</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .slide {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 20px auto;
+            max-width: 1000px;
+            min-height: 600px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: slideIn 0.5s ease;
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide-title {
+            color: #660099;
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #94070A;
+            padding-bottom: 15px;
+        }
+        
+        .content-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 5px solid #660099;
+        }
+        
+        .nav-container {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(102, 0, 153, 0.3);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 0, 153, 0.4);
+        }
+        
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .progress-container {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 600px;
+            height: 10px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #660099, #94070A);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .page-indicator {
+            position: fixed;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .interactive-btn {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: all 0.3s;
+        }
+        
+        .interactive-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .answer-input {
+            padding: 10px 15px;
+            font-size: 18px;
+            border: 2px solid #660099;
+            border-radius: 10px;
+            margin: 10px;
+            width: 200px;
+        }
+        
+        .answer-input.correct {
+            border-color: #4CAF50;
+            background: #E8F5E9;
+        }
+        
+        .answer-input.wrong {
+            border-color: #f44336;
+            background: #FFEBEE;
+        }
+        
+        .feedback {
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-size: 16px;
+            display: none;
+        }
+        
+        .feedback.success {
+            background: #E8F5E9;
+            border-left: 5px solid #4CAF50;
+            color: #2E7D32;
+            display: block;
+        }
+        
+        .feedback.error {
+            background: #FFEBEE;
+            border-left: 5px solid #f44336;
+            color: #C62828;
+            display: block;
+        }
+        
+        .emoji-display {
+            font-size: 64px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .cover-animation {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .start-btn {
+            display: block;
+            margin: 40px auto;
+            padding: 20px 50px;
+            font-size: 24px;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+        }
+        
+        .start-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(76, 175, 80, 0.4);
+        }
+        
+        .formula-box {
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+            border: 3px solid #FF9800;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 24px;
+            color: #E65100;
+        }
+        
+        .example-box {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border-left: 5px solid #4CAF50;
+            border-radius: 0 15px 15px 0;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        .tip-box {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            border-left: 5px solid #2196F3;
+            border-radius: 0 15px 15px 0;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .visual-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .magic-square {
+            display: grid;
+            grid-template-columns: repeat(3, 60px);
+            grid-template-rows: repeat(3, 60px);
+            gap: 5px;
+            margin: 20px auto;
+            width: fit-content;
+        }
+        
+        .magic-cell {
+            width: 60px;
+            height: 60px;
+            border: 3px solid #660099;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            background: white;
+            border-radius: 10px;
+        }
+        
+        .magic-cell.input {
+            background: #E3F2FD;
+            cursor: pointer;
+        }
+        
+        .magic-cell.input:hover {
+            background: #BBDEFB;
+        }
+        
+        .magic-cell.filled {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+        
+        .triangle-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .number-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid #660099;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            background: white;
+            margin: 10px;
+        }
+        
+        .number-circle.input {
+            background: #E3F2FD;
+            cursor: pointer;
+        }
+        
+        .line {
+            stroke: #660099;
+            stroke-width: 3;
+        }
+        
+        .game-area {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .summary-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+        
+        .summary-card:hover {
+            border-color: #660099;
+            box-shadow: 0 5px 20px rgba(102, 0, 153, 0.1);
+        }
+        
+        .summary-card h3 {
+            color: #660099;
+            margin-bottom: 10px;
+        }
+        
+        .challenge-timer {
+            font-size: 48px;
+            color: #f44336;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .score-board {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 20px 0;
+        }
+        
+        .score-item {
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+            border: 3px solid #FF9800;
+            border-radius: 15px;
+            padding: 15px 30px;
+            text-align: center;
+        }
+        
+        .score-label {
+            font-size: 16px;
+            color: #666;
+        }
+        
+        .score-value {
+            font-size: 36px;
+            color: #E65100;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="page-indicator" id="pageIndicator">第 1 / 20 页</div>
+    
+    <!-- Slide 1: Cover -->
+    <div class="slide active" id="slide1">
+        <div class="emoji-display cover-animation">🔢</div>
+        <h1 class="slide-title">第17课：数阵图入门</h1>
+        <div class="content-card" style="text-align: center;">
+            <p style="font-size: 24px; margin-bottom: 20px;">🌟 思维训练版 🌟</p>
+            <p style="font-size: 18px; color: #666; margin-bottom: 30px;">
+                探索数字排列的奥秘<br>
+                开启数阵图的奇妙之旅
+            </p>
+        </div>
+        <button class="start-btn" onclick="nextSlide()">开始探索之旅 🚀</button>
+    </div>
+    
+    <!-- Slide 2: Learning Objectives -->
+    <div class="slide" id="slide2">
+        <h1 class="slide-title">🎯 本课学习目标</h1>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">📚 知识目标</h3>
+            <ul style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li>了解什么是数阵图</li>
+                <li>掌握三阶幻方的特点和填法</li>
+                <li>学会简单的辐射型数阵图</li>
+            </ul>
+        </div>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">💡 能力目标</h3>
+            <ul style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li>培养逻辑推理能力</li>
+                <li>提升数字敏感度</li>
+                <li>锻炼尝试与验证的能力</li>
+            </ul>
+        </div>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">🎮 课堂活动</h3>
+            <ul style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li>幻方填数大挑战</li>
+                <li>数阵图闯关游戏</li>
+                <li>创意数阵设计</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Slide 3: Warm-up -->
+    <div class="slide" id="slide3">
+        <h1 class="slide-title">🔥 课前热身</h1>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">🧩 数字谜题</h3>
+            <p style="font-size: 18px; line-height: 1.8; margin-bottom: 20px;">
+                把1、2、3三个数字填入圆圈，使每条线上的三个数之和相等。<br>
+                你能找到几种填法？
+            </p>
+        </div>
+        <div class="triangle-container">
+            <svg width="300" height="200">
+                <!-- 三角形 -->
+                <line x1="150" y1="30" x2="50" y2="150" class="line"/>
+                <line x1="150" y1="30" x2="250" y2="150" class="line"/>
+                <line x1="50" y1="150" x2="250" y2="150" class="line"/>
+                <!-- 三个顶点 -->
+                <circle cx="150" cy="30" r="25" fill="white" stroke="#660099" stroke-width="3"/>
+                <text x="150" y="38" text-anchor="middle" font-size="20" fill="#660099">?</text>
+                <circle cx="50" cy="150" r="25" fill="white" stroke="#660099" stroke-width="3"/>
+                <text x="50" y="158" text-anchor="middle" font-size="20" fill="#660099">?</text>
+                <circle cx="250" cy="150" r="25" fill="white" stroke="#660099" stroke-width="3"/>
+                <text x="250" y="158" text-anchor="middle" font-size="20" fill="#660099">?</text>
+            </svg>
+        </div>
+        <div class="tip-box">
+            <strong>💡 思考：</strong>1+2+3=6，如果每条线三个数之和相等，这个和应该是多少？
+        </div>
+    </div>
+    
+    <!-- Slide 4: Story Introduction -->
+    <div class="slide" id="slide4">
+        <h1 class="slide-title">📖 情境导入</h1>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">🏛️ 神奇的洛书</h3>
+            <p style="font-size: 18px; line-height: 1.8;">
+                传说在很久很久以前，大禹治水时，洛水中浮现出一只神龟，龟背上刻着一幅神奇的图案。<br><br>
+                这幅图案由1到9的数字组成，排列成一个正方形。神奇的是，无论横着加、竖着加，还是斜着加，三个数的和都是15！<br><br>
+                <strong>这就是世界上最早的数阵图——洛书，也叫九宫格！</strong>
+            </p>
+        </div>
+        <div class="magic-square">
+            <div class="magic-cell filled">4</div>
+            <div class="magic-cell filled">9</div>
+            <div class="magic-cell filled">2</div>
+            <div class="magic-cell filled">3</div>
+            <div class="magic-cell filled">5</div>
+            <div class="magic-cell filled">7</div>
+            <div class="magic-cell filled">8</div>
+            <div class="magic-cell filled">1</div>
+            <div class="magic-cell filled">6</div>
+        </div>
+        <div class="tip-box">
+            <strong>🤔 验证一下：</strong>横着：4+9+2=15，竖着：4+3+8=15，斜着：4+5+6=15
+        </div>
+    </div>
+    
+    <!-- Slide 5: Core Concept 1 -->
+    <div class="slide" id="slide5">
+        <h1 class="slide-title">📚 核心概念一：什么是数阵图</h1>
+        <div class="formula-box">
+            <strong>🎯 数阵图</strong><br>
+            把一些数字按照一定的规则排列成图形，使图形中某些线上的数字之和相等。
+        </div>
+        <div class="example-box">
+            <h3 style="color: #2E7D32; margin-bottom: 10px;">🌰 常见类型</h3>
+            <ul style="font-size: 18px; line-height: 1.8;">
+                <li><strong>幻方：</strong>正方形排列，每行每列每条对角线之和相等</li>
+                <li><strong>辐射型：</strong>中间一个数，向四周辐射</li>
+                <li><strong>封闭型：</strong>形成封闭图形，如三角形、正方形</li>
+            </ul>
+        </div>
+        <div class="tip-box">
+            <strong>💡 关键点：</strong>找出"公共位置"和"重叠数"是解题的关键！
+        </div>
+    </div>
+    
+    <!-- Slide 6: Core Concept 2 -->
+    <div class="slide" id="slide6">
+        <h1 class="slide-title">📚 核心概念二：三阶幻方</h1>
+        <div class="formula-box">
+            <strong>✨ 三阶幻方的特点</strong><br>
+            用1-9填入3×3方格，使每行、每列、每条对角线之和都相等（等于15）
+        </div>
+        <div class="example-box">
+            <h3 style="color: #2E7D32; margin-bottom: 10px;">🔑 填法口诀</h3>
+            <p style="font-size: 18px; line-height: 1.8;">
+                <strong>"二四为肩，六八为足，左三右七，戴九履一，五居中央"</strong><br><br>
+                意思是：<br>
+                • 2和4在肩膀（上排左右）<br>
+                • 6和8在脚底（下排左右）<br>
+                • 3在左，7在右（中间排）<br>
+                • 9戴在上面，1履在下面<br>
+                • 5永远在中间
+            </p>
+        </div>
+        <div class="magic-square">
+            <div class="magic-cell filled">4</div>
+            <div class="magic-cell filled">9</div>
+            <div class="magic-cell filled">2</div>
+            <div class="magic-cell filled">3</div>
+            <div class="magic-cell filled">5</div>
+            <div class="magic-cell filled">7</div>
+            <div class="magic-cell filled">8</div>
+            <div class="magic-cell filled">1</div>
+            <div class="magic-cell filled">6</div>
+        </div>
+    </div>
+    
+    <!-- Slide 7: Practice 1 -->
+    <div class="slide" id="slide7">
+        <h1 class="slide-title">✏️ 练习一：认识幻方</h1>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">🎯 题目</h3>
+            <p style="font-size: 18px; line-height: 1.8;">
+                观察下面的三阶幻方，回答：<br>
+                1. 中间的数是多少？<br>
+                2. 每行、每列、每条对角线的和是多少？
+            </p>
+        </div>
+        <div class="magic-square">
+            <div class="magic-cell filled">2</div>
+            <div class="magic-cell filled">7</div>
+            <div class="magic-cell filled">6</div>
+            <div class="magic-cell filled">9</div>
+            <div class="magic-cell filled">5</div>
+            <div class="magic-cell filled">1</div>
+            <div class="magic-cell filled">4</div>
+            <div class="magic-cell filled">3</div>
+            <div class="magic-cell filled">8</div>
+        </div>
+        <div style="margin: 20px 0;">
+            <span style="font-size: 18px;">中间数：</span>
+            <input type="text" class="answer-input" id="p1_center" style="width: 100px;">
+            <span style="font-size: 18px; margin-left: 20px;">幻和：</span>
+            <input type="text" class="answer-input" id="p1_sum" style="width: 100px;">
+            <button class="interactive-btn" onclick="checkP1()">检查</button>
+        </div>
+        <div id="feedback_p1" class="feedback"></div>
+    </div>
+    
+    <!-- Slide 8: Core Concept 3 -->
+    <div class="slide" id="slide8">
+        <h1 class="slide-title">📚 核心概念三：辐射型数阵图</h1>
+        <div class="formula-box">
+            <strong>☀️ 辐射型数阵图</strong><br>
+            中间一个数，向四周辐射出几条线，每条线上的数字之和相等
+        </div>
+        <div class="example-box">
+            <h3 style="color: #2E7D32; margin-bottom: 10px;">🌰 例题</h3>
+            <p style="font-size: 18px; line-height: 1.8;">
+                把1、2、3、4、5填入下面的圆圈，使每条线上的三个数之和为10。<br>
+                中间的数应该填几？
+            </p>
+        </div>
+        <div class="triangle-container">
+            <svg width="300" height="200">
+                <!-- 三条线 -->
+                <line x1="150" y1="50" x2="80" y2="150" class="line"/>
+                <line x1="150" y1="50" x2="220" y2="150" class="line"/>
+                <line x1="80" y1="150" x2="220" y2="150" class="line"/>
+                <!-- 三个顶点 -->
+                <circle cx="150" cy="50" r="25" fill="white" stroke="#660099" stroke-width="3"/>
+                <text x="150" y="58" text-anchor="middle" font-size="20" fill="#660099">?</text>
+                <circle cx="80" cy="150" r="25" fill="white" stroke="#660099" stroke-width="3"/>
+                <text x="80" y="158" text-anchor="middle" font-size="20" fill="#660099">?</text>
+                <circle cx="220" cy="150" r="25" fill="white" stroke="#660099" stroke-width="3"/>
+                <text x="220" y="158" text-anchor="middle" font-size="20" fill="#660099">?</text>
+            </svg>
+        </div>
+        <div class="tip-box">
+            <strong>💡 解题思路：</strong>中间的数被算了3次，其他数各算1次。总和=1+2+3+4+5=15，三条线总和=10×3=30，中间数=(30-15)÷2=?
+        </div>
+    </div>
+    
+    <!-- Slide 9: Practice 2 -->
+    <div class="slide" id="slide9">
+        <h1 class="slide-title">✏️ 练习二：辐射型数阵图</h1>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">🎯 题目</h3>
+            <p style="font-size: 18px; line-height: 1.8;">
+                把2、4、6、8、10填入下面的圆圈，使每条线上的三个数之和为18。<br>
+                中间的数应该填几？
+            </p>
+        </div>
+        <div class="triangle-container">
+            <svg width="300" height="200">
+                <!-- 三条线 -->
+                <line x1="150" y1="50" x2="80" y2="150" class="line"/>
+                <line x1="150" y1="50" x2="220" y2="150" class="line"/>
+                <line x1="80" y1="150" x2="220" y2="150" class="line"/>
+                <!-- 三个顶点 -->
+                <circle cx="150" cy="50" r="25" fill="white" stroke="#660099" stroke-width="3"/>
+                <text x="150" y="58" text-anchor="middle" font-size="20" fill="#660099">?</text>
+                <circle cx="80" cy="150" r="25" fill="white" stroke="#660099" stroke-width="3"/>
+                <text x="80" y="158" text-anchor="middle" font-size="20" fill="#660099">?</text>
+                <circle cx="220" cy="150" r="25" fill="white" stroke="#660099" stroke-width="3"/>
+                <text x="220" y="158" text-anchor="middle" font-size="20" fill="#660099">?</text>
+            </svg>
+        </div>
+        <div style="margin: 20px 0;">
+            <span style="font-size: 18px;">中间数：</span>
+            <input type="text" class="answer-input" id="p2_center" style="width: 100px;">
+            <button class="interactive-btn" onclick="checkP2()">检查</button>
+        </div>
+        <div id="feedback_p2" class="feedback"></div>
+    </div>
+    
+    <!-- Slide 10: Core Concept 4 -->
+    <div class="slide" id="slide10">
+        <h1 class="slide-title">📚 核心概念四：解题方法</h1>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">🔑 数阵图解题三步法</h3>
+            <div style="font-size: 18px; line-height: 2;">
+                <p><strong>第一步：找公共位置</strong></p>
+                <p style="margin-left: 30px; color: #666;">找出被重复计算的数（通常是中间或顶点）</p>
+                
+                <p><strong>第二步：算总和</strong></p>
+                <p style="margin-left: 30px; color: #666;">计算所有数字的总和，以及每条线的目标和</p>
+                
+                <p><strong>第三步：列方程</strong></p>
+                <p style="margin-left: 30px; color: #666;">根据"总和 + 重叠部分 = 线总和"列方程求解</p>
+            </div>
+        </div>
+        <div class="example-box">
+            <h3 style="color: #2E7D32; margin-bottom: 10px;">🌰 公式总结</h3>
+            <p style="font-size: 18px; line-height: 1.8;">
+                <strong>所有数字之和 + 重叠数×(重复次数-1) = 线和×线数</strong>
+            </p>
+        </div>
+    </div>
+    
+    <!-- Slide 11: Practice 3 -->
+    <div class="slide" id="slide11">
+        <h1 class="slide-title">✏️ 练习三：封闭型数阵图</h1>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">🎯 题目</h3>
+            <p style="font-size: 18px; line-height: 1.8;">
+                把1、2、3、4、5、6填入下面的三角形顶点，使每条边上的三个数之和为12。
+            </p>
+        </div>
+        <div class="triangle-container">
+            <svg width="300" height="200">
+                <!-- 三角形 -->
+                <line x1="150" y1="30" x2="50" y2="150" class="line"/>
+                <line x1="150" y1="30" x2="250" y2="150" class="line"/>
+                <line x1="50" y1="150" x2="250" y2="150" class="line"/>
+                <!-- 三个顶点 -->
+                <circle cx="150" cy="30" r="25" fill="white" stroke="#660099" stroke-width="3"/>
+                <text x="150" y="38" text-anchor="middle" font-size="20" fill="#660099">?</text>
+                <circle cx="50" cy="150" r="25" fill="white" stroke="#660099" stroke-width="3"/>
+                <text x="50" y="158" text-anchor="middle" font-size="20" fill="#660099">?</text>
+                <circle cx="250" cy="150" r="25" fill="white" stroke="#660099" stroke-width="3"/>
+                <text x="250" y="158" text-anchor="middle" font-size="20" fill="#660099">?</text>
+            </svg>
+        </div>
+        <div class="tip-box">
+            <strong>💡 提示：</strong>三个顶点各被算了2次，三个边中点各算1次。总和=1+2+3+4+5+6=21，三条线总和=12×3=36，三个顶点之和=36-21=?
+        </div>
+    </div>
+    
+    <!-- Slide 12: Common Mistakes -->
+    <div class="slide" id="slide12">
+        <h1 class="slide-title">⚠️ 易错点总结</h1>
+        <div class="content-card" style="background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%); border-left: 5px solid #f44336;">
+            <h3 style="color: #C62828; margin-bottom: 15px;">❌ 常见错误</h3>
+            <ul style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li><strong>错误1：</strong>忘记考虑重叠数被重复计算</li>
+                <li><strong>错误2：</strong>算错所有数字的总和</li>
+                <li><strong>错误3：</strong>填完数后忘记验证每条线是否相等</li>
+                <li><strong>错误4：</strong>没有从公共位置入手，盲目尝试</li>
+            </ul>
+        </div>
+        <div class="content-card" style="background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); border-left: 5px solid #4CAF50;">
+            <h3 style="color: #2E7D32; margin-bottom: 15px;">✅ 正确做法</h3>
+            <ul style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li>先找出重叠位置和重复次数</li>
+                <li>用公式法计算关键位置的数</li>
+                <li>填完所有数后，逐条验证</li>
+                <li>养成检查的好习惯</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Slide 13: Module Summary -->
+    <div class="slide" id="slide13">
+        <h1 class="slide-title">📋 模块总结</h1>
+        <div class="summary-grid">
+            <div class="summary-card">
+                <h3>🔢 数阵图定义</h3>
+                <p>把数字按规则排列，使某些线上的数字之和相等</p>
+            </div>
+            <div class="summary-card">
+                <h3>✨ 三阶幻方</h3>
+                <p>用1-9填入，每行每列对角线之和为15</p>
+            </div>
+            <div class="summary-card">
+                <h3>☀️ 辐射型</h3>
+                <p>中间一个数，向四周辐射</p>
+            </div>
+            <div class="summary-card">
+                <h3>🔺 封闭型</h3>
+                <p>形成封闭图形，如三角形、正方形</p>
+            </div>
+            <div class="summary-card">
+                <h3>🔑 解题关键</h3>
+                <p>找公共位置，算重叠数</p>
+            </div>
+            <div class="summary-card">
+                <h3>📝 验证习惯</h3>
+                <p>填完一定要逐条验证</p>
+            </div>
+        </div>
+        <div class="formula-box">
+            <strong>核心公式</strong><br>
+            所有数字之和 + 重叠数×(重复次数-1) = 线和×线数
+        </div>
+    </div>
+    
+    <!-- Slide 14: Speed Challenge -->
+    <div class="slide" id="slide14">
+        <h1 class="slide-title">⚡ 速度挑战</h1>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px; text-align: center;">⏱️ 60秒限时挑战</h3>
+            <div class="challenge-timer" id="challengeTimer">60</div>
+            <div class="score-board">
+                <div class="score-item">
+                    <div class="score-label">得分</div>
+                    <div class="score-value" id="scoreValue">0</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-label">剩余时间</div>
+                    <div class="score-value" id="timeValue">60</div>
+                </div>
+            </div>
+        </div>
+        <div class="game-area">
+            <h3 style="color: #E65100; margin-bottom: 15px;">🎯 挑战题</h3>
+            <p style="font-size: 18px; margin-bottom: 20px;">
+                把3、5、7填入三角形的三个顶点，使每条边上的三个数之和为15。<br>
+                三个边上的中点应该填什么数？
+            </p>
+            <div style="margin: 20px 0;">
+                <span style="font-size: 18px;">上边中点：</span>
+                <input type="text" class="answer-input" id="speed_top" style="width: 80px;">
+                <span style="font-size: 18px; margin-left: 10px;">左下中点：</span>
+                <input type="text" class="answer-input" id="speed_left" style="width: 80px;">
+                <span style="font-size: 18px; margin-left: 10px;">右下中点：</span>
+                <input type="text" class="answer-input" id="speed_right" style="width: 80px;">
+            </div>
+            <button class="interactive-btn" onclick="checkSpeed()">提交答案</button>
+            <div id="feedback_speed" class="feedback"></div>
+        </div>
+        <button class="interactive-btn" onclick="startTimer()" style="display: block; margin: 20px auto;">🚀 开始挑战</button>
+    </div>
+    
+    <!-- Slide 15: Life Application -->
+    <div class="slide" id="slide15">
+        <h1 class="slide-title">🌍 生活中的数阵图</h1>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">🏛️ 数阵图的应用</h3>
+            <ul style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li><strong>建筑设计：</strong>古代建筑的布局常常用到对称和平衡</li>
+                <li><strong>艺术创作：</strong>许多图案设计需要数字的平衡排列</li>
+                <li><strong>密码学：</strong>一些简单的加密方法用到数字排列</li>
+                <li><strong>游戏设计：</strong>数独、魔方等益智游戏都基于数阵图原理</li>
+            </ul>
+        </div>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">🎮 有趣的数独游戏</h3>
+            <p style="font-size: 18px; line-height: 1.8;">
+                数独是一种源自18世纪瑞士的数学游戏。玩家需要在9×9的格子中填入数字1-9，使每行、每列、每个3×3宫格都不重复。<br><br>
+                <strong>数独和幻方有异曲同工之妙！</strong>
+            </p>
+        </div>
+    </div>
+    
+    <!-- Slide 16: Thinking Expansion -->
+    <div class="slide" id="slide16">
+        <h1 class="slide-title">💭 思维拓展</h1>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">🧩 进阶挑战</h3>
+            <p style="font-size: 18px; line-height: 1.8; margin-bottom: 20px;">
+                如果把1-16填入4×4的方格，使每行、每列、每条对角线之和都相等，这个和是多少？
+            </p>
+        </div>
+        <div class="magic-square" style="grid-template-columns: repeat(4, 50px); grid-template-rows: repeat(4, 50px);">
+            <div class="magic-cell filled" style="width: 50px; height: 50px; font-size: 18px;">1</div>
+            <div class="magic-cell filled" style="width: 50px; height: 50px; font-size: 18px;">15</div>
+            <div class="magic-cell filled" style="width: 50px; height: 50px; font-size: 18px;">14</div>
+            <div class="magic-cell filled" style="width: 50px; height: 50px; font-size: 18px;">4</div>
+            <div class="magic-cell filled" style="width: 50px; height: 50px; font-size: 18px;">12</div>
+            <div class="magic-cell filled" style="width: 50px; height: 50px; font-size: 18px;">6</div>
+            <div class="magic-cell filled" style="width: 50px; height: 50px; font-size: 18px;">7</div>
+            <div class="magic-cell filled" style="width: 50px; height: 50px; font-size: 18px;">9</div>
+            <div class="magic-cell filled" style="width: 50px; height: 50px; font-size: 18px;">8</div>
+            <div class="magic-cell filled" style="width: 50px; height: 50px; font-size: 18px;">10</div>
+            <div class="magic-cell filled" style="width: 50px; height: 50px; font-size: 18px;">11</div>
+            <div class="magic-cell filled" style="width: 50px; height: 50px; font-size: 18px;">5</div>
+            <div class="magic-cell filled" style="width: 50px; height: 50px; font-size: 18px;">13</div>
+            <div class="magic-cell filled" style="width: 50px; height: 50px; font-size: 18px;">3</div>
+            <div class="magic-cell filled" style="width: 50px; height: 50px; font-size: 18px;">2</div>
+            <div class="magic-cell filled" style="width: 50px; height: 50px; font-size: 18px;">16</div>
+        </div>
+        <div class="tip-box">
+            <strong>💡 答案：</strong>四阶幻方的幻和 = (1+2+...+16)÷4 = 136÷4 = 34
+        </div>
+    </div>
+    
+    <!-- Slide 17: Knowledge Summary -->
+    <div class="slide" id="slide17">
+        <h1 class="slide-title">📝 知识总结</h1>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">📚 本课重点回顾</h3>
+            <table style="width: 100%; border-collapse: collapse; font-size: 16px;">
+                <tr style="background: #660099; color: white;">
+                    <th style="padding: 12px; border: 1px solid #ddd;">知识点</th>
+                    <th style="padding: 12px; border: 1px solid #ddd;">核心内容</th>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; border: 1px solid #ddd;">数阵图定义</td>
+                    <td style="padding: 12px; border: 1px solid #ddd;">数字按规则排列，某些线上之和相等</td>
+                </tr>
+                <tr style="background: #f5f5f5;">
+                    <td style="padding: 12px; border: 1px solid #ddd;">三阶幻方</td>
+                    <td style="padding: 12px; border: 1px solid #ddd;">1-9填入，每行每列对角线之和为15</td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; border: 1px solid #ddd;">辐射型</td>
+                    <td style="padding: 12px; border: 1px solid #ddd;">中间一个数向四周辐射</td>
+                </tr>
+                <tr style="background: #f5f5f5;">
+                    <td style="padding: 12px; border: 1px solid #ddd;">封闭型</td>
+                    <td style="padding: 12px; border: 1px solid #ddd;">形成封闭图形</td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; border: 1px solid #ddd;">解题方法</td>
+                    <td style="padding: 12px; border: 1px solid #ddd;">找公共位置→算总和→列方程</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+    <!-- Slide 18: Practice Summary -->
+    <div class="slide" id="slide18">
+        <h1 class="slide-title">📊 练习回顾</h1>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">✅ 本课练习完成情况</h3>
+            <div style="font-size: 18px; line-height: 2;">
+                <p>✏️ 练习一：认识幻方 <span id="status_p1">⏳ 待完成</span></p>
+                <p>✏️ 练习二：辐射型数阵图 <span id="status_p2">⏳ 待完成</span></p>
+                <p>✏️ 练习三：封闭型数阵图 <span id="status_p3">⏳ 待完成</span></p>
+                <p>⚡ 速度挑战 <span id="status_speed">⏳ 待完成</span></p>
+            </div>
+        </div>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">💪 能力提升</h3>
+            <ul style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li>能够识别不同类型的数阵图</li>
+                <li>掌握找公共位置和重叠数的方法</li>
+                <li>学会用公式法解决数阵图问题</li>
+                <li>养成验证答案的好习惯</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Slide 19: Preview -->
+    <div class="slide" id="slide19">
+        <h1 class="slide-title">🔮 下节课预告</h1>
+        <div class="content-card" style="text-align: center;">
+            <div class="emoji-display">🎯</div>
+            <h3 style="color: #660099; margin-bottom: 20px;">第18课：巧填算符</h3>
+            <p style="font-size: 18px; line-height: 1.8; margin-bottom: 30px;">
+                在数字之间填入"+"、"-"、"×"、"÷"，使等式成立！<br><br>
+                例如：在1 2 3 4 5之间填算符，使结果等于10<br>
+                1 + 2 + 3 + 4 = 10 ✓<br><br>
+                更难的挑战等着你！
+            </p>
+        </div>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">📚 预习建议</h3>
+            <ul style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li>复习四则运算的顺序</li>
+                <li>练习一些简单的填算符题目</li>
+                <li>思考：有哪些常用的凑数技巧？</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Slide 20: Homework -->
+    <div class="slide" id="slide20">
+        <h1 class="slide-title">📝 作业布置</h1>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">📚 必做题（基础巩固）</h3>
+            <ol style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li>完成课后练习题第1-6题（幻方基础）</li>
+                <li>完成课后练习题第7-10题（数阵图应用）</li>
+            </ol>
+        </div>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">🎯 选做题（能力提升）</h3>
+            <ol style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li>完成课后练习题第11-12题（综合挑战）</li>
+                <li>尝试设计一个自己的数阵图</li>
+            </ol>
+        </div>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">🏠 亲子任务</h3>
+            <ol style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li>和家长一起玩"幻方"游戏</li>
+                <li>向家长讲解今天学的数阵图知识</li>
+                <li>尝试用实物（如积木）摆出数阵图</li>
+            </ol>
+        </div>
+        <div class="tip-box">
+            <strong>💡 温馨提示：</strong>建议用时20-30分钟，遇到困难可以画出示意图帮助理解。
+        </div>
+    </div>
+    
+    <!-- Navigation -->
+    <div class="nav-container">
+        <button class="nav-btn" onclick="prevSlide()">⬅️ 上一页</button>
+        <button class="nav-btn" onclick="nextSlide()">下一页 ➡️</button>
+    </div>
+    
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 20;
+        let completedExercises = {
+            p1: false,
+            p2: false,
+            p3: false,
+            speed: false
+        };
+        let timerInterval = null;
+        let timeLeft = 60;
+        let score = 0;
+        
+        function updateProgressBar() {
+            const progress = (currentSlide / totalSlides) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('pageIndicator').textContent = `第 ${currentSlide} / ${totalSlides} 页`;
+        }
+        
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => slide.classList.remove('active'));
+            document.getElementById('slide' + n).classList.add('active');
+            currentSlide = n;
+            updateProgressBar();
+        }
+        
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                showSlide(currentSlide + 1);
+            }
+        }
+        
+        function prevSlide() {
+            if (currentSlide > 1) {
+                showSlide(currentSlide - 1);
+            }
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+        
+        // Practice 1 check
+        function checkP1() {
+            const center = document.getElementById('p1_center');
+            const sum = document.getElementById('p1_sum');
+            const feedback = document.getElementById('feedback_p1');
+            
+            if (center.value.trim() === '5' && sum.value.trim() === '15') {
+                center.classList.add('correct');
+                sum.classList.add('correct');
+                center.classList.remove('wrong');
+                sum.classList.remove('wrong');
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 正确！中间数是5，幻和是15';
+                completedExercises.p1 = true;
+                document.getElementById('status_p1').textContent = '✅ 已完成';
+            } else {
+                center.classList.add('wrong');
+                sum.classList.add('wrong');
+                center.classList.remove('correct');
+                sum.classList.remove('correct');
+                feedback.className = 'feedback error';
+                feedback.textContent = '❌ 再想想，观察中间的数和每行的和';
+                setTimeout(() => { 
+                    center.classList.remove('wrong'); 
+                    sum.classList.remove('wrong'); 
+                }, 1000);
+            }
+        }
+        
+        // Practice 2 check
+        function checkP2() {
+            const center = document.getElementById('p2_center');
+            const feedback = document.getElementById('feedback_p2');
+            
+            if (center.value.trim() === '6') {
+                center.classList.add('correct');
+                center.classList.remove('wrong');
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 正确！中间数是6';
+                completedExercises.p2 = true;
+                document.getElementById('status_p2').textContent = '✅ 已完成';
+            } else {
+                center.classList.add('wrong');
+                center.classList.remove('correct');
+                feedback.className = 'feedback error';
+                feedback.textContent = '❌ 提示：总和=30，三条线总和=54，中间数=(54-30)÷2';
+                setTimeout(() => { center.classList.remove('wrong'); }, 1000);
+            }
+        }
+        
+        // Speed challenge
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timeLeft = 60;
+            score = 0;
+            document.getElementById('challengeTimer').textContent = timeLeft;
+            document.getElementById('timeValue').textContent = timeLeft;
+            document.getElementById('scoreValue').textContent = score;
+            document.getElementById('speed_top').value = '';
+            document.getElementById('speed_left').value = '';
+            document.getElementById('speed_right').value = '';
+            document.getElementById('speed_top').classList.remove('correct', 'wrong');
+            document.getElementById('speed_left').classList.remove('correct', 'wrong');
+            document.getElementById('speed_right').classList.remove('correct', 'wrong');
+            document.getElementById('feedback_speed').style.display = 'none';
+            
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                document.getElementById('challengeTimer').textContent = timeLeft;
+                document.getElementById('timeValue').textContent = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    document.getElementById('feedback_speed').className = 'feedback error';
+                    document.getElementById('feedback_speed').textContent = '⏰ 时间到！答案是：上边中点5，左下中点7，右下中点3';
+                    document.getElementById('feedback_speed').style.display = 'block';
+                }
+            }, 1000);
+        }
+        
+        function checkSpeed() {
+            const top = document.getElementById('speed_top');
+            const left = document.getElementById('speed_left');
+            const right = document.getElementById('speed_right');
+            const feedback = document.getElementById('feedback_speed');
+            
+            if (top.value.trim() === '5' && left.value.trim() === '7' && right.value.trim() === '3') {
+                top.classList.add('correct');
+                left.classList.add('correct');
+                right.classList.add('correct');
+                top.classList.remove('wrong');
+                left.classList.remove('wrong');
+                right.classList.remove('wrong');
+                score = timeLeft * 2;
+                document.getElementById('scoreValue').textContent = score;
+                feedback.className = 'feedback success';
+                feedback.textContent = `🎉 正确！获得 ${score} 分！`;
+                completedExercises.speed = true;
+                document.getElementById('status_speed').textContent = '✅ 已完成';
+                clearInterval(timerInterval);
+            } else {
+                top.classList.add('wrong');
+                left.classList.add('wrong');
+                right.classList.add('wrong');
+                top.classList.remove('correct');
+                left.classList.remove('correct');
+                right.classList.remove('correct');
+                feedback.className = 'feedback error';
+                feedback.textContent = '❌ 再想想，每条边之和为15';
+                setTimeout(() => { 
+                    top.classList.remove('wrong'); 
+                    left.classList.remove('wrong'); 
+                    right.classList.remove('wrong'); 
+                }, 1000);
+            }
+            feedback.style.display = 'block';
+        }
+        
+        // Initialize
+        updateProgressBar();
+    </script>
+</body>
+</html>
