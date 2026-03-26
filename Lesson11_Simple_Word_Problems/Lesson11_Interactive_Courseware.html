@@ -491,11 +491,24 @@
             <div class="content-card">
                 <h3 style="color: #660099; margin-bottom: 15px;">✏️ 线段图法</h3>
                 <p>用线段来表示数量，直观展示数量关系：</p>
-                <div class="line-diagram">
-                    小数: |━━━━━━━━| <br>
-                    大数: |━━━━━━━━|━━━━| (+差)<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└────和────┘
-                </div>
+                <svg width="600" height="200" viewBox="0 0 600 200">
+                    <!-- 小数线段 -->
+                    <line x1="120" y1="60" x2="320" y2="60" stroke="#2196F3" stroke-width="4"/>
+                    <text x="50" y="65" font-size="16" fill="#333">小数:</text>
+                    
+                    <!-- 大数线段（两段组成） -->
+                    <line x1="120" y1="100" x2="320" y2="100" stroke="#4CAF50" stroke-width="4"/>
+                    <line x1="320" y1="100" x2="420" y2="100" stroke="#FF9800" stroke-width="4"/>
+                    <text x="50" y="105" font-size="16" fill="#333">大数:</text>
+                    <text x="370" y="95" font-size="14" fill="#FF9800" text-anchor="middle">+差</text>
+                    
+                    <!-- 大括号 - 和 -->
+                    <path d="M 120 130 Q 110 140 120 150 L 420 150 Q 430 140 420 130" fill="none" stroke="#E91E63" stroke-width="3"/>
+                    <text x="270" y="175" font-size="18" fill="#E91E63" text-anchor="middle" font-weight="bold">和</text>
+                    
+                    <!-- 标注说明 -->
+                    <text x="270" y="30" font-size="16" fill="#666" text-anchor="middle">线段图法：直观展示数量关系</text>
+                </svg>
                 <p style="margin-top: 10px; color: #666;">从图中可以看出：和 + 差 = 2个大数，和 - 差 = 2个小数</p>
             </div>
         </div>
@@ -510,11 +523,26 @@
             
             <div class="content-card">
                 <h3 style="color: #660099; margin-bottom: 15px;">🎨 第一步：画线段图</h3>
-                <div class="line-diagram">
-                    小红: |━━━━━━━| (小数)<br>
-                    小明: |━━━━━━━|━━| (大数，多10张)<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─共50张─┘
-                </div>
+                <svg width="600" height="200" viewBox="0 0 600 200">
+                    <!-- 小红线段 -->
+                    <line x1="120" y1="60" x2="320" y2="60" stroke="#2196F3" stroke-width="4"/>
+                    <text x="50" y="65" font-size="16" fill="#333">小红:</text>
+                    <text x="210" y="55" font-size="14" fill="#666" text-anchor="middle">?</text>
+                    
+                    <!-- 小明的第一段（与小红相同） -->
+                    <line x1="120" y1="100" x2="320" y2="100" stroke="#4CAF50" stroke-width="4"/>
+                    <!-- 小明的第二段（多出的10张） -->
+                    <line x1="320" y1="100" x2="420" y2="100" stroke="#FF9800" stroke-width="4"/>
+                    <text x="50" y="105" font-size="16" fill="#333">小明:</text>
+                    <text x="370" y="95" font-size="14" fill="#FF9800" text-anchor="middle">多10张</text>
+                    
+                    <!-- 大括号 - 和 -->
+                    <path d="M 120 130 Q 110 140 120 150 L 420 150 Q 430 140 420 130" fill="none" stroke="#E91E63" stroke-width="3"/>
+                    <text x="270" y="175" font-size="18" fill="#E91E63" text-anchor="middle" font-weight="bold">共50张</text>
+                    
+                    <!-- 标注说明 -->
+                    <text x="270" y="30" font-size="16" fill="#666" text-anchor="middle">线段图：和差问题</text>
+                </svg>
             </div>
             
             <div class="content-card">
@@ -555,11 +583,26 @@
             <div class="content-card">
                 <h3 style="color: #660099; margin-bottom: 15px;">✏️ 份数思想</h3>
                 <p>把较小的数看作<strong>1份</strong>，较大的数就是<strong>几份</strong>：</p>
-                <div class="line-diagram">
-                    小数: |━━| (1份)<br>
-                    大数: |━━|━━|━━| (3份，假设倍数是3)<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─共4份─┘
-                </div>
+                <svg width="600" height="180" viewBox="0 0 600 180">
+                    <!-- 小数线段 (1份) -->
+                    <line x1="120" y1="50" x2="200" y2="50" stroke="#2196F3" stroke-width="4"/>
+                    <text x="50" y="55" font-size="16" fill="#333">小数:</text>
+                    <text x="160" y="45" font-size="14" fill="#2196F3" text-anchor="middle">1份</text>
+                    
+                    <!-- 大数线段 (3份) -->
+                    <line x1="120" y1="90" x2="200" y2="90" stroke="#4CAF50" stroke-width="4"/>
+                    <line x1="200" y1="90" x2="280" y2="90" stroke="#4CAF50" stroke-width="4"/>
+                    <line x1="280" y1="90" x2="360" y2="90" stroke="#4CAF50" stroke-width="4"/>
+                    <text x="50" y="95" font-size="16" fill="#333">大数:</text>
+                    <text x="240" y="85" font-size="14" fill="#4CAF50" text-anchor="middle">3份</text>
+                    
+                    <!-- 大括号 - 总份数 -->
+                    <path d="M 120 120 Q 110 130 120 140 L 360 140 Q 370 130 360 120" fill="none" stroke="#E91E63" stroke-width="3"/>
+                    <text x="240" y="165" font-size="18" fill="#E91E63" text-anchor="middle" font-weight="bold">共4份</text>
+                    
+                    <!-- 标注说明 -->
+                    <text x="240" y="25" font-size="16" fill="#666" text-anchor="middle">线段图：倍数问题（假设倍数是3）</text>
+                </svg>
                 <p style="margin-top: 10px; color: #666;">先求1份是多少，再求几份是多少。</p>
             </div>
         </div>
@@ -574,11 +617,26 @@
             
             <div class="content-card">
                 <h3 style="color: #660099; margin-bottom: 15px;">🎨 第一步：画份数图</h3>
-                <div class="line-diagram">
-                    梨树: |━━| (1份)<br>
-                    苹果树: |━━|━━|━━| (3份)<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─共4份=36棵─┘
-                </div>
+                <svg width="600" height="180" viewBox="0 0 600 180">
+                    <!-- 梨树线段 (1份) -->
+                    <line x1="120" y1="50" x2="200" y2="50" stroke="#2196F3" stroke-width="4"/>
+                    <text x="50" y="55" font-size="16" fill="#333">梨树:</text>
+                    <text x="160" y="45" font-size="14" fill="#2196F3" text-anchor="middle">1份</text>
+                    
+                    <!-- 苹果树线段 (3份) -->
+                    <line x1="120" y1="90" x2="200" y2="90" stroke="#4CAF50" stroke-width="4"/>
+                    <line x1="200" y1="90" x2="280" y2="90" stroke="#4CAF50" stroke-width="4"/>
+                    <line x1="280" y1="90" x2="360" y2="90" stroke="#4CAF50" stroke-width="4"/>
+                    <text x="50" y="95" font-size="16" fill="#333">苹果树:</text>
+                    <text x="240" y="85" font-size="14" fill="#4CAF50" text-anchor="middle">3份</text>
+                    
+                    <!-- 大括号 - 总份数 -->
+                    <path d="M 120 120 Q 110 130 120 140 L 360 140 Q 370 130 360 120" fill="none" stroke="#E91E63" stroke-width="3"/>
+                    <text x="240" y="165" font-size="18" fill="#E91E63" text-anchor="middle" font-weight="bold">共4份 = 36棵</text>
+                    
+                    <!-- 标注说明 -->
+                    <text x="240" y="25" font-size="16" fill="#666" text-anchor="middle">线段图：倍数问题（梨树是1份，苹果树是3份）</text>
+                </svg>
             </div>
             
             <div class="content-card">
@@ -643,6 +701,30 @@
             <div class="content-card">
                 <h3 style="color: #660099; margin-bottom: 15px;">🤔 思路分析</h3>
                 <p>这道题的关键是找出<strong>原来的差</strong>：</p>
+                <svg width="650" height="220" viewBox="0 0 650 220">
+                    <!-- 标题 -->
+                    <text x="325" y="25" font-size="16" fill="#666" text-anchor="middle">线段图：移多补少问题</text>
+                    
+                    <!-- 原来甲桶 -->
+                    <line x1="120" y1="60" x2="320" y2="60" stroke="#4CAF50" stroke-width="4"/>
+                    <line x1="320" y1="60" x2="420" y2="60" stroke="#FF9800" stroke-width="4"/>
+                    <text x="50" y="65" font-size="16" fill="#333">原来甲桶:</text>
+                    <text x="370" y="55" font-size="14" fill="#FF9800" text-anchor="middle">多20千克</text>
+                    
+                    <!-- 原来乙桶 -->
+                    <line x1="120" y1="100" x2="320" y2="100" stroke="#2196F3" stroke-width="4"/>
+                    <text x="50" y="105" font-size="16" fill="#333">原来乙桶:</text>
+                    
+                    <!-- 倒完后 -->
+                    <text x="50" y="145" font-size="14" fill="#666" font-style="italic">倒完后:</text>
+                    <line x1="120" y1="140" x2="320" y2="140" stroke="#9E9E9E" stroke-width="4" stroke-dasharray="5,5"/>
+                    <line x1="120" y1="155" x2="320" y2="155" stroke="#9E9E9E" stroke-width="4" stroke-dasharray="5,5"/>
+                    <text x="220" y="170" font-size="14" fill="#9E9E9E" text-anchor="middle">各30千克（相等）</text>
+                    
+                    <!-- 大括号 - 总和 -->
+                    <path d="M 120 185 Q 110 195 120 205 L 420 205 Q 430 195 420 185" fill="none" stroke="#E91E63" stroke-width="3"/>
+                    <text x="270" y="218" font-size="18" fill="#E91E63" text-anchor="middle" font-weight="bold">共60千克</text>
+                </svg>
                 <ul style="margin-left: 20px; margin-top: 10px; line-height: 1.8;">
                     <li>倒完后两桶一样重，各重：60 ÷ 2 = 30千克</li>
                     <li>甲桶倒出10千克后是30千克，原来重：30 + 10 = 40千克</li>
@@ -673,6 +755,34 @@
             <div class="content-card">
                 <h3 style="color: #660099; margin-bottom: 15px;">🤔 思路分析</h3>
                 <p>这道题是<strong>倍数问题的变形</strong>，多了"多15本"这个条件：</p>
+                <svg width="650" height="200" viewBox="0 0 650 200">
+                    <!-- 标题 -->
+                    <text x="325" y="25" font-size="16" fill="#666" text-anchor="middle">线段图：倍数问题变形（多几/少几）</text>
+                    
+                    <!-- 故事书 (1份) -->
+                    <line x1="120" y1="60" x2="220" y2="60" stroke="#2196F3" stroke-width="4"/>
+                    <text x="50" y="65" font-size="16" fill="#333">故事书:</text>
+                    <text x="170" y="55" font-size="14" fill="#2196F3" text-anchor="middle">1份</text>
+                    
+                    <!-- 科技书 (2份 + 15本) -->
+                    <line x1="120" y1="100" x2="220" y2="100" stroke="#4CAF50" stroke-width="4"/>
+                    <line x1="220" y1="100" x2="320" y2="100" stroke="#4CAF50" stroke-width="4"/>
+                    <line x1="320" y1="100" x2="420" y2="100" stroke="#FF9800" stroke-width="4"/>
+                    <text x="50" y="105" font-size="16" fill="#333">科技书:</text>
+                    <text x="270" y="95" font-size="14" fill="#4CAF50" text-anchor="middle">2份</text>
+                    <text x="370" y="95" font-size="14" fill="#FF9800" text-anchor="middle">+15本</text>
+                    
+                    <!-- 调整后的情况 -->
+                    <text x="50" y="145" font-size="14" fill="#666" font-style="italic">调整后:</text>
+                    <line x1="120" y1="140" x2="220" y2="140" stroke="#9E9E9E" stroke-width="4" stroke-dasharray="5,5"/>
+                    <line x1="120" y1="155" x2="220" y2="155" stroke="#9E9E9E" stroke-width="4" stroke-dasharray="5,5"/>
+                    <line x1="220" y1="155" x2="320" y2="155" stroke="#9E9E9E" stroke-width="4" stroke-dasharray="5,5"/>
+                    <text x="220" y="175" font-size="14" fill="#9E9E9E" text-anchor="middle">正好2倍（总数105本）</text>
+                    
+                    <!-- 大括号 - 总和 -->
+                    <path d="M 120 185 Q 110 195 120 205 L 420 205 Q 430 195 420 185" fill="none" stroke="#E91E63" stroke-width="3"/>
+                    <text x="270" y="218" font-size="18" fill="#E91E63" text-anchor="middle" font-weight="bold">共120本</text>
+                </svg>
                 <ul style="margin-left: 20px; margin-top: 10px; line-height: 1.8;">
                     <li>如果把科技书减少15本，正好是故事书的2倍</li>
                     <li>此时总数变成：120 - 15 = 105本</li>
