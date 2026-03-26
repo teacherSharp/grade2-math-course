@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第14课 年龄问题 - 课后练习题</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .question-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 5px solid #660099;
+        }
+        
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .question-number {
+            font-size: 20px;
+            font-weight: bold;
+            color: #660099;
+        }
+        
+        .difficulty {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .question-content {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .answer-section {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+        }
+        
+        .answer-label {
+            font-weight: bold;
+            color: #660099;
+            margin-bottom: 10px;
+        }
+        
+        .answer-input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        .bonus-question {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border: 3px solid #FF9800;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+        
+        .bonus-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .bonus-header h2 {
+            color: #E65100;
+            font-size: 24px;
+        }
+        
+        .bonus-tag {
+            display: inline-block;
+            background: #FF9800;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #f5f5f5;
+            color: #666;
+        }
+        
+        .emoji {
+            font-size: 24px;
+            margin-right: 5px;
+        }
+
+        .math-formula {
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .olympiad-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #333;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .hint-text {
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📝 第14课 年龄问题</h1>
+            <p>课后练习题 · 思维训练版</p>
+        </div>
+        
+        <div class="content">
+            <!-- 第1题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">第1题 ★★☆☆☆</span>
+                    <span class="difficulty">基础巩固</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">👨‍👦</span><strong>和差问题基础</strong><br>
+                    小明和爸爸今年的年龄和是50岁，爸爸比小明大32岁。两人今年各多少岁？<br><br>
+                    <em class="hint-text">提示：使用公式 大数=(和+差)÷2，小数=(和-差)÷2</em>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="例如：爸爸XX岁，小明XX岁">
+                </div>
+            </div>
+            
+            <!-- 第2题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">第2题 ★★☆☆☆</span>
+                    <span class="difficulty">基础巩固</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">👩‍👧</span><strong>和倍问题基础</strong><br>
+                    妈妈和小红今年的年龄和是48岁，妈妈的年龄是小红的3倍。两人今年各多少岁？<br><br>
+                    <em class="hint-text">提示：把小红年龄看作1份，妈妈就是3份，总共4份</em>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="例如：妈妈XX岁，小红XX岁">
+                </div>
+            </div>
+            
+            <!-- 第3题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">第3题 ★★★☆☆</span>
+                    <span class="difficulty">能力提升</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">👴‍👶</span><strong>差倍问题</strong><br>
+                    爷爷比孙子大54岁，今年爷爷的年龄是孙子的7倍。爷爷和孙子今年各多少岁？<br><br>
+                    <em class="hint-text">提示：把孙子年龄看作1份，爷爷就是7份，相差6份</em>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="例如：爷爷XX岁，孙子XX岁">
+                </div>
+            </div>
+            
+            <!-- 第4题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">第4题 ★★★☆☆</span>
+                    <span class="difficulty">能力提升</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">⏰</span><strong>时光穿梭（几年前）</strong><br>
+                    2年前，哥哥和弟弟的年龄和是26岁，哥哥比弟弟大4岁。今年哥哥和弟弟各多少岁？<br><br>
+                    <em class="hint-text">提示：2年前年龄和是26岁，今年年龄和要加上2+2=4岁</em>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="例如：哥哥XX岁，弟弟XX岁">
+                </div>
+            </div>
+            
+            <!-- 第5题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">第5题 ★★★☆☆</span>
+                    <span class="difficulty">能力提升</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">🔮</span><strong>时光穿梭（几年后）</strong><br>
+                    3年后，爸爸和小明的年龄和将是56岁，爸爸比小明大30岁。今年爸爸和小明各多少岁？<br><br>
+                    <em class="hint-text">提示：3年后年龄和是56岁，今年年龄和要减去3+3=6岁</em>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="例如：爸爸XX岁，小明XX岁">
+                </div>
+            </div>
+            
+            <!-- 第6题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">第6题 ★★★☆☆</span>
+                    <span class="difficulty">能力提升</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">🧮</span><strong>和倍问题进阶</strong><br>
+                    王老师和小李今年的年龄和是60岁，王老师的年龄是小李的4倍。两人今年各多少岁？<br><br>
+                    <em class="hint-text">提示：把小李年龄看作1份，王老师就是4份，总共5份</em>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="例如：王老师XX岁，小李XX岁">
+                </div>
+            </div>
+            
+            <!-- 第7题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">第7题 ★★★★☆</span>
+                    <span class="difficulty">进阶挑战</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">🎭</span><strong>复杂和差倍</strong><br>
+                    5年前，妈妈的年龄是小红的6倍，今年妈妈和小红的年龄和是50岁。今年两人各多少岁？<br><br>
+                    <em class="hint-text">提示：设小红今年x岁，5年前(x-5)岁，列方程求解</em>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="例如：妈妈XX岁，小红XX岁">
+                </div>
+            </div>
+            
+            <!-- 第8题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">第8题 ★★★★☆</span>
+                    <span class="difficulty">进阶挑战</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">🎪</span><strong>倍数变化问题</strong><br>
+                    今年爸爸的年龄是小明的5倍，3年后爸爸的年龄是小明的4倍。今年两人各多少岁？<br><br>
+                    <em class="hint-text">提示：年龄差永远不变，利用这个不变量解题</em>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="例如：爸爸XX岁，小明XX岁">
+                </div>
+            </div>
+            
+            <!-- 第9题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">第9题 ★★★★☆</span>
+                    <span class="difficulty">进阶挑战</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">🎨</span><strong>三人年龄问题</strong><br>
+                    小明、爸爸、爷爷三人的年龄和是100岁，爸爸比小明大28岁，爷爷比爸爸大25岁。三人今年各多少岁？<br><br>
+                    <em class="hint-text">提示：以小明的年龄为基准，用和差问题逐步求解</em>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="例如：小明XX岁，爸爸XX岁，爷爷XX岁">
+                </div>
+            </div>
+            
+            <!-- 第10题 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">第10题 ★★★★★</span>
+                    <span class="difficulty">巅峰挑战</span>
+                </div>
+                <div class="question-content">
+                    <span class="emoji">🏆</span><strong>综合应用题</strong><br>
+                    今年哥哥和弟弟的年龄和是30岁。当哥哥像弟弟现在这么大时，哥哥的年龄是弟弟当时年龄的3倍。哥哥今年多少岁？<br><br>
+                    <em class="hint-text">提示：这是一个差倍问题的变形，需要仔细分析时间关系</em>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="例如：哥哥XX岁">
+                </div>
+            </div>
+            
+            <!-- 附加题 -->
+            <div class="bonus-question">
+                <div class="bonus-header">
+                    <h2>🌟 附加题（巅峰难度）</h2>
+                    <span class="bonus-tag">思维挑战</span>
+                </div>
+                <div class="question-content" style="font-size: 18px; line-height: 1.8;">
+                    <span class="emoji">👑</span><strong>终极挑战</strong><br><br>
+                    今年爷爷、爸爸、小明三人的年龄和是120岁。爸爸的年龄是小明的5倍，爷爷的年龄是爸爸的2倍。三人今年各多少岁？<br><br>
+                    <em class="hint-text">提示：把小明的年龄看作1份，爸爸是5份，爷爷是10份，总共16份</em>
+                </div>
+                <div class="answer-section" style="margin-top: 20px;">
+                    <div class="answer-label">我的答案：</div>
+                    <input type="text" class="answer-input" placeholder="例如：爷爷XX岁，爸爸XX岁，小明XX岁">
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>🌟 答案仅供参考，理解解题思路比记住答案更重要！</p>
+            <p style="margin-top: 10px;">如有疑问，欢迎与老师讨论交流</p>
+            <p style="margin-top: 5px;">📱 夏老师：19117803360</p>
+        </div>
+    </div>
+</body>
+</html>

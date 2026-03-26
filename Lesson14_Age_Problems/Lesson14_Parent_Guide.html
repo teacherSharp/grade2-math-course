@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第14课 年龄问题 - 家长协同方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 35px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #660099;
+        }
+        
+        .section h2 {
+            color: #660099;
+            font-size: 24px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section p, .section li {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+        }
+        
+        .section ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .section li {
+            margin-bottom: 8px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #2196F3;
+        }
+        
+        .tip-box {
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #FF9800;
+        }
+        
+        .activity-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            transition: all 0.3s;
+        }
+        
+        .activity-card:hover {
+            border-color: #660099;
+            box-shadow: 0 5px 15px rgba(102, 0, 153, 0.1);
+        }
+        
+        .activity-card h3 {
+            color: #660099;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .olympiad-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #fff;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .formula-box {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border: 2px solid #FF9800;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .formula-title {
+            color: #E65100;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .qr-section {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .qr-section h3 {
+            color: #660099;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info {
+            background: white;
+            border: 3px solid #660099;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px auto;
+            max-width: 300px;
+        }
+        
+        .phone-number {
+            font-size: 24px;
+            color: #660099;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            margin: 15px auto;
+            background: white;
+            border: 2px solid #660099;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        
+        .qr-code img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 5px;
+        }
+        
+        .next-lesson {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border: 2px solid #4CAF50;
+        }
+        
+        .next-lesson h3 {
+            color: #2E7D32;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #f5f5f5;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .difficulty-tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        
+        .difficulty-easy {
+            background: #C8E6C9;
+            color: #2E7D32;
+        }
+        
+        .difficulty-medium {
+            background: #FFE0B2;
+            color: #E65100;
+        }
+        
+        .difficulty-hard {
+            background: #FFCDD2;
+            color: #C62828;
+        }
+        
+        .example-box {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .step-list {
+            counter-reset: step;
+            list-style: none;
+        }
+        
+        .step-list li {
+            counter-increment: step;
+            margin-bottom: 15px;
+            padding-left: 40px;
+            position: relative;
+        }
+        
+        .step-list li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #660099;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>第14课 年龄问题</h1>
+            <p>家长协同方案 · 思维训练版</p>
+            <span class="olympiad-badge">🏆 思维挑战</span>
+        </div>
+        
+        <div class="content">
+            <!-- 课程概述 -->
+            <div class="section">
+                <h2>📚 课程概述</h2>
+                <p>
+                    年龄问题是数学思维训练中的经典题型，也是实际生活中经常遇到的问题。本节课的核心是让孩子理解<strong>"年龄差永远不变"</strong>这一黄金法则，并掌握和差、和倍、差倍三种基本类型的解题方法。
+                </p>
+                <div class="highlight-box">
+                    <strong>🎯 学习目标：</strong><br>
+                    1. 理解年龄差不变的核心原理<br>
+                    2. 掌握和差问题的解题方法<br>
+                    3. 掌握和倍问题的解题方法<br>
+                    4. 掌握差倍问题的解题方法<br>
+                    5. 能够解决涉及"几年前/后"的复杂问题
+                </div>
+            </div>
+            
+            <!-- 核心知识点 -->
+            <div class="section">
+                <h2>🔑 核心知识点</h2>
+                
+                <div class="formula-box">
+                    <div class="formula-title">✨ 黄金法则：年龄差永远不变</div>
+                    <p style="font-size: 16px; margin-top: 10px;">
+                        无论过多少年，两个人的年龄差始终保持不变<br>
+                        因为两个人每年增长的年龄是一样的
+                    </p>
+                </div>
+                
+                <h3 style="color: #660099; margin: 20px 0 10px 0;">📐 三大解题公式</h3>
+                
+                <div class="activity-card">
+                    <h3>类型一：和差问题 <span class="difficulty-tag difficulty-medium">中等难度</span></h3>
+                    <p><strong>已知：</strong>年龄和、年龄差</p>
+                    <p><strong>公式：</strong></p>
+                    <ul>
+                        <li>大数 = (和 + 差) ÷ 2</li>
+                        <li>小数 = (和 - 差) ÷ 2</li>
+                    </ul>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>类型二：和倍问题 <span class="difficulty-tag difficulty-medium">中等难度</span></h3>
+                    <p><strong>已知：</strong>年龄和、倍数关系</p>
+                    <p><strong>公式：</strong></p>
+                    <ul>
+                        <li>小数 = 和 ÷ (倍数 + 1)</li>
+                        <li>大数 = 小数 × 倍数</li>
+                    </ul>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>类型三：差倍问题 <span class="difficulty-tag difficulty-hard">较高难度</span></h3>
+                    <p><strong>已知：</strong>年龄差、倍数关系</p>
+                    <p><strong>公式：</strong></p>
+                    <ul>
+                        <li>小数 = 差 ÷ (倍数 - 1)</li>
+                        <li>大数 = 小数 × 倍数</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 典型例题解析 -->
+            <div class="section">
+                <h2>📝 典型例题解析</h2>
+                
+                <div class="example-box">
+                    <h3 style="color: #660099; margin-bottom: 10px;">例题1：和差问题</h3>
+                    <p><strong>题目：</strong>小明和爸爸今年的年龄和是48岁，爸爸比小明大30岁。两人今年各多少岁？</p>
+                    <div class="tip-box" style="margin-top: 15px;">
+                        <strong>解题步骤：</strong><br>
+                        1. 明确已知：年龄和=48岁，年龄差=30岁<br>
+                        2. 应用公式：<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;爸爸 = (48 + 30) ÷ 2 = 39岁<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;小明 = (48 - 30) ÷ 2 = 9岁<br>
+                        3. 验证：39 + 9 = 48 ✓，39 - 9 = 30 ✓
+                    </div>
+                </div>
+                
+                <div class="example-box">
+                    <h3 style="color: #660099; margin-bottom: 10px;">例题2：时光穿梭问题</h3>
+                    <p><strong>题目：</strong>3年前，小明和爸爸的年龄和是42岁，爸爸比小明大30岁。今年两人各多少岁？</p>
+                    <div class="tip-box" style="margin-top: 15px;">
+                        <strong>解题关键：</strong><br>
+                        1. 3年前年龄和是42岁<br>
+                        2. 今年年龄和 = 42 + 3 + 3 = 48岁（每人各长3岁）<br>
+                        3. 年龄差永远是30岁<br>
+                        4. 转化为和差问题求解
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 在家辅导建议 -->
+            <div class="section">
+                <h2>🏠 在家辅导建议</h2>
+                
+                <div class="activity-card">
+                    <h3>1️⃣ 理解"年龄差不变"</h3>
+                    <p>用家庭成员的真实年龄进行练习：</p>
+                    <ul>
+                        <li>计算孩子与爸爸妈妈的年龄差</li>
+                        <li>预测5年后、10年后的年龄</li>
+                        <li>验证年龄差是否真的不变</li>
+                    </ul>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>2️⃣ 画图辅助理解</h3>
+                    <p>鼓励孩子用线段图表示数量关系：</p>
+                    <ul>
+                        <li>画两条线段表示两个人的年龄</li>
+                        <li>标出年龄差（两段之间的差距）</li>
+                        <li>对于和倍/差倍问题，用多段相等长度表示倍数</li>
+                    </ul>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>3️⃣ 生活场景应用</h3>
+                    <p>在日常生活中寻找年龄问题的影子：</p>
+                    <ul>
+                        <li>"爷爷今年多少岁？是你的几倍？"</li>
+                        <li>"妈妈比你大多少岁？这个差会变吗？"</li>
+                        <li>"等你上初中时，爸爸多少岁？"</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 亲子互动游戏 -->
+            <div class="section">
+                <h2>🎮 亲子互动游戏</h2>
+                
+                <div class="activity-card">
+                    <h3>游戏1：年龄侦探 <span class="difficulty-tag difficulty-easy">简单</span></h3>
+                    <p><strong>玩法：</strong></p>
+                    <ul>
+                        <li>家长说："我和你年龄和是XX岁，我比你大XX岁"</li>
+                        <li>孩子用公式计算两人的年龄</li>
+                        <li>交换角色，让孩子出题考家长</li>
+                    </ul>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>游戏2：时光机 <span class="difficulty-tag difficulty-medium">中等</span></h3>
+                    <p><strong>玩法：</strong></p>
+                    <ul>
+                        <li>设定一个未来年份（如2030年）</li>
+                        <li>计算那时每个家庭成员的年龄</li>
+                        <li>讨论那时可能会发生什么有趣的事</li>
+                    </ul>
+                </div>
+                
+                <div class="activity-card">
+                    <h3>游戏3：年龄谜题挑战赛 <span class="difficulty-tag difficulty-hard">较难</span></h3>
+                    <p><strong>玩法：</strong></p>
+                    <ul>
+                        <li>准备一些年龄问题的题目</li>
+                        <li>家长和孩子比赛，看谁解得快</li>
+                        <li>要求孩子说出解题思路和公式</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 常见问题解答 -->
+            <div class="section">
+                <h2>❓ 常见问题解答</h2>
+                
+                <div class="highlight-box">
+                    <h3 style="color: #2196F3; margin-bottom: 10px;">Q1：孩子总是混淆"年龄和"与"年龄差"怎么办？</h3>
+                    <p><strong>A：</strong>强调"和"是两个人年龄相加，"差"是两个人年龄相减。可以用实物演示：拿两堆糖果，总数是和，差距是差。</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3 style="color: #2196F3; margin-bottom: 10px;">Q2：孩子不理解为什么年龄差不变？</h3>
+                    <p><strong>A：</strong>用具体例子说明：今年爸爸比孩子大30岁，明年爸爸长1岁，孩子也长1岁，差距还是30岁。两个人增长的一样多，差距自然不变。</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3 style="color: #2196F3; margin-bottom: 10px;">Q3：涉及"几年前/后"的题目孩子总是算错？</h3>
+                    <p><strong>A：</strong>记住规律：n年前/后，每个人年龄变化n岁，两个人年龄和变化2n岁，年龄差不变。建议画时间轴帮助理解。</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3 style="color: #2196F3; margin-bottom: 10px;">Q4：孩子记不住三个公式怎么办？</h3>
+                    <p><strong>A：</strong>不需要死记硬背，关键是理解线段图。和差问题看总长度和差距，和倍问题看总份数，差倍问题看份数差。画图后公式自然就出来了。</p>
+                </div>
+            </div>
+            
+            <!-- 学习资源 -->
+            <div class="qr-section">
+                <h3>📱 学习资源链接</h3>
+                <div class="contact-info">
+                    <div class="phone-number">课后练习题</div>
+                    <p style="color: #666; font-size: 14px;">点击链接在线查看</p>
+                    <p style="margin-top: 10px; font-size: 12px; word-break: break-all;">
+                        https://teacherSharp.github.io/grade2-math-course/Lesson14_Age_Problems/Lesson14_Exercises.html
+                    </p>
+                </div>
+                <p style="color: #666; font-size: 14px; margin-top: 15px;">
+                    💡 建议用电脑打开，效果更佳
+                </p>
+            </div>
+            
+            <!-- 下节课预告 -->
+            <div class="next-lesson">
+                <h3>🚀 下节课预告</h3>
+                <p style="font-size: 16px; line-height: 1.8;">
+                    <strong>第15课：移多补少</strong><br><br>
+                    下节课我们将学习：
+                </p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>平均数的概念和计算方法</li>
+                    <li>移多补少的解题思路</li>
+                    <li>差额分析与调整</li>
+                    <li>实际生活中的平均数问题</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>🌟 让我们共同努力，让数学成为孩子最喜欢的科目！</p>
+            <p style="margin-top: 10px;">如有任何问题，欢迎随时联系夏老师</p>
+            <p style="margin-top: 5px;">📱 夏老师：19117803360</p>
+        </div>
+    </div>
+</body>
+</html>

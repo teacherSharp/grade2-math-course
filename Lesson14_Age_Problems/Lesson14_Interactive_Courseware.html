@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第14课 年龄问题 - 交互式课件</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .slide {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 20px auto;
+            max-width: 1000px;
+            min-height: 600px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: slideIn 0.5s ease;
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide-title {
+            color: #660099;
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #94070A;
+            padding-bottom: 15px;
+        }
+        
+        .content-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 5px solid #660099;
+        }
+        
+        .nav-container {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #660099 0%, #94070A 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(102, 0, 153, 0.3);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 0, 153, 0.4);
+        }
+        
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .progress-container {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 600px;
+            height: 10px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #660099, #94070A);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .page-indicator {
+            position: fixed;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .interactive-btn {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: all 0.3s;
+        }
+        
+        .interactive-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .answer-input {
+            padding: 10px 15px;
+            font-size: 18px;
+            border: 2px solid #660099;
+            border-radius: 10px;
+            margin: 10px;
+            width: 200px;
+        }
+        
+        .answer-input.correct {
+            border-color: #4CAF50;
+            background: #E8F5E9;
+        }
+        
+        .answer-input.wrong {
+            border-color: #f44336;
+            background: #FFEBEE;
+        }
+        
+        .feedback {
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-size: 16px;
+            display: none;
+        }
+        
+        .feedback.success {
+            background: #E8F5E9;
+            border-left: 5px solid #4CAF50;
+            color: #2E7D32;
+            display: block;
+        }
+        
+        .feedback.error {
+            background: #FFEBEE;
+            border-left: 5px solid #f44336;
+            color: #C62828;
+            display: block;
+        }
+        
+        .emoji-display {
+            font-size: 64px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .cover-animation {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .start-btn {
+            display: block;
+            margin: 40px auto;
+            padding: 20px 50px;
+            font-size: 24px;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(76, 175, 80, 0.4);
+        }
+        
+        .start-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.6);
+        }
+        
+        .formula-box {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border: 3px solid #FF9800;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .formula-title {
+            color: #E65100;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .formula-content {
+            font-size: 24px;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        .example-box {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        .example-title {
+            color: #660099;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .step-box {
+            background: #f8f9fa;
+            border-left: 4px solid #4CAF50;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .age-timeline {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+        }
+        
+        .timeline-year {
+            background: #2196F3;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .timeline-content {
+            flex: 1;
+            font-size: 16px;
+        }
+        
+        .olympiad-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #333;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .game-area {
+            background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .timer {
+            font-size: 48px;
+            color: #f44336;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .score-board {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+        }
+        
+        .score-item {
+            background: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 18px;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        
+        .comparison-table th {
+            background: #660099;
+            color: white;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .highlight {
+            background: yellow;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        
+        .tip-box {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border-left: 5px solid #4CAF50;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%);
+            border-left: 5px solid #f44336;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 10px 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- 进度条 -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="page-indicator" id="pageIndicator">第 1 / 20 页</div>
+    
+    <!-- 第1页：封面 -->
+    <div class="slide active" id="slide1">
+        <div class="emoji-display cover-animation">👨‍👩‍👧‍👦</div>
+        <h1 class="slide-title">第14课：年龄问题</h1>
+        <div class="content-card" style="text-align: center;">
+            <p style="font-size: 24px; margin-bottom: 20px;">🌟 思维训练版 🌟</p>
+            <p style="font-size: 18px; color: #666; margin-bottom: 30px;">
+                探索年龄背后的数学奥秘<br>
+                掌握"年龄差不变"的黄金法则
+            </p>
+            <div class="olympiad-badge">🏆 思维挑战</div>
+        </div>
+        <button class="start-btn" onclick="nextSlide()">开始探索之旅 🚀</button>
+    </div>
+    
+    <!-- 第2页：课程目标 -->
+    <div class="slide" id="slide2">
+        <h1 class="slide-title">🎯 今日探险目标</h1>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">📚 核心知识点</h3>
+            <ul style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li><strong>年龄差不变原理</strong> - 无论过多少年，两个人的年龄差永远不变</li>
+                <li><strong>和差问题应用</strong> - 已知年龄和与差，求各自年龄</li>
+                <li><strong>和倍问题应用</strong> - 已知年龄和与倍数关系，求各自年龄</li>
+                <li><strong>差倍问题应用</strong> - 已知年龄差与倍数关系，求各自年龄</li>
+                <li><strong>年龄轴分析法</strong> - 用线段图解决复杂年龄问题</li>
+            </ul>
+        </div>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">🎮 课堂活动</h3>
+            <ul style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li>🔥 年龄差不变大挑战</li>
+                <li>🧩 和差倍问题闯关</li>
+                <li>⏰ 时光穿梭计算赛</li>
+                <li>🏆 年龄问题王者争霸</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- 第3页：黄金法则 -->
+    <div class="slide" id="slide3">
+        <h1 class="slide-title">✨ 黄金法则：年龄差不变</h1>
+        <div class="formula-box">
+            <div class="formula-title">🔑 核心规律</div>
+            <div class="formula-content">年龄差 = 永远不变</div>
+        </div>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">📖 为什么年龄差不变？</h3>
+            <p style="font-size: 18px; line-height: 1.8; margin-bottom: 15px;">
+                小明今年8岁，爸爸今年35岁。<br>
+                年龄差：35 - 8 = <strong>27岁</strong>
+            </p>
+            <p style="font-size: 18px; line-height: 1.8; margin-bottom: 15px;">
+                5年后：<br>
+                小明：8 + 5 = 13岁<br>
+                爸爸：35 + 5 = 40岁<br>
+                年龄差：40 - 13 = <strong>27岁</strong> ✓
+            </p>
+            <p style="font-size: 18px; line-height: 1.8;">
+                10年前：<br>
+                小明：8 - 10 = -2岁（还没出生呢！）<br>
+                爸爸：35 - 10 = 25岁
+            </p>
+        </div>
+        <div class="tip-box">
+            <strong>💡 思维点拨：</strong>无论过多少年，两个人增长的年龄是一样的，所以年龄差永远不变！这是解决所有年龄问题的关键！
+        </div>
+    </div>
+    
+    <!-- 第4页：互动练习1 -->
+    <div class="slide" id="slide4">
+        <h1 class="slide-title">🎮 互动挑战：验证年龄差</h1>
+        <div class="game-area">
+            <p style="font-size: 20px; margin-bottom: 20px;">
+                小红今年12岁，妈妈今年40岁<br>
+                她们的年龄差是多少？
+            </p>
+            <input type="number" class="answer-input" id="q1" placeholder="输入年龄差">
+            <button class="interactive-btn" onclick="checkQ1()">提交答案</button>
+            <div class="feedback" id="f1"></div>
+        </div>
+        <div class="game-area" style="margin-top: 30px;">
+            <p style="font-size: 20px; margin-bottom: 20px;">
+                8年后，小红和妈妈各多少岁？<br>
+                那时的年龄差是多少？
+            </p>
+            <p style="font-size: 16px; color: #666; margin-bottom: 15px;">
+                小红：<input type="number" class="answer-input" id="q2a" placeholder="岁" style="width: 100px;">
+                妈妈：<input type="number" class="answer-input" id="q2b" placeholder="岁" style="width: 100px;">
+                年龄差：<input type="number" class="answer-input" id="q2c" placeholder="岁" style="width: 100px;">
+            </p>
+            <button class="interactive-btn" onclick="checkQ2()">提交答案</button>
+            <div class="feedback" id="f2"></div>
+        </div>
+    </div>
+    
+    <!-- 第5页：和差问题 -->
+    <div class="slide" id="slide5">
+        <h1 class="slide-title">🧩 类型一：和差问题</h1>
+        <div class="formula-box">
+            <div class="formula-title">📐 解题公式</div>
+            <div style="font-size: 18px; line-height: 2;">
+                大数 = (和 + 差) ÷ 2<br>
+                小数 = (和 - 差) ÷ 2
+            </div>
+        </div>
+        <div class="example-box">
+            <div class="example-title">📝 例题精讲</div>
+            <p style="font-size: 18px; line-height: 1.8; margin-bottom: 15px;">
+                <strong>题目：</strong>小明和爸爸今年的年龄和是48岁，爸爸比小明大30岁。两人今年各多少岁？
+            </p>
+            <div class="step-box">
+                <strong>第一步：明确已知条件</strong><br>
+                年龄和 = 48岁<br>
+                年龄差 = 30岁（永远不变）
+            </div>
+            <div class="step-box">
+                <strong>第二步：应用公式</strong><br>
+                爸爸（大数）= (48 + 30) ÷ 2 = 78 ÷ 2 = 39岁<br>
+                小明（小数）= (48 - 30) ÷ 2 = 18 ÷ 2 = 9岁
+            </div>
+            <div class="step-box">
+                <strong>第三步：验证答案</strong><br>
+                39 + 9 = 48 ✓<br>
+                39 - 9 = 30 ✓
+            </div>
+        </div>
+    </div>
+    
+    <!-- 第6页：互动练习2 -->
+    <div class="slide" id="slide6">
+        <h1 class="slide-title">🎮 互动挑战：和差问题</h1>
+        <div class="game-area">
+            <p style="font-size: 20px; margin-bottom: 20px;">
+                哥哥和弟弟今年的年龄和是25岁，哥哥比弟弟大5岁。<br>
+                哥哥和弟弟今年各多少岁？
+            </p>
+            <p style="font-size: 16px; color: #666; margin-bottom: 15px;">
+                哥哥：<input type="number" class="answer-input" id="q3a" placeholder="岁" style="width: 100px;">
+                弟弟：<input type="number" class="answer-input" id="q3b" placeholder="岁" style="width: 100px;">
+            </p>
+            <button class="interactive-btn" onclick="checkQ3()">提交答案</button>
+            <button class="interactive-btn" style="background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);" onclick="showHint1()">💡 提示</button>
+            <div class="feedback" id="f3"></div>
+            <div id="hint1" style="display: none; margin-top: 15px; padding: 15px; background: #FFF3E0; border-radius: 10px;">
+                <strong>提示：</strong>使用公式 大数 = (和 + 差) ÷ 2，小数 = (和 - 差) ÷ 2
+            </div>
+        </div>
+    </div>
+    
+    <!-- 第7页：和倍问题 -->
+    <div class="slide" id="slide7">
+        <h1 class="slide-title">🧩 类型二：和倍问题</h1>
+        <div class="formula-box">
+            <div class="formula-title">📐 解题公式</div>
+            <div style="font-size: 18px; line-height: 2;">
+                小数 = 和 ÷ (倍数 + 1)<br>
+                大数 = 小数 × 倍数
+            </div>
+        </div>
+        <div class="example-box">
+            <div class="example-title">📝 例题精讲</div>
+            <p style="font-size: 18px; line-height: 1.8; margin-bottom: 15px;">
+                <strong>题目：</strong>妈妈和小红今年的年龄和是48岁，妈妈的年龄是小红的3倍。两人今年各多少岁？
+            </p>
+            <div class="step-box">
+                <strong>第一步：画线段图理解</strong><br>
+                小红：|———|<br>
+                妈妈：|———|———|———|（3倍）<br>
+                总共：4段 = 48岁
+            </div>
+            <div class="step-box">
+                <strong>第二步：计算</strong><br>
+                小红 = 48 ÷ (3 + 1) = 48 ÷ 4 = 12岁<br>
+                妈妈 = 12 × 3 = 36岁
+            </div>
+            <div class="step-box">
+                <strong>第三步：验证答案</strong><br>
+                12 + 36 = 48 ✓<br>
+                36 ÷ 12 = 3 ✓
+            </div>
+        </div>
+    </div>
+    
+    <!-- 第8页：互动练习3 -->
+    <div class="slide" id="slide8">
+        <h1 class="slide-title">🎮 互动挑战：和倍问题</h1>
+        <div class="game-area">
+            <p style="font-size: 20px; margin-bottom: 20px;">
+                爷爷和孙子今年的年龄和是72岁，爷爷的年龄是孙子的5倍。<br>
+                爷爷和孙子今年各多少岁？
+            </p>
+            <p style="font-size: 16px; color: #666; margin-bottom: 15px;">
+                爷爷：<input type="number" class="answer-input" id="q4a" placeholder="岁" style="width: 100px;">
+                孙子：<input type="number" class="answer-input" id="q4b" placeholder="岁" style="width: 100px;">
+            </p>
+            <button class="interactive-btn" onclick="checkQ4()">提交答案</button>
+            <button class="interactive-btn" style="background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);" onclick="showHint2()">💡 提示</button>
+            <div class="feedback" id="f4"></div>
+            <div id="hint2" style="display: none; margin-top: 15px; padding: 15px; background: #FFF3E0; border-radius: 10px;">
+                <strong>提示：</strong>把孙子的年龄看作1份，爷爷就是5份，总共6份 = 72岁
+            </div>
+        </div>
+    </div>
+    
+    <!-- 第9页：差倍问题 -->
+    <div class="slide" id="slide9">
+        <h1 class="slide-title">🧩 类型三：差倍问题</h1>
+        <div class="formula-box">
+            <div class="formula-title">📐 解题公式</div>
+            <div style="font-size: 18px; line-height: 2;">
+                小数 = 差 ÷ (倍数 - 1)<br>
+                大数 = 小数 × 倍数
+            </div>
+        </div>
+        <div class="example-box">
+            <div class="example-title">📝 例题精讲</div>
+            <p style="font-size: 18px; line-height: 1.8; margin-bottom: 15px;">
+                <strong>题目：</strong>爸爸比小明大28岁，今年爸爸的年龄是小明的5倍。两人今年各多少岁？
+            </p>
+            <div class="step-box">
+                <strong>第一步：画线段图理解</strong><br>
+                小明：|———|<br>
+                爸爸：|———|———|———|———|———|（5倍）<br>
+                相差：4段 = 28岁
+            </div>
+            <div class="step-box">
+                <strong>第二步：计算</strong><br>
+                小明 = 28 ÷ (5 - 1) = 28 ÷ 4 = 7岁<br>
+                爸爸 = 7 × 5 = 35岁
+            </div>
+            <div class="step-box">
+                <strong>第三步：验证答案</strong><br>
+                35 - 7 = 28 ✓<br>
+                35 ÷ 7 = 5 ✓
+            </div>
+        </div>
+    </div>
+    
+    <!-- 第10页：互动练习4 -->
+    <div class="slide" id="slide10">
+        <h1 class="slide-title">🎮 互动挑战：差倍问题</h1>
+        <div class="game-area">
+            <p style="font-size: 20px; margin-bottom: 20px;">
+                王老师比小李大24岁，今年王老师的年龄是小李的4倍。<br>
+                王老师和小李今年各多少岁？
+            </p>
+            <p style="font-size: 16px; color: #666; margin-bottom: 15px;">
+                王老师：<input type="number" class="answer-input" id="q5a" placeholder="岁" style="width: 100px;">
+                小李：<input type="number" class="answer-input" id="q5b" placeholder="岁" style="width: 100px;">
+            </p>
+            <button class="interactive-btn" onclick="checkQ5()">提交答案</button>
+            <button class="interactive-btn" style="background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);" onclick="showHint3()">💡 提示</button>
+            <div class="feedback" id="f5"></div>
+            <div id="hint3" style="display: none; margin-top: 15px; padding: 15px; background: #FFF3E0; border-radius: 10px;">
+                <strong>提示：</strong>把小李的年龄看作1份，王老师就是4份，相差3份 = 24岁
+            </div>
+        </div>
+    </div>
+    
+    <!-- 第11页：时光穿梭问题 -->
+    <div class="slide" id="slide11">
+        <h1 class="slide-title">⏰ 时光穿梭问题</h1>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">🌟 核心思路</h3>
+            <p style="font-size: 18px; line-height: 1.8;">
+                当题目涉及"几年前"或"几年后"时，记住：<br><br>
+                1. <strong>年龄差永远不变</strong><br>
+                2. 几年前 = 现在年龄 - n<br>
+                3. 几年后 = 现在年龄 + n<br>
+                4. 两个人的年龄和变化 = 2n（n年前/后）
+            </p>
+        </div>
+        <div class="example-box">
+            <div class="example-title">📝 例题精讲</div>
+            <p style="font-size: 18px; line-height: 1.8; margin-bottom: 15px;">
+                <strong>题目：</strong>3年前，小明和爸爸的年龄和是42岁，爸爸比小明大30岁。今年两人各多少岁？
+            </p>
+            <div class="step-box">
+                <strong>第一步：分析</strong><br>
+                3年前年龄和 = 42岁<br>
+                今年年龄和 = 42 + 3 + 3 = 48岁（每人各长了3岁）<br>
+                年龄差 = 30岁（永远不变）
+            </div>
+            <div class="step-box">
+                <strong>第二步：用和差公式</strong><br>
+                爸爸 = (48 + 30) ÷ 2 = 39岁<br>
+                小明 = (48 - 30) ÷ 2 = 9岁
+            </div>
+        </div>
+    </div>
+    
+    <!-- 第12页：互动练习5 -->
+    <div class="slide" id="slide12">
+        <h1 class="slide-title">🎮 互动挑战：时光穿梭</h1>
+        <div class="game-area">
+            <p style="font-size: 20px; margin-bottom: 20px;">
+                5年前，哥哥和弟弟的年龄和是20岁，哥哥比弟弟大4岁。<br>
+                今年哥哥和弟弟各多少岁？
+            </p>
+            <p style="font-size: 16px; color: #666; margin-bottom: 15px;">
+                哥哥：<input type="number" class="answer-input" id="q6a" placeholder="岁" style="width: 100px;">
+                弟弟：<input type="number" class="answer-input" id="q6b" placeholder="岁" style="width: 100px;">
+            </p>
+            <button class="interactive-btn" onclick="checkQ6()">提交答案</button>
+            <button class="interactive-btn" style="background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);" onclick="showHint4()">💡 提示</button>
+            <div class="feedback" id="f6"></div>
+            <div id="hint4" style="display: none; margin-top: 15px; padding: 15px; background: #FFF3E0; border-radius: 10px;">
+                <strong>提示：</strong>5年前年龄和是20岁，今年年龄和 = 20 + 5 + 5 = 30岁
+            </div>
+        </div>
+    </div>
+    
+    <!-- 第13页：复杂年龄问题 -->
+    <div class="slide" id="slide13">
+        <h1 class="slide-title">🧩 复杂年龄问题</h1>
+        <div class="example-box">
+            <div class="example-title">📝 例题精讲（进阶难度）</div>
+            <p style="font-size: 18px; line-height: 1.8; margin-bottom: 15px;">
+                <strong>题目：</strong>今年爷爷的年龄是孙子的7倍，3年前爷爷的年龄是孙子的10倍。爷爷和孙子今年各多少岁？
+            </p>
+            <div class="step-box">
+                <strong>第一步：设未知数</strong><br>
+                设孙子今年x岁，则爷爷今年7x岁<br>
+                年龄差 = 7x - x = 6x（永远不变）
+            </div>
+            <div class="step-box">
+                <strong>第二步：列方程</strong><br>
+                3年前：孙子(x-3)岁，爷爷(7x-3)岁<br>
+                根据题意：7x - 3 = 10(x - 3)
+            </div>
+            <div class="step-box">
+                <strong>第三步：解方程</strong><br>
+                7x - 3 = 10x - 30<br>
+                30 - 3 = 10x - 7x<br>
+                27 = 3x<br>
+                x = 9
+            </div>
+            <div class="step-box">
+                <strong>答案：</strong>孙子9岁，爷爷63岁
+            </div>
+        </div>
+    </div>
+    
+    <!-- 第14页：综合练习 -->
+    <div class="slide" id="slide14">
+        <h1 class="slide-title">🎮 综合练习</h1>
+        <div class="game-area">
+            <p style="font-size: 20px; margin-bottom: 20px;">
+                <strong>挑战题：</strong>今年妈妈的年龄是小红的5倍，5年后妈妈的年龄是小红的3倍。今年两人各多少岁？
+            </p>
+            <p style="font-size: 16px; color: #666; margin-bottom: 15px;">
+                妈妈：<input type="number" class="answer-input" id="q7a" placeholder="岁" style="width: 100px;">
+                小红：<input type="number" class="answer-input" id="q7b" placeholder="岁" style="width: 100px;">
+            </p>
+            <button class="interactive-btn" onclick="checkQ7()">提交答案</button>
+            <button class="interactive-btn" style="background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);" onclick="showHint5()">💡 提示</button>
+            <div class="feedback" id="f7"></div>
+            <div id="hint5" style="display: none; margin-top: 15px; padding: 15px; background: #FFF3E0; border-radius: 10px; text-align: left;">
+                <strong>提示：</strong><br>
+                设小红今年x岁，则妈妈今年5x岁<br>
+                5年后：小红(x+5)岁，妈妈(5x+5)岁<br>
+                根据题意：5x + 5 = 3(x + 5)
+            </div>
+        </div>
+    </div>
+    
+    <!-- 第15页：方法总结 -->
+    <div class="slide" id="slide15">
+        <h1 class="slide-title">📚 方法总结</h1>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">🎯 年龄问题解题步骤</h3>
+            <table class="comparison-table">
+                <tr>
+                    <th>步骤</th>
+                    <th>操作</th>
+                    <th>要点</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>找不变量</td>
+                    <td>年龄差永远不变</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>分析条件</td>
+                    <td>确定是和差、和倍还是差倍</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>画线段图</td>
+                    <td>直观理解数量关系</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>应用公式</td>
+                    <td>选择合适的公式计算</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>验证答案</td>
+                    <td>检查是否符合所有条件</td>
+                </tr>
+            </table>
+        </div>
+        <div class="formula-box">
+            <div class="formula-title">📐 核心公式汇总</div>
+            <div style="font-size: 16px; line-height: 2; text-align: left; padding-left: 20px;">
+                <strong>和差问题：</strong>大数=(和+差)÷2，小数=(和-差)÷2<br>
+                <strong>和倍问题：</strong>小数=和÷(倍数+1)，大数=小数×倍数<br>
+                <strong>差倍问题：</strong>小数=差÷(倍数-1)，大数=小数×倍数
+            </div>
+        </div>
+    </div>
+    
+    <!-- 第16页：易错点提醒 -->
+    <div class="slide" id="slide16">
+        <h1 class="slide-title">⚠️ 易错点提醒</h1>
+        <div class="warning-box">
+            <h3 style="color: #C62828; margin-bottom: 10px;">❌ 常见错误1：混淆年龄和与年龄差</h3>
+            <p style="font-size: 16px; line-height: 1.8;">
+                错误：把"年龄和"当成"年龄差"来用公式<br>
+                正确：先找出年龄差（这是不变量），再判断题型
+            </p>
+        </div>
+        <div class="warning-box">
+            <h3 style="color: #C62828; margin-bottom: 10px;">❌ 常见错误2：时光计算错误</h3>
+            <p style="font-size: 16px; line-height: 1.8;">
+                错误：n年前/后的年龄和变化算错<br>
+                正确：n年前/后，两个人各变化n岁，年龄和变化2n岁
+            </p>
+        </div>
+        <div class="warning-box">
+            <h3 style="color: #C62828; margin-bottom: 10px;">❌ 常见错误3：倍数关系变化</h3>
+            <p style="font-size: 16px; line-height: 1.8;">
+                错误：认为倍数关系也不变<br>
+                正确：倍数关系会随时间变化，只有年龄差不变
+            </p>
+        </div>
+        <div class="tip-box">
+            <h3 style="color: #2E7D32; margin-bottom: 10px;">✅ 解题口诀</h3>
+            <p style="font-size: 18px; line-height: 1.8; text-align: center;">
+                <strong>年龄问题不用愁，年龄差是不变量<br>
+                和差和倍差倍题，线段图画清楚<br>
+                几年前后来帮忙，验证答案不能忘</strong>
+            </p>
+        </div>
+    </div>
+    
+    <!-- 第17页：王者争霸 -->
+    <div class="slide" id="slide17">
+        <h1 class="slide-title">🏆 年龄问题王者争霸</h1>
+        <div class="game-area">
+            <div class="timer" id="timer">60</div>
+            <p style="font-size: 18px; margin-bottom: 20px;">⏰ 限时60秒，尽可能多地答对题目！</p>
+            <div class="score-board">
+                <div class="score-item">✅ 正确: <span id="correctCount">0</span></div>
+                <div class="score-item">❌ 错误: <span id="wrongCount">0</span></div>
+            </div>
+            <div id="gameQuestion" style="margin: 20px 0; font-size: 20px; padding: 20px; background: white; border-radius: 10px;">
+                点击"开始挑战"开始游戏！
+            </div>
+            <div id="gameOptions" style="display: none;">
+                <button class="interactive-btn" onclick="answerGame(0)">A</button>
+                <button class="interactive-btn" onclick="answerGame(1)">B</button>
+                <button class="interactive-btn" onclick="answerGame(2)">C</button>
+            </div>
+            <button class="start-btn" id="startGameBtn" onclick="startGame()">开始挑战 🚀</button>
+        </div>
+    </div>
+    
+    <!-- 第18页：课堂总结 -->
+    <div class="slide" id="slide18">
+        <h1 class="slide-title">📝 课堂总结</h1>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">✨ 今天学到的本领</h3>
+            <ul style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li>✅ 理解<strong>年龄差不变</strong>的核心原理</li>
+                <li>✅ 掌握<strong>和差问题</strong>的解题方法</li>
+                <li>✅ 掌握<strong>和倍问题</strong>的解题方法</li>
+                <li>✅ 掌握<strong>差倍问题</strong>的解题方法</li>
+                <li>✅ 学会解决<strong>时光穿梭</strong>类年龄问题</li>
+                <li>✅ 能够用<strong>线段图</strong>分析复杂问题</li>
+            </ul>
+        </div>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">🌟 关键收获</h3>
+            <p style="font-size: 18px; line-height: 1.8;">
+                年龄问题的核心是<strong>"年龄差永远不变"</strong>！<br><br>
+                无论题目如何变化，只要抓住这个不变量，<br>
+                配合和差倍问题的公式，就能迎刃而解！
+            </p>
+        </div>
+    </div>
+    
+    <!-- 第19页：课后作业 -->
+    <div class="slide" id="slide19">
+        <h1 class="slide-title">📝 课后作业</h1>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">📚 必做题（基础巩固）</h3>
+            <ol style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li>完成课后练习题第1-6题（和差倍基础题）</li>
+                <li>用线段图画出每道题的数量关系</li>
+                <li>写出完整的解题步骤</li>
+            </ol>
+        </div>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">🎯 选做题（能力提升）</h3>
+            <ol style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li>完成课后练习题第7-10题（时光穿梭问题）</li>
+                <li>挑战附加题（巅峰难度）</li>
+            </ol>
+        </div>
+        <div class="content-card">
+            <h3 style="color: #660099; margin-bottom: 15px;">👨‍👩‍👧‍👦 亲子互动</h3>
+            <ol style="font-size: 18px; line-height: 2; margin-left: 30px;">
+                <li>计算你和爸爸妈妈的年龄差</li>
+                <li>预测5年后、10年后你们的年龄</li>
+                <li>验证年龄差是否真的不变</li>
+            </ol>
+        </div>
+    </div>
+    
+    <!-- 第20页：结束页 -->
+    <div class="slide" id="slide20">
+        <div class="emoji-display cover-animation">🎉</div>
+        <h1 class="slide-title">恭喜完成第14课！</h1>
+        <div class="content-card" style="text-align: center;">
+            <p style="font-size: 24px; margin-bottom: 20px;">
+                你已经掌握了年龄问题的核心方法！
+            </p>
+            <p style="font-size: 18px; color: #666; margin-bottom: 30px;">
+                记住：<strong>年龄差永远不变</strong><br>
+                这是解决所有年龄问题的金钥匙！
+            </p>
+            <div class="olympiad-badge">🏆 年龄问题小达人</div>
+        </div>
+        <div style="text-align: center; margin-top: 30px;">
+            <p style="font-size: 16px; color: #666;">
+                下节课预告：第15课《移多补少》<br>
+                探索平均数的奥秘
+            </p>
+        </div>
+    </div>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-container">
+        <button class="nav-btn" id="prevBtn" onclick="prevSlide()">上一页</button>
+        <button class="nav-btn" id="nextBtn" onclick="nextSlide()">下一页</button>
+    </div>
+    
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 20;
+        
+        function updateSlide() {
+            // 隐藏所有slide
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // 显示当前slide
+            document.getElementById('slide' + currentSlide).classList.add('active');
+            
+            // 更新进度条
+            const progress = (currentSlide / totalSlides) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            
+            // 更新页码
+            document.getElementById('pageIndicator').textContent = `第 ${currentSlide} / ${totalSlides} 页`;
+            
+            // 更新按钮状态
+            document.getElementById('prevBtn').disabled = currentSlide === 1;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides;
+        }
+        
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                updateSlide();
+            }
+        }
+        
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+        
+        // 键盘导航
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+        
+        // 检查答案函数
+        function checkQ1() {
+            const answer = document.getElementById('q1').value;
+            const feedback = document.getElementById('f1');
+            if (answer === '28') {
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 正确！40 - 12 = 28岁';
+                document.getElementById('q1').className = 'answer-input correct';
+            } else {
+                feedback.className = 'feedback error';
+                feedback.textContent = '❌ 再想想，用妈妈的年龄减去小红的年龄';
+                document.getElementById('q1').className = 'answer-input wrong';
+            }
+        }
+        
+        function checkQ2() {
+            const a = document.getElementById('q2a').value;
+            const b = document.getElementById('q2b').value;
+            const c = document.getElementById('q2c').value;
+            const feedback = document.getElementById('f2');
+            if (a === '20' && b === '48' && c === '28') {
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 完全正确！年龄差永远是28岁！';
+                document.getElementById('q2a').className = 'answer-input correct';
+                document.getElementById('q2b').className = 'answer-input correct';
+                document.getElementById('q2c').className = 'answer-input correct';
+            } else {
+                feedback.className = 'feedback error';
+                feedback.textContent = '❌ 8年后，小红12+8=20岁，妈妈40+8=48岁，年龄差还是28岁';
+            }
+        }
+        
+        function checkQ3() {
+            const a = document.getElementById('q3a').value;
+            const b = document.getElementById('q3b').value;
+            const feedback = document.getElementById('f3');
+            if (a === '15' && b === '10') {
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 正确！哥哥(25+5)÷2=15岁，弟弟(25-5)÷2=10岁';
+            } else {
+                feedback.className = 'feedback error';
+                feedback.textContent = '❌ 再试试，用和差公式：大数=(和+差)÷2';
+            }
+        }
+        
+        function showHint1() {
+            document.getElementById('hint1').style.display = 'block';
+        }
+        
+        function checkQ4() {
+            const a = document.getElementById('q4a').value;
+            const b = document.getElementById('q4b').value;
+            const feedback = document.getElementById('f4');
+            if (a === '60' && b === '12') {
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 正确！孙子=72÷(5+1)=12岁，爷爷=12×5=60岁';
+            } else {
+                feedback.className = 'feedback error';
+                feedback.textContent = '❌ 再想想，把孙子的年龄看作1份，爷爷是5份，共6份';
+            }
+        }
+        
+        function showHint2() {
+            document.getElementById('hint2').style.display = 'block';
+        }
+        
+        function checkQ5() {
+            const a = document.getElementById('q5a').value;
+            const b = document.getElementById('q5b').value;
+            const feedback = document.getElementById('f5');
+            if (a === '32' && b === '8') {
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 正确！小李=24÷(4-1)=8岁，王老师=8×4=32岁';
+            } else {
+                feedback.className = 'feedback error';
+                feedback.textContent = '❌ 再试试，用差倍公式：小数=差÷(倍数-1)';
+            }
+        }
+        
+        function showHint3() {
+            document.getElementById('hint3').style.display = 'block';
+        }
+        
+        function checkQ6() {
+            const a = document.getElementById('q6a').value;
+            const b = document.getElementById('q6b').value;
+            const feedback = document.getElementById('f6');
+            if (a === '17' && b === '13') {
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 正确！今年年龄和=20+5+5=30岁，哥哥=(30+4)÷2=17岁，弟弟=13岁';
+            } else {
+                feedback.className = 'feedback error';
+                feedback.textContent = '❌ 注意：5年前年龄和是20岁，今年年龄和要加上5+5=10岁';
+            }
+        }
+        
+        function showHint4() {
+            document.getElementById('hint4').style.display = 'block';
+        }
+        
+        function checkQ7() {
+            const a = document.getElementById('q7a').value;
+            const b = document.getElementById('q7b').value;
+            const feedback = document.getElementById('f7');
+            if (a === '25' && b === '5') {
+                feedback.className = 'feedback success';
+                feedback.textContent = '🎉 太棒了！设小红今年x岁，5x+5=3(x+5)，解得x=5，妈妈25岁';
+            } else {
+                feedback.className = 'feedback error';
+                feedback.textContent = '❌ 列方程试试：设小红今年x岁，妈妈5x岁';
+            }
+        }
+        
+        function showHint5() {
+            document.getElementById('hint5').style.display = 'block';
+        }
+        
+        // 游戏相关变量
+        let gameTimer = null;
+        let timeLeft = 60;
+        let correctAnswers = 0;
+        let wrongAnswers = 0;
+        let currentGameQuestion = null;
+        
+        const gameQuestions = [
+            {q: "小明今年8岁，爸爸今年36岁，年龄差是多少？", options: ["26岁", "28岁", "30岁"], answer: 1},
+            {q: "哥哥比弟弟大6岁，今年两人年龄和是24岁，哥哥几岁？", options: ["15岁", "14岁", "13岁"], answer: 0},
+            {q: "妈妈今年35岁，是小红的5倍，小红几岁？", options: ["6岁", "7岁", "8岁"], answer: 1},
+            {q: "爷爷比孙子大48岁，今年爷爷年龄是孙子的5倍，孙子几岁？", options: ["10岁", "11岁", "12岁"], answer: 2},
+            {q: "3年前两人年龄和是40岁，今年年龄和是多少？", options: ["43岁", "46岁", "49岁"], answer: 1},
+            {q: "爸爸今年40岁，小明今年10岁，几年后爸爸年龄是小明的4倍？", options: ["0年", "2年", "4年"], answer: 0}
+        ];
+        
+        function startGame() {
+            document.getElementById('startGameBtn').style.display = 'none';
+            document.getElementById('gameOptions').style.display = 'block';
+            correctAnswers = 0;
+            wrongAnswers = 0;
+            timeLeft = 60;
+            updateScore();
+            nextGameQuestion();
+            
+            gameTimer = setInterval(function() {
+                timeLeft--;
+                document.getElementById('timer').textContent = timeLeft;
+                if (timeLeft <= 0) {
+                    endGame();
+                }
+            }, 1000);
+        }
+        
+        function nextGameQuestion() {
+            const randomIndex = Math.floor(Math.random() * gameQuestions.length);
+            currentGameQuestion = gameQuestions[randomIndex];
+            document.getElementById('gameQuestion').innerHTML = `
+                <strong>题目：</strong>${currentGameQuestion.q}<br><br>
+                A. ${currentGameQuestion.options[0]}<br>
+                B. ${currentGameQuestion.options[1]}<br>
+                C. ${currentGameQuestion.options[2]}
+            `;
+        }
+        
+        function answerGame(choice) {
+            if (currentGameQuestion && choice === currentGameQuestion.answer) {
+                correctAnswers++;
+                document.getElementById('gameQuestion').innerHTML += '<br><br><span style="color: green;">✅ 正确！</span>';
+            } else {
+                wrongAnswers++;
+                document.getElementById('gameQuestion').innerHTML += '<br><br><span style="color: red;">❌ 错误！</span>';
+            }
+            updateScore();
+            
+            setTimeout(function() {
+                if (timeLeft > 0) {
+                    nextGameQuestion();
+                }
+            }, 1000);
+        }
+        
+        function updateScore() {
+            document.getElementById('correctCount').textContent = correctAnswers;
+            document.getElementById('wrongCount').textContent = wrongAnswers;
+        }
+        
+        function endGame() {
+            clearInterval(gameTimer);
+            document.getElementById('gameOptions').style.display = 'none';
+            document.getElementById('gameQuestion').innerHTML = `
+                <strong>游戏结束！</strong><br><br>
+                正确：${correctAnswers} 题<br>
+                错误：${wrongAnswers} 题<br><br>
+                ${correctAnswers >= 5 ? '🏆 年龄问题王者！' : correctAnswers >= 3 ? '👍 表现不错！' : '💪 继续加油！'}
+            `;
+            document.getElementById('startGameBtn').style.display = 'inline-block';
+            document.getElementById('startGameBtn').textContent = '再玩一次 🔄';
+        }
+        
+        // 初始化
+        updateSlide();
+    </script>
+</body>
+</html>
