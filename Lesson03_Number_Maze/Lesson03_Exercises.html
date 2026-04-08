@@ -251,9 +251,9 @@
             </div>
             <div class="maze-display">
                 <div class="maze-grid" style="grid-template-columns: repeat(4, 50px);">
-                    <div class="maze-cell start">S</div><div class="maze-cell number">2</div><div class="maze-cell wall"></div><div class="maze-cell wall"></div>
+                    <div class="maze-cell start">S</div><div class="maze-cell number">2</div><div class="maze-cell number">1</div><div class="maze-cell wall"></div>
                     <div class="maze-cell wall"></div><div class="maze-cell number">1</div><div class="maze-cell number">2</div><div class="maze-cell wall"></div>
-                    <div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell number">1</div><div class="maze-cell end">E</div>
+                    <div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell number">1</div><div class="maze-cell end">E</div>
                 </div>
             </div>
             <div class="answer-area">
@@ -262,7 +262,7 @@
             </div>
             <div class="hint-box">
                 <div class="hint-title">💡 提示</div>
-                <div class="hint-content">从S出发，S旁边是2，必须走2步。试试往右走2步会到哪里？</div>
+                <div class="hint-content">从S出发，S旁边是2，必须走2步。试试往右走2步会到哪里？能继续走吗？</div>
             </div>
         </div>
 
@@ -278,11 +278,11 @@
             </div>
             <div class="maze-display">
                 <div class="maze-grid" style="grid-template-columns: repeat(6, 50px);">
-                    <div class="maze-cell start">S</div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div>
-                    <div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div>
-                    <div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div>
+                    <div class="maze-cell start">S</div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div>
                     <div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div>
-                    <div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell end">E</div>
+                    <div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell end">E</div>
                     <div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div>
                 </div>
             </div>
@@ -304,19 +304,23 @@
                 <span class="difficulty-badge difficulty-medium">进阶</span>
             </div>
             <div class="question-content">
-                在这个数字迷宫中，每个数字表示移动的步数。注意：不能走出迷宫边界，也不能重复经过同一个格子。请找出从S到E的路径。
+                在这个数字迷宫中，每个数字表示移动的步数。注意：不能走出迷宫边界，也不能重复经过同一个格子。请找出从S到E的路径，并计算最短路径和最长路径的步数。
             </div>
             <div class="maze-display">
                 <div class="maze-grid" style="grid-template-columns: repeat(5, 50px);">
-                    <div class="maze-cell start">S</div><div class="maze-cell number">3</div><div class="maze-cell number">1</div><div class="maze-cell wall"></div><div class="maze-cell wall"></div>
-                    <div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell number">2</div><div class="maze-cell number">1</div><div class="maze-cell wall"></div>
-                    <div class="maze-cell wall"></div><div class="maze-cell number">2</div><div class="maze-cell number">2</div><div class="maze-cell wall"></div><div class="maze-cell wall"></div>
-                    <div class="maze-cell wall"></div><div class="maze-cell number">1</div><div class="maze-cell wall"></div><div class="maze-cell number">2</div><div class="maze-cell end">E</div>
+                    <div class="maze-cell start">S</div><div class="maze-cell number">2</div><div class="maze-cell number">1</div><div class="maze-cell wall"></div><div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell number">1</div><div class="maze-cell number">2</div><div class="maze-cell number">1</div><div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell number">2</div><div class="maze-cell wall"></div><div class="maze-cell number">2</div><div class="maze-cell end">E</div>
+                    <div class="maze-cell wall"></div><div class="maze-cell number">1</div><div class="maze-cell number">1</div><div class="maze-cell number">1</div><div class="maze-cell wall"></div>
                 </div>
             </div>
             <div class="answer-area">
-                <label class="answer-label">✏️ 路径经过的格子坐标（用行,列表示，如1,1→1,4）：</label>
-                <textarea class="answer-input" rows="2" placeholder="例如：1,1→1,4→2,4→..."></textarea>
+                <label class="answer-label">✏️ 一条可行路径的坐标（用行,列表示）：</label>
+                <textarea class="answer-input" rows="2" placeholder="例如：1,1→1,3→2,3→..."></textarea>
+                <label class="answer-label" style="margin-top: 10px;">✏️ 最短路径步数：（    ）步</label>
+                <input type="text" class="answer-input" placeholder="填写数字">
+                <label class="answer-label" style="margin-top: 10px;">✏️ 最长路径步数：（    ）步</label>
+                <input type="text" class="answer-input" placeholder="填写数字">
             </div>
         </div>
 
@@ -333,19 +337,27 @@
                 <br>• 🔽 表示只能向下走
                 <br>• ◀️ 表示只能向左走
                 <br>• ▶️ 表示只能向右走
-                <br>请根据指示牌找到从S到E的路径。
+                <br>请根据指示牌补足空缺的块并找到从S到E的路径。注意：遇到岔路时，选择正确的方向！
             </div>
             <div class="maze-display">
-                <div class="maze-grid" style="grid-template-columns: repeat(4, 50px);">
-                    <div class="maze-cell start">S</div><div class="maze-cell number">▶️</div><div class="maze-cell number">🔽</div><div class="maze-cell wall"></div>
-                    <div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell number">▶️</div><div class="maze-cell number">🔽</div>
-                    <div class="maze-cell wall"></div><div class="maze-cell number">▶️</div><div class="maze-cell number">🔼</div><div class="maze-cell number">◀️</div>
-                    <div class="maze-cell wall"></div><div class="maze-cell end">E</div><div class="maze-cell wall"></div><div class="maze-cell wall"></div>
+                <div class="maze-grid" style="grid-template-columns: repeat(8, 40px); font-size: 12px;">
+                    <div class="maze-cell start">S</div><div class="maze-cell number">▶️</div><div class="maze-cell number">🔽</div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell number">▶️</div><div class="maze-cell number">🔽</div><div class="maze-cell path"></div><div class="maze-cell number">◀️</div><div class="maze-cell wall"></div><div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell number">▶️</div><div class="maze-cell number">🔼</div><div class="maze-cell number">◀️</div><div class="maze-cell path"></div><div class="maze-cell number">🔽</div><div class="maze-cell path"></div><div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell number">▶️</div><div class="maze-cell number">🔽</div><div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell number">🔽</div><div class="maze-cell wall"></div><div class="maze-cell number">◀️</div><div class="maze-cell path"></div><div class="maze-cell number">🔼</div><div class="maze-cell path"></div><div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell number">▶️</div><div class="maze-cell number">🔽</div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell number">◀️</div><div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell number">🔼</div><div class="maze-cell number">◀️</div><div class="maze-cell path"></div><div class="maze-cell number">▶️</div><div class="maze-cell number">🔽</div><div class="maze-cell end">E</div>
+                    <div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div>
                 </div>
             </div>
             <div class="answer-area">
-                <label class="answer-label">✏️ 请按顺序写出经过的指示箭头和终点：</label>
-                <input type="text" class="answer-input" placeholder="例如：▶️→🔽→▶️→...→E">
+                <label class="answer-label">✏️ 请按顺序写出经过的指示箭头：</label>
+                <input type="text" class="answer-input" placeholder="例如：▶️→🔽→▶️→...">
+            </div>
+            <div class="hint-box">
+                <div class="hint-title">💡 提示</div>
+                <div class="hint-content">遇到岔路时，仔细观察哪个方向能继续前进，哪个方向会走进死胡同。</div>
             </div>
         </div>
 
@@ -356,29 +368,68 @@
                 <div class="question-title">我是迷宫设计师</div>
                 <span class="difficulty-badge difficulty-hard">挑战</span>
             </div>
+            <div class="answer-card">
+                <div class="answer-header">
+                    <div class="question-number">6</div>
+                    <div class="answer-title">我是迷宫设计师 - 参考答案</div>
+                    <span class="difficulty-badge difficulty-hard">挑战</span>
+                </div>
+                <div class="answer-section">
+                    <div class="answer-label">✅ 评分标准</div>
+                    <div class="answer-content">
+                        此题无固定答案，按以下标准评分：<br><br>
+<strong>基础要求（60分）：</strong><br>
+- 迷宫结构正确（10×10）<br>
+- 有明确的起点S和终点E<br>
+- 至少存在1条可行路径<br><br>
+<strong>进阶要求（80分）：</strong><br>
+- 路径长度≥15步<br>
+- 有5个岔路口<br>
+- 有2个"陷阱"设计<br><br>
+<strong>创意加分（100分）：</strong><br>
+- 有创意元素（如主题、故事性）则得100分。<br>
+                    </div>
+                </div>
+            </div>
             <div class="question-content">
-                请你设计一个5×5的迷宫，要求：
+                请你设计一个<strong>10×10</strong>的迷宫，要求：
                 <br>1. 有且仅有1条从S到E的路径
-                <br>2. 至少设置3个岔路口（让人容易走错的地方）
-                <br>3. 路径长度至少为8步
-                <br>在下面的方格中设计你的迷宫（S=起点，E=终点，█=墙壁，空格=通道）。
+                <br>2. 至少设置5个岔路口（让人容易走错的地方）
+                <br>3. 路径长度至少为15步
+                <br>4. 至少有2个"陷阱"（看起来能走但实际是死胡同的长通道）
+                <br><br>在下面的方格中设计你的迷宫（S=起点，E=终点，█=墙壁，空格=通道）。
             </div>
             <div class="maze-display">
-                <div class="maze-grid" style="grid-template-columns: repeat(5, 50px);">
-                    <div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div>
-                    <div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div>
-                    <div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div>
-                    <div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div>
-                    <div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div>
+                <div class="maze-grid" style="grid-template-columns: repeat(10, 35px); grid-template-rows: repeat(10, 35px); font-size: 11px;">
+                    <div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div>
+                    <div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div>
+                    <div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div>
+                    <div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div>
+                    <div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div>
+                    <div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div>
+                    <div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div>
+                    <div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div>
+                    <div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div>
+                    <div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div><div class="maze-cell path" style="width:35px;height:35px;"></div>
                 </div>
             </div>
             <div class="answer-area">
-                <label class="answer-label">✏️ 用文字描述你的迷宫设计（可用W表示墙，S表示起点，E表示终点，P表示通道）：</label>
-                <textarea class="answer-input" rows="5" placeholder="例如：
-第1行：S P P W W
-第2行：W W P W W
+                <label class="answer-label">✏️ 用文字描述你的迷宫设计（用W表示墙，S表示起点，E表示终点，P表示通道）：</label>
+                <textarea class="answer-input" rows="12" placeholder="例如：
+第1行：S P P W W P P P W W
+第2行：W W P W W P W P P P
+第3行：P P P W W P W W W P
 ...
+第10行：W W W W W P P P P E
 "></textarea>
+            </div>
+            <div class="hint-box">
+                <div class="hint-title">💡 设计技巧</div>
+                <div class="hint-content">
+                    <strong>岔路口设计：</strong>在通道分叉处设置两条路，一条通向终点，一条是死胡同。<br>
+                    <strong>陷阱设计：</strong>让死胡同看起来很长，让人以为能走通。<br>
+                    <strong>检验方法：</strong>设计完成后，自己走一遍，确保只有1条路径能到达终点。
+                </div>
             </div>
         </div>
 
@@ -394,10 +445,10 @@
             </div>
             <div class="maze-display">
                 <div class="maze-grid" style="grid-template-columns: repeat(5, 50px);">
-                    <div class="maze-cell start">1</div><div class="maze-cell number">2</div><div class="maze-cell number">5</div><div class="maze-cell wall"></div><div class="maze-cell wall"></div>
-                    <div class="maze-cell wall"></div><div class="maze-cell number">3</div><div class="maze-cell number">4</div><div class="maze-cell wall"></div><div class="maze-cell number">6</div>
-                    <div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell number">3</div><div class="maze-cell number">5</div><div class="maze-cell end">6</div>
-                    <div class="maze-cell wall"></div><div class="maze-cell number">2</div><div class="maze-cell number">4</div><div class="maze-cell wall"></div><div class="maze-cell wall"></div>
+                    <div class="maze-cell start">1</div><div class="maze-cell number">2</div><div class="maze-cell wall"></div><div class="maze-cell number">5</div><div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell number">3</div><div class="maze-cell number">4</div><div class="maze-cell number">5</div><div class="maze-cell number">6</div>
+                    <div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell number">3</div><div class="maze-cell wall"></div><div class="maze-cell end">6</div>
+                    <div class="maze-cell number">2</div><div class="maze-cell number">3</div><div class="maze-cell number">4</div><div class="maze-cell number">5</div><div class="maze-cell wall"></div>
                 </div>
             </div>
             <div class="answer-area">
@@ -406,7 +457,10 @@
             </div>
             <div class="hint-box">
                 <div class="hint-title">💡 提示</div>
-                <div class="hint-content">注意：有两个数字6，但只有一个是真正的终点E。你需要找到正确的路径到达正确的终点。</div>
+                <div class="hint-content">
+                    <strong>关键规则：</strong>每次只能走到相邻的格子，且新格子的数字必须比当前格子大1。<br>
+                    <strong>观察技巧：</strong>先找到所有数字1的位置，然后依次找数字2、3、4、5、6，看它们是否相邻。
+                </div>
             </div>
         </div>
 
