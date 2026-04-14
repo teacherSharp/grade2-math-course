@@ -1195,12 +1195,12 @@
             const answer = document.getElementById('q16_answer').value;
             const feedback = document.getElementById('feedback16');
             
-            if (answer === '30') {
-                feedback.textContent = '🎉 太棒了！答案正确！5条长线段，每条上有4个点（含交点），每条可分成3+2+1=6条，但交点处重复计算了...实际上每条长线段被分成3段小线段，共5×3=15条小线段，加上5条长线段本身？不对，应该是只算基本线段：5条×3段=15条，加上交点形成的...答案是30条！';
+            if (answer === '15') {
+                feedback.textContent = '🎉 太棒了！答案正确！五角星有5条直线段（五角星的5条边），每条边被分成3小段（由交点分割）。总线段数 = 5条长线段。';
                 feedback.className = 'feedback correct';
                 document.getElementById('q16_answer').classList.add('correct');
             } else {
-                feedback.textContent = '❌ 再想想！五角星有5条线相交，注意交点把线段分成了几段';
+                feedback.textContent = '❌ 再想想！五角星由5条直线段组成，每条直线段上有2个端点和1个交点，但交点不产生新的线段，只把原线段分成小段。';
                 feedback.className = 'feedback wrong';
                 document.getElementById('q16_answer').classList.add('wrong');
             }

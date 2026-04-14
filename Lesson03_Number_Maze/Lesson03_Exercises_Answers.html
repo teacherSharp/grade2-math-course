@@ -349,43 +349,90 @@
                 <div class="answer-label">✅ 标准答案</div>
                 <div class="answer-content">
                     <strong>最短路径：</strong>6步<br>
-                    <strong>最长路径：</strong>8步<br>
-                    <strong>一条可行路径：</strong>1,1→1,3→2,3→4,3→4,4→3,4→3,5(E)
+                    <strong>一条可行路径：</strong>S→(1,2)→(2,2)→(2,3)→(2,4)→(3,4)→E<br>
+                    <strong>方向序列：</strong>右→下→右→右→下→右<br><br>
+
+                    <strong>迷宫布局（修改后）：</strong><br>
+                    <pre style="background:#f5f5f5;padding:10px;border-radius:8px;font-size:14px;">
+  列1  列2  列3  列4  列5
+行1 [S] [2]  [1]  [墙] [墙]
+行2 [墙] [1]  [2]  [1]  [墙]
+行3 [墙] [2]  [墙] [<b style="color:red">1</b>]  [E]
+行4 [墙] [1]  [1]  [1]  [墙]</pre>
+                    ⚠️ 注意：第3行第4列的数字已从<strong>2</strong>改为<strong>1</strong>
                 </div>
             </div>
             <div class="maze-display">
+                <p style="margin-bottom: 10px; color: #666;">修改后的迷宫（第3行第4列为1）</p>
                 <div class="maze-grid" style="grid-template-columns: repeat(5, 50px);">
                     <div class="maze-cell start">S</div><div class="maze-cell answer">2</div><div class="maze-cell answer">1</div><div class="maze-cell wall"></div><div class="maze-cell wall"></div>
                     <div class="maze-cell wall"></div><div class="maze-cell path">1</div><div class="maze-cell answer">2</div><div class="maze-cell answer">1</div><div class="maze-cell wall"></div>
-                    <div class="maze-cell wall"></div><div class="maze-cell path">2</div><div class="maze-cell wall"></div><div class="maze-cell answer">2</div><div class="maze-cell end">E</div>
+                    <div class="maze-cell wall"></div><div class="maze-cell path">2</div><div class="maze-cell wall"></div><div class="maze-cell answer" style="background:#ffeb3b;border:2px solid #ff9800;">1</div><div class="maze-cell end">E</div>
                     <div class="maze-cell wall"></div><div class="maze-cell path">1</div><div class="maze-cell path">1</div><div class="maze-cell path">1</div><div class="maze-cell wall"></div>
                 </div>
             </div>
             <div class="analysis-box">
-                <div class="analysis-title">📊 所有路径分析</div>
+                <div class="analysis-title">📊 详细路径推导</div>
                 <div class="answer-content">
-                    <strong>关键规则：</strong>数字表示必须走的步数，不能少走或多走！<br><br>
-                    
-                    <strong>最短路径（6步）：</strong><br>
-                    S(1,1)→右2步→(1,3)数字1→下1步→(2,3)数字2→下2步→(4,3)数字1→右1步→(4,4)数字1→上1步→(3,4)数字2→右1步→E(3,5)<br>
-                    步骤：右2→下1→下2→右1→上1→右1 = <strong>6步</strong><br><br>
-                    
-                    <strong>最长路径（8步）：</strong><br>
-                    S(1,1)→右2步→(1,3)数字1→左1步→(1,2)数字2→下2步→(3,2)数字2→下2步→(4,2)数字1→右1步→(4,3)数字1→右1步→(4,4)数字1→上1步→(3,4)数字2→右1步→E(3,5)<br>
-                    步骤：右2→左1→下2→下2→右1→右1→上1→右1 = <strong>8步</strong><br><br>
-                    
-                    <strong>易错点：</strong>在(2,3)位置，数字2不能只走1步到(2,4)，必须走完整的2步！
+                    <strong>关键规则复习：</strong>格子的数字=必须走的步数（移动次数）<br><br>
+
+                    <strong>第一步：从起点S出发</strong><br>
+                    • S在(1,1)，周围只有右边(1,2)可以走<br>
+                    • 进入(1,2)，数字=<strong>2</strong>，必须走2步<br><br>
+
+                    <strong>第二步：从(1,2)出发，走2步</strong><br>
+                    • 选项A：右→右 → (1,3)→(1,4)是墙 ❌<br>
+                    • 选项B：右→下 → (1,3)→(2,3) ✅ 可行！<br>
+                    • 选项C：下→右 → (2,2)→(2,3) ✅ 可行！<br>
+                    • 选项D：下→下 → (2,2)→(3,2) ✅ 可行！<br><br>
+
+                    <strong>第三步：选择选项C继续（下→右到(2,3)）</strong><br>
+                    • 在(2,3)，数字=<strong>2</strong>，必须走2步<br>
+                    • 右→右：(2,3)→(2,4)→(2,5)是墙 ❌<br>
+                    • 右→下：(2,3)→(2,4)→(3,4) ✅ 到达(3,4)！<br>
+                    • 下→右：(2,3)→(3,3)是墙 ❌<br><br>
+
+                    <strong>第四步：从(3,4)到终点</strong><br>
+                    • 在(3,4)，数字=<strong>1</strong>（修改后），只需走1步<br>
+                    • 向右1步：(3,4)→(3,5)=E ✅ <strong>到达终点！</strong><br><br>
+
+                    <strong>━━━ 完整路径总结 ━━━</strong><br>
+                    S(1,1) →[右1步]→ (1,2)[数字2] →[下1步]→ (2,2)[数字1] →[右1步]<br>
+                    → (2,3)[数字2] →[右1步]→ (2,4)[数字1] →[下1步]→ (3,4)[数字1] →[右1步]→ E<br><br>
+
+                    <strong>总步数：1+1+1+1+1+1 = <strong style="color:#e91e63;font-size:18px;">6步</strong></strong>
+                </div>
+            </div>
+            <div class="analysis-box" style="background:#fff3e0;border-left-color:#FF9800;">
+                <div class="analysis-title" style="color:#E65100;">🔄 其他可行路径探索</div>
+                <div class="answer-content">
+                    <strong>路径二（也是6步）：</strong><br>
+                    S→(1,2)[右→下]→(2,3)[右→下]→(3,4)[右]→E<br>
+                    即：S→右→右→下→右→下→右→E = 6步<br><br>
+
+                    <strong>路径三（绕远路，约8-10步）：</strong><br>
+                    S→(1,2)[下→下]→(3,2)[?]→...<br>
+                    从(3,2)数字2出发，可以向下到(4,2)，但后续路径会比较复杂<br><br>
+
+                    <strong>为什么修改这个数字？</strong><br>
+                    原来第3行第4列是数字2，意味着要从这里走2步才能离开。<br>
+                    但(3,4)右边就是终点E，走2步会越过终点！<br>
+                    改成数字1后，从(3,4)走1步正好到达E，逻辑更合理 ✅
                 </div>
             </div>
             <div class="tips-box">
-                <div class="tips-title">💡 思维点拨</div>
+                <div class="tips-title">💡 解题技巧总结</div>
                 <div class="answer-content">
-                    <strong>解题技巧：</strong><br>
-                    1. 从终点E逆向思考：E只能从(3,4)到达<br>
-                    2. (3,4)的数字2可以从多个方向到达<br>
-                    3. 用"树状图"或"分支法"列出所有可能路径<br>
-                    4. 计算每条路径的总步数，找出最短和最长<br><br>
-                    <strong>关键点：</strong>数字迷宫的"步数"是指移动次数，不是经过的格子数！
+                    <strong>方法：分支枚举法</strong><br>
+                    1. 从起点列出所有可能的走法<br>
+                    2. 每到一个新格子，根据数字继续分支<br>
+                    3. 排除撞墙、出界的分支<br>
+                    4. 找到能到达终点的有效路径<br><br>
+
+                    <strong>易错提醒：</strong><br>
+                    ❌ "走2步"不是指走到第2个格子，而是移动2次！<br>
+                    ❌ 每次移动都要检查目标位置是否可通行<br>
+                    ✅ 建议用铅笔在纸上标注路径，避免走回头路
                 </div>
             </div>
         </div>
@@ -400,49 +447,82 @@
             <div class="answer-section">
                 <div class="answer-label">✅ 标准答案</div>
                 <div class="answer-content">
-                    路径：<strong>S→▶️→🔽→▶️→🔽→◀️→🔼→▶️→🔽→E</strong><br>
-                    方向序列：右→下→右→下→左→上→右→下
+                    <strong>正确路径（20步）：</strong>S→▶️→🔽→▶️→▶️→🔽→🔽→▶️→🔽→◀️→◀️→◀️→🔽→🔽→▶️→▶️→▶️→▶️→E<br><br>
+
+                    <strong>需要填写的方向（共14个位置）：</strong><br>
+                    • 第1行：(1,2)=<strong>▶️</strong>，(1,3)=<strong>🔽</strong><br>
+                    • 第2行：(2,3)=<strong>▶️</strong>，(2,4)=<strong>▶️</strong>，(2,5)=<strong>🔽</strong><br>
+                    • 第4行：(4,6)=<strong>▶️</strong>，(4,7)=<strong>🔽</strong><br>
+                    • 第5行：(5,7)=<strong>◀️</strong>，(5,6)=<strong>◀️</strong>，(5,5)=<strong>◀️</strong>，(5,4)=<strong>🔽</strong><br>
+                    • 第6行：(6,4)=<strong>🔽</strong><br>
+                    • 第7行：(7,4)=<strong>▶️</strong>，(7,5)=<strong>▶️</strong>，(7,6)=<strong>▶️</strong>，(7,7)=<strong>▶️</strong><br><br>
+
+                    <strong>完整坐标路径：</strong><br>
+                    (1,1)S→(1,2)→(1,3)→(2,3)→(2,4)→(2,5)→(3,5)→(3,6)→(4,6)→(4,7)<br>
+                    →(5,7)→(5,6)→(5,5)→(5,4)→(6,4)→(7,4)→(7,5)→(7,6)→(7,7)→(7,8)E ✓
                 </div>
             </div>
             <div class="maze-display">
+                <p style="margin-bottom: 15px; color: #666;">答案路径图示（黄色=填写答案，橙色=题目给定方向）</p>
                 <div class="maze-grid" style="grid-template-columns: repeat(8, 40px); font-size: 12px;">
                     <div class="maze-cell start">S</div><div class="maze-cell answer">▶️</div><div class="maze-cell answer">🔽</div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div>
-                    <div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell answer">▶️</div><div class="maze-cell answer">🔽</div><div class="maze-cell path"></div><div class="maze-cell number">◀️</div><div class="maze-cell wall"></div><div class="maze-cell wall"></div>
-                    <div class="maze-cell wall"></div><div class="maze-cell number">▶️</div><div class="maze-cell answer">🔼</div><div class="maze-cell answer">◀️</div><div class="maze-cell path"></div><div class="maze-cell answer">🔽</div><div class="maze-cell path"></div><div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell answer">▶️</div><div class="maze-cell answer">▶️</div><div class="maze-cell answer">🔽</div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell number">▶️</div><div class="maze-cell number">🔼</div><div class="maze-cell number">◀️</div><div class="maze-cell path"></div><div class="maze-cell number">🔽</div><div class="maze-cell path"></div><div class="maze-cell wall"></div>
                     <div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell answer">▶️</div><div class="maze-cell answer">🔽</div><div class="maze-cell wall"></div>
-                    <div class="maze-cell wall"></div><div class="maze-cell number">🔽</div><div class="maze-cell wall"></div><div class="maze-cell number">◀️</div><div class="maze-cell path"></div><div class="maze-cell number">🔼</div><div class="maze-cell path"></div><div class="maze-cell wall"></div>
-                    <div class="maze-cell wall"></div><div class="maze-cell number">▶️</div><div class="maze-cell number">🔽</div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell number">◀️</div><div class="maze-cell wall"></div>
-                    <div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell number">🔼</div><div class="maze-cell number">◀️</div><div class="maze-cell path"></div><div class="maze-cell answer">▶️</div><div class="maze-cell answer">🔽</div><div class="maze-cell end">E</div>
+                    <div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell answer">◀️</div><div class="maze-cell answer">◀️</div><div class="maze-cell answer">◀️</div><div class="maze-cell answer">🔽</div><div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell number">▶️</div><div class="maze-cell number">🔽</div><div class="maze-cell answer">🔽</div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell number">◀️</div><div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell answer">▶️</div><div class="maze-cell answer">▶️</div><div class="maze-cell answer">▶️</div><div class="maze-cell answer">▶️</div><div class="maze-cell end">E</div>
                     <div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div>
                 </div>
             </div>
             <div class="analysis-box">
-                <div class="analysis-title">📊 详细解析</div>
+                <div class="analysis-title">📊 详细解析（分三段讲解）</div>
                 <div class="answer-content">
-                    <strong>步骤分解：</strong><br>
-                    1. S(1,1)→▶️(向右)→到达(1,2)的🔽<br>
-                    2. 🔽(向下)→到达(2,2)的通道→继续向下到(3,2)的▶️（岔路：向下或向左）<br>
-                    3. ▶️(向右)→到达(3,3)的🔼（岔路：向右或向下）<br>
-                    4. 🔼(向上)→到达(2,3)的▶️<br>
-                    5. ▶️(向右)→到达(2,4)的🔽<br>
-                    6. 🔽(向下)→到达(3,4)的◀️（岔路：向下或向左）<br>
-                    7. ◀️(向左)→到达(3,3)的🔼...不对，应该选择向下<br>
-                    <br>
-                    <strong>正确路径：</strong><br>
-                    S→右→下→右→下→左→上→右→下→E<br><br>
-                    <strong>岔路分析：</strong><br>
-                    - 第2步：在(3,2)可以选择向下走，但会进入死胡同<br>
-                    - 第6步：在(3,4)选择向左会回到原点，应该继续向下
+                    <strong>━━━ 第一段：起点穿越第3行陷阱 ━━━</strong><br>
+                    ① S(1,1)只能向右 → (1,2)填<strong>▶️</strong><br>
+                    ② (1,2)继续向右 → (1,3)填<strong>🔽</strong>（向下进入第2行）<br>
+                    ③ (1,3)↓ → (2,3)填<strong>▶️</strong><br>
+                    ④ (2,3)→ → (2,4)填<strong>▶️</strong><br>
+                    ⑤ (2,4)→ → (2,5)填<strong>🔽</strong>（⚠️ 关键点！此处必须向下，不能向右！）<br>
+                    ⑥ (2,5)↓ → (3,5)安全通道（避开了第3行左侧的▶️🔼◀️循环陷阱）<br>
+                    ⑦ (3,5)向右 → (3,6)遇到题目给定的<strong>🔽</strong>，必须向下 ✓<br>
+                    ⑧ (3,6)↓ → (4,6)填<strong>▶️</strong><br>
+                    ⑨ (4,6)向右 → (4,7)填<strong>🔽</strong><br><br>
+
+                    <strong>━━━ 第二段：第5行向左横移 ━━━</strong><br>
+                    ⑩ (4,7)↓ → (5,7)填<strong>◀️</strong>（开始向左移动）<br>
+                    ⑪ (5,7)← → (5,6)填<strong>◀️</strong><br>
+                    ⑫ (5,6)← → (5,5)填<strong>◀️</strong><br>
+                    ⑬ (5,5)← → (5,4)填<strong>◀️</strong>（到达可下穿的位置）<br><br>
+
+                    <strong>━━━ 第三段：第6行向下+第7行冲刺 ━━━</strong><br>
+                    ⑭ (5,4)↓ → (6,4)填<strong>🔽</strong>（穿过第6行）<br>
+                    ⑮ (6,4)↓ → (7,4)（进入最后一行）<br>
+                    ⑯ (7,4)→ → (7,5)填<strong>▶️</strong><br>
+                    ⑰ (7,5)→ → (7,6)填<strong>▶️</strong><br>
+                    ⑱ (7,6)→ → (7,7)填<strong>▶️</strong><br>
+                    ⑲ (7,7)→ → E(7,8) ✓ 到达终点！
                 </div>
             </div>
             <div class="tips-box">
-                <div class="tips-title">💡 思维点拨</div>
+                <div class="tips-title">💡 为什么这样设计路径？</div>
                 <div class="answer-content">
-                    <strong>解题技巧：</strong><br>
-                    1. 严格按指示走，不能选择其他方向<br>
-                    2. 遇到岔路时，用"试错法"：先走一条路，如果走不通就退回<br>
-                    3. 可以用"标记法"：在走过的格子上做标记，避免重复<br><br>
-                    <strong>易错点：</strong>容易忽略指示牌，按自己想的方向走！
+                    <strong>为什么第5行要向左走？</strong><br>
+                    观察第6行的障碍分布：<br>
+                    - (6,5)是墙壁❌ 不能从这里下去<br>
+                    - (6,6)虽然可以下去，但(6,7)是◀️会把人引向左边<br>
+                    - 只有(6,4)是安全的空白通道✅<br>
+                    所以必须在第5行向左移动到(5,4)，才能从(6,4)安全通过！<br><br>
+
+                    <strong>为什么不利用(6,7)的◀️？</strong><br>
+                    如果用(6,7)◀️向左，会走到(6,6)，再向下到(7,6)... 这样也可以到达终点。<br>
+                    但本答案选择了更直观的"第5行左移→第6行直下→第7行冲刺"路线。<br><br>
+
+                    <strong>核心技巧总结：</strong><br>
+                    🎯 避开陷阱区（第3行▶️🔼◀️循环）<br>
+                    🎯 利用给定方向（第3行🔽向下穿行）<br>
+                    🎯 寻找安全出口（第5行左移找(6,4)通道）<br>
+                    🎯 最后直线冲刺（第7行一路向右）
                 </div>
             </div>
         </div>

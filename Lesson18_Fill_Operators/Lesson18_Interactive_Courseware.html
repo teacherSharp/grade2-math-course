@@ -571,7 +571,7 @@
         <div class="slide" data-slide="10">
             <h2 class="slide-title">✏️ 练习3：逆推法应用</h2>
             <div class="game-area">
-                <p style="font-size: 20px; margin-bottom: 20px;">用逆推法解决：9 3 2 = 7</p>
+                <p style="font-size: 20px; margin-bottom: 20px;">用逆推法解决：9 3 2 = 6</p>
                 <div style="font-size: 28px; margin: 20px 0;">
                     <span class="number-box">9</span>
                     <span class="equation-slot" id="ex3_1" onclick="selectSlot('ex3_1')">?</span>
@@ -579,7 +579,7 @@
                     <span class="equation-slot" id="ex3_2" onclick="selectSlot('ex3_2')">?</span>
                     <span class="number-box">2</span>
                     <span>=</span>
-                    <span class="number-box">7</span>
+                    <span class="number-box">6</span>
                 </div>
                 <div style="margin: 20px 0;">
                     <button class="operator-btn" onclick="fillOperator('+')">+</button>
@@ -591,7 +591,7 @@
                 <div class="feedback" id="feedback_ex3"></div>
             </div>
             <div class="tip-box">
-                <strong>💡 提示：</strong>目标是7，9-3=6，6+2=8不对；9÷3=3，3+2=5不对；再试试...
+                <strong>💡 提示：</strong>目标是6，9÷3=3，3×2=6；试试÷和×的组合！
             </div>
         </div>
         
@@ -1012,17 +1012,14 @@
             const slot1 = document.getElementById('ex3_1');
             const slot2 = document.getElementById('ex3_2');
             const feedback = document.getElementById('feedback_ex3');
-            if ((slot1.textContent === '-' && slot2.textContent === '+') || 
-                (slot1.textContent === '+' && slot2.textContent === '-')) {
-                if (slot1.textContent === '-' && slot2.textContent === '+') {
-                    if (document.getElementById('ex3_1').textContent === '-') {
-                        slot1.style.background = '#C8E6C9';
-                        slot2.style.background = '#C8E6C9';
-                        feedback.textContent = '🎉 正确！9-3+2=8+2=10？不对...再想想';
-                        feedback.className = 'feedback error';
-                        return;
-                    }
-                }
+            
+            // 正确答案：9÷3×2=6
+            if (slot1.textContent === '÷' && slot2.textContent === '×') {
+                slot1.style.background = '#C8E6C9';
+                slot2.style.background = '#C8E6C9';
+                feedback.textContent = '🎉 正确！9÷3×2=3×2=6';
+                feedback.className = 'feedback success';
+                return;
             }
             // 正确答案：9-3-2=4 不对，9÷3+2=5 不对，9-3×2=3 不对
             // 正确答案应该是：9-3+2=8 不对，目标是7

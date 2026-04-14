@@ -386,18 +386,19 @@
                     <span class="difficulty">⭐⭐⭐</span>
                 </div>
                 <div class="answer-content">
-                    <p><strong>答案：</strong>中间的数填 <span class="answer-highlight">3</span></p>
+                    <p><strong>答案：</strong>中间的数填 <span class="answer-highlight">4</span></p>
                 </div>
                 <div class="thinking-box">
                     <h4>💡 思路点评</h4>
-                    <p>这是一个辐射型三角形数阵图，中间数在三条线上都被用到。</p>
-                    <p>如果中间填3，那么每条线上另外两数之和为9-3=6。</p>
-                    <p>从1、2、4、5中找两对和为6的数：1+5=6，2+4=6。</p>
-                    <p>验证：3+1+5=9，3+2+4=9，符合要求！</p>
+                    <p>这是一个辐射型三角形数阵图，只有3个圆圈需要填入数字。</p>
+                    <p>从1、2、3、4、5、6中选3个数填入，使每条线上的三个数之和为12。</p>
+                    <p>如果中间填4，那么每条线上另外两数之和为12-4=8。</p>
+                    <p>从剩余数字1、2、3、5、6中找两对和为8的数：2+6=8，3+5=8。</p>
+                    <p>验证：4+2+6=12，4+3+5=12，符合要求！</p>
                 </div>
                 <div class="tip-box">
                     <h4>🎯 教学要点</h4>
-                    <p>对于辐射型数阵图，关键是确定中间数后，看剩余数字能否配对成所需的和。</p>
+                    <p>对于辐射型数阵图，关键是确定中间数后，看剩余数字能否配对成所需的和。注意只需要填入3个位置，从6个数中选择。</p>
                 </div>
             </div>
             
@@ -407,18 +408,19 @@
                     <span class="difficulty">⭐⭐⭐</span>
                 </div>
                 <div class="answer-content">
-                    <p><strong>答案：</strong>中间的数填 <span class="answer-highlight">2</span></p>
+                    <p><strong>答案：</strong>中间的数填 <span class="answer-highlight">12</span></p>
                 </div>
                 <div class="thinking-box">
                     <h4>💡 思路点评</h4>
-                    <p>这是一个辐射型三角形数阵图，中间数在三条线上都被用到。</p>
-                    <p>如果中间填2，那么每条线上另外两数之和为16-2=14。</p>
-                    <p>从4、6、8、10中找两对和为14的数：4+10=14，6+8=14。</p>
-                    <p>验证：2+4+10=16，2+6+8=16，符合要求！</p>
+                    <p>这是一个辐射型三角形数阵图，只有3个圆圈需要填入数字。</p>
+                    <p>从2、4、6、8、10、12中选3个数填入，使每条线上的三个数之和为24。</p>
+                    <p>如果中间填12，那么每条线上另外两数之和为24-12=12。</p>
+                    <p>从剩余数字2、4、6、8、10中找两对和为12的数：2+10=12，4+8=12。</p>
+                    <p>验证：12+2+10=24，12+4+8=24，符合要求！</p>
                 </div>
                 <div class="tip-box">
                     <h4>🎯 教学要点</h4>
-                    <p>引导学生尝试不同的中间数，验证哪一个是正确的。培养尝试与验证的能力。</p>
+                    <p>引导学生尝试不同的中间数，验证哪一个是正确的。培养尝试与验证的能力。注意只需要填入3个位置，从6个数中选择。</p>
                 </div>
             </div>
             
@@ -428,7 +430,7 @@
                     <span class="difficulty">⭐⭐⭐</span>
                 </div>
                 <div class="answer-content">
-                    <p><strong>答案：</strong>（一种填法）三个顶点可以填 <span class="answer-highlight">1</span>、<span class="answer-highlight">5</span>、<span class="answer-highlight">9</span> 或 <span class="answer-highlight">2</span>、<span class="answer-highlight">5</span>、<span class="answer-highlight">8</span> 或 <span class="answer-highlight">3</span>、<span class="answer-highlight">5</span>、<span class="answer-highlight">7</span> 或 <span class="answer-highlight">4</span>、<span class="answer-highlight">5</span>、<span class="answer-highlight">6</span></p>
+                    <p><strong>答案：</strong>（一种填法）三个顶点可以填 <span class="answer-highlight">4</span>、<span class="answer-highlight">5</span>、<span class="answer-highlight">6</span></p>
                 </div>
                 <div class="thinking-box">
                     <h4>💡 思路点评</h4>
@@ -438,10 +440,15 @@
                     <p>三个顶点之和 = 36 - 21 = 15</p>
                     <p>从1-6中选三个数，和为15，只有：4+5+6=15</p>
                     <p>所以顶点填4、5、6，边中点填1、2、3</p>
+                    <p>合理分配边中点使每边和为12：</p>
+                    <p>4+3+5=12（边中点填3）</p>
+                    <p>5+1+6=12（边中点填1）</p>
+                    <p>6+2+4=12（边中点填2）</p>
+                    <p>所以：顶点4、5、6，边中点3、1、2（按顺序）</p>
                 </div>
                 <div class="tip-box">
                     <h4>🎯 教学要点</h4>
-                    <p>这题有多种填法，关键是找到三个顶点之和为15的组合。让学生理解"顶点各算2次"的含义。</p>
+                    <p>这题关键是先确定三个顶点之和为15（只有4+5+6这一种组合），然后合理分配边中点。让学生理解"顶点各算2次"的含义。</p>
                 </div>
             </div>
             

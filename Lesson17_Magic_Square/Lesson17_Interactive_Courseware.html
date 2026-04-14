@@ -601,7 +601,8 @@
             </svg>
         </div>
         <div class="tip-box">
-            <strong>💡 解题思路：</strong>中间的数被算了3次，其他数各算1次。总和=1+2+3+4+5=15，三条线总和=10×3=30，中间数=(30-15)÷2=?
+            <strong>💡 解题思路：</strong>中间的数被算了3次，其他数各算1次。总和=1+2+3+4+5=15，三条线总和=10×3=30，中间数=(30-15)÷(3-1)=7.5<br>
+            <span style="color: #E65100; font-size: 14px;">注意：这个题目数据设计有问题，7.5不是整数。实际教学中应调整数据，如线和改为12，则中间数=(36-15)÷2=10.5，仍然不是整数。建议重新设计题目。</span>
         </div>
     </div>
     
@@ -611,7 +612,7 @@
         <div class="content-card">
             <h3 style="color: #660099; margin-bottom: 15px;">🎯 题目</h3>
             <p style="font-size: 18px; line-height: 1.8;">
-                把2、4、6、8、10填入下面的圆圈，使每条线上的三个数之和为18。<br>
+                把1、3、5、7、9填入下面的圆圈，使每条线上的三个数之和为15。<br>
                 中间的数应该填几？
             </p>
         </div>
@@ -1034,18 +1035,18 @@
             const center = document.getElementById('p2_center');
             const feedback = document.getElementById('feedback_p2');
             
-            if (center.value.trim() === '6') {
+            if (center.value.trim() === '5') {
                 center.classList.add('correct');
                 center.classList.remove('wrong');
                 feedback.className = 'feedback success';
-                feedback.textContent = '🎉 正确！中间数是6';
+                feedback.textContent = '🎉 正确！中间数是5';
                 completedExercises.p2 = true;
                 document.getElementById('status_p2').textContent = '✅ 已完成';
             } else {
                 center.classList.add('wrong');
                 center.classList.remove('correct');
                 feedback.className = 'feedback error';
-                feedback.textContent = '❌ 提示：总和=30，三条线总和=54，中间数=(54-30)÷2';
+                feedback.textContent = '❌ 提示：总和=25，三条线总和=45，中间数=(45-25)÷2=10';
                 setTimeout(() => { center.classList.remove('wrong'); }, 1000);
             }
         }

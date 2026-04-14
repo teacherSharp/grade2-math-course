@@ -243,6 +243,13 @@
                 </svg>
             </div>
             <p>答案：<input class="answer-input" id="q5" maxlength="2"/> 条线段</p>
+            <div class="hint-box" style="background: #f0f8ff; padding: 15px; border-radius: 10px; margin: 10px 0; border-left: 4px solid #0066cc;">
+                <div style="color: #0066cc; font-weight: bold; margin-bottom: 8px;">💡 解题方法</div>
+                <div style="font-size: 14px; color: #333;">
+                    6个点形成5条基本线段。用公式法：5+4+3+2+1=15条线段。<br>
+                    或者用组合法：从6个点中任选2个点组成一条线段，C(6,2)=15。
+                </div>
+            </div>
             <button class="btn-check" onclick="checkAnswer(5, '15')">检查答案</button>
             <div class="feedback" id="feedback5"></div>
         </div>
@@ -267,6 +274,9 @@
         <!-- 第7题 -->
         <div class="question">
             <p class="question-text"><span class="question-number">7</span>数一数，下图中有几个长方形？</p>
+            <div class="question-content" style="color: #E65100; font-weight: bold; margin-bottom: 15px;">
+                💡 计数规则：包含所有大小的长方形，由多个小长方形组成的大长方形也要算，重叠部分只算一次。
+            </div>
             <div class="svg-container">
                 <svg height="160" width="200">
                     <rect fill="rgba(255,152,0,0.1)" height="60" stroke="#FF9800" stroke-width="3" width="70" x="40" y="30"></rect>

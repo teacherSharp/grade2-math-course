@@ -205,7 +205,7 @@
         <div class="progress-bar" id="progressBar"></div>
     </div>
     <div class="page-indicator">
-        <span id="currentPage">1</span> / 20
+        <span id="currentPage">1</span> / 30
     </div>
 
     <div class="slide-container">
@@ -267,6 +267,7 @@
                 <h3>🏛️ 世界上最著名的迷宫</h3>
                 <p><strong>克里特岛迷宫</strong>（古希腊）</p>
                 <p>传说这座迷宫里住着一只牛头人身的怪物——米诺陶洛斯。英雄忒修斯用一根线团找到了出口！</p>
+                <p style="margin-top: 15px;"><a href="Crete Island.html" target="_blank" style="display: inline-block; padding: 10px 20px; background: linear-gradient(135deg, #660099 0%, #94070A 100%); color: white; text-decoration: none; border-radius: 25px; font-weight: bold;">🎮 点击体验克里特岛迷宫游戏</a></p>
             </div>
             <div class="content-card">
                 <h3>🌽 现代迷宫</h3>
@@ -400,9 +401,9 @@
                 <div class="maze-grid" style="grid-template-columns: repeat(4, 50px);">
                     <div class="maze-cell start">S</div><div class="maze-cell number">2</div><div class="maze-cell wall"></div><div class="maze-cell wall"></div>
                     <div class="maze-cell wall"></div><div class="maze-cell number">1</div><div class="maze-cell number">2</div><div class="maze-cell wall"></div>
-                    <div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell number">1</div><div class="maze-cell end">E</div>
+                    <div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell number">1</div><div class="maze-cell end">E</div>
                 </div>
-                <p style="margin-top: 15px;">路径：S → 2（走2步到1）→ 1（走1步到2）→ 2（走2步）→ 1 → E</p>
+                <p style="margin-top: 15px;">路径：S → 2（右2步到1）→ 1（右1步到2）→ 2（下1步到1）→ 1（右1步到E）</p>
             </div>
         </div>
 
@@ -411,27 +412,30 @@
             <h2 class="slide-title">🎮 数字迷宫练习</h2>
             <div class="content-card">
                 <h3>帮助小猫找到回家的路！</h3>
-                <p>按照数字规则，从S走到E。</p>
+                <p>按照数字规则，从S走到E。每个数字表示必须走的步数。</p>
             </div>
             <div class="maze-container">
                 <div class="maze-grid" style="grid-template-columns: repeat(5, 50px);">
-                    <div class="maze-cell start">S</div><div class="maze-cell number">3</div><div class="maze-cell number">1</div><div class="maze-cell wall"></div><div class="maze-cell wall"></div>
-                    <div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell number">2</div><div class="maze-cell number">1</div><div class="maze-cell wall"></div>
-                    <div class="maze-cell wall"></div><div class="maze-cell number">2</div><div class="maze-cell number">2</div><div class="maze-cell wall"></div><div class="maze-cell wall"></div>
-                    <div class="maze-cell wall"></div><div class="maze-cell number">1</div><div class="maze-cell wall"></div><div class="maze-cell number">2</div><div class="maze-cell end">E</div>
+                    <div class="maze-cell start">S</div><div class="maze-cell number">2</div><div class="maze-cell number">1</div><div class="maze-cell wall"></div><div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell number">1</div><div class="maze-cell number">2</div><div class="maze-cell number">1</div><div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell number">2</div><div class="maze-cell wall"></div><div class="maze-cell number">2</div><div class="maze-cell end">E</div>
+                    <div class="maze-cell wall"></div><div class="maze-cell number">1</div><div class="maze-cell number">1</div><div class="maze-cell number">1</div><div class="maze-cell wall"></div>
                 </div>
             </div>
             <div class="content-card">
                 <h3>🤔 思考步骤</h3>
-                <p>1. 从S出发，S旁边是数字3，应该往哪里走3步？</p>
-                <p>2. 如果向右走3步，会到哪里？</p>
-                <p>3. 如果向下走3步，会到哪里？</p>
-                <p>4. 哪个方向能继续走下去？</p>
+                <p>1. 从S出发，S旁边是数字2，应该往哪里走2步？</p>
+                <p>2. 向右走2步会到哪里？能继续走吗？</p>
+                <p>3. 向下走2步会到哪里？那是墙壁吗？</p>
+                <p>4. 找到正确的路径到达E！</p>
             </div>
             <div class="content-card" style="background: #e8f5e9;">
                 <h3>✅ 答案</h3>
-                <p>路径：S → 3（右3步到第1行第4列，但那是墙）→ 试试下3步...</p>
-                <p>正确路径：<strong>S → 3（右3步）→ 1（下1步）→ 2（右1步到下1步）→ 1 → E</strong></p>
+                <p>正确路径：<strong>S → 2（右2步到2）→ 2（下2步到2）→ 2（右2步到E）</strong></p>
+                <p>步骤详解：</p>
+                <p>• 从S向右走2步，到达第2行第3列的数字2</p>
+                <p>• 从该位置向下走2步，到达第4行第3列的数字1</p>
+                <p>• 从该位置向右走1步，到达E！</p>
             </div>
         </div>
 
@@ -490,8 +494,8 @@
             </div>
             <div id="answer1" style="display: none;" class="content-card" style="background: #e8f5e9;">
                 <h3>✅ 答案</h3>
-                <p>最短路径：右→右→下→下→右→右→下→下→右→右（10步）</p>
-                <p>或：右→右→下→右→下→右→下→右→下→右（也是10步）</p>
+                <p>最短路径（9步）：右→右→下→右→右→下→下→下→右</p>
+                <p>较长路径（11步）：右→右→下→下→左→下→下→右→右→右→右</p>
             </div>
         </div>
 
@@ -505,7 +509,7 @@
             </div>
             <div class="maze-container">
                 <div class="maze-grid" style="grid-template-columns: repeat(5, 50px);">
-                    <div class="maze-cell start">S</div><div class="maze-cell number">2</div><div class="maze-cell number">3</div><div class="maze-cell wall"></div><div class="maze-cell wall"></div>
+                    <div class="maze-cell start">S</div><div class="maze-cell number">2</div><div class="maze-cell number">3</div><div class="maze-cell number">1</div><div class="maze-cell path"></div>
                     <div class="maze-cell wall"></div><div class="maze-cell number">1</div><div class="maze-cell wall"></div><div class="maze-cell number">2</div><div class="maze-cell wall"></div>
                     <div class="maze-cell wall"></div><div class="maze-cell number">2</div><div class="maze-cell number">1</div><div class="maze-cell number">1</div><div class="maze-cell wall"></div>
                     <div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell number">2</div><div class="maze-cell end">E</div><div class="maze-cell wall"></div>
@@ -517,8 +521,8 @@
             </div>
             <div id="answer2" style="display: none;" class="content-card" style="background: #e8f5e9;">
                 <h3>✅ 答案</h3>
-                <p>路径：S(2) → 右2步到3 → 左1步到1 → 下2步到2 → 右1步到1 → 右1步到1 → 下1步到2 → 右2步到E</p>
-                <p>数字序列：2→3→1→2→1→1→2</p>
+                <p>最佳路径：S(2) → 右2步到3 → 右1步到1 → 下1步到2 → 左1步到1 → 下1步到2 → 右2步到E</p>
+                <p>数字序列：2→3→1→2→1→2</p>
             </div>
         </div>
 
@@ -587,8 +591,8 @@
             </div>
             <div class="maze-container">
                 <div class="maze-grid" style="grid-template-columns: repeat(4, 50px);">
-                    <div class="maze-cell start">S</div><div class="maze-cell number">▶️</div><div class="maze-cell number">🔽</div><div class="maze-cell wall"></div>
-                    <div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell number">▶️</div><div class="maze-cell number">🔽</div>
+                    <div class="maze-cell start">S</div><div class="maze-cell number">▶️</div><div class="maze-cell number">🔽</div><div class="maze-cell path"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell number">▶️</div><div class="maze-cell number">🔽</div>
                     <div class="maze-cell wall"></div><div class="maze-cell number">▶️</div><div class="maze-cell number">🔼</div><div class="maze-cell number">◀️</div>
                     <div class="maze-cell wall"></div><div class="maze-cell end">E</div><div class="maze-cell wall"></div><div class="maze-cell wall"></div>
                 </div>
@@ -599,8 +603,8 @@
             </div>
             <div id="answer5" style="display: none;" class="content-card" style="background: #e8f5e9;">
                 <h3>✅ 答案</h3>
-                <p>路径：S → ▶️ → 🔽 → ▶️ → 🔽 → ◀️ → 🔼 → ▶️ → E</p>
-                <p>方向序列：右→下→右→下→左→上→右</p>
+                <p>路径：S → ▶️(右) → 🔽(下) → ▶️(右) → 🔽(下) → ◀️(左) → 🔼(上) → E</p>
+                <p>路线：从S向右到🔽，向下到▶️，向右到🔽，向下到◀️，向左到🔼，向上到达E！</p>
             </div>
         </div>
 
@@ -735,8 +739,299 @@
             </div>
         </div>
 
-        <!-- 第19页：课堂总结 -->
+        <!-- 第19-28页：高难度迷宫挑战（10道） -->
+        
+        <!-- 第19页：高难度迷宫1 - 6×6数字迷宫 -->
         <div class="slide" data-slide="19">
+            <h2 class="slide-title">🏆 大师挑战1</h2>
+            <div class="timer-display" id="timer6">60</div>
+            <div class="content-card">
+                <h3>6×6数字迷宫</h3>
+                <p>更大的迷宫，更复杂的路线！按照数字规则从S走到E。</p>
+            </div>
+            <div class="maze-container">
+                <div class="maze-grid" style="grid-template-columns: repeat(6, 45px);">
+                    <div class="maze-cell start">S</div><div class="maze-cell number">2</div><div class="maze-cell number">3</div><div class="maze-cell wall"></div><div class="maze-cell number">2</div><div class="maze-cell number">1</div>
+                    <div class="maze-cell wall"></div><div class="maze-cell number">1</div><div class="maze-cell wall"></div><div class="maze-cell number">1</div><div class="maze-cell wall"></div><div class="maze-cell number">2</div>
+                    <div class="maze-cell number">2</div><div class="maze-cell number">2</div><div class="maze-cell number">1</div><div class="maze-cell number">2</div><div class="maze-cell number">1</div><div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell number">1</div><div class="maze-cell wall"></div><div class="maze-cell number">1</div><div class="maze-cell number">2</div><div class="maze-cell number">1</div>
+                    <div class="maze-cell number">1</div><div class="maze-cell number">2</div><div class="maze-cell number">2</div><div class="maze-cell wall"></div><div class="maze-cell number">1</div><div class="maze-cell number">2</div>
+                    <div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell number">1</div><div class="maze-cell number">2</div><div class="maze-cell end">E</div><div class="maze-cell wall"></div>
+                </div>
+            </div>
+            <div class="controls">
+                <button class="game-btn" onclick="startTimer('timer6', 60)">⏱️ 开始计时</button>
+                <button class="game-btn" onclick="showAnswer(6)">👀 显示答案</button>
+            </div>
+            <div id="answer6" style="display: none;" class="content-card" style="background: #e8f5e9;">
+                <h3>✅ 答案</h3>
+                <p>路径：S→2→1→2→1→2→1→2→1→2→E</p>
+                <p>提示：沿着数字2和1交替前进，注意避开墙壁！</p>
+            </div>
+        </div>
+
+        <!-- 第20页：高难度迷宫2 - 多层迷宫 -->
+        <div class="slide" data-slide="20">
+            <h2 class="slide-title">🏆 大师挑战2</h2>
+            <div class="timer-display" id="timer7">55</div>
+            <div class="content-card">
+                <h3>多层路径迷宫</h3>
+                <p>终点在迷宫中部！需要仔细规划路线。</p>
+            </div>
+            <div class="maze-container">
+                <div class="maze-grid" style="grid-template-columns: repeat(5, 50px);">
+                    <div class="maze-cell start">S</div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell path"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div>
+                    <div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell end">E</div><div class="maze-cell path"></div><div class="maze-cell path"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div>
+                    <div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div>
+                </div>
+            </div>
+            <div class="controls">
+                <button class="game-btn" onclick="startTimer('timer7', 55)">⏱️ 开始计时</button>
+                <button class="game-btn" onclick="showAnswer(7)">👀 显示答案</button>
+            </div>
+            <div id="answer7" style="display: none;" class="content-card" style="background: #e8f5e9;">
+                <h3>✅ 答案</h3>
+                <p>路径：S→右→下→右→右→下→下→左→E</p>
+                <p>终点在中心位置，需要绕过墙壁到达！</p>
+            </div>
+        </div>
+
+        <!-- 第21页：高难度迷宫3 - 双终点迷宫 -->
+        <div class="slide" data-slide="21">
+            <h2 class="slide-title">🏆 大师挑战3</h2>
+            <div class="timer-display" id="timer8">50</div>
+            <div class="content-card">
+                <h3>双终点选择迷宫</h3>
+                <p>有两个终点E1和E2，找到到达任意一个终点的最短路径！</p>
+            </div>
+            <div class="maze-container">
+                <div class="maze-grid" style="grid-template-columns: repeat(6, 45px);">
+                    <div class="maze-cell start">S</div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell end">E1</div>
+                    <div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div>
+                    <div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell path"></div>
+                    <div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell end">E2</div>
+                </div>
+            </div>
+            <div class="controls">
+                <button class="game-btn" onclick="startTimer('timer8', 50)">⏱️ 开始计时</button>
+                <button class="game-btn" onclick="showAnswer(8)">👀 显示答案</button>
+            </div>
+            <div id="answer8" style="display: none;" class="content-card" style="background: #e8f5e9;">
+                <h3>✅ 答案</h3>
+                <p>到E1的最短路径：S→右→下→右→右→上→E1（6步）</p>
+                <p>到E2的最短路径：S→下→右→右→下→下→E2（6步）</p>
+                <p>两条路径长度相同，都是6步！</p>
+            </div>
+        </div>
+
+        <!-- 第22页：高难度迷宫4 - 螺旋迷宫 -->
+        <div class="slide" data-slide="22">
+            <h2 class="slide-title">🏆 大师挑战4</h2>
+            <div class="timer-display" id="timer9">65</div>
+            <div class="content-card">
+                <h3>螺旋数字迷宫</h3>
+                <p>按照数字指引，走螺旋路线到达终点！</p>
+            </div>
+            <div class="maze-container">
+                <div class="maze-grid" style="grid-template-columns: repeat(5, 50px);">
+                    <div class="maze-cell start">S</div><div class="maze-cell number">2</div><div class="maze-cell number">1</div><div class="maze-cell number">2</div><div class="maze-cell number">1</div>
+                    <div class="maze-cell number">1</div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell number">2</div>
+                    <div class="maze-cell number">2</div><div class="maze-cell wall"></div><div class="maze-cell number">2</div><div class="maze-cell number">1</div><div class="maze-cell number">1</div>
+                    <div class="maze-cell number">1</div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell number">2</div>
+                    <div class="maze-cell number">2</div><div class="maze-cell number">1</div><div class="maze-cell number">2</div><div class="maze-cell number">1</div><div class="maze-cell end">E</div>
+                </div>
+            </div>
+            <div class="controls">
+                <button class="game-btn" onclick="startTimer('timer9', 65)">⏱️ 开始计时</button>
+                <button class="game-btn" onclick="showAnswer(9)">👀 显示答案</button>
+            </div>
+            <div id="answer9" style="display: none;" class="content-card" style="background: #e8f5e9;">
+                <h3>✅ 答案</h3>
+                <p>路径：S→2→1→2→1→2→1→2→1→2→1→2→1→2→E</p>
+                <p>沿着外圈螺旋向内，最终到达中心的E！</p>
+            </div>
+        </div>
+
+        <!-- 第23页：高难度迷宫5 - 跳跃迷宫 -->
+        <div class="slide" data-slide="23">
+            <h2 class="slide-title">🏆 大师挑战5</h2>
+            <div class="timer-display" id="timer10">70</div>
+            <div class="content-card">
+                <h3>大数字跳跃迷宫</h3>
+                <p>数字最大为3，需要跳跃更远的距离！</p>
+            </div>
+            <div class="maze-container">
+                <div class="maze-grid" style="grid-template-columns: repeat(6, 45px);">
+                    <div class="maze-cell start">S</div><div class="maze-cell number">3</div><div class="maze-cell wall"></div><div class="maze-cell number">2</div><div class="maze-cell number">1</div><div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell number">1</div><div class="maze-cell number">2</div><div class="maze-cell wall"></div><div class="maze-cell number">3</div><div class="maze-cell number">1</div>
+                    <div class="maze-cell number">2</div><div class="maze-cell wall"></div><div class="maze-cell number">1</div><div class="maze-cell number">2</div><div class="maze-cell wall"></div><div class="maze-cell number">2</div>
+                    <div class="maze-cell number">1</div><div class="maze-cell number">2</div><div class="maze-cell number">3</div><div class="maze-cell wall"></div><div class="maze-cell number">1</div><div class="maze-cell number">1</div>
+                    <div class="maze-cell wall"></div><div class="maze-cell number">1</div><div class="maze-cell wall"></div><div class="maze-cell number">2</div><div class="maze-cell number">2</div><div class="maze-cell wall"></div>
+                    <div class="maze-cell number">2</div><div class="maze-cell number">1</div><div class="maze-cell number">1</div><div class="maze-cell end">E</div><div class="maze-cell wall"></div><div class="maze-cell wall"></div>
+                </div>
+            </div>
+            <div class="controls">
+                <button class="game-btn" onclick="startTimer('timer10', 70)">⏱️ 开始计时</button>
+                <button class="game-btn" onclick="showAnswer(10)">👀 显示答案</button>
+            </div>
+            <div id="answer10" style="display: none;" class="content-card" style="background: #e8f5e9;">
+                <h3>✅ 答案</h3>
+                <p>路径：S→3(下)→1→2→3→1→2→1→2→1→E</p>
+                <p>注意大数字3可以一次跳3格，但要确保落点有路！</p>
+            </div>
+        </div>
+
+        <!-- 第24页：高难度迷宫6 - 镜像迷宫 -->
+        <div class="slide" data-slide="24">
+            <h2 class="slide-title">🏆 大师挑战6</h2>
+            <div class="timer-display" id="timer11">60</div>
+            <div class="content-card">
+                <h3>镜像对称迷宫</h3>
+                <p>迷宫左右对称，找到最短路径！</p>
+            </div>
+            <div class="maze-container">
+                <div class="maze-grid" style="grid-template-columns: repeat(7, 40px);">
+                    <div class="maze-cell start">S</div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell path"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div>
+                    <div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell path"></div>
+                    <div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell end">E</div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div>
+                    <div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell path"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div>
+                </div>
+            </div>
+            <div class="controls">
+                <button class="game-btn" onclick="startTimer('timer11', 60)">⏱️ 开始计时</button>
+                <button class="game-btn" onclick="showAnswer(11)">👀 显示答案</button>
+            </div>
+            <div id="answer11" style="display: none;" class="content-card" style="background: #e8f5e9;">
+                <h3>✅ 答案</h3>
+                <p>最短路径：S→右→下→右→右→下→E（6步）</p>
+                <p>利用对称性，左右两边路径相同，选择左边更短！</p>
+            </div>
+        </div>
+
+        <!-- 第25页：高难度迷宫7 - 回字迷宫 -->
+        <div class="slide" data-slide="25">
+            <h2 class="slide-title">🏆 大师挑战7</h2>
+            <div class="timer-display" id="timer12">75</div>
+            <div class="content-card">
+                <h3>回字形数字迷宫</h3>
+                <p>终点在迷宫正中央！需要层层深入。</p>
+            </div>
+            <div class="maze-container">
+                <div class="maze-grid" style="grid-template-columns: repeat(5, 50px);">
+                    <div class="maze-cell start">S</div><div class="maze-cell number">2</div><div class="maze-cell number">2</div><div class="maze-cell number">2</div><div class="maze-cell number">1</div>
+                    <div class="maze-cell number">1</div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell number">2</div>
+                    <div class="maze-cell number">2</div><div class="maze-cell wall"></div><div class="maze-cell end">E</div><div class="maze-cell wall"></div><div class="maze-cell number">1</div>
+                    <div class="maze-cell number">1</div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell number">2</div>
+                    <div class="maze-cell number">2</div><div class="maze-cell number">1</div><div class="maze-cell number">2</div><div class="maze-cell number">1</div><div class="maze-cell number">1</div>
+                </div>
+            </div>
+            <div class="controls">
+                <button class="game-btn" onclick="startTimer('timer12', 75)">⏱️ 开始计时</button>
+                <button class="game-btn" onclick="showAnswer(12)">👀 显示答案</button>
+            </div>
+            <div id="answer12" style="display: none;" class="content-card" style="background: #e8f5e9;">
+                <h3>✅ 答案</h3>
+                <p>路径：S→2→2→2→1→2→1→2→1→E</p>
+                <p>沿着外圈走，找到入口进入内圈到达中心E！</p>
+            </div>
+        </div>
+
+        <!-- 第26页：高难度迷宫8 - 分叉迷宫 -->
+        <div class="slide" data-slide="26">
+            <h2 class="slide-title">🏆 大师挑战8</h2>
+            <div class="timer-display" id="timer13">55</div>
+            <div class="content-card">
+                <h3>多重分叉迷宫</h3>
+                <p>有很多岔路，但只有一条能到达终点！</p>
+            </div>
+            <div class="maze-container">
+                <div class="maze-grid" style="grid-template-columns: repeat(6, 45px);">
+                    <div class="maze-cell start">S</div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell path"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div>
+                    <div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div>
+                    <div class="maze-cell path"></div><div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell path"></div><div class="maze-cell path"></div><div class="maze-cell end">E</div><div class="maze-cell wall"></div><div class="maze-cell wall"></div>
+                </div>
+            </div>
+            <div class="controls">
+                <button class="game-btn" onclick="startTimer('timer13', 55)">⏱️ 开始计时</button>
+                <button class="game-btn" onclick="showAnswer(13)">👀 显示答案</button>
+            </div>
+            <div id="answer13" style="display: none;" class="content-card" style="background: #e8f5e9;">
+                <h3>✅ 答案</h3>
+                <p>正确路径：S→下→右→右→下→右→下→左→下→右→右→E</p>
+                <p>很多岔路都是死胡同，需要试错找到正确路线！</p>
+            </div>
+        </div>
+
+        <!-- 第27页：高难度迷宫9 - 阶梯迷宫 -->
+        <div class="slide" data-slide="27">
+            <h2 class="slide-title">🏆 大师挑战9</h2>
+            <div class="timer-display" id="timer14">80</div>
+            <div class="content-card">
+                <h3>阶梯式数字迷宫</h3>
+                <p>像爬楼梯一样，数字逐渐变化！</p>
+            </div>
+            <div class="maze-container">
+                <div class="maze-grid" style="grid-template-columns: repeat(6, 45px);">
+                    <div class="maze-cell start">S</div><div class="maze-cell number">1</div><div class="maze-cell number">2</div><div class="maze-cell number">3</div><div class="maze-cell wall"></div><div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell number">1</div><div class="maze-cell wall"></div><div class="maze-cell number">2</div><div class="maze-cell number">3</div><div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell number">2</div><div class="maze-cell number">1</div><div class="maze-cell wall"></div><div class="maze-cell number">2</div>
+                    <div class="maze-cell number">3</div><div class="maze-cell wall"></div><div class="maze-cell number">2</div><div class="maze-cell number">1</div><div class="maze-cell number">2</div>
+                    <div class="maze-cell wall"></div><div class="maze-cell number">1</div><div class="maze-cell number">2</div><div class="maze-cell wall"></div><div class="maze-cell number">1</div>
+                    <div class="maze-cell wall"></div><div class="maze-cell wall"></div><div class="maze-cell number">1</div><div class="maze-cell number">2</div><div class="maze-cell end">E</div>
+                </div>
+            </div>
+            <div class="controls">
+                <button class="game-btn" onclick="startTimer('timer14', 80)">⏱️ 开始计时</button>
+                <button class="game-btn" onclick="showAnswer(14)">👀 显示答案</button>
+            </div>
+            <div id="answer14" style="display: none;" class="content-card" style="background: #e8f5e9;">
+                <h3>✅ 答案</h3>
+                <p>路径：S→1→2→3→2→1→2→1→2→1→2→1→2→E</p>
+                <p>像下楼梯一样，数字在1、2、3之间变化！</p>
+            </div>
+        </div>
+
+        <!-- 第28页：高难度迷宫10 - 终极挑战 -->
+        <div class="slide" data-slide="28">
+            <h2 class="slide-title">🏆 终极挑战</h2>
+            <div class="timer-display" id="timer15">90</div>
+            <div class="content-card">
+                <h3>7×7超级迷宫</h3>
+                <p>最大的挑战！7×7的巨型数字迷宫，你能解开吗？</p>
+            </div>
+            <div class="maze-container">
+                <div class="maze-grid" style="grid-template-columns: repeat(7, 38px); font-size: 12px;">
+                    <div class="maze-cell start">S</div><div class="maze-cell number">2</div><div class="maze-cell number">1</div><div class="maze-cell wall"></div><div class="maze-cell number">2</div><div class="maze-cell number">1</div><div class="maze-cell number">2</div>
+                    <div class="maze-cell number">1</div><div class="maze-cell wall"></div><div class="maze-cell number">2</div><div class="maze-cell number">1</div><div class="maze-cell wall"></div><div class="maze-cell number">2</div><div class="maze-cell number">1</div>
+                    <div class="maze-cell number">2</div><div class="maze-cell number">1</div><div class="maze-cell number">1</div><div class="maze-cell wall"></div><div class="maze-cell number">2</div><div class="maze-cell number">1</div><div class="maze-cell wall"></div>
+                    <div class="maze-cell wall"></div><div class="maze-cell number">2</div><div class="maze-cell wall"></div><div class="maze-cell number">2</div><div class="maze-cell number">1</div><div class="maze-cell number">2</div><div class="maze-cell number">1</div>
+                    <div class="maze-cell number">1</div><div class="maze-cell number">1</div><div class="maze-cell number">2</div><div class="maze-cell wall"></div><div class="maze-cell number">1</div><div class="maze-cell wall"></div><div class="maze-cell number">2</div>
+                    <div class="maze-cell number">2</div><div class="maze-cell wall"></div><div class="maze-cell number">1</div><div class="maze-cell number">2</div><div class="maze-cell number">1</div><div class="maze-cell number">2</div><div class="maze-cell number">1</div>
+                    <div class="maze-cell wall"></div><div class="maze-cell number">1</div><div class="maze-cell number">2</div><div class="maze-cell number">1</div><div class="maze-cell end">E</div><div class="maze-cell wall"></div><div class="maze-cell wall"></div>
+                </div>
+            </div>
+            <div class="controls">
+                <button class="game-btn" onclick="startTimer('timer15', 90)">⏱️ 开始计时</button>
+                <button class="game-btn" onclick="showAnswer(15)">👀 显示答案</button>
+            </div>
+            <div id="answer15" style="display: none;" class="content-card" style="background: #e8f5e9;">
+                <h3>✅ 答案</h3>
+                <p>路径：S→2→1→2→1→2→1→2→1→2→1→2→1→2→1→E</p>
+                <p>恭喜！你完成了终极挑战！这是真正的迷宫大师级别！</p>
+            </div>
+        </div>
+
+        <!-- 第29页：课堂总结 -->
+        <div class="slide" data-slide="29">
             <h2 class="slide-title">📝 课堂总结</h2>
             <div class="emoji-big">🎉</div>
             <div class="content-card">
@@ -808,7 +1103,7 @@
 
     <script>
         let currentSlide = 1;
-        const totalSlides = 20;
+        const totalSlides = 30;
 
         function updateProgress() {
             const progress = (currentSlide / totalSlides) * 100;
